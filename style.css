@@ -1,0 +1,225 @@
+@charset "UTF-8";
+
+/* 🎛️すべての要素の基本ルール */
+*, *::before, *::after {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent; /* スマホのタップ影を消す */
+}
+
+input, button, textarea, select {
+  font-family: inherit; /* フォーム要素のフォントをbodyに合わせる */
+}
+
+/* 🎛️余白・フォント・表示の共通リセット */
+html {
+  scroll-behavior: smooth; /* スクロールを滑らかに */
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background: black url(img/bg_space.gif);
+  font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;  /* 視認性の高い基本フォント */
+  -webkit-font-smoothing: antialiased; /* 文字を滑らかに */
+  color: #eee;
+  overflow-x: hidden; /* 横スクロール(画面へのはみ出し)を防止 */
+}
+
+/* 🎛️見出しや段落の余白をゼロに */
+h1, h2, h3, h4, h5, h6, p, ul, ol, figure {
+  margin: 0;
+  padding: 0;
+}
+
+/* 🎛️タグごとの個別リセット */
+ul, ol {
+  list-style: none; /* リストの「・」を消す */
+}
+
+a {
+  text-decoration: none; /* リンクの下線を消す */
+  color: inherit;        /* リンクの青文字をリセット */
+}
+
+img {
+  display: block;   /* 画像下の謎の隙間を消す */
+  max-width: 100%;  /* 画面からはみ出さない */
+  height: auto;     /* 縦横比の維持 */
+}
+
+button {
+  background: none;
+  border: none;
+  outline: none;
+  cursor: pointer; /* マウスを乗せたらポインターの形に */
+}
+
+/* 🎛️オリジナルクラス */
+.夜空 {
+background: url(img/bg_star.gif);
+height: 55px;
+}
+
+.対話枠 {
+    max-width: 800px;            /* 最大横幅 */
+    width: 100%;                 /* スマホで画面幅いっぱいに */
+    margin: 0 auto;              /* 画面の中央寄せ */
+    padding: 0 10px;
+    min-height: 100vh;           /* 画面全体の高さを最低限確保 */
+    display: flex;
+    flex-direction: column;      /* 要素を縦並びに */
+    justify-content: flex-start; /* 上揃えに */
+    gap: 24px;                   /* 発言ごとの間隔 */
+}
+
+/* ==========================================================================
+   メッセージ行（アイコンと吹き出しのセット）の共通設定
+   ========================================================================== */
+.message-row {
+    display: flex;
+    flex-direction: column; /* アイコンの縦真下に吹き出しを配置するための設定 */
+    width: 100%;
+}
+
+/* ==========================================================================
+   顔アイコン（アバター）の装飾
+   ========================================================================== */
+.icon-wrapper {
+    display: flex;
+    margin-bottom: 6px; /* アイコンと吹き出しの間の絶妙な隙間 */
+}
+
+.avatar {
+    width: 50px;
+    height: 50px;
+    border: 2px solid #333333;
+    border-radius: 50%;
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    font-size: 14px;
+    user-select: none;
+}
+
+/* キャラクターごとの表情分け（簡易版） */
+.avatar-happy {
+    background-color: #fff9db;
+}
+.avatar-happy .eyes {
+    font-size: 16px;
+    margin-bottom: -2px;
+}
+
+.avatar-surprised {
+    background-color: #e3faf2;
+}
+
+/* ==========================================================================
+   吹き出し（チャットバブル）の共通装飾
+   ========================================================================== */
+.bubble-wrapper {
+    display: flex;
+    width: 100%;
+}
+
+.chat-bubble {
+    position: relative;
+    max-width: 85%; /* イラストのように右側（または左側）に余白を残すための設定 */
+    padding: 14px 16px;
+    border: 2px solid #333333;
+    border-radius: 16px;
+    font-size: 15px;
+    line-height: 1.5;
+    word-break: break-all;
+    background-color: #ffffff;
+}
+
+/* 吹き出しの「しっぽ（尖った部分）」の共通設定 */
+.chat-bubble::after {
+    content: '';
+    position: absolute;
+    top: -10px; /* 吹き出しの上側に配置 */
+    border-style: solid;
+    display: block;
+    width: 0;
+    z-index: 1;
+}
+.chat-bubble::before {
+    content: '';
+    position: absolute;
+    top: -13px; /* 枠線用のしっぽ */
+    border-style: solid;
+    display: block;
+    width: 0;
+    z-index: 0;
+}
+
+/* ==========================================================================
+   左側の発言（ユーザーA）の固有スタイル
+   ========================================================================== */
+.message-left {
+    align-items: flex-start; /* 全体を左寄せに */
+}
+
+.message-left .icon-wrapper {
+    justify-content: flex-start;
+    margin-left: 10px; /* イラストのように少し内側からスタート */
+}
+
+.message-left .bubble-wrapper {
+    justify-content: flex-start;
+}
+
+.message-left .chat-bubble {
+    background-color: #ffffff;
+    /* イラストの緩やかなニュアンスを出すため、左上の角を少し丸く調整 */
+    border-top-left-radius: 4px;
+}
+
+/* 左側吹き出しの「しっぽ」：上を向いた小さな角 */
+.message-left .chat-bubble::after {
+    left: 15px;
+    border-width: 0 8px 10px 8px;
+    border-color: transparent transparent #ffffff transparent;
+}
+.message-left .chat-bubble::before {
+    left: 15px;
+    border-width: 0 8px 10px 8px;
+    border-color: transparent transparent #333333 transparent;
+}
+
+/* ==========================================================================
+   右側の発言（ユーザーB）の固有スタイル
+   ========================================================================== */
+.message-right {
+    align-items: flex-end; /* 全体を右寄せに */
+}
+
+.message-right .icon-wrapper {
+    justify-content: flex-end;
+    margin-right: 10px;
+}
+
+.message-right .bubble-wrapper {
+    justify-content: flex-end;
+}
+
+.message-right .chat-bubble {
+    background-color: #ffffff;
+    border-top-right-radius: 4px;
+}
+
+/* 右側吹き出しの「しっぽ」：上を向いた小さな角 */
+.message-right .chat-bubble::after {
+    right: 15px;
+    border-width: 0 8px 10px 8px;
+    border-color: transparent transparent #ffffff transparent;
+}
+.message-right .chat-bubble::before {
+    right: 15px;
+    border-width: 0 8px 10px 8px;
+    border-color: transparent transparent #333333 transparent;
+}
