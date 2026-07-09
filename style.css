@@ -72,110 +72,75 @@ height: 55px;
     gap: 24px;                   /* 発言ごとの間隔 */
 }
 
-.🥸, .🐰, .👩‍🦰 {
+.🥸, .🐰, .👩, .👤 {
     display: flex;
     flex-direction: column;
 }
 
+.キャラ画像 {
+    width: 160px;
+    margin-bottom: -20px;
+    z-index: 1;
+}
+
 .💬 {
-    position: relative;
-    max-width: 85%; /* イラストのように右側（または左側）に余白を残すための設定 */
-    padding: 16px;
-
     border-radius: 16px;
-
+    padding: 16px;
     line-height: 1.5;
     background-color: gray;
-    word-break: break-all;
-
+    word-break: break-all;  /* 長い単語を折り返す */
+    position: relative;     /* しっぽ位置指定のため */
 }
 
-/* 吹き出しの「しっぽ（尖った部分）」の共通設定 */
-.💬::after {
+.💬::after {    /* 吹き出しのしっぽ */
     content: '';
-    position: absolute;
-    top: -16px; /* 吹き出しの上側に配置 */
     border-style: solid;
     display: block;
-    width: 0;
+    position: absolute;
+    top: -8px;
     z-index: 2;
-    border-color: transparent transparent white transparent;
-}
-
-
-/* ==========================================================================
-   左側の発言（ユーザーA）の固有スタイル
-   ========================================================================== */
-.message-left {
-    align-items: flex-start; /* 全体を左寄せに */
-}
-
-.message-left .icon-wrapper {
-    justify-content: flex-start;
-    margin-left: 10px; /* イラストのように少し内側からスタート */
-}
-
-.message-left .bubble-wrapper {
-    justify-content: flex-start;
-}
-
-.message-left .chat-bubble {
-    background-color: #ffffff;
-    /* イラストの緩やかなニュアンスを出すため、左上の角を少し丸く調整 */
-    border-top-left-radius: 4px;
-}
-
-/* 左側吹き出しの「しっぽ」：上を向いた小さな角 */
-.message-left .chat-bubble::after {
-    left: 15px;
-    border-width: 0 8px 10px 8px;
-    border-color: transparent transparent #ffffff transparent;
-}
-.message-left .chat-bubble::before {
-    left: 15px;
-    border-width: 0 8px 10px 8px;
-    border-color: transparent transparent #333333 transparent;
+    border-color: transparent transparent gray transparent;
 }
 
 /* #️⃣キャラの指定と配置、ふきだしの自動配置と配色 */
-.左側, .🥸 {
+.左側, .🥸:not(.右側) {
     align-items: flex-start;
 }
 
-.右側, .🐰 {
+.右側, .🐰:not(.左側) {
     align-items: flex-end;
 }
 
 .左側 .💬, .🥸:not(.右側) .💬 {
-    margin-left: 190px;
+    margin-left: 140px;
 }
 
 .右側 .💬, .🐰:not(.左側) .💬 {
-    margin-right: 190px;
+    margin-right: 140px;
 }
 
 .左側 .💬::after, .🥸:not(.右側) .💬::after {
     left: 32px;
-    border-width: 0 8px 16px 0;
+    border-width: 0 4px 8px 0;
 }
 
 .右側 .💬::after, .🐰:not(.左側) .💬::after {
     right: 32px;
-    border-width: 0 0 16px 8px;
+    border-width: 0 0 8px 4px;
 }
 
 .🥸 .💬 {
-    background-color: #876;
+    background-color: #765;
 }
 
 .🐰 .💬 {
-    background-color: #966;
+    background-color: #955;
 }
 
 .🥸 .💬::after {
-    border-color: transparent transparent #876 transparent;
+    border-color: transparent transparent #765 transparent;
 }
 
 .🐰 .💬::after {
-    border-color: transparent transparent #966 transparent;
+    border-color: transparent transparent #955 transparent;
 }
