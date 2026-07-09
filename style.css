@@ -3,7 +3,7 @@
 /* #️⃣すべての要素の基本ルール */
 *, *::before, *::after {
   box-sizing: border-box;
-  -webkit-tap-highlight-color: transparent; /* スマホのタップ影を消す */
+  -webkit-tap-highlight-color: transparent; /* タップ影を消す */
 }
 
 input, button, textarea, select {
@@ -42,7 +42,7 @@ a {
 }
 
 img {
-  display: block;   /* 画像下の謎の隙間を消す */
+  display: block;   /* 画像下の隙間を消す */
   max-width: 100%;  /* 画面からはみ出さない */
   height: auto;     /* 縦横比の維持 */
 }
@@ -51,7 +51,7 @@ button {
   background: none;
   border: none;
   outline: none;
-  cursor: pointer; /* マウスを乗せたらポインターの形に */
+  cursor: pointer;
 }
 
 /* #️⃣オリジナルクラス */
@@ -61,15 +61,15 @@ height: 55px;
 }
 
 .対話全体枠 {
-    max-width: 800px;            /* 最大横幅 */
-    width: 100%;                 /* スマホで画面幅いっぱいに */
-    margin: 0 auto;              /* 画面の中央寄せ */
+    max-width: 800px;            /* 大型デバイスの最大横幅 */
+    width: 100%;                 /* スマホでの画面合わせ */
+    margin: 0 auto;              /* 中央寄せ */
+    gap: 16px;                   /* 発言ごとの間隔 */
     padding: 0 10px;
-    min-height: 100vh;           /* 画面全体の高さを最低限確保 */
+    min-height: 100vh;
     display: flex;
-    flex-direction: column;      /* 要素を縦並びに */
-    justify-content: flex-start; /* 上揃えに */
-    gap: 24px;                   /* 発言ごとの間隔 */
+    flex-direction: column;
+    justify-content: flex-start;
 }
 
 .🥸, .🐰, .👩, .👤 {
@@ -78,69 +78,68 @@ height: 55px;
 }
 
 .キャラ画像 {
-    width: 160px;
-    margin-bottom: -20px;
+    max-width: 25%;       /* 対話全体枠の25%以下に */
+    margin-bottom: -32px;
     z-index: 1;
 }
 
 .💬 {
+    background-color: rgb(128 128 128 / 50%);
     border-radius: 16px;
     padding: 16px;
     line-height: 1.5;
-    background-color: gray;
-    word-break: break-all;  /* 長い単語を折り返す */
+    word-break: break-all;  /* 右端で強制改行 */
     position: relative;     /* しっぽ位置指定のため */
 }
 
 .💬::after {    /* 吹き出しのしっぽ */
     content: '';
+    border-color: transparent transparent rgb(128 128 128 / 50%) transparent;
     border-style: solid;
     display: block;
     position: absolute;
     top: -8px;
-    z-index: 2;
-    border-color: transparent transparent gray transparent;
 }
 
 /* #️⃣キャラの指定と配置、ふきだしの自動配置と配色 */
-.左側, .🥸:not(.右側) {
+.左, .🥸:not(.右) {
     align-items: flex-start;
 }
 
-.右側, .🐰:not(.左側) {
+.右, .🐰:not(.左) {
     align-items: flex-end;
 }
 
-.左側 .💬, .🥸:not(.右側) .💬 {
-    margin-left: 140px;
+.左 .💬, .🥸:not(.右) .💬 {
+    margin-left: 20%;
 }
 
-.右側 .💬, .🐰:not(.左側) .💬 {
-    margin-right: 140px;
+.右 .💬, .🐰:not(.左) .💬 {
+    margin-right: 20%;
 }
 
-.左側 .💬::after, .🥸:not(.右側) .💬::after {
-    left: 32px;
+.左 .💬::after, .🥸:not(.右) .💬::after {
+    left: 8%;
     border-width: 0 4px 8px 0;
 }
 
-.右側 .💬::after, .🐰:not(.左側) .💬::after {
-    right: 32px;
+.右 .💬::after, .🐰:not(.左) .💬::after {
+    right: 8%;
     border-width: 0 0 8px 4px;
 }
 
 .🥸 .💬 {
-    background-color: #765;
+    background-color: rgb(118 101 85 / 50%);
 }
 
 .🐰 .💬 {
-    background-color: #955;
+    background-color: rgb(149 85 85 / 50%);
 }
 
 .🥸 .💬::after {
-    border-color: transparent transparent #765 transparent;
+    border-color: transparent transparent rgb(118 101 85 / 50%) transparent;
 }
 
 .🐰 .💬::after {
-    border-color: transparent transparent #955 transparent;
+    border-color: transparent transparent rgb(149 85 85 / 50%) transparent;
 }
