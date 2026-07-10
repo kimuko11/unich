@@ -12,6 +12,7 @@ input, button, textarea, select {
 
 /* #️⃣余白・フォント・表示の共通リセット */
 html {
+  font-size: 100%;
   scroll-behavior: smooth; /* スクロールを滑らかに */
 }
 
@@ -64,8 +65,8 @@ height: 55px;
     max-width: 800px;            /* 大型デバイスの最大横幅 */
     width: 100%;                 /* スマホでの画面合わせ */
     margin: 0 auto;              /* 中央寄せ */
-    gap: 16px;                   /* 発言ごとの間隔 */
-    padding: 0 10px;
+    gap: 10px;                   /* 発言ごとの間隔 */
+    padding: 0 1%;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -79,14 +80,18 @@ height: 55px;
 
 .キャラ画像 {
     max-width: 25%;       /* 対話全体枠の25%以下に */
-    margin-bottom: -32px;
+    margin-bottom: -40px;
     z-index: 1;
+}
+
+.差分 {
+ 
 }
 
 .💬 {
     background-color: rgb(128 128 128 / 50%);
-    border-radius: 16px;
-    padding: 16px;
+    border-radius: 30px;
+    padding: 20px;
     line-height: 1.5;
     word-break: break-all;  /* 右端で強制改行 */
     position: relative;     /* しっぽ位置指定のため */
@@ -98,7 +103,7 @@ height: 55px;
     border-style: solid;
     display: block;
     position: absolute;
-    top: -8px;
+    top: -10px;
 }
 
 /* #️⃣キャラの指定と配置、ふきだしの自動配置と配色 */
@@ -120,12 +125,12 @@ height: 55px;
 
 .左 .💬::after, .🥸:not(.右) .💬::after {
     left: 8%;
-    border-width: 0 4px 8px 0;
+    border-width: 0 5px 10px 0;
 }
 
 .右 .💬::after, .🐰:not(.左) .💬::after {
     right: 8%;
-    border-width: 0 0 8px 4px;
+    border-width: 0 0 10px 5px;
 }
 
 .🥸 .💬 {
