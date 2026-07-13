@@ -1,21 +1,10 @@
 // #️⃣対象エリア一覧
 const キャラエリア一覧 = document.querySelectorAll('.🥸, .🐰, .👩, .👤');
 
-// #️⃣SEオーディオ（キャラ別・ポポポポ用）
+// #️⃣SEオーディオ（ポポポポ用）
 // ※ファイル名・パスはお手持ちのSEに合わせて変更してくださいませ
-const SE音源一覧 = {
-    ドク: new Audio('se/doc.mp3'),
-    ユニ: new Audio('se/uni.mp3'),
-    その他: new Audio('se/oth.mp3')
-};
-Object.values(SE音源一覧).forEach((音) => { 音.preload = 'auto'; });
-
-/** エリアのクラスからキャラ種別（ドク／ユニ／その他）を判定する */
-function キャラ種別を取得する(エリア) {
-    if (エリア.classList.contains('🥸')) return 'ドク';
-    if (エリア.classList.contains('🐰')) return 'ユニ';
-    return 'その他';
-}
+const SEオーディオ = new Audio('se/doc.mp3');
+SEオーディオ.preload = 'auto';
 
 // #️⃣文字送りの間隔（ミリ秒）
 const 文字送り間隔 = 70;
@@ -60,9 +49,9 @@ function 文字を分解する(要素) {
     return 文字要素一覧;
 }
 
-/** SEを再生する（キャラ種別ごとの音源を、連続再生できるよう複製してから再生） */
-function SEを再生する(キャラ種別) {
-    const 音 = SE音源一覧[キャラ種別].cloneNode();
+/** SEを再生する（連続再生できるよう複製してから再生） */
+function SEを再生する() {
+    const 音 = SEオーディオ.cloneNode();
     音.volume = 0.7;
     音.play().catch(() => {}); // 自動再生ブロック対策（無視してOK）
 }
@@ -81,13 +70,11 @@ function 口パクを終了する(エリア) {
     });
 }
 
-/** セリフを1文字ずつ表示し、モノローグでなければSE＆口パクを伴わせる
- *  完了したら完了コールバックを呼ぶ（＝次のキャラへバトンタッチするため） */
-function セリフを表示する(エリア, 完了コールバック) {
+/** セリフを1文字ずつ表示し、モノローグでなければSE＆口パクを伴わせる */
+function セリフを表示する(エリア) {
     const 吹き出し = エリア.querySelector('.💬');
     const 段落 = 吹き出し.querySelector('p');
     const モノローグか = 吹き出し.classList.contains('無音');
-    const キャラ種別 = キャラ種別を取得する(エリア);
 
     const 文字一覧 = 文字を分解する(段落);
 
@@ -102,7 +89,6 @@ function セリフを表示する(エリア, 完了コールバック) {
             if (!モノローグか) {
                 口パクを終了する(エリア); // セリフ＆SE終了で口パク停止
             }
-            完了コールバック();
             return;
         }
 
@@ -110,61 +96,35 @@ function セリフを表示する(エリア, 完了コールバック) {
         文字span.classList.add('表示済み');
 
         if (!モノローグか && 文字span.textContent !== ' ') {
-            SEを再生する(キャラ種別);
+            SEを再生する();
         }
 
         現在位置++;
     }, 文字送り間隔);
 }
 
-// #️⃣「上から順番に一人ずつ登場→発話」を管理する待機キュー
-const 待機リスト = [];
-let 表示処理中フラグ = false; // trueの間は次のキャラを登場させない
-
-/** DOM上での出現順（＝上から順）に並べ替える */
-function 上から順に並べ替える(リスト) {
-    return リスト.sort((a, b) => {
-        const 位置関係 = a.compareDocumentPosition(b);
-        return 位置関係 & Node.DOCUMENT_POSITION_FOLLOWING ? -1 : 1;
-    });
-}
-
-/** 待機リストの先頭のキャラを登場させ、話し終わったら次のキャラへ */
-function 次のキャラを処理する() {
-    if (表示処理中フラグ || 待機リスト.length === 0) return;
-
-    上から順に並べ替える(待機リスト);
-    const エリア = 待機リスト.shift();
-    表示処理中フラグ = true;
-
-    const キャラ画像 = エリア.querySelector('.キャラ画像');
-    const 吹き出し = エリア.querySelector('.💬');
-
-    キャラ画像.classList.add('出現');
-    吹き出し.classList.add('出現');
-
-    // キャラのスライドインが完了＝ふきだしが現れ始めるタイミングで
-    // セリフ表示（＋口パク）をスタートさせる
-    キャラ画像.addEventListener('transitionend', function スライド完了時(イベント) {
-        if (イベント.propertyName !== 'transform') return;
-        キャラ画像.removeEventListener('transitionend', スライド完了時);
-
-        セリフを表示する(エリア, () => {
-            表示処理中フラグ = false;
-            次のキャラを処理する(); // 話し終わったので次のキャラへバトンタッチ
-        });
-    });
-}
-
-// #️⃣画面内出現の監視（出現順に待機リストへ積むだけ。実際の登場は上の関数が制御）
+// #️⃣画面内出現の監視
 const 監視 = new IntersectionObserver((項目一覧) => {
     項目一覧.forEach((項目) => {
         if (項目.isIntersecting) {
-            待機リスト.push(項目.target);
-            監視.unobserve(項目.target); // 一度キューに入れたら監視終了
+            const エリア = 項目.target;
+            const キャラ画像 = エリア.querySelector('.キャラ画像');
+            const 吹き出し = エリア.querySelector('.💬');
+
+            キャラ画像.classList.add('出現');
+            吹き出し.classList.add('出現');
+
+            // キャラのスライドインが完了＝ふきだしが現れ始めるタイミングで
+            // セリフ表示（＋口パク）をスタートさせる
+            キャラ画像.addEventListener('transitionend', function スライド完了時(イベント) {
+                if (イベント.propertyName !== 'transform') return;
+                キャラ画像.removeEventListener('transitionend', スライド完了時);
+                セリフを表示する(エリア);
+            });
+
+            監視.unobserve(エリア); // 一度出現したら監視終了
         }
     });
-    次のキャラを処理する();
 }, {
     threshold: 1
 });
