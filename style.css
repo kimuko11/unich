@@ -31,9 +31,7 @@ img {
     height: auto;     /* 縦横比の維持 */
 }
 
-input, button, textarea, select {
-    font-family: inherit;
-}
+input, button, textarea, select { font-family: inherit; }
 
 button {
     background: none;
@@ -82,39 +80,39 @@ ul, ol { list-style: none; }
 
     /* 出現前の初期配置 */
     opacity: 0;
-    transform: translateX(calc(var(--出現方向) * 200%));         /* 出現位置 */
+    transform: translateX(calc(var(--出現方向) * 200%)) scaleX(var(--キャラ反転));  /* 出現位置 */
     transition: transform 7s cubic-bezier(0.34, 1.56, 0.64, 1), /* 時間、動き */
     opacity 3s ease-out;
 }
 
 .キャラ画像.出現 { /* JSで「出現」付与、定位置へ */
     opacity: 1;
-    transform: translateX(0);
+    transform: translateX(0) scaleX(var(--キャラ反転));
 }
 
 /* 基本配置（:where()なので詳細度0） */
 :where(.🥸) {
-	--配置方向: flex-start; --出現方向: -1;
+	--配置方向: flex-start; --出現方向: -1;     --キャラ反転: 1;
 	--💬左余白: 21%;       --💬右余白: 0;
 	--💬しっぽ左: 10%;	   --💬しっぽ右: auto;
 	--💬起点: top left;	   --💬しっぽ形: 0 5px 6px 0;
 }
 :where(.🐰) {
-	--配置方向: flex-end;	--出現方向: 1;
+	--配置方向: flex-end;	--出現方向: 1;      --キャラ反転: 1;
 	--💬左余白: 0;		   --💬右余白: 21%;
 	--💬しっぽ左: auto;	   --💬しっぽ右: 10%;
 	--💬起点: top right;   --💬しっぽ形: 0 0 6px 5px;
 }
 
-/* 配置の左右指定（詳細度1なので上書き） */
+/* 配置の左右指定（詳細度1なので上書きされる） */
 .左 {
-	--配置方向: flex-start; --出現方向: -1;
+	--配置方向: flex-start; --出現方向: -1;     --キャラ反転: -1;
 	--💬左余白: 21%;       --💬右余白: 0;
 	--💬しっぽ左: 10%;	   --💬しっぽ右: auto;
 	--💬起点: top left;	   --💬しっぽ形: 0 5px 6px 0;
 }
 .右 {
-	--配置方向: flex-end;	--出現方向: 1;
+	--配置方向: flex-end;	--出現方向: 1;      --キャラ反転: -1;
 	--💬左余白: 0;		   --💬右余白: 21%;
 	--💬しっぽ左: auto;	   --💬しっぽ右: 10%;
 	--💬起点: top right;   --💬しっぽ形: 0 0 6px 5px;
@@ -132,8 +130,8 @@ ul, ol { list-style: none; }
     line-height: 1.5;
     word-break: break-all; /* 右端で強制改行 */
     position: relative;    /* しっぽ位置指定のため */
-    margin-left: var(--💬左余白);
-    margin-right: var(--💬右余白);
+    margin-left:      var(--💬左余白);
+    margin-right:     var(--💬右余白);
     transform-origin: var(--💬起点);
 
     /* 出現前の初期配置 */
@@ -148,8 +146,8 @@ ul, ol { list-style: none; }
     display: block;
     position: absolute;
     top: -6px;
-    left: var(--💬しっぽ左);
-    right: var(--💬しっぽ右);
+    left:         var(--💬しっぽ左);
+    right:        var(--💬しっぽ右);
     border-width: var(--💬しっぽ形);
 }
 /* メインキャラの配色 */
