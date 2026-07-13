@@ -94,42 +94,41 @@ ul, ol { list-style: none; }
 :where(.🥸) {
 	--配置方向: flex-start; --出現方向: -1;     --キャラ反転: 1;
 	--💬左余白: 21%;       --💬右余白: 0;
-	--💬しっぽ左: 10%;	   --💬しっぽ右: auto;
+	--💬しっぽ左: 40px;	   --💬しっぽ右: auto;
 	--💬起点: top left;	   --💬しっぽ形: 0 5px 6px 0;
+    --💬色: rgb(118 101 85 / 50%);
 }
 :where(.🐰) {
 	--配置方向: flex-end;	--出現方向: 1;      --キャラ反転: 1;
 	--💬左余白: 0;		   --💬右余白: 21%;
-	--💬しっぽ左: auto;	   --💬しっぽ右: 10%;
+	--💬しっぽ左: auto;	   --💬しっぽ右: 40px;
 	--💬起点: top right;   --💬しっぽ形: 0 0 6px 5px;
+    --💬色: rgb(149 85 85 / 50%);
 }
 
 /* 配置の左右指定（詳細度1なので上書きされる） */
 .左 {
 	--配置方向: flex-start; --出現方向: -1;     --キャラ反転: -1;
 	--💬左余白: 21%;       --💬右余白: 0;
-	--💬しっぽ左: 10%;	   --💬しっぽ右: auto;
+	--💬しっぽ左: 40px;	   --💬しっぽ右: auto;
 	--💬起点: top left;	   --💬しっぽ形: 0 5px 6px 0;
 }
 .右 {
 	--配置方向: flex-end;	--出現方向: 1;      --キャラ反転: -1;
 	--💬左余白: 0;		   --💬右余白: 21%;
-	--💬しっぽ左: auto;	   --💬しっぽ右: 10%;
+	--💬しっぽ左: auto;	   --💬しっぽ右: 40px;
 	--💬起点: top right;   --💬しっぽ形: 0 0 6px 5px;
 }
 
 /* #️⃣ふきだしの配色と自動配置 */
 .💬 {
-    --🥸: rgb(118 101  85 / 50%);   /* ドクのふきだし色 */
-    --🐰: rgb(149  85  85 / 50%);   /* ユニのふきだし色 */
-    --👤: rgb(128 128 128 / 50%);   /* 標準のふきだし色 */
-
-    background-color: var(--👤);
+    --💬標準色: rgb(128 128 128 / 50%);
+    background-color: var(--💬色, --💬標準色);
     border-radius: 40px;
     padding: 20px;
     line-height: 1.5;
-    word-break: break-all; /* 右端で強制改行 */
-    position: relative;    /* しっぽ位置指定のため */
+    word-break: break-all;              /* 右端で強制改行 */
+    position: relative;                 /* しっぽ位置指定のため */
     margin-left:      var(--💬左余白);
     margin-right:     var(--💬右余白);
     transform-origin: var(--💬起点);
@@ -138,10 +137,10 @@ ul, ol { list-style: none; }
     transform: scale(0);
     transition: transform 1s cubic-bezier(0.68, 0, 0.27, 1.55) 1s;
 }
-/* 吹き出しのしっぽ */
+/* しっぽ */
 .💬::after {
     content: '';
-    border-color: transparent transparent var(--👤) transparent;
+    border-color: transparent transparent var(--💬色, --💬標準色) transparent;
     border-style: solid;
     display: block;
     position: absolute;
@@ -150,11 +149,16 @@ ul, ol { list-style: none; }
     right:        var(--💬しっぽ右);
     border-width: var(--💬しっぽ形);
 }
-/* メインキャラの配色 */
-.🥸 .💬 { background-color: var(--🥸); }
-.🐰 .💬 { background-color: var(--🐰); }
-.🥸 .💬::after { border-color: transparent transparent var(--🥸) transparent; }
-.🐰 .💬::after { border-color: transparent transparent var(--🐰) transparent; }
+/* モノローグ */
+.無音 { opacity: 0.5; }
+
+.💬.無音::after {
+    border: none;   /* しっぽ消去 */
+    background-color: var(--💬色, --💬標準色);
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+}
 
 .💬.出現 { /* JSで「出現」付与、定位置へ */
     transform: scale(1) translate(0, 0);
