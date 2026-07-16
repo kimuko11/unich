@@ -13,7 +13,8 @@ html {
 }
 
 body {
-    background: black url(img/bg_space.gif) fixed;
+    background: black url(img/nebula.webp) fixed;
+    background-size: cover;
     font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;  /* 視認性の高い基本フォント */
     -webkit-font-smoothing: antialiased; /* 文字を滑らかに */
     color: #eee;
@@ -48,10 +49,69 @@ a {
 ul, ol { list-style: none; }
 
 /* #️⃣オリジナルクラス */
-.夜空 {
-    background: url(img/bg_star.gif);
-    height: 55px;
+.宇宙 {
+    position: relative;
+    width: 100%;
+    overflow: clip;
 }
+
+.宇宙レイヤー {
+    position: fixed; /* scroll(root)と同期させるため画面に固定配置 */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 150vh; /* スクロールしてズレる余白を多めに確保 */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    will-change: transform, opacity; /* GPUアクセラレーションの準備 */
+    pointer-events: none;
+}
+
+.遠景 {
+    background-image: url('img/nebula.webp');
+    animation: 遠景の動き 1s linear forwards;
+    animation-timeline: scroll(root); /* ブラウザ全体のスクロールに同期 (中景以下も同様) */
+}
+.中景 {
+    background-image: url('img/space.webp');
+    animation:
+        中景の動き 1s linear forwards,
+        中景の瞬き 1.3s ease-in-out infinite alternate;
+    animation-timeline: scroll(root), auto;
+}
+.近景 {
+    background-image: url('img/stars.webp');
+    animation:
+        近景の動き 1s linear forwards,
+        近景の瞬き 1.9s ease-in-out infinite alternate;
+    animation-timeline: scroll(root), auto;
+}
+
+@keyframes 遠景の動き {
+    from { transform: translateY(0); }
+    to   { transform: translateY(-100px); } /* 低速 */
+}
+@keyframes 中景の動き {
+    from { transform: translateY(0); }
+    to   { transform: translateY(-300px); } /* 中速 */
+}
+@keyframes 近景の動き {
+    from { transform: translateY(0); }
+    to   { transform: translateY(-900px); } /* 高速 */
+}
+
+@keyframes 中景の瞬き {
+      0% {opacity: 0.5;}
+     50% {opacity: 1.0;}
+    100% {opacity: 0.6;}
+}
+@keyframes 近景の瞬き {
+      0% { opacity: 1.0; }
+     50% { opacity: 0.5; }
+    100% { opacity: 0.9; }
+}
+
 
 .対話全体枠 {
     max-width: 800px; /* 大型デバイスでの最大横幅 */
@@ -94,14 +154,14 @@ ul, ol { list-style: none; }
 :where(.🥸) {
 	--配置方向: flex-start; --出現方向: -1;     --キャラ反転: 1;
 	--💬左余白: 16%;       --💬右余白: 0;
-	--💬しっぽ左: 50px;	   --💬しっぽ右: auto;
+	--💬しっぽ左: 70px;	   --💬しっぽ右: auto;
 	--💬起点: top left;	   --💬しっぽ形: 0 5px 6px 0;
     --💬色: rgb(118 101 85 / 50%);
 }
 :where(.🐰) {
 	--配置方向: flex-end;	--出現方向: 1;      --キャラ反転: 1;
 	--💬左余白: 0;		   --💬右余白: 14%;
-	--💬しっぽ左: auto;	   --💬しっぽ右: 50px;
+	--💬しっぽ左: auto;	   --💬しっぽ右: 70px;
 	--💬起点: top right;   --💬しっぽ形: 0 0 6px 5px;
     --💬色: rgb(149 85 85 / 50%);
 }
@@ -110,13 +170,13 @@ ul, ol { list-style: none; }
 .左 {
 	--配置方向: flex-start; --出現方向: -1;     --キャラ反転: -1;
 	--💬左余白: 16%;       --💬右余白: 0;
-	--💬しっぽ左: 50px;	   --💬しっぽ右: auto;
+	--💬しっぽ左: 70px;	   --💬しっぽ右: auto;
 	--💬起点: top left;	   --💬しっぽ形: 0 5px 6px 0;
 }
 .右 {
 	--配置方向: flex-end;	--出現方向: 1;      --キャラ反転: -1;
 	--💬左余白: 0;		   --💬右余白: 14%;
-	--💬しっぽ左: auto;	   --💬しっぽ右: 50px;
+	--💬しっぽ左: auto;	   --💬しっぽ右: 70px;
 	--💬起点: top right;   --💬しっぽ形: 0 0 6px 5px;
 }
 
@@ -124,6 +184,7 @@ ul, ol { list-style: none; }
 .💬 {
     --💬標準色: rgb(128 128 128 / 50%);
     background-color: var(--💬色, --💬標準色);
+    backdrop-filter: blur(3px);
     border-radius: 40px;
     padding: 20px;
     line-height: 1.5;
@@ -141,6 +202,7 @@ ul, ol { list-style: none; }
 .💬::after {
     content: '';
     border-color: transparent transparent var(--💬色, --💬標準色) transparent;
+    backdrop-filter: blur(3px);
     border-style: solid;
     display: block;
     position: absolute;
@@ -150,7 +212,10 @@ ul, ol { list-style: none; }
     border-width: var(--💬しっぽ形);
 }
 /* モノローグ */
-.無音 { opacity: 0.5; }
+.無音 {
+    background-color: rgb(from var(--💬色, --💬標準色) r g b / 25%);
+    color: #888;
+}
 
 .💬.無音::after {
     border: none;   /* しっぽ消去 */
