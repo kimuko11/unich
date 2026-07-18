@@ -85,7 +85,7 @@ function 口パクを終了する(エリア) {
 function セリフを表示する(エリア, 完了コールバック) {
     const 吹き出し = エリア.querySelector('.💬');
     const 段落 = 吹き出し.querySelector('p');
-    const モノローグか = 吹き出し.classList.contains('無音');
+    const モノローグか = 吹き出し.classList.contains('無声');
     const キャラ種別 = キャラ種別を取得する(エリア);
 
     const 文字一覧 = 文字分解(段落);
