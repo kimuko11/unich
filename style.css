@@ -136,6 +136,8 @@ a {
     position:      relative; /* 差分を重ねるため */
     z-index:       1;
 
+    filter: drop-shadow(0 0 10px rgb(255 240 230 / 50%));
+
     /* 出現前の位置 */
     transform: translateX(calc(var(--出現方向) * 150%)) scaleX(var(--キャラ反転));
     opacity:   0;
