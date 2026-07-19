@@ -175,11 +175,9 @@ a {
     transition: transform 1s cubic-bezier(0.68, 0, 0.27, 1.55) 1s;
 }
 
-.💬.出現 { /* JSで「出現」クラス付与で、定位置へ */
-    transform: scale(1) translate(0, 0);
-}
+.💬.出現 { transform: scale(1) translate(0, 0); } /* JSで「出現」クラス付与で、定位置へ */
 
-/* ふきだし背景の疑似レイヤー (1枚の画像にすることでアニメしてもメインレイヤーは再計算しない、かつ文字は固定される) */
+/* ふきだし背景の疑似レイヤー (文字と切り離すことでアニメしても文字は固定のまま、かつメインレイヤーの再計算を回避) */
 .💬::before {
     content: '';
     position: absolute;
@@ -207,14 +205,15 @@ a {
     content: '';
     border-color: transparent transparent rgb(from var(--色, var(--標準色)) r g b) transparent;
     backdrop-filter: blur(3px);
-    border-style: solid;
-    display: block;
-    position: absolute;
-    top: -5.5px;
-    left:         var(--しっぽ左);
-    right:        var(--しっぽ右);
-    border-width: var(--しっぽ形);
+    border-style:    solid;
+    display:         block;
+    position:        absolute;
+    top:             -5.5px;
+    left:            var(--しっぽ左);
+    right:           var(--しっぽ右);
+    border-width:    var(--しっぽ形);
     transform-origin: center bottom;
+
     animation: しっぽ 1s infinite ease-in-out alternate;
 }
 @keyframes しっぽ {
@@ -223,9 +222,7 @@ a {
 }
 
 /* #️⃣モノローグのふきだし */
-.無声 {
-    color: #888;
-}
+.無声 { color: #888; }
 
 .💬.無声::before {
     background-color: rgb(from var(--色, var(--標準色)) r g b / calc(alpha / 2));
@@ -234,10 +231,17 @@ a {
 .💬.無声::after {
     border: none;   /* しっぽ消去 */
     background-color: rgb(from var(--色, var(--標準色)) r g b);
-    width: 4px;
+    width:  4px;
     height: 4px;
     border-radius: 50%;
 }
+
+/* #️⃣文字送り（1文字ずつフェードイン） */
+.文字 {
+    opacity: 0;
+    transition: opacity 0.15s ease-out;
+}
+.文字.表示済み { opacity: 1; }
 
 /* #️⃣キャラの基本配置とふきだしの指定（:where()で囲み詳細度0に） */
 :where(.🥸) {
@@ -269,81 +273,73 @@ a {
 	--起点: top right;  --しっぽ形: 0 0 6px 5px;
 }
 
-/* #️⃣差分アニメ */
-/* 文字送り中限定 */
-.口パク {
-    position: absolute; top: 0%;
-    transform-origin: 50% 77%;  /* 基点 */
-    animation: 口パク 0.2s infinite ease-in-out alternate;
-    animation-play-state: paused; /* 初期状態は停止＝口を閉じておく */
-}
-@keyframes 口パク { /* 縦幅のみ0.1～1.0倍 */
-      0% { transform: scaleY(0.1); }
-    100% { transform: scaleY(1.0); }
-}
+/* #️⃣キャラ画像差分用 absolute */
+/* 無限 */.ハート,
+/* 口元 */.ヒゲ, .口パク,
+/* 差分 */.驚き汗 {
+    position: absolute; top: 0%; }
 
-.驚き {
-    position: absolute; top: 0%;
-    animation: 驚き 1s 1 ease forwards;
-    animation-play-state: paused; /* 初期状態は停止 */
-}
-@keyframes 驚き {
-      0% { opacity: 0.0; transform: scale(0.7); }
-    100% { opacity: 1.0; transform: scale(1.0); }
-}
+/* #️⃣アニメ再生トリガー (初期値は停止、JSで再生・停止コントロール) */
+/* 口元 */.ヒゲ.再生, .口パク.再生,
+/* 差分 */.驚き汗.再生,
+/* 身体 */.縦伸縮.再生, .横揺れ.再生 {
+    animation-play-state: running; }
 
-.ヒゲ {
-    position: absolute; top: 0%;
-    transform-origin: 50% 70%;  /* 基点 */
-    animation: ヒゲ 0.3s infinite ease-in-out alternate;
-    animation-play-state: paused; /* 初期状態は停止 */
-}
-@keyframes ヒゲ { /* 縦幅のみ1.0～1.1倍 */
-      0% { transform: scaleY(1.0); }
-    100% { transform: scaleY(1.1); }
-}
-
-/* JSで「発話中」クラスが付いている間だけアニメ再生 */
-.口パク.発話中, .縦揺れ.発話中, .横揺れ.発話中,
-.ヒゲ.発話中, .驚き.発話中 {
-    animation-play-state: running;
-}
-
-/* 文字送り（1文字ずつフェードイン表示） */
-.文字 {
-    opacity: 0;
-    transition: opacity 0.15s ease-out;
-}
-.文字.表示済み {
-    opacity: 1;
-}
-
-/* 無限 */
-.ハート {
-    position: absolute; top: 0%;
-    animation: ハート 1s infinite ease-in-out alternate;
-}
+/* #️⃣無限アニメ (トリガー不要) */
+.ハート { animation: ハート 1s infinite ease-in-out alternate; }
 @keyframes ハート {
       0% { transform: scale(1.0); }
     100% { transform: scale(0.9); }
 }
 
-.縦揺れ {
-    transform-origin: center bottom;
-    animation: 縦揺れ 0.5s infinite ease-in-out alternate;
-    animation-play-state: paused;
+/* #️⃣口元アニメ */
+.ヒゲ {
+    transform-origin: 50% 70%;
+    animation: ヒゲ 0.3s infinite ease-in-out alternate paused;
 }
-@keyframes 縦揺れ {
+@keyframes ヒゲ {
+      0% { transform: scaleY(1.0); }
+    100% { transform: scaleY(1.1); }
+}
+
+.口パク {
+    transform-origin: 50% 77%;
+    animation: 口パク 0.2s infinite ease-in-out alternate paused;
+}
+@keyframes 口パク {
+      0% { transform: scaleY(1.0); }
+    100% { transform: scaleY(0.1); }
+}
+
+/* #️⃣差分アニメ */
+.驚き汗 {
+    opacity: 0;
+    animation: 驚き汗 2s 1 ease forwards paused;
+}
+@keyframes 驚き汗 {
+      0% { opacity: 0.0; transform: scale(0.5); }
+     50% { opacity: 1.0; transform: scale(1.1); }
+    100% { opacity: 0.3; transform: scale(1.0); }
+}
+
+/* #️⃣身体アニメ (absolute 不要) */
+.縦伸縮 {
+    transform-origin: center bottom;
+    animation: 縦伸縮 0.5s 15 ease-in-out alternate paused;
+}
+@keyframes 縦伸縮 {
     0%, 100% { transform: scaleY(1.0); }
     50%      { transform: scaleY(1.1); }
 }
 .横揺れ {
     transform-origin: center bottom;
-    animation: 横揺れ 0.5s infinite ease-in-out alternate;
-    animation-play-state: paused;
+    animation: 横揺れ 0.5s 15 ease-in-out alternate paused;
 }
 @keyframes 横揺れ {
       0% { transform: scaleY(1.0) rotate(5deg); }
      50% { transform: scaleY(1.1) rotate(0deg); }
     100% { transform: scaleY(1.0) rotate(-5deg); }
 }
+
+
+

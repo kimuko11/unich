@@ -68,15 +68,15 @@ function SEを再生する(キャラ種別) {
 
 /** 口パク・ヒゲのアニメを開始する */
 function 口パクを開始する(エリア) {
-    エリア.querySelectorAll('.口パク, .ヒゲ, .驚き, .縦揺れ, .横揺れ').forEach((要素) => {
-        要素.classList.add('発話中');
+    エリア.querySelectorAll('.ヒゲ, .口パク, .驚き汗, .縦伸縮, .横揺れ').forEach((要素) => {
+        要素.classList.add('再生');
     });
 }
 
 /** 口パク・ヒゲのアニメを終了する（ハートは対象外＝ずっと浮遊） */
 function 口パクを終了する(エリア) {
-    エリア.querySelectorAll('.口パク, .ヒゲ, .驚き, .縦揺れ, .横揺れ').forEach((要素) => {
-        要素.classList.remove('発話中');
+    エリア.querySelectorAll('.ヒゲ, .口パク').forEach((要素) => {
+        要素.classList.remove('再生');
     });
 }
 
