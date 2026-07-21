@@ -1,37 +1,33 @@
-// 🎛️対象エリア一覧
-const キャラエリア一覧 = document.querySelectorAll('.🥸, .🐰, .👩, .👤');
+// 🎛️対象一覧
+const キャラ一覧 = document.querySelectorAll('.🥸, .🐰, .👩, .👤');
 
-// 🎛️SEオーディオ
-const SE音源一覧 = {
+// 🎛️代替音声
+const 音声一覧 = {
     ドク: new Audio('se/doc.mp3'),
     ユニ: new Audio('se/uni.mp3'),
-    その他: new Audio('se/oth.mp3')
+    第三: new Audio('se/oth.mp3')
 };
-Object.values(SE音源一覧).forEach((音) => { 音.preload = 'auto'; });
+Object.values(音声一覧).forEach((音声) => { 音声.preload = 'auto'; });
 
-/** エリアのクラスからキャラ種別（ドク／ユニ／その他）を判定する */
-function キャラ種別を取得する(エリア) {
+// 🎛️エリアのクラスからキャラを判定
+function キャラ取得(エリア) {
     if (エリア.classList.contains('🥸')) return 'ドク';
     if (エリア.classList.contains('🐰')) return 'ユニ';
-    return 'その他';
+    return '第三';
 }
 
-// 🎛️文字送りの間隔（ミリ秒）
+// 🎛️文字送り間隔（ミリ秒）
 const 文字送り間隔 = 50;
 
-/**
- * ふきだし内のHTML構造（<big>や<br>）を保ったまま、
- * 文字を1つずつ<span class="文字">に分解する
- */
+// 🎛️文字分解（ふきだし内のHTML構造を保ったまま、文字を1つずつ <span class="文字"> に分解）
 function 文字分解(要素) {
     const 文字要素一覧 = [];
 
     function 走査(元ノード, 複製先) {
         元ノード.childNodes.forEach((子ノード) => {
             if (子ノード.nodeType === Node.TEXT_NODE) {
-                // 連続する空白・改行インデントは半角スペース1つに整形
-                const 整形済みテキスト = 子ノード.textContent.replace(/\s+/g, ' ');
-                [...整形済みテキスト].forEach((文字) => {
+                const 整形文字 = 子ノード.textContent.replace(/\s+/g, ' '); // 連続する空白や改行は半角スペース1つに整形
+                [...整形文字].forEach((文字) => {
                     const 文字span = document.createElement('span');
                     文字span.className = '文字';
                     文字span.textContent = 文字;
@@ -59,103 +55,102 @@ function 文字分解(要素) {
     return 文字要素一覧;
 }
 
-/** SEを再生する（キャラ種別ごとの音源を、連続再生できるよう複製してから再生） */
-function SEを再生する(キャラ種別) {
-    const 音 = SE音源一覧[キャラ種別].cloneNode();
-    音.volume = 0.1;
-    音.play().catch(() => {}); // 自動再生ブロック対策（無視してOK）
+// 🎛️音声再生（キャラごとの音声を連続再生できるように複製してから再生）
+function 音声再生(キャラ) {
+    const 音声 = 音声一覧[キャラ].cloneNode();
+    音声.volume = 0.1;
+    音声.play().catch(() => {}); // 自動再生ブロック対策（無視してOK）
 }
 
-/** 口パク・ヒゲのアニメを開始する */
-function 口パクを開始する(エリア) {
-    エリア.querySelectorAll('.ヒゲ, .口パク, .驚き汗, .縦伸縮, .横揺れ').forEach((要素) => {
+// 🎛️身体・差分アニメ開始
+function 身体アニメ開始(エリア) {
+    エリア.querySelectorAll('.縦伸縮, .横揺れ, .驚き汗').forEach((要素) => {
         要素.classList.add('再生');
     });
 }
 
-/** 口パク・ヒゲのアニメを終了する（ハートは対象外＝ずっと浮遊） */
-function 口パクを終了する(エリア) {
-    エリア.querySelectorAll('.ヒゲ, .口パク').forEach((要素) => {
+// 🎛️口元アニメ開始
+function 口元アニメ開始(エリア) {
+    エリア.querySelectorAll('.髭揺れ, .口パク').forEach((要素) => {
+        要素.classList.add('再生');
+    });
+}
+
+// 🎛️口元アニメ終了
+function 口元アニメ終了(エリア) {
+    エリア.querySelectorAll('.髭揺れ, .口パク').forEach((要素) => {
         要素.classList.remove('再生');
     });
 }
 
-/** セリフを1文字ずつ表示し、モノローグでなければSE＆口パクを伴わせる
- *  完了したら完了コールバックを呼ぶ（＝次のキャラへバトンタッチするため） */
-function セリフを表示する(エリア, 完了コールバック) {
-    const 吹き出し = エリア.querySelector('.💬');
-    const 段落 = 吹き出し.querySelector('p');
-    const モノローグか = 吹き出し.classList.contains('無声');
-    const キャラ種別 = キャラ種別を取得する(エリア);
+// 🎛️セリフ表示（セリフを1文字ずつ表示し、モノローグでなければ音声＆口元アニメを伴わせる）
+//  完了したら完了コールバックを呼ぶ（次キャラへ進むため）
+function セリフ表示(エリア, 完了コールバック) {
+    const ふきだし   = エリア.querySelector('.💬');
+    const モノローグ = ふきだし.classList.contains('無声');
+    const キャラ     = キャラ取得(エリア);
+    const 文字一覧   = 文字分解(ふきだし);
 
-    const 文字一覧 = 文字分解(段落);
-
-    if (!モノローグか) {
-        口パクを開始する(エリア);
-    }
+    身体アニメ開始(エリア);
+    if (!モノローグ) 口元アニメ開始(エリア);
 
     let 現在位置 = 0;
     const タイマーID = setInterval(() => {
         if (現在位置 >= 文字一覧.length) {
             clearInterval(タイマーID);
-            if (!モノローグか) {
-                口パクを終了する(エリア); // セリフ＆SE終了で口パク停止
-            }
+            if (!モノローグ) 口元アニメ終了(エリア); // セリフと音声終了
             完了コールバック();
             return;
         }
 
         const 文字span = 文字一覧[現在位置];
-        文字span.classList.add('表示済み');
+        文字span.classList.add('表示済');
 
-        if (!モノローグか && 文字span.textContent !== ' ') {
-            SEを再生する(キャラ種別);
-        }
+        if (!モノローグ && 文字span.textContent !== ' ') 音声再生(キャラ);
 
         現在位置++;
     }, 文字送り間隔);
 }
 
-// #️⃣🎛️「上から順番に一人ずつ登場→発話」を管理する待機キュー
+// 🎛️「上から順番に一人ずつ登場 → セリフ」を管理する待機キュー
 const 待機リスト = [];
-let 表示処理中フラグ = false; // trueの間は次のキャラを登場させない
+let 表示処理中 = false; // true の間は次キャラを登場させない
 
-/** DOM上での出現順（＝上から順）に並べ替える */
-function 上から順に並べ替える(リスト) {
+// 🎛️ DOM上での出現順（上から順）に並び替える
+function 並び替え(リスト) {
     return リスト.sort((a, b) => {
         const 位置関係 = a.compareDocumentPosition(b);
         return 位置関係 & Node.DOCUMENT_POSITION_FOLLOWING ? -1 : 1;
     });
 }
 
-/** 待機リストの先頭のキャラを登場させ、話し終わったら次のキャラへ */
-function 次のキャラを処理する() {
-    if (表示処理中フラグ || 待機リスト.length === 0) return;
+// 🎛️ 待機リストの先頭キャラを登場させ、話し終わったら次キャラへ
+function 次キャラ処理() {
+    if (表示処理中 || 待機リスト.length === 0) return;
 
-    上から順に並べ替える(待機リスト);
+    並び替え(待機リスト);
     const エリア = 待機リスト.shift();
-    表示処理中フラグ = true;
+    表示処理中 = true;
 
     const キャラ画像 = エリア.querySelector('.キャラ画像');
-    const 吹き出し = エリア.querySelector('.💬');
+    const ふきだし   = エリア.querySelector('.💬');
 
     キャラ画像.classList.add('出現');
-    吹き出し.classList.add('出現');
+    ふきだし  .classList.add('出現');
 
-    // キャラのスライドインが完了＝ふきだしが現れ始めるタイミングで
-    // セリフ表示（＋口パク）をスタートさせる
-    キャラ画像.addEventListener('transitionend', function スライド完了時(イベント) {
+    // キャラ画像のスライドイン完了（ふきだしが現れ始めるタイミング）でセリフ表示と口元アニメを開始
+    キャラ画像.addEventListener('transitionend', function スライドイン完了(イベント) {
         if (イベント.propertyName !== 'transform') return;
-        キャラ画像.removeEventListener('transitionend', スライド完了時);
+        キャラ画像.removeEventListener('transitionend', スライドイン完了);
 
-        セリフを表示する(エリア, () => {
-            表示処理中フラグ = false;
-            次のキャラを処理する(); // 話し終わったので次のキャラへバトンタッチ
+        セリフ表示(エリア, () => {
+            表示処理中 = false;
+            次キャラ処理(); // 話し終わったので次キャラへ
         });
     });
 }
 
-// #️⃣🎛️画面内出現の監視（出現順に待機リストへ積むだけ。実際の登場は上の関数が制御）
+// 🎛️画面内出現の監視（出現順に待機リストへ積むだけ。実際の登場は上の関数が制御）
 const 監視 = new IntersectionObserver((項目一覧) => {
     項目一覧.forEach((項目) => {
         if (項目.isIntersecting) {
@@ -163,12 +158,9 @@ const 監視 = new IntersectionObserver((項目一覧) => {
             監視.unobserve(項目.target); // 一度キューに入れたら監視終了
         }
     });
-    次のキャラを処理する();
-}, {
-    threshold: 0.9
-});
+    次キャラ処理();
+}, { threshold: 0.9 }
+);
 
-// 一つずつ監視対象に登録していく
-キャラエリア一覧.forEach((エリア) => {
-    監視.observe(エリア);
-});
+// 🎛️一つずつ監視対象に登録していく
+キャラ一覧.forEach((エリア) => { 監視.observe(エリア); });
