@@ -64,21 +64,21 @@ function 音声再生(キャラ) {
 
 // 🎛️身体・差分アニメ開始
 function 身体アニメ開始(エリア) {
-    エリア.querySelectorAll('.縦伸縮, .横揺れ, .驚き汗').forEach((要素) => {
+    エリア.querySelectorAll('.縦伸縮, .横揺れ, .驚きと縦伸縮, .驚き汗').forEach((要素) => {
         要素.classList.add('再生');
     });
 }
 
 // 🎛️口元アニメ開始
 function 口元アニメ開始(エリア) {
-    エリア.querySelectorAll('.髭揺れ, .口パク').forEach((要素) => {
+    エリア.querySelectorAll('.口パク').forEach((要素) => {
         要素.classList.add('再生');
     });
 }
 
 // 🎛️口元アニメ終了
 function 口元アニメ終了(エリア) {
-    エリア.querySelectorAll('.髭揺れ, .口パク').forEach((要素) => {
+    エリア.querySelectorAll('.口パク').forEach((要素) => {
         要素.classList.remove('再生');
     });
 }
