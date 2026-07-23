@@ -272,13 +272,13 @@ a {
 }
 
 /* 配置の左右指定（詳細度1なので上書き可能）※単に画像反転のためにも使える */
-.左 {
+.左側 {
 	--配置: flex-start; --出現方向: -1;   --キャラ反転: -1;
 	--左余白:   16%;    --右余白:   0;
 	--しっぽ左: 50px;	--しっぽ右: auto;
 	--起点: top left;	--しっぽ形: 0 5px 6px 0;
 }
-.右 {
+.右側 {
 	--配置: flex-end;	--出現方向: 1;    --キャラ反転: -1;
 	--左余白:   0;		--右余白:  14%;
 	--しっぽ左: auto;	--しっぽ右: 50px;
@@ -286,14 +286,14 @@ a {
 }
 
 /* #️⃣キャラ画像差分用 absolute */
-/* 無限 */.ハート, .フィギュア,
+/* 無限 */.ハート, .腕振り, .フィギュア,
 /* 口元 */.口パク,
-/* 差分 */.驚き汗 {
+/* 差分 */.目玉, .驚き汗 {
     position: absolute; top: 0%; }
 
 /* #️⃣アニメ再生トリガー (初期値は停止、JSで再生・停止コントロール) */
 /* 口元 */.口パク.再生,
-/* 差分 */.驚き汗.再生,
+/* 差分 */.目玉.再生, .驚き汗.再生,
 /* 身体 */.縦伸縮.再生, .横揺れ.再生, .驚きと縦伸縮.再生 {
     animation-play-state: running; }
 
@@ -302,6 +302,14 @@ a {
 @keyframes ハート {
       0% { transform: scale(1.0); }
     100% { transform: scale(0.9); }
+}
+
+.腕振り {
+    transform-origin: 25% 95%;
+    animation: 腕振り 0.5s infinite ease-in-out alternate; }
+@keyframes 腕振り {
+       0% { transform: rotate(-5deg); }
+     100% { transform: rotate( 5deg); }
 }
 
 .フィギュア { 
@@ -326,6 +334,20 @@ a {
 }
 
 /* #️⃣差分アニメ */
+.目玉 {
+    transform-origin: center 158px;
+    animation: 目玉 1s ease forwards paused,
+               目パチ    1s infinite ease-in-out alternate 1s paused;
+}
+@keyframes 目玉 {
+    0%, 100% { transform: scale(1.0); }
+    40%      { transform: scale(1.2); }
+}
+@keyframes 目パチ {
+    0%, 95% { transform: scaleY(1.0); }
+    100%    { transform: scaleY(0.1); }
+}
+
 .驚き汗 {
     opacity: 0;
     animation: 驚き汗 1s ease forwards paused;
