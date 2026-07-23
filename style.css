@@ -286,7 +286,7 @@ a {
 }
 
 /* #️⃣キャラ画像差分用 absolute */
-/* 無限 */.ハート, .腕振り, .フィギュア,
+/* 無限 */.ハート, .星回転, .腕振り, .フィギュア,
 /* 口元 */.口パク,
 /* 差分 */.目玉, .驚き汗 {
     position: absolute; top: 0%; }
@@ -304,9 +304,19 @@ a {
     100% { transform: scale(0.9); }
 }
 
+.星回転 {
+    transform-origin: 25% 20.8%;
+    animation: 星回転 5s infinite linear;
+}
+@keyframes 星回転 {
+       0% { transform: rotate(360deg); }
+     100% { transform: rotate(  0deg); }
+}
+
 .腕振り {
     transform-origin: 25% 95%;
-    animation: 腕振り 0.5s infinite ease-in-out alternate; }
+    animation: 腕振り 0.5s infinite ease-in-out alternate;
+}
 @keyframes 腕振り {
        0% { transform: rotate(-5deg); }
      100% { transform: rotate( 5deg); }
@@ -335,7 +345,7 @@ a {
 
 /* #️⃣差分アニメ */
 .目玉 {
-    transform-origin: center 65%;
+    transform-origin: center 68%;
     animation: 目玉 1s ease forwards paused,
                目パチ    1s infinite ease-in-out alternate 1s paused;
 }
@@ -344,7 +354,7 @@ a {
     40%      { transform: scale(1.2); }
 }
 @keyframes 目パチ {
-    0%, 95% { transform: scaleY(1.0); }
+    0%, 90% { transform: scaleY(1.0); }
     100%    { transform: scaleY(0.1); }
 }
 
@@ -355,7 +365,7 @@ a {
 @keyframes 驚き汗 {
       0% { opacity: 0.0; transform: scale(0.5); }
      40% { opacity: 1.0; transform: scale(1.2); }
-    100% { opacity: 0.3; transform: scale(1.0); }
+    100% { opacity: 0.5; transform: scale(1.0); }
 }
 
 /* #️⃣身体アニメ (absolute 不要) */
