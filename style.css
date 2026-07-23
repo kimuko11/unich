@@ -335,7 +335,7 @@ a {
 
 /* #️⃣差分アニメ */
 .目玉 {
-    transform-origin: center 158px;
+    transform-origin: center 65%;
     animation: 目玉 1s ease forwards paused,
                目パチ    1s infinite ease-in-out alternate 1s paused;
 }
