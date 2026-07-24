@@ -162,5 +162,41 @@ const 監視 = new IntersectionObserver((項目一覧) => {
 }, { threshold: 0.9 }
 );
 
-// 🎛️一つずつ監視対象に登録していく
+// 🎛️一つずつ監視対象に登録
 キャラ一覧.forEach((エリア) => { 監視.observe(エリア); });
+
+
+// 🎛️流星呼び出し
+const 流星レイヤー = document.querySelector('.宇宙レイヤー');
+
+function 流星作成() {
+    const 流星 = document.createElement('div');
+    流星.classList.add('流星');
+
+    const 反転 = Math.random() < 0.5; // 50%は反転
+
+    // 出現位置
+    if (反転) {
+        流星.classList.add('反転');
+        流星.style.left = `${Math.random() * window.innerWidth  * 0.5}px`; 
+        流星.style.top  = `${Math.random() * window.innerHeight * 0.8}px`;
+    } else {
+        流星.style.left = `${Math.random() * window.innerWidth  * 0.5 + window.innerWidth * 0.5}px`;
+        流星.style.top  = `${Math.random() * window.innerHeight * 0.8}px`;
+    }
+
+    流星レイヤー.appendChild(流星); // CSSアニメ開始
+
+    setTimeout(() => { 流星.remove(); }, 1000); // CSSアニメ終了(1秒後)に要素を削除してメモリ解放
+}
+
+function 流星出現() {
+    const 出現間隔 = Math.random() * 19000 + 1000; // 次の流星出現まで1〜20秒
+
+    setTimeout(() => {
+        流星作成();
+        流星出現(); // 次のループ予約
+    }, 出現間隔);
+}
+
+流星出現();

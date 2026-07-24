@@ -36,7 +36,7 @@
 }
 .近景 {
     background-image: url('img/stars.webp');
-    z-index: 3;
+    z-index: 4;
     animation:
         近景の動き 1s linear forwards,
         近景の瞬き 1.9s ease-in-out infinite alternate;
@@ -75,9 +75,69 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 1000vh; /* 画面3倍分のスクロール領域を作ります */
+  height: 200vh; /* 画面3倍分のスクロール領域を作ります */
   color: #ffffff;
   font-family: sans-serif;
+}
+
+.流星 { z-index: 3; }
+
+.流星本体 {
+  position: absolute;
+  width: 100px; /* 長さ */
+  height: 2px;  /* 太さ */
+  border-radius: 999px;
+  background: linear-gradient(-45deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1)); /* 先端が明るく、後ろが消えるグラデーション */
+  filter: drop-shadow(0 0 6px rgba(255, 255, 255, 1));
+  opacity: 0; /* 最初は透明 */
+  
+  /* アニメーションを指定（JSでクラスが付与されたら起動） */
+  animation: 流星 1s linear;
+}
+
+/* 
+  流れ星のアニメーションキーフレーム
+  右上（0%, -0%）から左下（100px, 100px）へ移動しながら、
+  最初は透明 ➔ 真ん中で不透明 ➔ 最後は透明、と変化させる
+*/
+@keyframes 流星 {
+  0% {
+    opacity: 0;
+    transform: translate(0, 0) rotate(-45deg) scaleX(0); /* 縮んだ状態 */
+  }
+  20% {
+    opacity: 1;
+    transform: translate(0, 0) rotate(-45deg) scaleX(1); /* 伸びる */
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-300px, 300px) rotate(-45deg) scaleX(1); /* 移動して消える */
+  }
+}
+
+.流星本体.反転 {
+  /* 
+    通常版は translateY(-300px, 300px) rotate(-45deg) で右上から左下へ動かしていたので、
+    角度を 45deg にし、移動方向を (300px, 300px) にして「左上から右下」へ変えます。
+  */
+  background: linear-gradient(45deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1)); 
+  animation-name: 流星反転;
+}
+
+/* 逆方向用のアニメーションキーフレームを追加 */
+@keyframes 流星反転 {
+  0% {
+    opacity: 0;
+    transform: translate(0, 0) rotate(45deg) scaleX(0);
+  }
+  20% {
+    opacity: 1;
+    transform: translate(0, 0) rotate(45deg) scaleX(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(300px, 300px) rotate(45deg) scaleX(1); /* 右下へ伸びて消える */
+  }
 }
 </style>
 
@@ -85,11 +145,65 @@
 <div class="星空">
     <div class="星空レイヤー 遠景"></div>
     <div class="星空レイヤー 中景"></div>
+    <div class="星空レイヤー 流星"></div>
     <div class="星空レイヤー 近景"></div>
-  
+
   <!-- コンテンツ（文字など） -->
   <div class="content">
     <h1>Cosmic Journey</h1>
     <p>スクロールして宇宙の奥行きを体感してください。</p>
   </div>
 </div>
+
+
+<script>
+
+  const 流星レイヤー = document.querySelector('.流星');
+
+  // 流れ星を作成して流す関数
+  function 流星作成() {
+    const 流星 = document.createElement('div');
+    流星.classList.add('流星本体');
+
+// 【追加】5回に1回くらい（20%の確率）で逆方向にする判定
+    const 反転 = Math.random() < 0.5; 
+
+    if (反転) {
+      流星.classList.add('反転');
+      // 逆方向（左上➔右下）の場合は、画面の「左側〜上部」から出現させる
+      流星.style.left = `${Math.random() * window.innerWidth * 0.5}px`; 
+      流星.style.top = `${Math.random() * window.innerHeight * 0.4}px`;
+    } else {
+      // 通常方向（右上➔左下）の場合は、画面の「右側〜上部」から出現させる（前回と同じ）
+      流星.style.left = `${Math.random() * window.innerWidth * 0.8 + window.innerWidth * 0.2}px`;
+      流星.style.top = `${Math.random() * window.innerHeight * 0.5}px`;
+    }
+
+
+
+    // コンテナに追加（これでCSSアニメーションが始まる）
+    流星レイヤー.appendChild(流星);
+
+    // アニメーション終了後（1.5秒後）に要素を削除してメモリを解放
+    setTimeout(() => {
+      流星.remove();
+    }, 1000); // CSSのアニメーション時間（1.5s）と合わせる
+  }
+
+  // ランダムな間隔で流れ星を生成するループ関数
+  function 流星出現() {
+    // 次の流れ星までの時間をランダムに設定（2秒〜3秒の間）
+    const 出現間隔 = Math.random() * 1000 + 2000;
+
+    setTimeout(() => {
+      流星作成();
+      // 次のループを予約
+      流星出現();
+    }, 出現間隔);
+  }
+
+  // 流れ星のループを開始
+  流星出現();
+
+
+</script>

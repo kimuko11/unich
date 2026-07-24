@@ -52,6 +52,7 @@ a {
     overflow: clip;
     --弱光: rgb(255 240 230 / 25%);
     --中光: rgb(255 240 230 / 50%);
+    --強光: rgb(255 240 230);
 }
 
 .宇宙レイヤー {
@@ -87,18 +88,18 @@ a {
     animation-timeline: scroll(root), auto;
 }
 
- /* ⚠️ページ長さによって px 増減 */
+ /* ⚠️ページ長さによって px 増減すること */
 @keyframes 遠景の動き {
     from { transform: translateY(0); }
-    to   { transform: translateY(-100px); } /* 低速 */
+    to   { transform: translateY(var(--視差速度)); } /* 低速 */
 }
 @keyframes 中景の動き {
     from { transform: translateY(0); }
-    to   { transform: translateY(-200px); } /* 中速 */
+    to   { transform: translateY(calc(var(--視差速度) * 2)); } /* 中速 */
 }
 @keyframes 近景の動き {
     from { transform: translateY(0); }
-    to   { transform: translateY(-400px); } /* 高速 */
+    to   { transform: translateY(calc(var(--視差速度) * 4)); } /* 高速 */
 }
 
 @keyframes 中景の瞬き {
@@ -110,6 +111,51 @@ a {
       0% { opacity: 1.0; }
      50% { opacity: 0.5; }
     100% { opacity: 0.9; }
+}
+
+/* #️⃣流星 (右上から出現、反転で左上から) */
+.流星 {
+    background: linear-gradient(-45deg, rgb(0 0 0 / 0), var(--強光));
+    filter: drop-shadow(0 0 6px var(--強光));
+    position: absolute;
+    width:    100px; /* 長さ */
+    height:   1px;   /* 太さ */
+    opacity:  0;
+
+    animation: 流星 1s linear; /* JSで起動 */
+}
+.流星.反転 {
+    background: linear-gradient(45deg, rgb(0 0 0 / 0), var(--中光));
+    animation-name: 流星反転;
+}
+
+@keyframes 流星 {
+    0% {
+        opacity: 0;
+        transform: translate(0, 0) scaleX(0) rotate(-45deg);
+    }
+    20% {
+        opacity: 1;
+        transform: translate(0, 0) scaleX(1) rotate(-45deg);
+    }
+    100% {
+        opacity: 0;
+        transform: translate(-300px, 300px) scaleX(1) rotate(-45deg);
+    }
+}
+@keyframes 流星反転 {
+    0% {
+        opacity: 0;
+        transform: translate(0, 0) scaleX(0) rotate(45deg);
+    }
+    20% {
+        opacity: 1;
+        transform: translate(0, 0) scaleX(1) rotate(45deg);
+    }
+    100% {
+        opacity: 0;
+        transform: translate(300px, 300px) scaleX(1) rotate(45deg);
+    }
 }
 
 /* #️⃣メインコンテンツ */
