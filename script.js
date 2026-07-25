@@ -140,7 +140,7 @@ function 次キャラ処理() {
 
     // キャラ画像のスライドイン完了（ふきだしが現れ始めるタイミング）でセリフ表示と口元アニメを開始
     キャラ画像.addEventListener('transitionend', function スライドイン完了(イベント) {
-        if (イベント.propertyName !== 'transform') return;
+        if (イベント.propertyName !== 'translate') return;
         キャラ画像.removeEventListener('transitionend', スライドイン完了);
 
         セリフ表示(エリア, () => {
@@ -191,7 +191,7 @@ function 流星作成() {
 }
 
 function 流星出現() {
-    const 出現間隔 = Math.random() * 19000 + 1000; // 次の流星出現まで1〜20秒
+    const 出現間隔 = Math.random() * 59000 + 1000; // 次の流星出現まで1〜60秒
 
     setTimeout(() => {
         流星作成();
