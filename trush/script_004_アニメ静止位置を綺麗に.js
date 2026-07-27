@@ -74,45 +74,15 @@ function 音声再生(キャラ) {
 // 🎛️身体・差分アニメ開始 (モノローグでも動く)
 function 身体アニメ開始(エリア) {
     エリア.querySelectorAll('.縦伸縮, .横揺れ, .驚きと縦伸縮, .目玉, .驚き汗').forEach((要素) => {
-        // ニュートラル復帰で入れたインライン指定を解除して、CSSのキーフレームに制御を戻す
-        要素.style.animation  = '';
-        要素.style.rotate     = '';
-        要素.style.scale      = '';
-        要素.style.transition = '';
         要素.classList.add('再生');
     });
 }
 
-// 🎛️指定プロパティを「今の見た目の値」でインライン固定 → 強制リフロー →
-//  transitionを有効にして目標値へなめらかに変更する
-function ニュートラル復帰(要素, プロパティ, 目標値, 秒数 = 0.5) {
-    const 現在値 = getComputedStyle(要素)[プロパティ]; // 例: "-3.2deg" や "1 1.03"
-
-    要素.style.animation  = 'none';   // キーフレーム制御を完全に外す
-    要素.style.transition = 'none';   // 誤発火防止のため一旦なし
-    要素.style[プロパティ] = 現在値;   // 今の見た目をインラインで明示的に固定
-
-    void 要素.offsetWidth; // 強制リフロー：ここまでの状態を確定させる
-
-    要素.style.transition = `${プロパティ} ${秒数}s ease-out`;
-    要素.style[プロパティ] = 目標値; // ここで初めてtransitionが発火する
-}
-
-// 🎛️身体アニメ終了（rotate:0 / scale:1 のニュートラル姿勢へなめらかに戻す）
+// 🎛️身体アニメ終了
+//  （CSS側は無限ループ＋paused制御にしてあるので、ここで止めた瞬間の姿勢のまま
+//    自然に静止する。急に0度へ戻るような不自然なスナップは発生しない）
 function 身体アニメ終了(エリア) {
-    エリア.querySelectorAll('.横揺れ').forEach((要素) => {
-        要素.classList.remove('再生');
-        ニュートラル復帰(要素, 'rotate', '0deg');
-    });
-
-    エリア.querySelectorAll('.縦伸縮, .驚きと縦伸縮').forEach((要素) => {
-        要素.classList.remove('再生');
-        const キャラ反転 = getComputedStyle(要素).getPropertyValue('--キャラ反転').trim() || '1';
-        ニュートラル復帰(要素, 'scale', `${キャラ反転} 1`);
-    });
-
-    // 目玉・驚き汗は一瞬の表情差分なので、そのまま停止でOK
-    エリア.querySelectorAll('.目玉, .驚き汗').forEach((要素) => {
+    エリア.querySelectorAll('.縦伸縮, .横揺れ, .驚きと縦伸縮').forEach((要素) => {
         要素.classList.remove('再生');
     });
 }
@@ -120,10 +90,6 @@ function 身体アニメ終了(エリア) {
 // 🎛️口元アニメ開始 (モノローグでは動かない)
 function 口元アニメ開始(エリア) {
     エリア.querySelectorAll('.口パク').forEach((要素) => {
-        要素.style.animation  = '';
-        要素.style.rotate     = '';
-        要素.style.scale      = '';
-        要素.style.transition = '';
         要素.classList.add('再生');
     });
 }
@@ -132,7 +98,6 @@ function 口元アニメ開始(エリア) {
 function 口元アニメ終了(エリア) {
     エリア.querySelectorAll('.口パク').forEach((要素) => {
         要素.classList.remove('再生');
-        ニュートラル復帰(要素, 'scale', '1');
     });
 }
 
