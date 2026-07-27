@@ -71,6 +71,14 @@ function 音声再生(キャラ) {
     音声.play().catch(() => {}); // 自動再生ブロック対策（無視してOK）
 }
 
+// 🎛️効果音再生
+function 効果音再生(パス) {
+    if (!パス) return;
+    const 効果音 = new Audio(パス);
+    効果音.volume = 0.03;
+    効果音.play().catch(() => {});
+}
+
 // 🎛️身体・差分アニメ開始 (モノローグでも動く)
 function 身体アニメ開始(エリア) {
     エリア.querySelectorAll('.縦伸縮, .横揺れ, .驚きと縦伸縮, .目玉, .驚き汗').forEach((要素) => {
@@ -209,6 +217,12 @@ function 次キャラ処理() {
     キャラ画像.addEventListener('transitionend', function スライドイン完了(イベント) {
         if (イベント.propertyName !== 'translate') return;
         キャラ画像.removeEventListener('transitionend', スライドイン完了);
+
+        // data-se に指定された効果音を再生
+        const 効果音パス = ふきだし.dataset.se;
+        if (効果音パス) {
+            効果音再生(効果音パス);
+        }
 
         セリフ表示(エリア, () => {
             表示処理中 = false;
