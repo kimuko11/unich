@@ -71,10 +71,23 @@ function 音声再生(キャラ) {
     音声.play().catch(() => {}); // 自動再生ブロック対策（無視してOK）
 }
 
-// 🎛️効果音再生
+// 🎛️効果音（SE）の事前ロード用キャッシュ
+const 効果音キャッシュ = {};
+
+// data-se を持つ吹き出しから音声を事前ロード
+document.querySelectorAll('.💬[data-se]').forEach((el) => {
+    const パス = el.dataset.se;
+    if (パス && !効果音キャッシュ[パス]) {
+        const audio = new Audio(パス);
+        audio.preload = 'auto';
+        効果音キャッシュ[パス] = audio;
+    }
+});
+
+// 🎛️効果音再生（SE用：プリロード済みのものを複製して高速再生）
 function 効果音再生(パス) {
-    if (!パス) return;
-    const 効果音 = new Audio(パス);
+    if (!パス || !効果音キャッシュ[パス]) return;
+    const 効果音 = 効果音キャッシュ[パス].cloneNode();
     効果音.volume = 0.03;
     効果音.play().catch(() => {});
 }
@@ -120,9 +133,9 @@ function 身体アニメ終了(エリア) {
     });
 
     // 目玉・驚き汗は一瞬の表情差分なので、そのまま停止でOK
-    エリア.querySelectorAll('.目玉, .驚き汗').forEach((要素) => {
-        要素.classList.remove('再生');
-    });
+    // エリア.querySelectorAll('.目玉, .驚き汗').forEach((要素) => {
+    //    要素.classList.remove('再生');
+    // });
 }
 
 // 🎛️口元アニメ開始 (モノローグでは動かない)

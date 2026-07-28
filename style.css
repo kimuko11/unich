@@ -45,6 +45,8 @@ a {
     color: inherit;
 }
 
+.白枠 { filter: url(#白枠); }
+
 /* #️⃣宇宙視差背景 */
 .宇宙全体 {
     position: relative;
@@ -194,8 +196,9 @@ a {
     max-width:     25%;      /* 画像は対話全体枠の横幅25%以下 */
     position:      relative; /* 差分を重ねるため */
     z-index:       1;
-
-    filter: drop-shadow(0 0 10px var(--中光));
+    
+    filter: url(#白枠);
+    /* filter: drop-shadow(0 0 10px var(--中光)); */
 
     /* 出現前の位置 */
     translate: calc(var(--出現方向) * 150%) 0;
@@ -351,7 +354,7 @@ a {
 }
 
 /* #️⃣キャラ画像差分用 absolute */
-/* 無限 */.ハート, .星回転, .腕振り, .フィギュア,
+/* 無限 */.ハート, .高速伸縮, .星回転, .腕振り, .フィギュア,
 /* 口元 */.口パク,
 /* 差分 */.目玉, .驚き汗 {
     position: absolute; top: 0%; }
@@ -369,6 +372,7 @@ a {
       0% { scale: 1.0 1.0; }
     100% { scale: 0.9 0.9; }
 }
+.高速伸縮 { animation: ハート 0.5s infinite ease-in-out alternate; }
 
 .星回転 {
     transform-origin: 25% 20.8%;
@@ -432,7 +436,7 @@ a {
 @keyframes 驚き汗 {
       0% { opacity: 0.0; scale: 0.5; }
      40% { opacity: 1.0; scale: 1.2; }
-    100% { opacity: 0.5; scale: 1.0; }
+    100% { opacity: 1.0; scale: 1.0; }
 }
 
 /* #️⃣身体アニメ (absolute 不要) */
