@@ -14,7 +14,7 @@ html {
 
 body {
     background: black url(img/nebula0.webp) fixed no-repeat center / cover;
-    color:      #eee;
+    color:      #fff4f0;
     font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif; /* 視認性の高い基本フォント */
     overflow-x: hidden; /* 画面のはみ出し防止 */
     -webkit-font-smoothing: antialiased; /* 文字を滑らかに */
@@ -52,9 +52,9 @@ a {
     position: relative;
     width:    100%;
     overflow: clip;
-    --弱光:   rgb(255 240 230 / 25%);
-    --中光:   rgb(255 240 230 / 50%);
-    --強光:   rgb(255 240 230);
+    --弱光:   rgb(255 244 240 / 25%);
+    --中光:   rgb(255 244 240 / 50%);
+    --強光:   rgb(255 244 240);
 }
 
 .宇宙レイヤー {
@@ -197,8 +197,7 @@ a {
     position:      relative; /* 差分を重ねるため */
     z-index:       1;
     
-    filter: url(#白枠);
-    /* filter: drop-shadow(0 0 10px var(--中光)); */
+    filter: url(#白枠) drop-shadow(0 0 10px var(--中光));
 
     /* 出現前の位置 */
     translate: calc(var(--出現方向) * 150%) 0;
@@ -249,8 +248,9 @@ a {
     inset:    0;
     z-index: -1; /* 文字の後ろに配置 */
 
-    --標準色: rgb(128 128 128 / 50%);
+    --標準色: rgb(99 99 99 / 50%);
     background-color: var(--色, var(--標準色));
+    border: 1px solid var(--中光);
     border-radius:    40px;
     backdrop-filter:  blur(3px);
     box-shadow:
@@ -272,15 +272,14 @@ a {
 /* ふきだしのしっぽ */
 .💬::after {
     content: '';
-    border-color:    transparent transparent var(--色, var(--標準色)) transparent;
-    backdrop-filter: blur(3px);
-    border-style:    solid;
     display:         block;
     position:        absolute;
     top:             -5.5px;
     left:            var(--しっぽ左);
     right:           var(--しっぽ右);
     border-width:    var(--しっぽ形);
+    border-style:    solid;
+    border-color:    transparent transparent var(--中光) transparent;
 
     transform-origin: center bottom;
     animation: しっぽ 0.6s infinite ease-in-out alternate;  /* 低速 */
@@ -302,17 +301,18 @@ a {
 }
 
 /* #️⃣モノローグのふきだし */
-.無声 { color: #888; }
+.無声 { color: rgb(192 183 180); }
 
 .💬.無声::before {
     background-color: rgb(from var(--色, var(--標準色)) r g b / calc(alpha / 2));
+    border: 1px solid var(--弱光);
 }
 
 .💬.無声::after {
+    width:  3px;
+    height: 3px;
+    background-color: var(--弱光);
     border: none;   /* しっぽ消去 */
-    background-color: var(--色, var(--標準色));
-    width:         3px;
-    height:        3px;
     border-radius: 50%;
 }
 
@@ -328,14 +328,14 @@ a {
 	--配置: flex-start; --出現方向: -1;   --キャラ反転: 1;
 	--左余白:   16%;    --右余白:   0;
 	--しっぽ左: 50px;	--しっぽ右: auto;
-	--起点: top left;	--しっぽ形: 0 5px 6px 0;
+	--起点: top left;	--しっぽ形: 0 3px 6px 0;
     --色: rgb(118 101 85 / 50%);
 }
 :where(.🥸) {
 	--配置: flex-end;	--出現方向: 1;    --キャラ反転: 1;
 	--左余白:   0;		--右余白:  14%;
 	--しっぽ左: auto;	--しっぽ右: 50px;
-	--起点: top right;  --しっぽ形: 0 0 6px 5px;
+	--起点: top right;  --しっぽ形: 0 0 6px 3px;
     --色: rgb(149 85 85 / 50%);
 }
 
@@ -344,13 +344,13 @@ a {
 	--配置: flex-start; --出現方向: -1;   --キャラ反転: -1;
 	--左余白:   16%;    --右余白:   0;
 	--しっぽ左: 50px;	--しっぽ右: auto;
-	--起点: top left;	--しっぽ形: 0 5px 6px 0;
+	--起点: top left;	--しっぽ形: 0 3px 6px 0;
 }
 .右側 {
 	--配置: flex-end;	--出現方向: 1;    --キャラ反転: -1;
 	--左余白:   0;		--右余白:  14%;
 	--しっぽ左: auto;	--しっぽ右: 50px;
-	--起点: top right;  --しっぽ形: 0 0 6px 5px;
+	--起点: top right;  --しっぽ形: 0 0 6px 3px;
 }
 
 /* #️⃣キャラ画像差分用 absolute */

@@ -79,8 +79,8 @@
                 <img src="cha/uf_sizukana-ikari.webp" alt="ユニ俯瞰：静かな怒り">
                 <img src="cha/uf_sizukana-ikari_kekkan.webp" class="高速伸縮">
             </div>
-            <div class="💬 高速">
-                <big>………💢</big>
+            <div class="💬 無声 高速">
+                <big>………💢</big>おま、今月の生活費は残りきびちーって口をすっぱくちてゆってたのにまた…耳をなくちたんか！<br>
             </div>
         </div>
 
@@ -90,19 +90,20 @@
 
 </div> <!-- 宇宙全体 ここまで -->
 
+<!-- ↔️SVGフィルター -->
 <svg style="position: absolute; width: 0; height: 0; overflow: hidden;">
-  <defs>
-    <filter id="白枠">
-      <feMorphology in="SourceAlpha" operator="dilate" radius="1" result="expanded" />
-      <feFlood flood-color="#ffffff" flood-opacity="1" result="color" />
-      <feComposite in="color" in2="expanded" operator="in" result="outline" />
-      <!-- 元の画像をその上に重ねる -->
-      <feMerge>
-        <feMergeNode in="outline" />
-        <feMergeNode in="SourceGraphic" />
-      </feMerge>
-    </filter>
-  </defs>
+    <defs>
+        <filter id="白枠">
+            <feMorphology in="SourceAlpha" operator="dilate" radius="1" result="expanded" />
+            <feFlood flood-color="#fff4f0" flood-opacity="1" result="color" />
+            <feComposite in="color" in2="expanded" operator="in" result="outline" />
+            <!-- 元の画像をその上に重ねる -->
+            <feMerge>
+                <feMergeNode in="outline" />
+                <feMergeNode in="SourceGraphic" />
+            </feMerge>
+        </filter>
+    </defs>
 </svg>
 
 </body>
