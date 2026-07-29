@@ -94,7 +94,7 @@ function 効果音再生(パス) {
 
 // 🎛️身体・差分アニメ開始 (モノローグでも動く)
 function 身体アニメ開始(エリア) {
-    エリア.querySelectorAll('.縦伸縮, .横揺れ, .驚きと縦伸縮, .目玉, .驚き汗').forEach((要素) => {
+    エリア.querySelectorAll('.縦伸縮, .横揺れ, .驚きと縦伸縮, .震え, .目玉, .驚き汗').forEach((要素) => {
         // ニュートラル復帰で入れたインライン指定を解除して、CSSのキーフレームに制御を戻す
         要素.style.animation  = '';
         要素.style.rotate     = '';
@@ -132,10 +132,9 @@ function 身体アニメ終了(エリア) {
         ニュートラル復帰(要素, 'scale', `${キャラ反転} 1`);
     });
 
-    // 目玉・驚き汗は一瞬の表情差分なので、そのまま停止でOK
-    // エリア.querySelectorAll('.目玉, .驚き汗').forEach((要素) => {
-    //    要素.classList.remove('再生');
-    // });
+    エリア.querySelectorAll('.震え').forEach((要素) => {
+        要素.classList.remove('再生');
+    });
 }
 
 // 🎛️口元アニメ開始 (モノローグでは動かない)
@@ -228,7 +227,7 @@ function 次キャラ処理() {
 
     // キャラ画像のスライドイン完了（ふきだしが現れ始めるタイミング）でセリフ表示と口元アニメを開始
     キャラ画像.addEventListener('transitionend', function スライドイン完了(イベント) {
-        if (イベント.propertyName !== 'translate') return;
+        if (イベント.propertyName !== 'transform') return;
         キャラ画像.removeEventListener('transitionend', スライドイン完了);
 
         // data-se に指定された効果音を再生
