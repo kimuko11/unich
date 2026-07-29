@@ -174,7 +174,7 @@ a {
 .対話全体枠 {
     max-width:       800px;  /* 大型デバイスでの最大横幅 */
     width:           100%;   /* スマホでの画面合わせ */
-    gap:             10px;   /* 発言ごとの間隔 */
+    gap:             10px;   /* キャラごとの間隔 */
     margin:          0 auto; /* 中央寄せ */
     padding:         0 1%;
     min-height:      100vh;
@@ -185,6 +185,8 @@ a {
 
 /* #️⃣キャラの指定と出現方法 */
 .🥸, .🐰, .👩, .👤 {
+    --間隔:         0; /* キャラ間隔の変更に */
+    margin-top:     var(--間隔);
     display:        flex;
     flex-direction: column;
     align-items:    var(--配置);
@@ -267,7 +269,7 @@ a {
 
 @keyframes ふわふわ {
     0% { scale: 1.00 1.00; }
-  100% { scale: 1.01 1.02; }
+  100% { scale: 1.01 1.01; }
 }
 
 /* ふきだしのしっぽ */
@@ -355,7 +357,7 @@ a {
 }
 
 /* #️⃣キャラ画像差分用 absolute */
-/* 無限 */.ハート, .高速伸縮, .星回転, .腕振り, .フィギュア,
+/* 無限 */.ハート, .高速伸縮, .星回転, .腕振り, .フィギュア, .ちいかわ,
 /* 口元 */.口パク,
 /* 差分 */.目玉, .驚き汗 {
     position: absolute; top: 0%; }
@@ -363,7 +365,7 @@ a {
 /* #️⃣アニメ再生トリガー (初期値は停止、JSで再生・停止コントロール) */
 /* 口元 */.口パク.再生,
 /* 差分 */.目玉.再生, .驚き汗.再生,
-/* 身体 */.縦伸縮.再生, .横揺れ.再生, .驚きと縦伸縮.再生, .震え.再生 {
+/* 身体 */.縦伸縮.再生, .横揺れ.再生, .横揺れ低速.再生, .驚きと縦伸縮.再生, .震え.再生 {
     animation-play-state: running; }
 
 /* #️⃣無限アニメ (トリガー不要) */
@@ -385,11 +387,12 @@ a {
 
 .腕振り {
     transform-origin: 25% 95%;
-    animation: 腕振り 0.5s infinite ease-in-out alternate;
+    animation: 横揺れ 0.5s infinite ease-in-out alternate;
 }
-@keyframes 腕振り {
-      0% { rotate: -5deg; }
-    100% { rotate:  5deg; }
+
+.ちいかわ {
+    transform-origin: center bottom;
+    animation: 横揺れ小 1s infinite ease-in-out alternate;
 }
 
 .フィギュア { 
@@ -452,9 +455,17 @@ a {
     transform-origin: center bottom;
     animation: 横揺れ 0.5s infinite ease-in-out alternate paused;
 }
+.横揺れ低速 {
+    transform-origin: center bottom;
+    animation: 横揺れ小 1s infinite ease-in-out alternate paused;
+}
 @keyframes 横揺れ {
       0% { rotate: -5deg; }
     100% { rotate:  5deg; }
+}
+@keyframes 横揺れ小 {
+      0% { rotate: -2deg; }
+    100% { rotate:  2deg; }
 }
 
 .驚きと縦伸縮 {

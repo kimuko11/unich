@@ -94,7 +94,7 @@ function 効果音再生(パス) {
 
 // 🎛️身体・差分アニメ開始 (モノローグでも動く)
 function 身体アニメ開始(エリア) {
-    エリア.querySelectorAll('.縦伸縮, .横揺れ, .驚きと縦伸縮, .震え, .目玉, .驚き汗').forEach((要素) => {
+    エリア.querySelectorAll('.縦伸縮, .横揺れ, .横揺れ低速, .驚きと縦伸縮, .震え, .目玉, .驚き汗').forEach((要素) => {
         // ニュートラル復帰で入れたインライン指定を解除して、CSSのキーフレームに制御を戻す
         要素.style.animation  = '';
         要素.style.rotate     = '';
@@ -121,7 +121,7 @@ function ニュートラル復帰(要素, プロパティ, 目標値, 秒数 = 0
 
 // 🎛️身体アニメ終了（rotate:0 / scale:1 のニュートラル姿勢へなめらかに戻す）
 function 身体アニメ終了(エリア) {
-    エリア.querySelectorAll('.横揺れ').forEach((要素) => {
+    エリア.querySelectorAll('.横揺れ, .横揺れ低速').forEach((要素) => {
         要素.classList.remove('再生');
         ニュートラル復帰(要素, 'rotate', '0deg');
     });

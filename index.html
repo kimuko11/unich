@@ -18,8 +18,11 @@
 
     <main class="対話全体枠">
 
-         <!-- #️⃣デフォルトstyle キャラ画像 "--サイズ: 25%;", "--被り幅: -25px;", 💬 "--左余白: 16%;", "--右余白: 14%;"
-                変更したい時は class="キャラ画像" や class="💬" の後に style=" " を追加して上記変数を代入 -->
+        <!-- #️⃣デフォルト CSS 変数
+        🥸🐰     "--間隔: 0px;"
+        キャラ画像 "--サイズ: 25%;", "--被り幅: -25px;"
+        💬        "--左余白: 16%;", "--右余白: 14%;"
+        変更したい時は、該当クラスの後に style=" " を追加して上記変数を代入 -->
 
         <div class="🐰">
             <div class="キャラ画像 横揺れ">
@@ -74,13 +77,24 @@
             </div>
         </div>
 
-        <div class="🐰">
+        <div class="🐰" style="--間隔: 20px;">
             <div class="キャラ画像 震え" style="--サイズ: 23%;">
                 <img src="cha/uf_sizukana-ikari.webp" alt="ユニ俯瞰：静かな怒り">
                 <img src="cha/uf_sizukana-ikari_kekkan.webp" class="高速伸縮">
             </div>
             <div class="💬 高速">
-                <big>………💢</big>
+                <big>……………💢</big>
+            </div>
+        </div>
+
+        <div class="🥸" style="--間隔: -40px;">
+            <div class="キャラ画像 横揺れ低速" style="--サイズ: 23%;">
+                <img src="cha/df_chiikawa.webp" alt="ドク俯瞰：ちいかわ">
+                <img src="cha/df_chiikawa_chiikawa.webp" class="ちいかわ">
+            </div>
+            <div class="💬">
+                あれ、お気に召されない？<br>
+                ちい〇わの方がよかったですかのう…
             </div>
         </div>
 
