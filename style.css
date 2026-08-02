@@ -18,6 +18,9 @@ body {
     font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif; /* 視認性の高い基本フォント */
     overflow-x: hidden; /* 画面のはみ出し防止 */
     -webkit-font-smoothing: antialiased; /* 文字を滑らかに */
+    --弱光:   rgb(255 244 240 / 25%);
+    --中光:   rgb(255 244 240 / 50%);
+    --強光:   rgb(255 244 240);
 }
 
 body, h1, h2, h3, h4, h5, h6, p, ul, ol, figure {
@@ -47,14 +50,35 @@ a {
 
 .白枠 { filter: url(#白枠); }
 
+
+/* #️⃣ロゴとメニュー */
+.ヘッダー {
+    position: fixed;  /* 画面上に固定表示 */
+    top: 0px;         /* 画面上部からの距離 */
+    left: 0px;        /* 画面左からの距離 */
+    right: 0px;       /* 画面右からの距離 */
+    z-index: 999;     /* 背景や対話コンテンツより前面に配置 */
+
+    display: flex;
+    justify-content: space-between; /* 左寄せ（ロゴ）と右寄せ（メニュー）に分離 */
+    align-items: center;
+    pointer-events: none; /* ヘッダー自体の透明領域で下層のクリックを阻害しない */
+}
+
+.ロゴ, .メニュー {
+    max-width: 50%;
+    pointer-events: auto;
+    filter: drop-shadow(0 0 2px var(--強光));
+}
+
+.ロゴのふきだし { max-width: 50%; }
+
+
 /* #️⃣宇宙視差背景 */
 .宇宙全体 {
     position: relative;
     width:    100%;
     overflow: clip;
-    --弱光:   rgb(255 244 240 / 25%);
-    --中光:   rgb(255 244 240 / 50%);
-    --強光:   rgb(255 244 240);
 }
 
 .宇宙レイヤー {
@@ -169,6 +193,7 @@ a {
         rotate:    45deg;
     }
 }
+
 
 /* #️⃣メインコンテンツ */
 .対話全体枠 {
@@ -356,8 +381,9 @@ a {
 	--起点: top right;  --しっぽ形: 0 0 6px 3px;
 }
 
+
 /* #️⃣キャラ画像差分用 absolute */
-/* 無限 */.ハート, .高速伸縮, .星回転, .腕振り, .フィギュア, .ちいかわ,
+/* 無限 */.ハート, .高速伸縮, .星回転, .腕振り, .フィギュア, .ちいかわ, .ロゴのふきだし,
 /* 口元 */.口パク,
 /* 差分 */.目玉, .驚き汗 {
     position: absolute; top: 0%; }

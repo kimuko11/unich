@@ -284,7 +284,7 @@ function 流星作成() {
 }
 
 function 流星出現() {
-    const 出現間隔 = Math.random() * 59000 + 1000; // 次の流星出現まで1〜60秒
+    const 出現間隔 = Math.random() * 590 + 1000; // 次の流星出現まで1〜60秒
 
     setTimeout(() => {
         流星作成();
