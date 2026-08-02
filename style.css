@@ -53,25 +53,47 @@ a {
 
 /* #️⃣ロゴとメニュー */
 .ヘッダー {
-    position: fixed;  /* 画面上に固定表示 */
-    top: 0px;         /* 画面上部からの距離 */
-    left: 0px;        /* 画面左からの距離 */
-    right: 0px;       /* 画面右からの距離 */
-    z-index: 999;     /* 背景や対話コンテンツより前面に配置 */
-
-    display: flex;
+    position: fixed;
+    top:      0;  /* 画面上からの距離 */
+    left:     0;  /* 画面左からの距離 */
+    right:    1%; /* 画面右からの距離 */
+    z-index:  999;
+    display:  flex;
     justify-content: space-between; /* 左寄せ（ロゴ）と右寄せ（メニュー）に分離 */
-    align-items: center;
-    pointer-events: none; /* ヘッダー自体の透明領域で下層のクリックを阻害しない */
+    align-items:     center;
+    pointer-events:  none; /* 下層のクリックを阻害しない */
 }
 
 .ロゴ, .メニュー {
     max-width: 50%;
     pointer-events: auto;
-    filter: drop-shadow(0 0 2px var(--強光));
+    filter: drop-shadow(0 0 5px black);
 }
 
-.ロゴのふきだし { max-width: 50%; }
+.ロゴ { animation: スライドイン 2s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
+
+.ロゴのふきだし {
+    max-width: 50%;
+    opacity:   0;
+    animation: 現れて消える 10s ease forwards 2s;
+}
+
+@keyframes スライドイン {
+    0% {
+        transform: translateX(100vw);
+        opacity:   0;
+    }
+    100% {
+        transform: translateX(0);
+        opacity:   1;
+    }
+}
+
+@keyframes 現れて消える {
+      0%      { opacity: 0; }
+     10%, 90% { opacity: 1; }
+    100%      { opacity: 0; visibility: hidden;}
+}
 
 
 /* #️⃣宇宙視差背景 */
