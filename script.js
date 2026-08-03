@@ -26,7 +26,7 @@ function 種別取得(エリア) {
 }
 
 // 🎛️文字送り間隔（ミリ秒）
-const 文字送り間隔 = 50;
+const 文字速度 = 50;
 
 // 🎛️文字分解（ふきだし内のHTML構造を保ったまま、文字を1つずつ <span class="文字"> に分解）
 function 文字分解(要素) {
@@ -182,7 +182,7 @@ function セリフ表示(エリア, 完了コールバック) {
         if (!モノローグ && 文字span.textContent !== ' ') 音声再生(キャラ);
 
         現在位置++;
-    }, 文字送り間隔);
+    }, 文字速度);
 }
 
 // 🎛️「上から順番に一人ずつ登場 → セリフ」を管理する待機キュー
@@ -257,6 +257,26 @@ const 監視 = new IntersectionObserver((項目一覧) => {
 
 // 🎛️一つずつ監視対象に登録
 キャラ一覧.forEach((エリア) => { 監視.observe(エリア); });
+
+
+// 🎛️オプション
+document.addEventListener('DOMContentLoaded', () => {
+    const オプション = document.getElementById('オプション');
+    const ラジオ = document.getElementById('ラジオ');
+
+    // 開閉切り替え
+    ラジオ.addEventListener('click', (e) => {
+        e.stopPropagation(); // イベントが親に伝播してすぐ閉じるのを防ぐ
+        オプション.classList.toggle('オープン');
+    });
+
+    // オプション外をタップしたら閉じる
+    document.addEventListener('click', (e) => {
+        if (!オプション.contains(e.target)) {
+            オプション.classList.remove('オープン');
+        }
+    });
+});
 
 
 // 🎛️流星呼び出し

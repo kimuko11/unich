@@ -10,13 +10,38 @@
 <body>
 
 <header class="ヘッダー">
+
     <a href="#" class="ロゴ">
         <img src="img/logo.webp" alt="ロゴ">
     </a>
     <img src="img/logo_fukidasi_nomi.webp" class="ロゴのふきだし">
-    <img src="img/radio.gif" alt="メニュー" class="メニュー">
+
+    <div class="オプション" id="オプション">
+        <img src="img/radio.gif" class="ラジオ" id="ラジオ">
+        <div class="オプションの文字">オプション</div>
+
+        <div class="オプションふきだし">
+            <div class="オプション項目">
+                文字速度
+                <div class="スライダー">
+                    遅<input type="range" id="文字速度" value="50">速
+                </div>
+            </div>
+            
+            <div class="オプション項目">
+                効果音量
+                <div class="スライダー">
+                    小<input type="range" id="効果音量" value="10">大
+                </div>
+            </div>
+
+        </div> <!-- オプションふきだし ここまで -->
+
+    </div> <!-- オプション ここまで -->
+
 </header>
 
+<!-- ↔️メインコンテンツ -->
 <div class="宇宙全体" style="--視差速度: -100px;"> <!-- ⚠️ページ長さによって px 増減する -->
     <div class="宇宙レイヤー 遠景"></div>
     <div class="宇宙レイヤー 中景"></div>
