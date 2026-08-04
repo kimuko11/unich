@@ -262,7 +262,7 @@ const 監視 = new IntersectionObserver((項目一覧) => {
 // 🎛️オプション
 document.addEventListener('DOMContentLoaded', () => {
     const オプション = document.getElementById('オプション');
-    const ラジオ = document.getElementById('ラジオ');
+    const ラジオ = document.getElementById('📻');
 
     // 開閉切り替え
     ラジオ.addEventListener('click', (e) => {
@@ -275,6 +275,20 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!オプション.contains(e.target)) {
             オプション.classList.remove('オープン');
         }
+    });
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+    // すべてのスライダー要素を取得
+    const スライダー = document.querySelectorAll('.スライダー input[type="range"]');
+
+    スライダー.forEach(スライダー項目 => {
+        const 表示 = スライダー項目.nextElementSibling; // 隣の .スライダー数値 を取得
+
+        // スライダー操作時に数値を更新
+        スライダー項目.addEventListener('input', (e) => {
+            表示.textContent = e.target.value;
+        });
     });
 });
 

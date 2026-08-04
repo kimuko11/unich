@@ -16,17 +16,10 @@ body {
     background: black url(img/nebula0.webp) fixed no-repeat center / cover;
     color:      #fff4f0;
     font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif; /* 視認性の高い基本フォント */
-    overflow-x: hidden; /* 画面のはみ出し防止 */
-    -webkit-font-smoothing: antialiased; /* 文字を滑らかに */
-    --標準色: rgb(99 99 99 / 50%);
-    --弱光:   rgb(255 244 240 / 25%);
-    --中光:   rgb(255 244 240 / 50%);
-    --強光:   rgb(255 244 240);
-}
-
-body, h1, h2, h3, h4, h5, h6, p, ul, ol, figure {
     margin:  0;
     padding: 0;
+    overflow-x: hidden; /* 画面のはみ出し防止 */
+    -webkit-font-smoothing: antialiased; /* 文字を滑らかに */
 }
 
 img {
@@ -49,7 +42,25 @@ a {
     color: inherit;
 }
 
+/* #️⃣共通CSS */
+* {
+    --弱光:   rgb(255 244 240 / 25%);
+    --中光:   rgb(255 244 240 / 50%);
+    --強光:   rgb(255 244 240);
+    --標準色: rgb(100 100 100 / 50%);
+}
+
 .白枠 { filter: url(#白枠); }
+
+.💬, .オプション💬 {
+    padding: 16px;
+    text-shadow:
+        0  1px #000,      /* 下 */
+       -1px  0 #111,      /* 左 */
+        1px  0 #111,      /* 右 */
+        0 -1px #222,      /* 上 */
+        0  2px 2px #000;  /* 影 */
+}
 
 
 /* #️⃣ヘッダー (ロゴとオプション) */
@@ -71,42 +82,45 @@ a {
     flex-direction: column;
     align-items:    center;
     pointer-events: auto;
-    filter: drop-shadow(0 0 5px black);
 }
 
-.ロゴ { animation: スライドイン 1s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
+.ロゴ {
+    filter:    drop-shadow(0 0 5px black);
+    animation: スライドイン 1s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
 
-.ロゴのふきだし {
+.ロゴ💬 {
     max-width: 50%;
     opacity:   0;
-    animation: 現れて消える 10s ease forwards 1s;
+    animation: 現れて消える 9s ease forwards 1s;
 }
 
 /* オプション */
-.ラジオ {
+.📻 {
+    margin-top: 20px;
     cursor:     pointer;
+    filter:     drop-shadow(0 0 5px black);
     transition: scale 0.3s ease;
     animation:  出現 1s linear forwards;
 }
-.オプション.オープン .ラジオ { scale: 1.1; } /* オプションオープン時 */
+.オプション.オープン .📻 { scale: 1.1; } /* オプションオープン時 */
 
 .オプションの文字 {
     font-size: 50%;
-    animation: 現れて消える 11s ease forwards;
+    animation: 現れて消える 10s ease forwards;
 }
 
-.オプションふきだし {
+.オプション💬 {
     position: absolute;
-    top:      100%; /* ラジオ直下 */
+    top:      90%;   /* 位置 */
     right:    0;
-    width:    240px;
-    padding:  20px;
+    width:    250px; /* 横幅 */
 
     background-color: var(--標準色);
     border: 1px solid var(--中光);
     border-radius:    30px;
-    backdrop-filter:  blur(3px);
-    box-shadow: 0    0 20px black,             /* 背景の影 */
+    backdrop-filter:  blur(4px);
+    box-shadow: 0  2px 20px black,             /* 背景の影 */
         inset   0  2px 10px var(--弱光),         /* 光沢 */
         inset   0 -2px 20px rgb(0 0 0 / 50%); /* 影 */
 
@@ -118,18 +132,18 @@ a {
                 opacity    0.3s ease,
                 visibility 0.4s;
 }
-.オプション.オープン .オプションふきだし {
+.オプション.オープン .オプション💬 {
     scale:      1;
     opacity:    1;
     visibility: visible;
 }
 
-.オプションふきだし::before { /* ふきだしのしっぽ */
+.オプション💬::before { /* ふきだしのしっぽ */
     content: '';
     position:     absolute;
     top:          -6px;
-    right:        25px;
-    border-width: 0 0px 6px 3px;
+    right:        27px;
+    border-width: 0 1px 6px 3px;
     border-style: solid;
     border-color: transparent transparent var(--中光) transparent;
 }
@@ -151,6 +165,31 @@ a {
     flex:         1;
     cursor:       pointer;
     accent-color: gold; /* ツマミ色 */
+}
+
+.スライダー数値 {
+    position:  absolute;
+    top:       -6px; /* 位置 */
+    left:      50%;
+    translate: -50%;
+    
+    background-color: #555;
+    color:            gold;
+    box-shadow: 0 2px 5px black;
+
+    padding:          4px 8px;
+    border-radius:    6px;
+    border:           1px solid var(--中光);
+    pointer-events:   none;
+    
+    /* フェード設定 */
+    opacity:    0;
+    visibility: hidden;
+    transition: opacity 0.2s ease, visibility 0.2s ease;
+}
+.スライダー:hover .スライダー数値, .スライダー input[type="range"]:focus + .スライダー数値 { /* フォーカス時 */
+    opacity:    1;
+    visibility: visible;
 }
 
 @keyframes スライドイン {
@@ -490,7 +529,7 @@ a {
 
 
 /* #️⃣キャラ画像差分用 absolute */
-/* 無限 */.ハート, .高速伸縮, .星回転, .腕振り, .フィギュア, .ちいかわ, .ロゴのふきだし,
+/* 無限 */.ハート, .高速伸縮, .星回転, .腕振り, .フィギュア, .ちいかわ, .ロゴ💬,
 /* 口元 */.口パク,
 /* 差分 */.目玉, .驚き汗 {
     position: absolute; top: 0%; }
