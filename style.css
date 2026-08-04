@@ -153,7 +153,6 @@ a {
     display:        flex;
     flex-direction: column;
 }
-.オプション項目:last-child { margin-bottom: 0; }
 
 .スライダー {
     display:     flex;
@@ -190,6 +189,24 @@ a {
 .スライダー:hover .スライダー数値, .スライダー input[type="range"]:focus + .スライダー数値 { /* フォーカス時 */
     opacity:    1;
     visibility: visible;
+}
+
+/* 初期値に戻すボタン（控えめなデザイン） */
+.初期値ボタン {
+  display: block;
+  margin: 30px auto 0;
+  padding: 4px 8px;
+  font-size: 11px;
+  color: gray;
+
+  border: 1px solid gray;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.初期値ボタン:hover {
+  color: var(--強光);
 }
 
 @keyframes スライドイン {

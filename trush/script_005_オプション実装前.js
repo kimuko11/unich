@@ -1,22 +1,6 @@
 // 🎛️対象一覧
 const キャラ一覧 = document.querySelectorAll('.🥸, .🐰, .👩, .👤');
 
-// 🎛️スライダー設定のグローバル変数（初期値）
-let スライダー文字速度 = 50;
-let スライダー効果音量 = 10;
-
-// 計算用の派生変数
-let 設定速度ms = 100 - スライダー文字速度; // (100 - 文字速度)
-let ボイス音量 = スライダー効果音量 * 0.01;
-let 効果音音量 = ボイス音量 * 0.3; // その3割
-
-// 🎛️設定更新関数
-function 設定更新() {
-    設定速度ms = 100 - スライダー文字速度;
-    ボイス音量 = スライダー効果音量 * 0.01;
-    効果音音量 = ボイス音量 * 0.3;
-}
-
 // 🎛️代替音声
 const 音声一覧 = {
     ドク: new Audio('se/doc.mp3'),
@@ -33,12 +17,16 @@ function キャラ取得(エリア) {
 }
 
 // 🎛️エリアのクラスから「身体アニメ管理用の種別」を判定
+//  （音声のキャラ取得とは別に、👩・👤も個別に区別するためのもの）
 function 種別取得(エリア) {
     for (const 種別 of ['🥸', '🐰', '👩', '👤']) {
         if (エリア.classList.contains(種別)) return 種別;
     }
     return '__既定__';
 }
+
+// 🎛️文字送り間隔（ミリ秒）
+const 文字速度 = 50;
 
 // 🎛️文字分解（ふきだし内のHTML構造を保ったまま、文字を1つずつ <span class="文字"> に分解）
 function 文字分解(要素) {
@@ -47,7 +35,7 @@ function 文字分解(要素) {
     function 走査(元ノード, 複製先) {
         元ノード.childNodes.forEach((子ノード) => {
             if (子ノード.nodeType === Node.TEXT_NODE) {
-                const 整形文字 = 子ノード.textContent.replace(/\s+/g, ' ');
+                const 整形文字 = 子ノード.textContent.replace(/\s+/g, ' '); // 連続する空白や改行は半角スペース1つに整形
                 [...整形文字].forEach((文字) => {
                     const 文字span = document.createElement('span');
                     文字span.className = '文字';
@@ -64,7 +52,7 @@ function 文字分解(要素) {
                         複製要素.setAttribute(属性.name, 属性.value);
                     });
                     複製先.appendChild(複製要素);
-                    走査(子ノード, 複製要素);
+                    走査(子ノード, 複製要素); // 入れ子タグも再帰的に処理
                 }
             }
         });
@@ -76,17 +64,17 @@ function 文字分解(要素) {
     return 文字要素一覧;
 }
 
-// 🎛️音声再生（ボイス用）
+// 🎛️音声再生（キャラごとの音声を連続再生できるように複製してから再生）
 function 音声再生(キャラ) {
-    if (ボイス音量 <= 0) return; // 音量0なら再生スキップ
     const 音声 = 音声一覧[キャラ].cloneNode();
-    音声.volume = Math.min(Math.max(ボイス音量, 0), 1); // 0.0 ~ 1.0 にクランプ
-    音声.play().catch(() => {});
+    音声.volume = 0.1;
+    音声.play().catch(() => {}); // 自動再生ブロック対策（無視してOK）
 }
 
 // 🎛️効果音（SE）の事前ロード用キャッシュ
 const 効果音キャッシュ = {};
 
+// data-se を持つ吹き出しから音声を事前ロード
 document.querySelectorAll('.💬[data-se]').forEach((el) => {
     const パス = el.dataset.se;
     if (パス && !効果音キャッシュ[パス]) {
@@ -96,17 +84,18 @@ document.querySelectorAll('.💬[data-se]').forEach((el) => {
     }
 });
 
-// 🎛️効果音再生（SE用：ボイスの3割の音量で再生）
+// 🎛️効果音再生（SE用：プリロード済みのものを複製して高速再生）
 function 効果音再生(パス) {
-    if (!パス || !効果音キャッシュ[パス] || 効果音音量 <= 0) return;
+    if (!パス || !効果音キャッシュ[パス]) return;
     const 効果音 = 効果音キャッシュ[パス].cloneNode();
-    効果音.volume = Math.min(Math.max(効果音音量, 0), 1);
+    効果音.volume = 0.03;
     効果音.play().catch(() => {});
 }
 
-// 🎛️身体・差分アニメ開始
+// 🎛️身体・差分アニメ開始 (モノローグでも動く)
 function 身体アニメ開始(エリア) {
     エリア.querySelectorAll('.縦伸縮, .横揺れ, .横揺れ低速, .驚きと縦伸縮, .震え, .目玉, .驚き汗').forEach((要素) => {
+        // ニュートラル復帰で入れたインライン指定を解除して、CSSのキーフレームに制御を戻す
         要素.style.animation  = '';
         要素.style.rotate     = '';
         要素.style.scale      = '';
@@ -115,21 +104,22 @@ function 身体アニメ開始(エリア) {
     });
 }
 
-// 🎛️ニュートラル復帰
+// 🎛️指定プロパティを「今の見た目の値」でインライン固定 → 強制リフロー →
+//  transitionを有効にして目標値へなめらかに変更する
 function ニュートラル復帰(要素, プロパティ, 目標値, 秒数 = 0.5) {
-    const 現在値 = getComputedStyle(要素)[プロパティ];
+    const 現在値 = getComputedStyle(要素)[プロパティ]; // 例: "-3.2deg" や "1 1.03"
 
-    要素.style.animation  = 'none';
-    要素.style.transition = 'none';
-    要素.style[プロパティ] = 現在値;
+    要素.style.animation  = 'none';   // キーフレーム制御を完全に外す
+    要素.style.transition = 'none';   // 誤発火防止のため一旦なし
+    要素.style[プロパティ] = 現在値;   // 今の見た目をインラインで明示的に固定
 
-    void 要素.offsetWidth;
+    void 要素.offsetWidth; // 強制リフロー：ここまでの状態を確定させる
 
     要素.style.transition = `${プロパティ} ${秒数}s ease-out`;
-    要素.style[プロパティ] = 目標値;
+    要素.style[プロパティ] = 目標値; // ここで初めてtransitionが発火する
 }
 
-// 🎛️身体アニメ終了
+// 🎛️身体アニメ終了（rotate:0 / scale:1 のニュートラル姿勢へなめらかに戻す）
 function 身体アニメ終了(エリア) {
     エリア.querySelectorAll('.横揺れ, .横揺れ低速').forEach((要素) => {
         要素.classList.remove('再生');
@@ -147,7 +137,7 @@ function 身体アニメ終了(エリア) {
     });
 }
 
-// 🎛️口元アニメ開始
+// 🎛️口元アニメ開始 (モノローグでは動かない)
 function 口元アニメ開始(エリア) {
     エリア.querySelectorAll('.口パク').forEach((要素) => {
         要素.style.animation  = '';
@@ -166,7 +156,8 @@ function 口元アニメ終了(エリア) {
     });
 }
 
-// 🎛️セリフ表示（文字速度や設定に動的対応）
+// 🎛️セリフ表示（セリフを1文字ずつ表示し、モノローグでなければ音声＆口元アニメを伴わせる）
+//  完了したら完了コールバックを呼ぶ（次キャラへ進むため）
 function セリフ表示(エリア, 完了コールバック) {
     const ふきだし   = エリア.querySelector('.💬');
     const モノローグ = ふきだし.classList.contains('無声');
@@ -174,25 +165,13 @@ function セリフ表示(エリア, 完了コールバック) {
     const 文字一覧   = 文字分解(ふきだし);
 
     身体アニメ開始(エリア);
-
-    // 💡【文字速度 100（最大）の場合】: 一気に全表示＆ボイスなし
-    if (設定速度ms <= 0) {
-        文字一覧.forEach((span) => span.classList.add('表示済'));
-        // 身体アニメだけ一瞬見せてすぐ終了処理へ
-        setTimeout(() => {
-            完了コールバック();
-        }, 50);
-        return;
-    }
-
-    // 通常の1文字ずつ表示処理
     if (!モノローグ) 口元アニメ開始(エリア);
 
     let 現在位置 = 0;
     const タイマーID = setInterval(() => {
         if (現在位置 >= 文字一覧.length) {
             clearInterval(タイマーID);
-            if (!モノローグ) 口元アニメ終了(エリア);
+            if (!モノローグ) 口元アニメ終了(エリア); // セリフと音声終了
             完了コールバック();
             return;
         }
@@ -203,14 +182,18 @@ function セリフ表示(エリア, 完了コールバック) {
         if (!モノローグ && 文字span.textContent !== ' ') 音声再生(キャラ);
 
         現在位置++;
-    }, 設定速度ms);
+    }, 文字速度);
 }
 
 // 🎛️「上から順番に一人ずつ登場 → セリフ」を管理する待機キュー
 const 待機リスト = [];
-let 表示処理中 = false;
+let 表示処理中 = false; // true の間は次キャラを登場させない
+
+// 🎛️キャラ種別ごとの「直近登場エリア」を記録
+//  次に同じ種別が登場した瞬間、前回分の身体アニメを止めるために使う
 const 最終登場エリア = {};
 
+// 🎛️ DOM上での出現順（上から順）に並び替える
 function 並び替え(リスト) {
     return リスト.sort((a, b) => {
         const 位置関係 = a.compareDocumentPosition(b);
@@ -218,6 +201,7 @@ function 並び替え(リスト) {
     });
 }
 
+// 🎛️ 待機リストの先頭キャラを登場させ、話し終わったら次キャラへ
 function 次キャラ処理() {
     if (表示処理中 || 待機リスト.length === 0) return;
 
@@ -225,6 +209,9 @@ function 次キャラ処理() {
     const エリア = 待機リスト.shift();
     表示処理中 = true;
 
+    // 同じ種別キャラの前回登場エリアがまだ身体アニメ中なら、今の登場と同時に止める
+    // （これにより「別キャラがしゃべり終わって→同キャラが次に登場するまで」継続し、
+    //   常に最大2体だけが動いている状態を保てる）
     const 種別     = 種別取得(エリア);
     const 前回エリア = 最終登場エリア[種別];
     if (前回エリア && 前回エリア !== エリア) {
@@ -238,11 +225,12 @@ function 次キャラ処理() {
     キャラ画像.classList.add('出現');
     ふきだし  .classList.add('出現');
 
+    // キャラ画像のスライドイン完了（ふきだしが現れ始めるタイミング）でセリフ表示と口元アニメを開始
     キャラ画像.addEventListener('transitionend', function スライドイン完了(イベント) {
         if (イベント.propertyName !== 'transform') return;
         キャラ画像.removeEventListener('transitionend', スライドイン完了);
 
-        // SE再生（効果音量はボイスの3割で自動計算）
+        // data-se に指定された効果音を再生
         const 効果音パス = ふきだし.dataset.se;
         if (効果音パス) {
             効果音再生(効果音パス);
@@ -250,40 +238,35 @@ function 次キャラ処理() {
 
         セリフ表示(エリア, () => {
             表示処理中 = false;
-            次キャラ処理();
+            次キャラ処理(); // 話し終わったので次キャラへ
         });
     });
 }
 
-// 🎛️画面内出現の監視
+// 🎛️画面内出現の監視（出現順に待機リストへ積むだけ。実際の登場は上の関数が制御）
 const 監視 = new IntersectionObserver((項目一覧) => {
     項目一覧.forEach((項目) => {
         if (項目.isIntersecting) {
             待機リスト.push(項目.target);
-            監視.unobserve(項目.target);
+            監視.unobserve(項目.target); // 一度キューに入れたら監視終了
         }
     });
     次キャラ処理();
-}, { threshold: 0.9 });
+}, { threshold: 0.9 }
+);
 
+// 🎛️一つずつ監視対象に登録
 キャラ一覧.forEach((エリア) => { 監視.observe(エリア); });
 
 
-// 🎛️UI・スライダー連携と初期設定
+// 🎛️オプション
 document.addEventListener('DOMContentLoaded', () => {
     const オプション = document.getElementById('オプション');
     const ラジオ = document.getElementById('📻');
-    const 入力_文字速度 = document.getElementById('文字速度');
-    const 入力_効果音量 = document.getElementById('効果音量');
-    const リセットボタン = document.getElementById('リセットボタン');
-
-    // デフォルト値の定義
-    const 初期値_文字速度 = 50;
-    const 初期値_効果音量 = 10;
 
     // 開閉切り替え
     ラジオ.addEventListener('click', (e) => {
-        e.stopPropagation();
+        e.stopPropagation(); // イベントが親に伝播してすぐ閉じるのを防ぐ
         オプション.classList.toggle('オープン');
     });
 
@@ -293,54 +276,20 @@ document.addEventListener('DOMContentLoaded', () => {
             オプション.classList.remove('オープン');
         }
     });
+});
 
-    // スライダー初期値の同期＆イベントリスナー設定
-    if (入力_文字速度) {
-        スライダー文字速度 = parseInt(入力_文字速度.value, 10);
-        入力_文字速度.addEventListener('input', (e) => {
-            スライダー文字速度 = parseInt(e.target.value, 10);
-            const 表示 = e.target.nextElementSibling;
-            if (表示) 表示.textContent = e.target.value;
-            設定更新();
+document.addEventListener('DOMContentLoaded', () => {
+    // すべてのスライダー要素を取得
+    const スライダー = document.querySelectorAll('.スライダー input[type="range"]');
+
+    スライダー.forEach(スライダー項目 => {
+        const 表示 = スライダー項目.nextElementSibling; // 隣の .スライダー数値 を取得
+
+        // スライダー操作時に数値を更新
+        スライダー項目.addEventListener('input', (e) => {
+            表示.textContent = e.target.value;
         });
-    }
-
-    if (入力_効果音量) {
-        スライダー効果音量 = parseInt(入力_効果音量.value, 10);
-        入力_効果音量.addEventListener('input', (e) => {
-            スライダー効果音量 = parseInt(e.target.value, 10);
-            const 表示 = e.target.nextElementSibling;
-            if (表示) 表示.textContent = e.target.value;
-            設定更新();
-        });
-    }
-
-    // リセットボタンのクリック処理
-    if (リセットボタン) {
-        リセットボタン.addEventListener('click', () => {
-            // 文字速度のリセット
-            if (入力_文字速度) {
-                入力_文字速度.value = 初期値_文字速度;
-                スライダー文字速度 = 初期値_文字速度;
-                const 表示 = 入力_文字速度.nextElementSibling;
-                if (表示) 表示.textContent = 初期値_文字速度;
-            }
-
-            // 効果音量のリセット
-            if (入力_効果音量) {
-                入力_効果音量.value = 初期値_効果音量;
-                スライダー効果音量 = 初期値_効果音量;
-                const 表示 = 入力_効果音量.nextElementSibling;
-                if (表示) 表示.textContent = 初期値_効果音量;
-            }
-
-            // 変数と音量の再計算
-            設定更新();
-        });
-    }
-
-    // 初回の音量・速度設定の反映
-    設定更新();
+    });
 });
 
 
@@ -351,8 +300,9 @@ function 流星作成() {
     const 流星 = document.createElement('div');
     流星.classList.add('流星');
 
-    const 反転 = Math.random() < 0.5;
+    const 反転 = Math.random() < 0.5; // 50%は反転
 
+    // 出現位置
     if (反転) {
         流星.classList.add('反転');
         流星.style.left = `${Math.random() * window.innerWidth  * 0.5}px`; 
@@ -362,17 +312,17 @@ function 流星作成() {
         流星.style.top  = `${Math.random() * window.innerHeight * 0.8}px`;
     }
 
-    流星レイヤー.appendChild(流星);
+    流星レイヤー.appendChild(流星); // CSSアニメ開始
 
-    setTimeout(() => { 流星.remove(); }, 1000);
+    setTimeout(() => { 流星.remove(); }, 1000); // CSSアニメ終了(1秒後)に要素を削除してメモリ解放
 }
 
 function 流星出現() {
-    const 出現間隔 = Math.random() * 59000 + 1000;
+    const 出現間隔 = Math.random() * 59000 + 1000; // 次の流星出現まで1〜60秒
 
     setTimeout(() => {
         流星作成();
-        流星出現();
+        流星出現(); // 次のループ予約
     }, 出現間隔);
 }
 
