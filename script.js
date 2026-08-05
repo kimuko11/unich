@@ -260,6 +260,10 @@ function 次キャラ処理() {
         if (イベント.propertyName !== 'transform') return;
         キャラ画像.removeEventListener('transitionend', スライドイン完了);
 
+        // 💡【追加】ふきだしが100%の大きさになった瞬間に実サイズを取得してCSS変数に代入
+        ふきだし.style.setProperty('--横幅', `${ふきだし.offsetWidth}px`);
+        ふきだし.style.setProperty('--縦幅', `${ふきだし.offsetHeight}px`);
+
         // 効果音再生
         const 効果音パス = ふきだし.dataset.se;
         if (効果音パス) {
@@ -293,7 +297,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const ラジオ = document.getElementById('📻');
     const 入力_文字速度 = document.getElementById('文字速度');
     const 入力_効果音量 = document.getElementById('効果音量');
-    const リセットボタン = document.getElementById('リセットボタン');
+    const リセット = document.getElementById('リセット');
 
     // デフォルト値の定義
     const 初期値_文字速度 = 5;
@@ -357,8 +361,8 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // リセットボタンのクリック処理（保存値も削除してデフォルトへ）
-    if (リセットボタン) {
-        リセットボタン.addEventListener('click', () => {
+    if (リセット) {
+        リセット.addEventListener('click', () => {
             // 保存データの消去
             localStorage.removeItem(KEY_文字速度);
             localStorage.removeItem(KEY_効果音量);
