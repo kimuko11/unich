@@ -97,7 +97,6 @@ a {
 
 /* オプション */
 .📻 {
-    margin-top: 20px;
     cursor:     pointer;
     filter:     drop-shadow(0 0 5px black);
     transition: scale 0.3s ease;
@@ -112,7 +111,7 @@ a {
 
 .オプション💬 {
     position: absolute;
-    top:      90%;   /* 位置 */
+    top:      100%;   /* 位置 */
     right:    0;
     width:    250px; /* 横幅 */
 
@@ -191,22 +190,19 @@ a {
     visibility: visible;
 }
 
-/* 初期値に戻すボタン（控えめなデザイン） */
 .初期値ボタン {
-  display: block;
-  margin: 30px auto 0;
-  padding: 4px 8px;
-  font-size: 11px;
-  color: gray;
-
-  border: 1px solid gray;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: all 0.2s ease;
+    display:       block;
+    margin:        30px auto 0;
+    padding:       4px 8px;
+    border:        1px solid var(--中光);
+    border-radius: 6px;
+    font-size:     50%;
+    color:         var(--中光);
+    cursor:        pointer;
+    transition:    all 0.2s ease;
 }
-
 .初期値ボタン:hover {
-  color: var(--強光);
+    color: var(--強光);
 }
 
 @keyframes スライドイン {

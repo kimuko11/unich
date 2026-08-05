@@ -2,18 +2,18 @@
 const キャラ一覧 = document.querySelectorAll('.🥸, .🐰, .👩, .👤');
 
 // 🎛️スライダー設定のグローバル変数（初期値）
-let スライダー文字速度 = 50;
-let スライダー効果音量 = 10;
+let スライダー文字速度 = 5;
+let スライダー効果音量 = 5;
 
 // 計算用の派生変数
-let 設定速度ms = 100 - スライダー文字速度; // (100 - 文字速度)
-let ボイス音量 = スライダー効果音量 * 0.01;
-let 効果音音量 = ボイス音量 * 0.3; // その3割
+let 設定速度ms = 100 - スライダー文字速度 * 10; // 10〜100ms
+let ボイス音量 = スライダー効果音量 * 0.02;     // 0.0〜0.18
+let 効果音音量 = ボイス音量 * 0.3;
 
 // 🎛️設定更新関数
 function 設定更新() {
-    設定速度ms = 100 - スライダー文字速度;
-    ボイス音量 = スライダー効果音量 * 0.01;
+    設定速度ms = 100 - スライダー文字速度 * 10;
+    ボイス音量 = スライダー効果音量 * 0.02;
     効果音音量 = ボイス音量 * 0.3;
 }
 
@@ -96,7 +96,7 @@ document.querySelectorAll('.💬[data-se]').forEach((el) => {
     }
 });
 
-// 🎛️効果音再生（SE用：ボイスの3割の音量で再生）
+// 🎛️効果音再生
 function 効果音再生(パス) {
     if (!パス || !効果音キャッシュ[パス] || 効果音音量 <= 0) return;
     const 効果音 = 効果音キャッシュ[パス].cloneNode();
@@ -166,44 +166,62 @@ function 口元アニメ終了(エリア) {
     });
 }
 
-// 🎛️セリフ表示（文字速度や設定に動的対応）
+// 🎛️セリフ表示（文字速度や設定の即時変更・タメ時間にも対応）
 function セリフ表示(エリア, 完了コールバック) {
     const ふきだし   = エリア.querySelector('.💬');
     const モノローグ = ふきだし.classList.contains('無声');
     const キャラ     = キャラ取得(エリア);
     const 文字一覧   = 文字分解(ふきだし);
 
+    // 💡 HTMLの data-wait="文字数" から追加の待ち文字数を取得（未設定なら0）
+    const 追加文字数 = parseInt(ふきだし.dataset.wait || '0', 10);
+
     身体アニメ開始(エリア);
 
-    // 💡【文字速度 100（最大）の場合】: 一気に全表示＆ボイスなし
-    if (設定速度ms <= 0) {
-        文字一覧.forEach((span) => span.classList.add('表示済'));
-        // 身体アニメだけ一瞬見せてすぐ終了処理へ
-        setTimeout(() => {
-            完了コールバック();
-        }, 50);
-        return;
-    }
-
-    // 通常の1文字ずつ表示処理
     if (!モノローグ) 口元アニメ開始(エリア);
 
     let 現在位置 = 0;
-    const タイマーID = setInterval(() => {
-        if (現在位置 >= 文字一覧.length) {
-            clearInterval(タイマーID);
+    let タイマーID = null;
+
+    // 💡 1文字進めるステップ関数
+    function 次文字表示() {
+        // 💡【文字速度 9（最大）の場合】: 待ち時間なしで全表示＆即完了
+        if (設定速度ms <= 10) {
+            for (let i = 現在位置; i < 文字一覧.length; i++) {
+                文字一覧[i].classList.add('表示済');
+            }
             if (!モノローグ) 口元アニメ終了(エリア);
             完了コールバック();
             return;
         }
 
-        const 文字span = 文字一覧[現在位置];
-        文字span.classList.add('表示済');
+        // 💡 表示文字 ＋ 追加のタメ文字数 がすべて終了した場合
+        if (現在位置 >= 文字一覧.length + 追加文字数) {
+            完了コールバック();
+            return;
+        }
 
-        if (!モノローグ && 文字span.textContent !== ' ') 音声再生(キャラ);
+        // 実際の文字の表示処理（実際の文字数を超えた分は「タメ時間」として待機のみ行う）
+        if (現在位置 < 文字一覧.length) {
+            const 文字span = 文字一覧[現在位置];
+            文字span.classList.add('表示済');
+
+            if (!モノローグ && 文字span.textContent !== ' ') 音声再生(キャラ);
+
+            // 最後の1文字を表示し終えた瞬間に口パクを止める
+            if (現在位置 === 文字一覧.length - 1 && !モノローグ) {
+                口元アニメ終了(エリア);
+            }
+        }
 
         現在位置++;
-    }, 設定速度ms);
+
+        // 毎回その時点の「設定速度ms」を取得して次のタイマーを設定
+        タイマーID = setTimeout(次文字表示, 設定速度ms);
+    }
+
+    // 処理開始
+    次文字表示();
 }
 
 // 🎛️「上から順番に一人ずつ登場 → セリフ」を管理する待機キュー
@@ -242,7 +260,7 @@ function 次キャラ処理() {
         if (イベント.propertyName !== 'transform') return;
         キャラ画像.removeEventListener('transitionend', スライドイン完了);
 
-        // SE再生（効果音量はボイスの3割で自動計算）
+        // 効果音再生
         const 効果音パス = ふきだし.dataset.se;
         if (効果音パス) {
             効果音再生(効果音パス);
@@ -269,7 +287,7 @@ const 監視 = new IntersectionObserver((項目一覧) => {
 キャラ一覧.forEach((エリア) => { 監視.observe(エリア); });
 
 
-// 🎛️UI・スライダー連携と初期設定
+// 🎛️UI・スライダー連携と初期設定（localStorage対応版）
 document.addEventListener('DOMContentLoaded', () => {
     const オプション = document.getElementById('オプション');
     const ラジオ = document.getElementById('📻');
@@ -278,8 +296,52 @@ document.addEventListener('DOMContentLoaded', () => {
     const リセットボタン = document.getElementById('リセットボタン');
 
     // デフォルト値の定義
-    const 初期値_文字速度 = 50;
-    const 初期値_効果音量 = 10;
+    const 初期値_文字速度 = 5;
+    const 初期値_効果音量 = 5;
+
+    // ストレージ保存用のキー名
+    const KEY_文字速度 = 'site_text_speed';
+    const KEY_効果音量 = 'site_se_volume';
+
+    // 保存データの読み込み（無ければデフォルト値を使用）
+    const 保存_文字速度 = localStorage.getItem(KEY_文字速度);
+    const 保存_効果音量 = localStorage.getItem(KEY_効果音量);
+
+    スライダー文字速度 = 保存_文字速度 !== null ? parseInt(保存_文字速度, 10) : 初期値_文字速度;
+    スライダー効果音量 = 保存_効果音量 !== null ? parseInt(保存_効果音量, 10) : 初期値_効果音量;
+
+    // 画面のスライダー要素と数値表示に初期値を反映
+    if (入力_文字速度) {
+        入力_文字速度.value = スライダー文字速度;
+        const 表示 = 入力_文字速度.nextElementSibling;
+        if (表示) 表示.textContent = スライダー文字速度;
+
+        入力_文字速度.addEventListener('input', (e) => {
+            スライダー文字速度 = parseInt(e.target.value, 10);
+            const 表示 = e.target.nextElementSibling;
+            if (表示) 表示.textContent = e.target.value;
+            
+            // 変更時にブラウザへ即時保存
+            localStorage.setItem(KEY_文字速度, スライダー文字速度);
+            設定更新();
+        });
+    }
+
+    if (入力_効果音量) {
+        入力_効果音量.value = スライダー効果音量;
+        const 表示 = 入力_効果音量.nextElementSibling;
+        if (表示) 表示.textContent = スライダー効果音量;
+
+        入力_効果音量.addEventListener('input', (e) => {
+            スライダー効果音量 = parseInt(e.target.value, 10);
+            const 表示 = e.target.nextElementSibling;
+            if (表示) 表示.textContent = e.target.value;
+
+            // 変更時にブラウザへ即時保存
+            localStorage.setItem(KEY_効果音量, スライダー効果音量);
+            設定更新();
+        });
+    }
 
     // 開閉切り替え
     ラジオ.addEventListener('click', (e) => {
@@ -294,30 +356,13 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // スライダー初期値の同期＆イベントリスナー設定
-    if (入力_文字速度) {
-        スライダー文字速度 = parseInt(入力_文字速度.value, 10);
-        入力_文字速度.addEventListener('input', (e) => {
-            スライダー文字速度 = parseInt(e.target.value, 10);
-            const 表示 = e.target.nextElementSibling;
-            if (表示) 表示.textContent = e.target.value;
-            設定更新();
-        });
-    }
-
-    if (入力_効果音量) {
-        スライダー効果音量 = parseInt(入力_効果音量.value, 10);
-        入力_効果音量.addEventListener('input', (e) => {
-            スライダー効果音量 = parseInt(e.target.value, 10);
-            const 表示 = e.target.nextElementSibling;
-            if (表示) 表示.textContent = e.target.value;
-            設定更新();
-        });
-    }
-
-    // リセットボタンのクリック処理
+    // リセットボタンのクリック処理（保存値も削除してデフォルトへ）
     if (リセットボタン) {
         リセットボタン.addEventListener('click', () => {
+            // 保存データの消去
+            localStorage.removeItem(KEY_文字速度);
+            localStorage.removeItem(KEY_効果音量);
+
             // 文字速度のリセット
             if (入力_文字速度) {
                 入力_文字速度.value = 初期値_文字速度;
