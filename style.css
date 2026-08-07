@@ -1,24 +1,26 @@
 @charset "UTF-8";
 
-/* #️⃣全要素リセット */
+/* #️⃣リセット */
 *, *::before, *::after {
     box-sizing: border-box;
     -webkit-tap-highlight-color: transparent; /* タップ影を消す */
 }
 
-/* #️⃣個別リセット */
+/* 個別リセット */
 html {
     font-size: 100%;
     scroll-behavior: smooth; /* 滑らかスクロール */
 }
 
 body {
-    background: black url(img/nebula0.webp) fixed no-repeat center / cover;
-    color:      #fff4f0;
-    font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif; /* 視認性の高い基本フォント */
     margin:  0;
     padding: 0;
-    overflow-x: hidden; /* 画面のはみ出し防止 */
+    background: black url(img/nebula0.webp) fixed no-repeat center / cover;
+    color:      #fff4f0;
+    font-size:   1rem;
+    font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif; /* 視認性の高い基本フォント */
+    line-height: 1.75;
+    overflow-x:  hidden; /* 画面のはみ出し防止 */
     -webkit-font-smoothing: antialiased; /* 文字を滑らかに */
 }
 
@@ -42,7 +44,8 @@ a {
     color: inherit;
 }
 
-/* #️⃣共通CSS */
+
+/* #️⃣共通 CSS */
 * {
     --弱光:   rgb(255 244 240 / 25%);
     --中光:   rgb(255 244 240 / 50%);
@@ -50,28 +53,7 @@ a {
     --標準色: rgb(100 100 100 / 50%);
 }
 
-.白枠 { filter: url(#白枠); }
-
-p {
-    max-width:      400px;      /* 最大横幅 */
-    margin:         0 auto 1em;
-    position:       relative;
-    line-height: 1.5;
-}
-.先頭装飾::first-letter {
-    padding: 0.08em;
-    font-size: 240%;
-    float: left;
-    line-height: 1;
-    margin-right: 0.15em;
-    font-weight: bold;
-    color: var(--強光);
-    background-color: #bf0000;
-    text-shadow: 0 0 5px var(--強光);
-    box-shadow: 0 0 5px red;
-}
-
-.💬, .オプション💬 {
+p, .💬, .オプション💬 {
     padding: 20px;
     text-shadow:
         0  1px #000,      /* 下 */
@@ -81,13 +63,34 @@ p {
         0  2px 2px #000;  /* 影 */
 }
 
+p { /* 宇宙背景のテキスト用 */
+    max-width:   600px;
+    margin:      0 auto;
+    padding:     0 1rem 1rem;
+    position:    relative;
+}
+.先頭装飾::first-letter {
+    margin-right:     0.15em;
+    padding:          0.08em;
+    float:            left;
+    background-color: #bf0000;
+    font-size:        3rem;
+    font-weight:      bold;
+    line-height:      1;
+    color:            var(--強光);
+    box-shadow:       0 0 10px red;
+    text-shadow:      0 0 5px var(--強光);
+}
 
-/* #️⃣ヘッダー (ロゴとオプション) */
+.白枠 { filter: url(#白枠); }
+
+
+/* #️⃣ヘッダー */
 .ヘッダー {
     position: fixed;
-    top:      0;  /* 画面上からの距離 */
-    left:     0;  /* 画面左からの距離 */
-    right:    1%; /* 画面右からの距離 */
+    top:      0;
+    left:     1px;
+    right:    1px;
     z-index:  999;
     display:  flex;
     justify-content: space-between; /* 左寄せ(ロゴ)と右寄せ(オプション)に分離 */
@@ -116,6 +119,12 @@ p {
 }
 
 /* オプション */
+.オプションの文字 {
+    font-size: 8px;
+    opacity:   0;
+    animation: 現れて消える 10s linear forwards 1s;
+}
+
 .📻 {
     cursor:     pointer;
     filter:     drop-shadow(0 0 5px black);
@@ -123,13 +132,7 @@ p {
     transition: scale 0.3s ease;
     animation:  出現 1s linear forwards 1s;
 }
-.オプション.オープン .📻 { scale: 1.1; } /* オプションオープン時 */
-
-.オプションの文字 {
-    font-size: 50%;
-    opacity:   0;
-    animation: 現れて消える 10s linear forwards 1s;
-}
+.オプション.オープン .📻 { scale: 1.1; }
 
 .オプション💬 {
     position: absolute;
@@ -486,7 +489,6 @@ p {
     margin-right:     var(--右余白);
     transform-origin: var(--起点);
 
-    line-height:      1.5;
     word-break:       break-all; /* 右端で強制改行 */
     position:         relative;  /* 疑似要素の位置指定のため */
 
