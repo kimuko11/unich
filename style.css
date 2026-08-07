@@ -354,6 +354,19 @@ a {
 }
 
 
+/* #️⃣トップ画像 */
+.トップ画像 {
+    max-width:      75%;  /* 大型デバイスでの最大横幅 */
+    margin:         0 auto; /* 中央寄せ */
+    position:       relative; /* 差分を重ねるため */
+    display:        flex;
+    flex-direction: column;
+    align-items:    center;
+}
+.ネオン { filter: drop-shadow(0 0 2px yellow); }
+.放送灯 { filter: drop-shadow(0 0 5px red); }
+.ONAIR { filter: drop-shadow(0 0 2px var(--強光)); }
+
 /* #️⃣メインコンテンツ */
 .対話全体枠 {
     max-width:       800px;  /* 大型デバイスでの最大横幅 */
@@ -361,7 +374,7 @@ a {
     gap:             10px;   /* キャラごとの間隔 */
     margin:          0 auto; /* 中央寄せ */
     padding:         0 1%;
-    min-height:      100vh;
+
     display:         flex;
     flex-direction:  column;
     justify-content: flex-start;
@@ -544,7 +557,7 @@ a {
 
 
 /* #️⃣キャラ画像差分用 absolute */
-/* 無限 */.ハート, .高速伸縮, .星回転, .腕振り, .フィギュア, .ちいかわ, .ロゴ💬,
+/* 無限 */.ハート, .高速伸縮, .星回転, .腕振り, .フィギュア, .ちいかわ, .ロゴ💬, .放送中,
 /* 口元 */.口パク,
 /* 差分 */.目玉, .驚き汗 {
     position: absolute; top: 0%; }
