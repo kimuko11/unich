@@ -52,6 +52,25 @@ a {
 
 .白枠 { filter: url(#白枠); }
 
+p {
+    max-width:      400px;      /* 最大横幅 */
+    margin:         0 auto 1em;
+    position:       relative;
+    line-height: 1.5;
+}
+.先頭装飾::first-letter {
+    padding: 0.08em;
+    font-size: 240%;
+    float: left;
+    line-height: 1;
+    margin-right: 0.15em;
+    font-weight: bold;
+    color: var(--強光);
+    background-color: #bf0000;
+    text-shadow: 0 0 5px var(--強光);
+    box-shadow: 0 0 5px red;
+}
+
 .💬, .オプション💬 {
     padding: 20px;
     text-shadow:
@@ -86,27 +105,30 @@ a {
 
 .ロゴ {
     filter:    drop-shadow(0 0 5px black);
-    animation: スライドイン 1s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+    opacity:   0;
+    animation: スライドイン 1s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards 1s;
 }
 
 .ロゴ💬 {
     max-width: 50%;
     opacity:   0;
-    animation: 現れて消える 9s ease forwards 1s;
+    animation: 現れて消える 9s ease forwards 2s;
 }
 
 /* オプション */
 .📻 {
     cursor:     pointer;
     filter:     drop-shadow(0 0 5px black);
+    opacity:    0;
     transition: scale 0.3s ease;
-    animation:  出現 1s linear forwards;
+    animation:  出現 1s linear forwards 1s;
 }
 .オプション.オープン .📻 { scale: 1.1; } /* オプションオープン時 */
 
 .オプションの文字 {
     font-size: 50%;
-    animation: 現れて消える 10s ease forwards;
+    opacity:   0;
+    animation: 現れて消える 10s linear forwards 1s;
 }
 
 .オプション💬 {
@@ -208,11 +230,11 @@ a {
 
 @keyframes スライドイン {
     0% {
-        transform: translateX(100vw);
+        translate: 100vw 0;
         opacity:   0;
     }
     100% {
-        transform: translateX(0);
+        translate: 0 0;
         opacity:   1;
     }
 }
@@ -356,16 +378,59 @@ a {
 
 /* #️⃣トップ画像 */
 .トップ画像 {
-    max-width:      75%;  /* 大型デバイスでの最大横幅 */
-    margin:         0 auto; /* 中央寄せ */
+    max-width:      400px;      /* 最大横幅 */
+    margin:         0 auto;   /* 中央寄せ */
     position:       relative; /* 差分を重ねるため */
-    display:        flex;
-    flex-direction: column;
-    align-items:    center;
 }
-.ネオン { filter: drop-shadow(0 0 2px yellow); }
-.放送灯 { filter: drop-shadow(0 0 5px red); }
-.ONAIR { filter: drop-shadow(0 0 2px var(--強光)); }
+.二人 {
+        opacity: 0;
+        animation: 落下 1s ease forwards 2s;
+}
+.ネオン { animation: レインボー 7s infinite linear alternate; }
+.放送灯 {
+    filter: drop-shadow(0 0 5px red);
+    opacity: 0;
+    animation: 出現 1s linear forwards 3s;
+}
+.ONAIR {
+    filter: drop-shadow(0 0 2px var(--強光));
+    opacity: 0;
+    animation: 出現 1s linear forwards 3s;
+}
+.概要1 {
+    opacity: 0;
+    animation: 出現 1s linear forwards 4s;
+}
+.概要2 {
+    opacity: 0;
+    animation: 出現 1s linear forwards 5s;
+}
+.概要3 {
+    opacity: 0;
+    animation: 出現 1s linear forwards 6s;
+}
+
+@keyframes 落下 {
+    0% {
+        translate: 0 -50vh;
+        opacity:   0;
+    }
+    100% {
+        translate: 0 0;
+        opacity:   1;
+    }
+}
+
+@keyframes レインボー {
+     0.0% { filter: drop-shadow(0 0 2px red); }
+    16.7% { filter: drop-shadow(0 0 2px orange); }
+    33.3% { filter: drop-shadow(0 0 2px yellow); }
+    50.0% { filter: drop-shadow(0 0 2px green); }
+    66.7% { filter: drop-shadow(0 0 2px blue); }
+    83.3% { filter: drop-shadow(0 0 2px indigo); }
+     100% { filter: drop-shadow(0 0 2px purple); }
+}
+
 
 /* #️⃣メインコンテンツ */
 .対話全体枠 {
