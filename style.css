@@ -94,7 +94,7 @@ p { /* 宇宙背景のテキスト用 */
     z-index:  999;
     display:  flex;
     justify-content: space-between; /* 左寄せ(ロゴ)と右寄せ(オプション)に分離 */
-    align-items:     center;
+    align-items:     flex-start;
     pointer-events:  none; /* 下層のクリックを阻害しない */
 }
 
@@ -136,9 +136,9 @@ p { /* 宇宙背景のテキスト用 */
 
 .オプション💬 {
     position: absolute;
-    top:      100%;   /* 位置 */
+    top:      70px;   /* 位置 */
     right:    0;
-    width:    250px; /* 横幅 */
+    width:    250px;
 
     background-color: var(--標準色);
     border: 1px solid var(--中光);
@@ -232,14 +232,8 @@ p { /* 宇宙背景のテキスト用 */
 }
 
 @keyframes スライドイン {
-    0% {
-        translate: 100vw 0;
-        opacity:   0;
-    }
-    100% {
-        translate: 0 0;
-        opacity:   1;
-    }
+      0% { translate: 100vw 0; }
+    100% { translate: 0 0; opacity: 1; }
 }
 
 @keyframes 現れて消える {
@@ -381,13 +375,13 @@ p { /* 宇宙背景のテキスト用 */
 
 /* #️⃣トップ画像 */
 .トップ画像 {
-    max-width:      400px;      /* 最大横幅 */
-    margin:         0 auto;   /* 中央寄せ */
-    position:       relative; /* 差分を重ねるため */
+    max-width: 400px;    /* 最大横幅 */
+    margin:    0 auto;   /* 中央寄せ */
+    position:  relative; /* 差分を重ねるため */
 }
 .二人 {
-        opacity: 0;
-        animation: 落下 1s ease forwards 2s;
+    opacity: 0;
+    animation: 落下 1s ease-out forwards 2s;
 }
 .ネオン { animation: レインボー 7s infinite linear alternate; }
 .放送灯 {
@@ -414,13 +408,22 @@ p { /* 宇宙背景のテキスト用 */
 }
 
 @keyframes 落下 {
-    0% {
+     0% {
+        opacity: 1;
         translate: 0 -50vh;
-        opacity:   0;
+        animation-timing-function: ease-in;
+    }
+    60% {
+        translate: 0 0;
+        animation-timing-function: ease-out;
+    }
+    80% {
+        translate: 0 -50px;
+        animation-timing-function: ease-in;
     }
     100% {
+        opacity: 1;
         translate: 0 0;
-        opacity:   1;
     }
 }
 
