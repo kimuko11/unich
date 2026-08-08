@@ -53,6 +53,20 @@ a {
     --標準色: rgb(100 100 100 / 50%);
 }
 
+.明朝 { font-family: "Noto Serif JP", serif; }
+
+b     { font-size: 1.1rem; line-height: 1; }
+
+.極大 { font-size: 3.0rem; line-height: 1; }
+.大字 { font-size: 1.5rem; line-height: 1; }
+.小字 { font-size: 0.8rem; }
+.極小 { font-size: 0.6rem; }
+
+.金 { color: gold; }
+.橙 { color: darkorange; }
+
+.中央 { text-align: center; }
+
 p, .💬, .オプション💬 {
     padding: 20px;
     text-shadow:
@@ -82,7 +96,21 @@ p { /* 宇宙背景のテキスト用 */
     text-shadow:      0 0 5px var(--強光);
 }
 
+.画像 {
+    max-width:      75%;      /* 最大横幅 */
+    margin:         0 auto;   /* 中央寄せ */
+    position:       relative; /* 差分を重ねるため */
+    display:        flex;
+    flex-direction: column;
+    align-items:    center;
+}
+
+/* キャラの特殊効果 */
 .白枠 { filter: url(#白枠); }
+
+.発光 { filter: drop-shadow(0 0 10px var(--中光)); }
+
+.効果 { filter: url(#白枠) drop-shadow(0 0 10px var(--中光)); }
 
 
 /* #️⃣ヘッダー */
@@ -99,7 +127,7 @@ p { /* 宇宙背景のテキスト用 */
 }
 
 .ロゴ, .オプション {
-    max-width:      50%;
+    max-width:      40%;
     display:        flex;
     flex-direction: column;
     align-items:    center;
@@ -113,14 +141,14 @@ p { /* 宇宙背景のテキスト用 */
 }
 
 .ロゴ💬 {
-    max-width: 50%;
+    max-width: 40%;
     opacity:   0;
     animation: 現れて消える 9s ease forwards 2s;
 }
 
 /* オプション */
 .オプションの文字 {
-    font-size: 8px;
+    font-size: 0.6rem;
     opacity:   0;
     animation: 現れて消える 10s linear forwards 1s;
 }
@@ -138,7 +166,7 @@ p { /* 宇宙背景のテキスト用 */
     position: absolute;
     top:      70px;   /* 位置 */
     right:    0;
-    width:    250px;
+    width:    220px;
 
     background-color: var(--標準色);
     border: 1px solid var(--中光);
@@ -147,6 +175,7 @@ p { /* 宇宙背景のテキスト用 */
     box-shadow: 0  2px 20px black,             /* 背景の影 */
         inset   0  2px 10px var(--弱光),         /* 光沢 */
         inset   0 -2px 20px rgb(0 0 0 / 50%); /* 影 */
+    font-size: 0.8rem;
 
     transform-origin: top right;
     scale:      0;
@@ -222,7 +251,7 @@ p { /* 宇宙背景のテキスト用 */
     padding:       4px 8px;
     border:        1px solid var(--中光);
     border-radius: 6px;
-    font-size:     50%;
+    font-size:     0.6rem;
     color:         var(--中光);
     cursor:        pointer;
     transition:    all 0.2s ease;
@@ -374,14 +403,6 @@ p { /* 宇宙背景のテキスト用 */
 
 
 /* #️⃣トップ画像 */
-.トップ画像 {
-    max-width:      75%;      /* 最大横幅 */
-    margin:         0 auto;   /* 中央寄せ */
-    position:       relative; /* 差分を重ねるため */
-    display:        flex;
-    flex-direction: column;
-    align-items:    center;
-}
 .二人 {
     opacity: 0;
     animation: 落下 1s ease-out forwards 2s;
@@ -421,7 +442,7 @@ p { /* 宇宙背景のテキスト用 */
         animation-timing-function: ease-out;
     }
     80% {
-        translate: 0 -50px;
+        translate: 0 -30px;
         animation-timing-function: ease-in;
     }
     100% {
@@ -630,7 +651,7 @@ p { /* 宇宙背景のテキスト用 */
 
 
 /* #️⃣キャラ画像差分用 absolute */
-/* 無限 */.ハート, .高速伸縮, .星回転, .腕振り, .フィギュア, .ちいかわ, .ロゴ💬, .放送中,
+/* 無限 */.ハート, .高速伸縮, .星回転, .腕振り, .フィギュア, .ちいかわ, .ロゴ💬, .差分,
 /* 口元 */.口パク,
 /* 差分 */.目玉, .驚き汗 {
     position: absolute; top: 0%; }
