@@ -15,11 +15,14 @@ html {
 body {
     margin:  0;
     padding: 0;
-    background: black url(img/nebula0.webp) fixed no-repeat center / cover;
-    color:      #fff4f0;
-    font-size:   1rem;
+
+    background:black url(img/nebula0.webp) fixed no-repeat center / cover;
+
     font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif; /* 視認性の高い基本フォント */
+    font-size:   1rem;
     line-height: 1.75;
+    color:     #fff4f0;
+
     overflow-x:  hidden; /* 画面のはみ出し防止 */
     -webkit-font-smoothing: antialiased; /* 文字を滑らかに */
 }
@@ -46,13 +49,12 @@ a {
 
 
 /* #️⃣共通 CSS */
-* {
-    --弱光:   rgb(255 244 240 / 25%);
-    --中光:   rgb(255 244 240 / 50%);
-    --強光:   rgb(255 244 240);
-    --標準色: rgb(100 100 100 / 50%);
-}
+/* 配置 */
+.中央 { text-align: center; }
+.左寄 { text-align: left; }
+.右寄 { text-align: right; }
 
+/* フォント */
 .明朝 { font-family: "Noto Serif JP", serif; }
 
 b     { font-size: 1.1rem; line-height: 1; }
@@ -62,15 +64,21 @@ b     { font-size: 1.1rem; line-height: 1; }
 .小字 { font-size: 0.8rem; }
 .極小 { font-size: 0.6rem; }
 
+/* カラー */
+.黄 { color: yellow; }
 .金 { color: gold; }
 .橙 { color: darkorange; }
 .灰 { color: gray; }
 
-.中央 { text-align: center; }
-.左寄 { text-align: left; }
-.右寄 { text-align: right; }
+* {
+    --弱光:   rgb(255 244 240 / 25%);
+    --中光:   rgb(255 244 240 / 50%);
+    --強光:   rgb(255 244 240);
+    --標準色: rgb(100 100 100 / 50%);
+}
 
-p, .💬, .オプション💬 {
+/* 文字枠, ふきだし */
+p, .💬, .設定💬 {
     padding: 20px;
     text-shadow:
         0  1px #000,      /* 下 */
@@ -80,12 +88,14 @@ p, .💬, .オプション💬 {
         0  2px 2px #000;  /* 影 */
 }
 
-p { /* 宇宙背景のテキスト用 */
-    max-width:   600px;
-    margin:      0 auto;
-    padding:     0 1rem 1rem;
-    position:    relative;
+p {
+    position:  relative;
+    margin:    0 auto;
+    padding:   0 1rem 1rem;
+
+    max-width: 600px; /* 文字枠の最大横幅 600px */
 }
+
 .先頭装飾::first-letter {
     margin-right:     0.15em;
     padding:          0.08em;
@@ -114,295 +124,6 @@ p { /* 宇宙背景のテキスト用 */
 .発光 { filter: drop-shadow(0 0 10px var(--中光)); }
 
 .効果 { filter: url(#白枠) drop-shadow(0 0 10px var(--中光)); }
-
-
-/* #️⃣ヘッダー */
-.ヘッダー {
-    position: fixed;
-    top:      0;
-    left:     1px;
-    right:    1px;
-    z-index:  999;
-    display:  flex;
-    justify-content: space-between; /* 左寄せ(ロゴ)と右寄せ(オプション)に分離 */
-    align-items:     flex-start;
-    pointer-events:  none; /* 下層のクリックを阻害しない */
-}
-
-.ロゴ, .オプション {
-    max-width:      40%;
-    display:        flex;
-    flex-direction: column;
-    align-items:    center;
-    pointer-events: auto;
-}
-
-.ロゴ {
-    filter:    drop-shadow(0 0 5px black);
-    opacity:   0;
-    animation: スライドイン 1s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards 1s;
-}
-
-.ロゴ💬 {
-    max-width: 40%;
-    opacity:   0;
-    animation: 現れて消える 9s ease forwards 2s;
-}
-
-/* オプション */
-.オプションの文字 {
-    font-size: 0.6rem;
-    opacity:   0;
-    animation: 現れて消える 10s linear forwards 1s;
-}
-
-.📻 {
-    cursor:     pointer;
-    filter:     drop-shadow(0 0 5px black);
-    opacity:    0;
-    transition: scale 0.3s ease;
-    animation:  出現 1s linear forwards 1s;
-}
-.オプション.オープン .📻 { scale: 1.1; }
-
-.オプション💬 {
-    position: absolute;
-    top:      65px;   /* 位置 */
-    right:    0;
-    width:    220px;
-
-    background-color: var(--標準色);
-    border: 1px solid var(--中光);
-    border-radius:    30px;
-    backdrop-filter:  blur(4px);
-    box-shadow: 0  2px 20px black,             /* 背景の影 */
-        inset   0  2px 10px var(--弱光),         /* 光沢 */
-        inset   0 -2px 20px rgb(0 0 0 / 50%); /* 影 */
-    font-size: 0.8rem;
-
-    transform-origin: top right;
-    scale:      0;
-    opacity:    0;
-    visibility: hidden;
-    transition:
-        scale      0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275),
-        opacity    0.3s ease,
-        visibility 0.4s;
-}
-.オプション.オープン .オプション💬 {
-    scale:      1;
-    opacity:    1;
-    visibility: visible;
-}
-
-.オプション💬::before { /* ふきだしのしっぽ */
-    content: '';
-    position:     absolute;
-    top:          -6px;
-    right:        27px;
-    border-width: 0 1px 6px 3px;
-    border-style: solid;
-    border-color: transparent transparent var(--中光) transparent;
-}
-
-.オプション項目 {
-    margin-bottom:  10px;
-    display:        flex;
-    flex-direction: column;
-}
-
-.スライダー {
-    display:     flex;
-    align-items: center;
-    gap:         6px;
-    color:     gold;
-}
-.スライダー input[type="range"] {
-    flex:         1;
-    cursor:       pointer;
-    accent-color: gold; /* ツマミ色 */
-}
-
-.スライダー数値 {
-    position:  absolute;
-    top:       -6px; /* 位置 */
-    left:      50%;
-    translate: -50%;
-    
-    background-color: #555;
-    color:            gold;
-    box-shadow: 0 2px 5px black;
-
-    padding:          4px 8px;
-    border-radius:    6px;
-    border:           1px solid var(--中光);
-    pointer-events:   none;
-    
-    /* フェード設定 */
-    opacity:    0;
-    visibility: hidden;
-    transition: opacity 0.2s ease, visibility 0.2s ease;
-}
-.スライダー:hover .スライダー数値, .スライダー input[type="range"]:focus + .スライダー数値 { /* フォーカス時 */
-    opacity:    1;
-    visibility: visible;
-}
-
-.リセット {
-    display:       block;
-    margin:        30px auto 0;
-    padding:       4px 8px;
-    border:        1px solid var(--中光);
-    border-radius: 6px;
-    font-size:     0.6rem;
-    color:         var(--中光);
-    cursor:        pointer;
-    transition:    all 0.2s ease;
-}
-.リセット:hover {
-    color: var(--強光);
-}
-
-@keyframes スライドイン {
-      0% { translate: 100vw 0; }
-    100% { translate: 0 0; opacity: 1; }
-}
-
-@keyframes 現れて消える {
-      0%      { opacity: 0; }
-     10%, 90% { opacity: 1; }
-    100%      { opacity: 0; visibility: hidden;}
-}
-
-@keyframes 出現 {
-      0% { opacity: 0; }
-    100% { opacity: 1; }
-}
-@keyframes 半現 {
-      0% { opacity: 0; }
-    100% { opacity: 0.5; }
-}
-
-
-/* #️⃣宇宙視差背景 */
-.宇宙全体 {
-    position: relative;
-    width:    100%;
-    overflow: clip;
-}
-
-.宇宙レイヤー {
-    position: fixed; /* scroll(root)と同期させるため画面に固定配置 */
-    top:    0;
-    left:   0;
-    width:  100%;
-    height: 150vh; /* スクロールしてズレる余白を多めに確保 */
-    background-repeat:   no-repeat;
-    background-position: center;
-    background-size:     cover;
-    pointer-events:      none;
-}
-
-.遠景 {
-    background-image: url('img/nebula.webp');
-    animation: 遠景の動き 1s linear forwards;
-    animation-timeline: scroll(root); /* ブラウザ全体のスクロールに同期 (中景以下も同様) */
-}
-.中景 {
-    background-image: url('img/space.webp');
-    animation:
-        中景の動き 1.0s linear forwards,
-        中景の瞬き 1.7s ease-in-out infinite alternate;
-    animation-timeline: scroll(root), auto;
-}
-.近景 {
-    background-image: url('img/stars.webp');
-    animation:
-        近景の動き 1.0s linear forwards,
-        近景の瞬き 1.3s ease-in-out infinite alternate;
-    animation-timeline: scroll(root), auto;
-}
-
-@keyframes 遠景の動き {
-    from { translate: 0 0; }
-    to   { translate: 0 var(--視差速度); } /* 低速 */
-}
-@keyframes 中景の動き {
-    from { translate: 0 0; }
-    to   { translate: 0 calc(var(--視差速度) * 3); } /* 中速 */
-}
-@keyframes 近景の動き {
-    from { translate: 0 0; }
-    to   { translate: 0 calc(var(--視差速度) * 9); } /* 高速 */
-}
-
-@keyframes 中景の瞬き {
-      0% { opacity: 0.3; }
-     50% { opacity: 0.8; }
-    100% { opacity: 0.4; }
-}
-@keyframes 近景の瞬き {
-      0% { opacity: 1.0; }
-     50% { opacity: 0.5; }
-    100% { opacity: 0.9; }
-}
-
-/* #️⃣流星 (右上から出現、反転で左上から) */
-.流星 {
-    background: linear-gradient(-45deg, rgb(0 0 0 / 0), var(--強光));
-    filter:     drop-shadow(0 0 6px var(--強光));
-    position:   absolute;
-    width:      100px; /* 長さ */
-    height:     1px;   /* 太さ */
-    opacity:    0;
-
-    animation: 流星 1s linear; /* JSで起動 */
-}
-.流星.反転 {
-    background: linear-gradient(45deg, rgb(0 0 0 / 0), var(--中光));
-    animation-name: 流星反転;
-}
-
-@keyframes 流星 {
-    0% {
-        opacity:   0;
-        translate: 0 0;
-        scale:     0 1;
-        rotate:   -45deg;
-    }
-    20% {
-        opacity:   1;
-        translate: 0 0;
-        scale:     1 1;
-        rotate:   -45deg;
-    }
-    100% {
-        opacity:   0;
-        translate:-300px 300px;
-        scale:     1 1;
-        rotate:   -45deg;
-    }
-}
-@keyframes 流星反転 {
-    0% {
-        opacity:   0;
-        translate: 0 0;
-        scale:     0 1;
-        rotate:    45deg;
-    }
-    20% {
-        opacity:   1;
-        translate: 0 0;
-        scale:     1 1;
-        rotate:    45deg;
-    }
-    100% {
-        opacity:   0;
-        translate: 300px 300px;
-        scale:     1 1;
-        rotate:    45deg;
-    }
-}
 
 
 /* #️⃣トップ画像 */
@@ -654,7 +375,7 @@ p { /* 宇宙背景のテキスト用 */
 
 
 /* #️⃣キャラ画像差分用 absolute */
-/* 無限 */.ハート, .高速伸縮, .星回転, .腕振り, .フィギュア, .ちいかわ, .ロゴ💬, .差分,
+/* 無限 */.ハート, .高速伸縮, .星回転, .腕振り, .フィギュア, .ちいかわ, .差分,
 /* 口元 */.口パク,
 /* 差分 */.目玉, .驚き汗 {
     position: absolute; top: 0%; }

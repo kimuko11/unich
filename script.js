@@ -293,7 +293,7 @@ const 監視 = new IntersectionObserver((項目一覧) => {
 
 // 🎛️UI・スライダー連携と初期設定（localStorage対応版）
 document.addEventListener('DOMContentLoaded', () => {
-    const オプション = document.getElementById('オプション');
+    const 設定 = document.getElementById('設定');
     const ラジオ = document.getElementById('📻');
     const 入力_文字速度 = document.getElementById('文字速度');
     const 入力_効果音量 = document.getElementById('効果音量');
@@ -350,13 +350,13 @@ document.addEventListener('DOMContentLoaded', () => {
     // 開閉切り替え
     ラジオ.addEventListener('click', (e) => {
         e.stopPropagation();
-        オプション.classList.toggle('オープン');
+        設定.classList.toggle('オープン');
     });
 
-    // オプション外をタップしたら閉じる
+    // 設定外をタップしたら閉じる
     document.addEventListener('click', (e) => {
-        if (!オプション.contains(e.target)) {
-            オプション.classList.remove('オープン');
+        if (!設定.contains(e.target)) {
+            設定.classList.remove('オープン');
         }
     });
 
