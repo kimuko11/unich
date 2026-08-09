@@ -64,8 +64,11 @@ b     { font-size: 1.1rem; line-height: 1; }
 
 .金 { color: gold; }
 .橙 { color: darkorange; }
+.灰 { color: gray; }
 
 .中央 { text-align: center; }
+.左寄 { text-align: left; }
+.右寄 { text-align: right; }
 
 p, .💬, .オプション💬 {
     padding: 20px;
@@ -164,7 +167,7 @@ p { /* 宇宙背景のテキスト用 */
 
 .オプション💬 {
     position: absolute;
-    top:      70px;   /* 位置 */
+    top:      65px;   /* 位置 */
     right:    0;
     width:    220px;
 
