@@ -1,0 +1,67 @@
+@charset "UTF-8";
+
+/* #️⃣トップ画像 */
+.放送中 {
+    opacity: 0;
+    animation: 落下 1s ease-out forwards 2s;
+}
+@keyframes 落下 {
+     0% {
+        opacity: 1;
+        translate: 0 -50vh;
+        animation-timing-function: ease-in;
+    }
+    60% {
+        translate: 0 0;
+        animation-timing-function: ease-out;
+    }
+    70% {
+        translate: 0 -30px;
+        animation-timing-function: ease-in;
+    }
+    80% {
+        translate: 0 0;
+        animation-timing-function: ease-out;
+    }
+    90% {
+        translate: 0 -10px;
+        animation-timing-function: ease-in;
+    }
+    100% {
+        opacity: 1;
+        translate: 0 0;
+    }
+}
+
+.ネオン { animation: レインボー 7s infinite linear alternate; }
+
+@keyframes レインボー {
+     0.0% { filter: drop-shadow(0 0 2px red); }
+    16.7% { filter: drop-shadow(0 0 2px orange); }
+    33.3% { filter: drop-shadow(0 0 2px yellow); }
+    50.0% { filter: drop-shadow(0 0 2px green); }
+    66.7% { filter: drop-shadow(0 0 2px blue); }
+    83.3% { filter: drop-shadow(0 0 2px indigo); }
+     100% { filter: drop-shadow(0 0 2px purple); }
+}
+
+.放送灯, .オンエア {
+    opacity: 0;
+    filter: drop-shadow(0 0 5px red);
+
+    animation: 出現 1s linear forwards 3s;
+}
+.オンエア { filter: drop-shadow(0 0 2px var(--強光)); }
+
+.概要1 {
+    opacity: 0;
+    animation: 出現 1s linear forwards 4s;
+}
+.概要2 {
+    opacity: 0;
+    animation: 出現 1s linear forwards 5s;
+}
+.概要3 {
+    opacity: 0;
+    animation: 出現 1s linear forwards 6s;
+}

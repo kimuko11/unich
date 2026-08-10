@@ -80,7 +80,7 @@
     position: absolute;
     top:      65px;   /* 位置 */
     right:    0;
-    width:    220px;
+    width:    250px;
 
     background-color: var(--標準色);
     border: 1px solid var(--中光);

@@ -106,7 +106,7 @@ function 効果音再生(パス) {
 
 // 🎛️身体・差分アニメ開始
 function 身体アニメ開始(エリア) {
-    エリア.querySelectorAll('.縦伸縮, .横揺れ, .横揺れ低速, .驚きと縦伸縮, .震え, .目玉, .驚き汗').forEach((要素) => {
+    エリア.querySelectorAll('.縦伸縮, .横揺れ, .横揺れ小, .驚き→縦伸縮, .震え, .驚き目→目パチ, .驚き汗').forEach((要素) => {
         要素.style.animation  = '';
         要素.style.rotate     = '';
         要素.style.scale      = '';
@@ -131,12 +131,12 @@ function ニュートラル復帰(要素, プロパティ, 目標値, 秒数 = 0
 
 // 🎛️身体アニメ終了
 function 身体アニメ終了(エリア) {
-    エリア.querySelectorAll('.横揺れ, .横揺れ低速').forEach((要素) => {
+    エリア.querySelectorAll('.横揺れ, .横揺れ小').forEach((要素) => {
         要素.classList.remove('再生');
         ニュートラル復帰(要素, 'rotate', '0deg');
     });
 
-    エリア.querySelectorAll('.縦伸縮, .驚きと縦伸縮').forEach((要素) => {
+    エリア.querySelectorAll('.縦伸縮, .驚き→縦伸縮').forEach((要素) => {
         要素.classList.remove('再生');
         const キャラ反転 = getComputedStyle(要素).getPropertyValue('--キャラ反転').trim() || '1';
         ニュートラル復帰(要素, 'scale', `${キャラ反転} 1`);
