@@ -1,12 +1,14 @@
 @charset "UTF-8";
 
 /* #️⃣リセット */
+
 *, *::before, *::after {
     box-sizing: border-box;
     -webkit-tap-highlight-color: transparent; /* タップ影を消す */
 }
 
-/* 個別リセット */
+/* 🔹個別リセット */
+
 html {
     font-size: 100%;
     scroll-behavior: smooth; /* 滑らかスクロール */
@@ -48,12 +50,15 @@ a {
 
 
 /* #️⃣共通 CSS */
-/* 配置 */
+
+/* 🔹配置 */
+
 .中央 { text-align: center; }
 .左寄 { text-align: left; }
 .右寄 { text-align: right; }
 
-/* フォント */
+/* 🔹フォント */
+
 .明朝 { font-family: "Noto Serif JP", serif; }
 
 b     { font-size: 1.1rem; line-height: 1; }
@@ -63,7 +68,8 @@ b     { font-size: 1.1rem; line-height: 1; }
 .大字 { font-size: 1.5rem; line-height: 1; }
 .極大 { font-size: 3.0rem; line-height: 1; }
 
-/* カラー */
+/* 🔹カラー */
+
 .黄 { color: yellow; }
 .金 { color: gold; }
 .橙 { color: darkorange; }
@@ -76,7 +82,8 @@ b     { font-size: 1.1rem; line-height: 1; }
     --標準色: rgb(100 100 100 / 50%); /* ふきだし背景 */
 }
 
-/* 文字装飾 */
+/* 🔹文字装飾 */
+
 .先頭装飾::first-letter {
     margin-right: 0.15em;
     padding:      0.08em;
@@ -92,7 +99,8 @@ b     { font-size: 1.1rem; line-height: 1; }
     text-shadow: 0 0 5px var(--強光);
 }
 
-/* 文字枠, ふきだし */
+/* 🔹文字枠, ふきだし */
+
 p, .💬, .設定💬 {
     padding: 20px;
     text-shadow:
@@ -111,7 +119,8 @@ p {
     max-width: 600px; /* 最大横幅 600px */
 }
 
-/* 画像枠 */
+/* 🔹画像枠 */
+
 .画像 {
     position: relative;
     margin:   0 auto;
@@ -123,10 +132,56 @@ p {
     align-items:    center;
 }
 
-/* フィルター */
+/* 🔹フィルター */
+
 .白枠 { filter: url(#白枠); }
 
 .発光 { filter: drop-shadow(0 0 10px var(--中光)); }
 
 .効果 { filter: url(#白枠)
-                drop-shadow(0 0 10px var(--中光)); }
+                drop-shadow(0 0 10px var(--中光));
+}
+
+/* 🔹差分用 absolute ( class="差分 ◯◯◯" ) */
+
+.差分 { position: absolute; top: 0%; }
+
+
+/* 🔹汎用アニメ */
+
+.出現 {
+    opacity: 0;
+    animation: 出現 var(--時間, 1s) linear forwards var(--待機);
+}
+@keyframes 出現 {
+      0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+.消滅 { animation: 消滅 var(--時間, 1s) linear forwards var(--待機);
+}
+@keyframes 消滅 {
+      0% { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+.出現→消滅 {
+    opacity: 0;
+    animation: 出現→消滅 var(--時間, 10s) linear var(--待機);
+}
+@keyframes 出現→消滅 {
+      0%      { opacity: 0; }
+     10%, 90% { opacity: 1; } /* 8割 */
+    100%      { opacity: 0; visibility: hidden;}
+}
+
+.登場右 { --方向:  1; }
+.登場左 { --方向: -1; }
+.登場右, .登場左 {
+    opacity: 0;
+    animation: スライドイン var(--時間, 1s) cubic-bezier(0.175, 0.885, 0.32, 1.275) var(--待機);
+}
+@keyframes スライドイン {
+      0% { translate: calc(var(--方向) * 100vw) 0; }
+    100% { translate: 0 0; opacity: 1; }
+}

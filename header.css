@@ -1,6 +1,7 @@
 @charset "UTF-8";
 
 /* #️⃣ヘッダー */
+
 .ヘッダー {
     position: fixed;
     top:      0;
@@ -15,6 +16,8 @@
     pointer-events:  none;
 }
 
+/* ロゴ */
+
 .ロゴ, .設定 {
     display:        flex;
     flex-direction: column;
@@ -27,38 +30,18 @@
 
 .ロゴ {
     filter:    drop-shadow(0 0 5px black);
+
+}
+
+
+.副題 { animation: 消滅 1s ease forwards 10s; }
+
+.放送回 {
     opacity:   0;
-
-    animation: ロゴ・スライドイン 1s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards 1s;
-}
-@keyframes ロゴ・スライドイン {
-      0% { translate: 100vw 0; }
-    100% { translate: 0 0; opacity: 1; }
+    animation: 出現 1s ease forwards 10s;
 }
 
-.ロゴ💬 { /* 今後、ロゴ差分に変更する予定。スクロールで博士と幼女の… と Koji Kimura が消えて、ON AIR #001 が現れる */
-    position:  absolute;
-    top:       0;
-
-    max-width: 40%;
-    opacity:   0;
-
-    animation: 現れて消える 9s ease forwards 2s;
-}
-
-/* 📻設定 */
-.設定の文字 {
-    font-size: 0.6rem;
-    opacity:   0;
-
-    animation: 現れて消える 10s linear forwards 1s;
-}
-
-@keyframes 現れて消える {
-      0%      { opacity: 0; }
-     10%, 90% { opacity: 1; }
-    100%      { opacity: 0; visibility: hidden;}
-}
+/* 設定 */
 
 .📻 {
     cursor:     pointer;
@@ -66,15 +49,8 @@
     opacity:    0;
 
     transition: scale 0.3s ease;
-
-    animation:  出現 1s linear forwards 1s;
 }
 .設定.オープン .📻 { scale: 1.1; }
-
-@keyframes 出現 {
-      0% { opacity: 0; }
-    100% { opacity: 1; }
-}
 
 .設定💬 {
     position: absolute;
