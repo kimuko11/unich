@@ -24,7 +24,7 @@ body {
     line-height: 1.75;
     color:     #fff4f0;
 
-    overflow-x:  hidden; /* 画面のはみ出し防止 */
+    overflow-x: hidden; /* 画面のはみ出し防止 */
     -webkit-font-smoothing: antialiased; /* 文字を滑らかに */
 }
 
@@ -85,9 +85,10 @@ b     { font-size: 1.1rem; line-height: 1; }
 /* 🔹文字装飾 */
 
 .先頭装飾::first-letter {
+    float: left;
+
     margin-right: 0.15em;
     padding:      0.08em;
-    float:        left;
 
     background-color: #bf0000;
     font-size:        3rem;
@@ -113,8 +114,9 @@ p, .💬, .設定💬 {
 
 p {
     position: relative;
-    margin:   0 auto;
-    padding:  0 1rem 1rem 1rem;
+
+    margin:  0 auto;
+    padding: 0 1rem 1rem 1rem;
 
     max-width: 600px; /* 最大横幅 600px */
 }
@@ -123,13 +125,14 @@ p {
 
 .画像 {
     position: relative;
-    margin:   0 auto;
-
-    max-width: 75%; /* 最大横幅 400px (画像サイズは最大400pxで書き出しているから) */
 
     display:        flex;
     flex-direction: column;
     align-items:    center;
+
+    margin: 0 auto;
+
+    max-width: 75%; /* 最大横幅 400px (画像サイズは最大400pxで書き出しているから) */
 }
 
 /* 🔹フィルター */
@@ -151,14 +154,14 @@ p {
 
 .出現 {
     opacity: 0;
-    animation: 出現 var(--時間, 1s) linear forwards var(--待機);
+    animation: 出現 var(--時間, 1s) linear forwards var(--待機, 0s);
 }
 @keyframes 出現 {
       0% { opacity: 0; }
     100% { opacity: 1; }
 }
 
-.消滅 { animation: 消滅 var(--時間, 1s) linear forwards var(--待機);
+.消滅 { animation: 消滅 var(--時間, 1s) linear forwards var(--待機, 0s);
 }
 @keyframes 消滅 {
       0% { opacity: 1; }
@@ -167,21 +170,23 @@ p {
 
 .出現→消滅 {
     opacity: 0;
-    animation: 出現→消滅 var(--時間, 10s) linear var(--待機);
+    animation: 出現→消滅 var(--時間, 10s) linear forwards var(--待機, 0s);
 }
 @keyframes 出現→消滅 {
       0%      { opacity: 0; }
      10%, 90% { opacity: 1; } /* 8割 */
-    100%      { opacity: 0; visibility: hidden;}
+    100%      { opacity: 0;
+                visibility: hidden;}
 }
 
 .登場右 { --方向:  1; }
 .登場左 { --方向: -1; }
 .登場右, .登場左 {
     opacity: 0;
-    animation: スライドイン var(--時間, 1s) cubic-bezier(0.175, 0.885, 0.32, 1.275) var(--待機);
+    animation: スライドイン var(--時間, 1s) cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards var(--待機, 0s);
 }
 @keyframes スライドイン {
       0% { translate: calc(var(--方向) * 100vw) 0; }
-    100% { translate: 0 0; opacity: 1; }
+    100% { translate: 0 0;
+           opacity: 1; }
 }

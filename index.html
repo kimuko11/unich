@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>📻宇宙よろず相談室 🎬#001</title>
 
-    <script src="script.js" defer></script>
+    <title>📻宇宙よろず相談室 🎬#001</title>
 
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="ucyu.css">
@@ -17,23 +16,32 @@
     <link rel="preconnect" href="https://googleapis.com">
     <link rel="preconnect" href="https://gstatic.com" crossorigin>
     <link href="https://googleapis.com/css2?family=Noto+Serif+JP:wght@900&display=swap" rel="stylesheet">
+
+    <script src="script.js" defer></script>
 </head>
 <body>
 
+
+<!-- ↔️ヘッダー -->
+
 <header class="ヘッダー">
+
+    <!-- 🔹ロゴ -->
 
     <a href="#" class="ロゴ 登場右" style="--待機: 1s;">
         <img src="img/logo.webp" alt="宇宙よろず相談室 ロゴ">
-        <img src="img/logo_subtitle.webp"  class="差分 副題">
-        <img src="img/logo_onair_001.webp" class="差分 放送回">
+        <img src="img/logo_subtitle.webp"  class="差分 消滅" style="--待機: 10s;">
+        <img src="img/logo_onair_001.webp" class="差分 出現" style="--待機: 10s;">
     </a>
+
+    <!-- 🔹設定 -->
 
     <div class="設定" id="設定">
 
         <img src="img/radio.webp" alt="ラジオ(設定)" id="📻" class="📻 出現" style="--待機: 1s;">
         <div class="極小 出現→消滅" style="--待機: 1s;">設定</div>
 
-        <div class="設定💬">
+        <div class="設定💬 小字">
             <div class="設定項目">
                 文字速度
                 <div class="スライダー">
@@ -50,7 +58,7 @@
                 </div>
             </div>
 
-            <button type="button" id="リセット" class="リセット">初期値に戻す</button>
+            <button type="button" id="リセット" class="リセット 極小">初期値に戻す</button>
 
         </div> <!-- 設定💬 ここまで -->
 
@@ -58,62 +66,68 @@
 
 </header>
 
-<!-- ↔️メインコンテンツ -->
+
+<!-- ↔️サイト概要 -->
+
+<!-- 🔹宇宙視差背景 -->
+
 <div class="宇宙全体" style="--視差速度: -100px;"> <!-- ⚠️ページ長さによって px 増減する -->
+
     <div class="宇宙レイヤー 遠景"></div>
     <div class="宇宙レイヤー 中景"></div>
     <div class="宇宙レイヤー 流星"></div>
     <div class="宇宙レイヤー 近景"></div>
 
-    <div style="height: 12vw;"></div>
+    <div style="height: 12vw;"></div> <!-- トップ画像をサイズ可変のロゴに被せないために vw で縦余白を決定 -->
 
-    <div class="画像">
+    <!-- 🔹トップ画像 -->
+
+    <div class="画像" style="margin-bottom: 2rem;">
         <img src="pic/hosocyu_yuka.webp">
         <img src="pic/hosocyu_ucyu-yoro.webp" class="差分 ネオン">
         <img src="pic/hosocyu_hosoto.webp"    class="差分 放送灯 出現"  style="--待機: 3s;">
         <img src="pic/hosocyu_onair.webp"     class="差分 オンエア 出現" style="--待機: 3s;">
-        <img src="pic/hosocyu_futari.webp"    class="差分 放送中 効果">
+        <img src="pic/hosocyu_futari.webp"    class="差分 放送中 効果"  alt="ドクとユニちゃん">
     </div>
 
-    <div style="height: 2rem;"></div>
+    <!-- 🔹概要文 -->
 
     <p class="先頭装飾 出現" style="--待機: 4s;">
         この番組は、幸せを与えない。<br>
-        なぜなら、あなたが幸せの<b>中心</b>だから。<br>
+        なぜなら、あなたが幸せの<b>中心</b>だから。
     </p>
     <p class="出現" style="--待機: 5s;">
         この番組は、誰の人生も変えない。<br>
         なぜなら、誰もが<b>完璧</b>な配役で、何も変える必要がないから。
     </p>
-    <p class="出現" style="--待機: 6s;">
-        これは、充足感を未来ではなく、<b>今ここ</b>で味わうための番組である✨
+    <p class="出現" style="--待機: 6s; margin-bottom: 5rem;">
+        これは、天国のような充足感を未来ではなく、<b>今ここ</b>で味わうための番組である✨
     </p>
 
-    <div style="height: 5rem;"></div>
+    <!-- 🔹キャラ紹介 -->
 
-    <p class="登場右" style="--待機: 7s;">
+    <p class="登場右" style="--待機: 7s; margin-bottom: 2rem;">
         <span class="極大">🎙️</span><b class="大字 橙">番組パーソナリティ</b>
     </p>
 
-    <div style="height: 2rem;"></div>
-
-    <div class="画像 出現" style="--待機: 8s;">
-        <img src="pic/prof_doc_001.webp" class="発光">
+    <div class="画像 出現" style="--待機: 8s; margin-bottom: 2rem;">
+        <img src="pic/prof_doc_001.webp" alt="Dr.YOU (ドクター・ユー)" class="発光">
     </div>
 
-    <div style="height: 2rem;"></div>
-
-    <p>
-        <b class="金 出現" style="--待機: 9s;">Dr.YOU (ドクター・ユー)</b>
+    <p class="出現" style="--待機: 9s;">
+        <b class="黄">Dr.YOU (ドクター・ユー)</b>
     </p>
-    <p>
+    <p class="出現" style="--待機: 10s; margin-bottom: 5rem;">
         世界でも指折りの<b>形而上学博士</b> (Ph.D. in Philosophy) らしいが、それ以上に日本のオタク文化に沼りすぎて生活もままならない<b>社会不適合者</b>。<br>
         だが、その不適合ぶりを全力で<b>自愛</b>する姿は、人生を深刻にとらえて悩めるリスナーたちに安らぎをもたらしているとかいないとか。
     </p>
 
-    <div style="height: 5rem;"></div>
 
-    <div class="画像 発光">
+    <!-- ↔️メインコンテンツ -->
+
+    <!-- 🔹タイトル -->
+
+    <div class="画像 発光" style="margin-bottom: 20rem;">
         <img src="img/kachinko.webp">
         <p class="中央" style="max-width: 380px; width: 95%; border: 1px solid #666; border-top: 1px solid #222; border-radius: 0 0 8px 8px; padding: 1rem 1rem; background: linear-gradient(160deg, #333, black); ">
             <b class="大字" style="display: block; margin: 1rem 0;">ON AIR #001</b>
@@ -122,7 +136,7 @@
         </p>
     </div>
 
-    <div style="height: 20rem;"></div>
+    <!-- 🔹対話 -->
 
     <main class="対話全体枠">
 
@@ -212,6 +226,7 @@
     <div style="height: 100vh;"></div>
 
 </div> <!-- 宇宙全体 ここまで -->
+
 
 <!-- ↔️SVGフィルター -->
 <svg style="position: absolute; width: 0; height: 0; overflow: hidden;">
