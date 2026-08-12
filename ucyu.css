@@ -1,6 +1,7 @@
 @charset "UTF-8";
 
 /* #️⃣宇宙視差背景 */
+
 .宇宙全体 {
     position: relative;
     width:    100%;
@@ -71,6 +72,7 @@
 
 
 /* #️⃣流星 (右上から出現、反転で左上から) */
+
 .流星 {
     position:   absolute;
     width:      100px; /* 長さ */
@@ -127,4 +129,17 @@
         scale:     1 1;
         rotate:    45deg;
     }
+}
+
+
+/* #️⃣ライン */
+
+.星群 {
+    margin-bottom:    -55px;
+    height:           55px;
+    background-image: url('img/seigun.webp');
+    opacity: 0;
+
+    animation: 出現 var(--時間, 1s) linear forwards var(--待機, 0s),
+               近景・瞬き 2s ease-in-out infinite alternate calc(var(--待機, 0s) + var(--時間, 1s));
 }

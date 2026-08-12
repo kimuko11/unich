@@ -35,7 +35,6 @@
 .📻 {
     cursor:  pointer;
     filter:  drop-shadow(0 0 5px black);
-    opacity: 0;
 
     transition: scale 0.3s ease;
 }
