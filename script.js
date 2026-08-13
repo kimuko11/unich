@@ -277,7 +277,7 @@ function 次キャラ処理() {
     });
 }
 
-// 🎛️画面内出現の監視
+// 🎛️キャラの画面内出現の監視
 const 監視 = new IntersectionObserver((項目一覧) => {
     項目一覧.forEach((項目) => {
         if (項目.isIntersecting) {
@@ -289,6 +289,46 @@ const 監視 = new IntersectionObserver((項目一覧) => {
 }, { threshold: 0.9 });
 
 キャラ一覧.forEach((エリア) => { 監視.observe(エリア); });
+
+
+// 🎛️▼の画面内出現の監視
+const ページ開始時刻 = performance.now();
+const スクロール出現最短時刻 = 8000;
+const スクロール出現マップ = new Map(); // 監視対象要素 → 実際に .再生 を付与する要素の配列
+ 
+function スクロール出現実行(要素) {
+    要素.classList.add('再生');
+}
+ 
+const スクロール出現監視 = new IntersectionObserver((項目一覧) => {
+    項目一覧.forEach((項目) => {
+        if (!項目.isIntersecting) return;
+        スクロール出現監視.unobserve(項目.target); // 一度再生したら監視終了
+ 
+        const 対象一覧 = スクロール出現マップ.get(項目.target) || [項目.target];
+        const 経過時刻 = performance.now() - ページ開始時刻;
+        const 残り時刻 = スクロール出現最短時刻 - 経過時刻;
+ 
+        const 再生実行 = () => 対象一覧.forEach(スクロール出現実行);
+ 
+        if (残り時刻 > 0) {
+            setTimeout(再生実行, 残り時刻);
+        } else {
+            再生実行();
+        }
+    });
+}, { threshold: 0.9 });
+ 
+document.querySelectorAll('.▼').forEach((要素) => {
+    const 横スライド系 = 要素.classList.contains('登場右') || 要素.classList.contains('登場左');
+    const 監視対象 = 横スライド系 ? 要素.parentElement : 要素;
+ 
+    if (!スクロール出現マップ.has(監視対象)) {
+        スクロール出現マップ.set(監視対象, []);
+        スクロール出現監視.observe(監視対象);
+    }
+    スクロール出現マップ.get(監視対象).push(要素);
+});
 
 
 // 🎛️UI・スライダー連携と初期設定（localStorage対応版）

@@ -73,6 +73,7 @@ b     { font-size: 1.1rem; line-height: 1; }
 .黄 { color: yellow; }
 .金 { color: gold; }
 .橙 { color: darkorange; }
+.銀 { color: silver; }
 .灰 { color: gray; }
 
 * {
@@ -186,7 +187,7 @@ p {
 
 .出現→消滅 {
     opacity: 0;
-    animation: 出現→消滅 var(--時間, 10s) linear forwards var(--待機, 0s);
+    animation: 出現→消滅 var(--時間, 20s) linear forwards var(--待機, 0s);
 }
 @keyframes 出現→消滅 {
       0%      { opacity: 0; }
@@ -214,4 +215,12 @@ p {
       0% { translate: calc(var(--方向) * 100vw) 0; }
     100% { translate: 0 0;
            opacity: 1; }
+}
+
+.浮遊 {
+    animation: 浮遊 var(--時間, 1s) infinite ease-in-out alternate var(--待機, 0s);
+}
+@keyframes 浮遊 {
+      0% { translate: 0  3px; }
+    100% { translate: 0 -3px; }
 }
