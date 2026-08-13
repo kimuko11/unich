@@ -27,13 +27,14 @@
 <header class="ヘッダー">
 
     <!-- 🔹ロゴ -->
-
-    <a href="#" class="ロゴ 登場右" style="--待機: 1s;">
-        <img src="img/logo_subtitle.webp"  class="差分 消滅 効果" style="--待機: 10s;">
-        <img src="img/logo_fukidasi.webp"  class="差分 出現→消滅" style="--待機: 2s; --時間: 9s;">
-        <img src="img/logo_onair_001.webp" class="差分 出現 効果" style="--待機: 10s;">
-        <img src="img/logo.webp" alt="宇宙よろず相談室 ロゴ" class="効果">
-    </a>
+    <div class="ロゴ 登場右" style="--待機: 1s;">
+        <a href="#" class="効果">
+            <img src="img/logo_subtitle.webp"  class="差分 消滅" style="--待機: 10s;">
+            <img src="img/logo_onair_001.webp" class="差分 出現" style="--待機: 10s;">
+            <img src="img/logo.webp" alt="宇宙よろず相談室 ロゴ">
+        </a>
+        <img src="img/logo_fukidasi.webp" class="差分 出現→消滅" style="--待機: 2s; --時間: 9s; pointer-events: none;">
+    </div>
 
     <!-- 🔹設定 -->
 
@@ -110,16 +111,16 @@
     <p class="星群" style="--待機: 8s;"></p>
 
     <p class="効果 改行">
-        <span class="極大 出現" style="--待機: 8s;">🎙️</span>
-        <b class="差分 大字 橙 登場右" style="--待機: 8s; top: 0.5em">番組パーソナリティ</b>
+        <span class="黒枠 極大 出現" style="--待機: 8s;">🎙️</span>
+        <b class="差分 黒枠 大字 橙 登場右" style="--待機: 8s; top: 0.4em">番組パーソナリティ</b>
     </p>
 
     <div class="画像 拡大 発光 改行2" style="--待機: 9s;">
         <img src="pic/prof_doc_001.webp" alt="アイドルライブを楽しむドク">
     </div>
 
-    <p class="出現" style="--待機: 10s;">
-        <b class="効果 黄">Dr. YOU (ドクター・ユー)</b>
+    <p class="効果 出現" style="--待機: 10s;">
+        <b class="黒枠 黄">Dr. YOU (ドクター・ユー)</b>
     </p>
     <p class="出現 改行5" style="--待機: 11s;">
         世界でも指折りの<b>形而上学博士</b> (Ph.D. in Philosophy) らしいが、それ以上に日本のオタク文化に沼りすぎて生活もままならない<b>社会不適合者</b>。<br>
@@ -235,6 +236,7 @@
 <!-- ↔️SVGフィルター -->
 <svg style="position: absolute; width: 0; height: 0; overflow: hidden;">
     <defs>
+
         <filter id="白枠">
             <feMorphology in="SourceAlpha" operator="dilate" radius="1" result="expanded" />
             <feFlood flood-color="#fff4f0" flood-opacity="1" result="color" />
@@ -245,6 +247,18 @@
                 <feMergeNode in="SourceGraphic" />
             </feMerge>
         </filter>
+
+        <filter id="黒枠">
+            <feMorphology in="SourceAlpha" operator="dilate" radius="1" result="expanded" />
+            <feFlood flood-color="black" flood-opacity="1" result="color" />
+            <feComposite in="color" in2="expanded" operator="in" result="outline" />
+
+            <feMerge>
+                <feMergeNode in="outline" />
+                <feMergeNode in="SourceGraphic" />
+            </feMerge>
+        </filter>
+
     </defs>
 </svg>
 

@@ -108,7 +108,8 @@ p, .💬, .設定💬 {
         0  1px #000,      /* 下 */
        -1px  0 #111,      /* 左 */
         1px  0 #111,      /* 右 */
-        0 -1px #222;      /* 上 */
+        0 -1px #222,      /* 上 */
+        0  2px 2px #000;  /* 影 */
 }
 
 p {
@@ -150,6 +151,9 @@ p {
 /* 🔹フィルター */
 
 .白枠 { filter: url(#白枠); }
+.黒枠 { filter: url(#黒枠);
+        text-shadow: none;
+}
 
 .発光 { filter: drop-shadow(0 0 10px var(--中光)); }
 
@@ -188,7 +192,7 @@ p {
       0%      { opacity: 0; }
      10%, 90% { opacity: 1; } /* 8割 */
     100%      { opacity: 0;
-                visibility: hidden;}
+                visibility: hidden; }
 }
 
 .拡大 {
