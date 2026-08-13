@@ -66,7 +66,7 @@ b     { font-size: 1.1rem; line-height: 1; }
 .極小 { font-size: 0.6rem; }
 .小字 { font-size: 0.8rem; }
 .大字 { font-size: 1.5rem; line-height: 1; }
-.極大 { font-size: 3.0rem; line-height: 1; }
+.極大 { font-size: 2.5rem; line-height: 1; }
 
 /* 🔹カラー */
 
@@ -88,10 +88,10 @@ b     { font-size: 1.1rem; line-height: 1; }
     float: left;
 
     margin-right: 0.15em;
-    padding:      0.08em;
+    padding:      0.05em;
 
     background-color: #bf0000;
-    font-size:        3rem;
+    font-size:        2.5rem;
     font-weight:      bold;
     line-height:      1;
     color:            var(--強光);
@@ -108,8 +108,7 @@ p, .💬, .設定💬 {
         0  1px #000,      /* 下 */
        -1px  0 #111,      /* 左 */
         1px  0 #111,      /* 右 */
-        0 -1px #222,      /* 上 */
-        0  2px 2px #000;  /* 影 */
+        0 -1px #222;      /* 上 */
 }
 
 p {
