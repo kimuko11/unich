@@ -1,65 +1,16 @@
-// 🎛️ローディング・マスク
-
-const 読み込みリスト = [
-    'img/ucyu_enkei.webp',
-    'img/ucyu_cyukei.webp',
-    'img/ucyu_kinkei.webp',
-    'img/ucyu_seigun.webp',
-    'img/logo.webp',
-    'img/logo_subtitle.webp',
-    'img/logo_fukidasi.webp',
-    'img/radio.webp',
-    'pic/hosocyu_yuka.webp',
-    'pic/hosocyu_ucyu-yoro.webp',
-    'pic/hosocyu.webp',
-    'pic/hosocyu_hosoto.webp',
-    'pic/hosocyu_onair.webp'
-];
-
-function ページオープン() {
-    const 暗幕 = document.getElementById('暗幕');
-  
-    if (暗幕 && !暗幕.classList.contains('読み込み完了')) {
-        暗幕.classList.add('読み込み完了');
-    }
-}
-
-function プリロード(対象URL) {
-    return new Promise((成功) => {
-        const 画像   = new Image();
-        画像.src     = 対象URL;
-        画像.onload  = 成功;
-        画像.onerror = 成功; // エラーでも
-    });
-}
-
-Promise.all(読み込みリスト.map(プリロード)).then(() => {
-    ページオープン();
-});
-// 3秒経過で強制的にページオープン
-setTimeout(() => {
-    ページオープン();
-}, 3000);
-
-
-// 🎛️キャラクター(target)一覧
-
+// 🎛️対象一覧
 const キャラ一覧 = document.querySelectorAll('.🥸, .🐰, .👩, .👤');
 
-
 // 🎛️スライダー設定のグローバル変数（初期値）
-
 let スライダー文字速度 = 5;
 let スライダー効果音量 = 5;
 
 // 計算用の派生変数
-
 let 設定速度ms = 100 - スライダー文字速度 * 10; // 10〜100ms
 let ボイス音量 = スライダー効果音量 * 0.02;     // 0.0〜0.18
 let 効果音音量 = ボイス音量 * 0.3;
 
-// 設定更新関数
-
+// 🎛️設定更新関数
 function 設定更新() {
     設定速度ms = 100 - スライダー文字速度 * 10;
     ボイス音量 = スライダー効果音量 * 0.02;
@@ -67,7 +18,6 @@ function 設定更新() {
 }
 
 // 🎛️代替音声
-
 const 音声一覧 = {
     ドク: new Audio('se/doc.mp3'),
     ユニ: new Audio('se/uni.mp3'),
@@ -75,17 +25,14 @@ const 音声一覧 = {
 };
 Object.values(音声一覧).forEach((音声) => { 音声.preload = 'auto'; });
 
-
 // 🎛️エリアのクラスからキャラを判定
-
 function キャラ取得(エリア) {
     if (エリア.classList.contains('🥸')) return 'ドク';
     if (エリア.classList.contains('🐰')) return 'ユニ';
     return '第三';
 }
 
-// エリアのクラスから「身体アニメ管理用の種別」を判定
-
+// 🎛️エリアのクラスから「身体アニメ管理用の種別」を判定
 function 種別取得(エリア) {
     for (const 種別 of ['🥸', '🐰', '👩', '👤']) {
         if (エリア.classList.contains(種別)) return 種別;
@@ -94,7 +41,6 @@ function 種別取得(エリア) {
 }
 
 // 🎛️文字分解（ふきだし内のHTML構造を保ったまま、文字を1つずつ <span class="文字"> に分解）
-
 function 文字分解(要素) {
     const 文字要素一覧 = [];
 
@@ -331,7 +277,7 @@ function 次キャラ処理() {
     });
 }
 
-// 🎛️キャラの画面内出現の監視
+// 🎛️画面内出現の監視
 const 監視 = new IntersectionObserver((項目一覧) => {
     項目一覧.forEach((項目) => {
         if (項目.isIntersecting) {
@@ -345,24 +291,30 @@ const 監視 = new IntersectionObserver((項目一覧) => {
 キャラ一覧.forEach((エリア) => { 監視.observe(エリア); });
 
 
-// 🎛️▼の画面内出現の監視
+// 🎛️キャラ紹介パート等のスクロール出現監視（対話パートと同じ「◯%見えたら再生」方式）
 const ページ開始時刻 = performance.now();
-const スクロール出現最短時刻 = 8000;
-const スクロール出現閾値既定値 = 1; // data-threshold 既定値
+const スクロール出現最短時刻 = 9000; // ⚠️ページを開いてから9秒経過するまでは再生しない（早くスクロールされた場合の待機）
+const スクロール出現閾値既定値 = 0.9; // data-threshold 未指定時の既定値
+
+// 💡「.登場右」「.登場左」は再生前 translate で画面外に避難した状態が初期値のため、
+//    要素自身を監視すると永遠に isIntersecting が true にならない。
+//    そのため、位置が動かない親要素を監視対象にし、交差確定時に子の実要素へ .再生 を付与する。
 const スクロール出現マップ = new Map(); // 監視対象要素 → 実際に .再生 を付与する要素の配列
 const スクロール出現監視一覧 = new Map(); // threshold値 → IntersectionObserver（同じ閾値は1つに共有）
- 
+
 function スクロール出現実行(要素) {
     要素.classList.add('再生');
 }
- 
+
 function スクロール出現交差時(項目一覧, 監視) {
     項目一覧.forEach((項目) => {
         if (!項目.isIntersecting) return;
-        監視.unobserve(項目.target); // 一度再生したら監視終了
+        監視.unobserve(項目.target); // 一度再生したら監視終了（.出現/.拡大/.登場右/.登場左 は forwards で状態保持のため再監視不要）
+
         const 対象一覧 = スクロール出現マップ.get(項目.target) || [項目.target];
         const 経過時刻 = performance.now() - ページ開始時刻;
         const 残り時刻 = スクロール出現最短時刻 - 経過時刻;
+
         const 再生実行 = () => 対象一覧.forEach(スクロール出現実行);
 
         if (残り時刻 > 0) {
@@ -384,9 +336,11 @@ function スクロール出現監視取得(閾値) {
     return スクロール出現監視一覧.get(閾値);
 }
 
-document.querySelectorAll('.▼').forEach((要素) => {
+document.querySelectorAll('.スクロール出現').forEach((要素) => {
     const 横スライド系 = 要素.classList.contains('登場右') || 要素.classList.contains('登場左');
     const 監視対象 = 横スライド系 ? 要素.parentElement : 要素;
+
+    // data-threshold="0.7" のように指定があれば優先、未指定・不正値なら既定値
     const 指定閾値 = parseFloat(要素.dataset.threshold);
     const 閾値 = Number.isNaN(指定閾値) ? スクロール出現閾値既定値 : 指定閾値;
     const 監視 = スクロール出現監視取得(閾値);
