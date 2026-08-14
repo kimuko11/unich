@@ -180,6 +180,10 @@ p {
 
 .消滅 { animation: 消滅 var(--時間, 1s) linear forwards var(--待機, 0s);
 }
+.連動消滅 {
+    animation: 消滅 auto linear forwards;
+    animation-timeline: view();
+}
 @keyframes 消滅 {
       0% { opacity: 1; }
     100% { opacity: 0; }
