@@ -1,6 +1,6 @@
 // 🎛️ローディング・マスク
 
-const 読み込み画像 = [
+const 読み込みリスト = [
     'img/ucyu_enkei.webp',
     'img/ucyu_cyukei.webp',
     'img/ucyu_kinkei.webp',
@@ -16,17 +16,30 @@ const 読み込み画像 = [
     'pic/hosocyu_onair.webp'
 ];
 
-Promise.all(読み込み画像.map(src => {
-    return new Promise(resolve => {
-        const 画像 = new Image();
-        画像.src = src;
-        画像.onload  = resolve;
-        画像.onerror = resolve; // エラー時も止めずに進める
-    });
-})).then(() => {
+function ページオープン() {
     const 暗幕 = document.getElementById('暗幕');
-    if (暗幕) 暗幕.classList.add('読み込み完了');
+  
+    if (暗幕 && !暗幕.classList.contains('読み込み完了')) {
+        暗幕.classList.add('読み込み完了');
+    }
+}
+
+function プリロード(対象URL) {
+    return new Promise((成功) => {
+        const 画像   = new Image();
+        画像.src     = 対象URL;
+        画像.onload  = 成功;
+        画像.onerror = 成功; // エラーでも
+    });
+}
+
+Promise.all(読み込みリスト.map(プリロード)).then(() => {
+    ページオープン();
 });
+// 3秒経過で強制的にページオープン
+setTimeout(() => {
+    ページオープン();
+}, 3000);
 
 
 // 🎛️キャラクター(target)一覧
