@@ -1,5 +1,25 @@
 @charset "UTF-8";
 
+/* #️⃣ローディング・マスク */
+
+#暗幕 {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: black; /* サイトの背景色に合わせる */
+  z-index: 999;             /* 一番手前に表示 */
+  transition: opacity 0.4s ease; /* フェードアウトの滑らかさ */
+}
+
+/* 読み込み完了後にJSで付与するクラス */
+#暗幕.読み込み完了 {
+  opacity: 0;
+  pointer-events: none; /* 下の要素をタップできるようにする */
+}
+
+
 /* #️⃣宇宙視差背景 */
 
 .宇宙全体 {

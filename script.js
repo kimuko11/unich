@@ -1,16 +1,55 @@
-// 🎛️対象一覧
+// 🎛️ローディング・マスク
+
+const 読み込み画像 = [
+    'img/ucyu_enkei.webp',
+    'img/ucyu_cyukei.webp',
+    'img/ucyu_kinkei.webp',
+    'img/ucyu_seigun.webp',
+    'img/logo.webp',
+    'img/logo_subtitle.webp',
+    'img/logo_fukidasi.webp',
+    'img/radio.webp',
+    'pic/hosocyu_yuka.webp',
+    'pic/hosocyu_ucyu-yoro.webp',
+    'pic/hosocyu_futari.webp',
+    'pic/hosocyu_hosoto.webp',
+    'pic/hosocyu_onair.webp'
+];
+
+// 画像を裏で読み込む処理
+
+Promise.all(読み込み画像.map(src => {
+  return new Promise(resolve => {
+    const 画像 = new Image();
+    画像.src = src;
+    画像.onload = resolve;
+    画像.onerror = resolve; // エラー時も止めずに進める
+  });
+})).then(() => {
+  // すべて読み込めたら幕を消す！
+  const 暗幕 = document.getElementById('暗幕');
+  if (暗幕) 暗幕.classList.add('読み込み完了');
+});
+
+
+// 🎛️キャラクター(target)一覧
+
 const キャラ一覧 = document.querySelectorAll('.🥸, .🐰, .👩, .👤');
 
+
 // 🎛️スライダー設定のグローバル変数（初期値）
+
 let スライダー文字速度 = 5;
 let スライダー効果音量 = 5;
 
 // 計算用の派生変数
+
 let 設定速度ms = 100 - スライダー文字速度 * 10; // 10〜100ms
 let ボイス音量 = スライダー効果音量 * 0.02;     // 0.0〜0.18
 let 効果音音量 = ボイス音量 * 0.3;
 
-// 🎛️設定更新関数
+// 設定更新関数
+
 function 設定更新() {
     設定速度ms = 100 - スライダー文字速度 * 10;
     ボイス音量 = スライダー効果音量 * 0.02;
@@ -18,6 +57,7 @@ function 設定更新() {
 }
 
 // 🎛️代替音声
+
 const 音声一覧 = {
     ドク: new Audio('se/doc.mp3'),
     ユニ: new Audio('se/uni.mp3'),
@@ -25,14 +65,17 @@ const 音声一覧 = {
 };
 Object.values(音声一覧).forEach((音声) => { 音声.preload = 'auto'; });
 
+
 // 🎛️エリアのクラスからキャラを判定
+
 function キャラ取得(エリア) {
     if (エリア.classList.contains('🥸')) return 'ドク';
     if (エリア.classList.contains('🐰')) return 'ユニ';
     return '第三';
 }
 
-// 🎛️エリアのクラスから「身体アニメ管理用の種別」を判定
+// エリアのクラスから「身体アニメ管理用の種別」を判定
+
 function 種別取得(エリア) {
     for (const 種別 of ['🥸', '🐰', '👩', '👤']) {
         if (エリア.classList.contains(種別)) return 種別;
@@ -41,6 +84,7 @@ function 種別取得(エリア) {
 }
 
 // 🎛️文字分解（ふきだし内のHTML構造を保ったまま、文字を1つずつ <span class="文字"> に分解）
+
 function 文字分解(要素) {
     const 文字要素一覧 = [];
 
