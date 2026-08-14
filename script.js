@@ -11,24 +11,21 @@ const 読み込み画像 = [
     'img/radio.webp',
     'pic/hosocyu_yuka.webp',
     'pic/hosocyu_ucyu-yoro.webp',
-    'pic/hosocyu_futari.webp',
+    'pic/hosocyu.webp',
     'pic/hosocyu_hosoto.webp',
     'pic/hosocyu_onair.webp'
 ];
 
-// 画像を裏で読み込む処理
-
 Promise.all(読み込み画像.map(src => {
-  return new Promise(resolve => {
-    const 画像 = new Image();
-    画像.src = src;
-    画像.onload = resolve;
-    画像.onerror = resolve; // エラー時も止めずに進める
-  });
+    return new Promise(resolve => {
+        const 画像 = new Image();
+        画像.src = src;
+        画像.onload  = resolve;
+        画像.onerror = resolve; // エラー時も止めずに進める
+    });
 })).then(() => {
-  // すべて読み込めたら幕を消す！
-  const 暗幕 = document.getElementById('暗幕');
-  if (暗幕) 暗幕.classList.add('読み込み完了');
+    const 暗幕 = document.getElementById('暗幕');
+    if (暗幕) 暗幕.classList.add('読み込み完了');
 });
 
 

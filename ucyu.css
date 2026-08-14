@@ -3,20 +3,27 @@
 /* #️⃣ローディング・マスク */
 
 #暗幕 {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: black; /* サイトの背景色に合わせる */
-  z-index: 999;             /* 一番手前に表示 */
-  transition: opacity 0.4s ease; /* フェードアウトの滑らかさ */
-}
+    position: fixed;
+    top:  0;
+    left: 0;
 
-/* 読み込み完了後にJSで付与するクラス */
+    width:  100vw;
+    height: 100vh;
+
+    background-color: black;
+    z-index: 999;
+
+    visibility: visible;
+    opacity:    1;
+
+    transition: opacity    2s ease,
+                visibility 2s ease;
+}
 #暗幕.読み込み完了 {
-  opacity: 0;
-  pointer-events: none; /* 下の要素をタップできるようにする */
+    opacity:    0;
+    visibility: hidden;
+
+    pointer-events: none;
 }
 
 
