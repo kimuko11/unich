@@ -79,7 +79,7 @@ b     { font-size: 1.1rem; line-height: 1; }
 .黄 { color: yellow; }
 .金 { color: gold; }
 .橙 { color: darkorange; }
-.桃 { color: pink; }
+.桃 { color: deeppink; }
 .銀 { color: silver; }
 .灰 { color: gray; }
 
@@ -198,11 +198,11 @@ p {
 
 .出現→消滅 {
     opacity: 0;
-    animation: 出現→消滅 var(--時間, 20s) linear forwards var(--待機, 0s);
+    animation: 出現→消滅 var(--時間, 50s) linear forwards var(--待機, 0s);
 }
 @keyframes 出現→消滅 {
       0%      { opacity: 0; }
-     10%, 90% { opacity: 1; } /* 8割 */
+      2%, 98% { opacity: 1; }
     100%      { opacity: 0;
                 visibility: hidden; }
 }

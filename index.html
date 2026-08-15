@@ -33,18 +33,18 @@
     <!-- 🔹ロゴ -->
     <div class="ロゴ スライド" style="--待機: 1s;">
         <a href="#" class="効果">
-            <img src="img/logo_subtitle.webp"  class="差分 消滅" style="--待機: 20s;">
-            <img src="img/logo_onair_001.webp" class="差分 出現" style="--待機: 21s;">
+            <img src="img/logo_subtitle.webp"  class="差分 消滅" style="--待機: 50s;">
+            <img src="img/logo_onair_001.webp" class="差分 出現" style="--待機: 51s;">
             <img src="img/logo.webp" alt="宇宙よろず相談室 ロゴ">
         </a>
-        <img src="img/logo_fukidasi.webp" class="差分 出現→消滅" style="--待機: 2s; --時間: 19s; pointer-events: none;">
+        <img src="img/logo_fukidasi.webp" class="差分 出現→消滅" style="--待機: 2s; --時間: 49s; pointer-events: none;">
     </div>
 
     <!-- 🔹設定 -->
 
     <div class="設定" id="設定">
 
-        <img src="img/radio.webp" alt="ラジオ(設定)" id="📻" class="📻 出現" style="--待機: 1s;">
+        <img src="img/radio.webp" alt="ラジオ" id="📻" class="📻 出現" style="--待機: 1s;">
         <div class="極小 出現→消滅" style="--待機: 1s;">設定</div>
 
         <div class="設定💬 小字">
@@ -85,7 +85,7 @@
     <div class="宇宙レイヤー 近景"></div>
     <div class="星群"></div>
 
-    <div style="height: 10vw;"></div> <!-- トップ画像をサイズ可変のロゴに被せないために vw で縦余白を決定 -->
+    <div style="height: 12vw;"></div> <!-- トップ画像をサイズ可変のロゴに被せないために vw で縦余白を決定 -->
 
     <!-- 🔹トップ画像 -->
 
@@ -100,12 +100,12 @@
     <!-- 🔹概要文 -->
 
     <p class="先頭装飾 出現" style="--待機: 4s;">
-        この番組は、幸せを与えない。<br>
-        なぜなら、あなたが幸せの<b>中心</b>だから。
+        この番組は、喜びを与えない。<br>
+        なぜなら、あなたが喜びの<b>中心</b>だから。
     </p>
     <p class="出現" style="--待機: 5s;">
-        この番組は、誰の人生も変えない。<br>
-        なぜなら、誰もが<b>完璧</b>な配役で、何も変える必要がないから。
+        この番組は、誰の人生も良くしない。<br>
+        なぜなら、誰もが<b>完璧</b>な配役で、何も良くする必要はないから。
     </p>
     <p class="出現 改行2" style="--待機: 6s;">
         これは、天国のような充足感を未来ではなく、<b>今ここ</b>で味わうための番組である✨
@@ -139,7 +139,7 @@
         世界でも指折りの<b>形而上学博士</b> (Ph.D. in Philosophy)
         らしいが、それ以上に日本のオタク文化に沼りすぎて生活もままならない<b>社会不適合者</b>。
     </p>
-    <p class="出現 改行2 ▼">
+    <p class="出現 改行3 ▼">
         だが、その不適合ぶりを全力で<b>自愛</b>する姿は、人生を深刻にとらえて悩めるリスナーたちに安らぎをもたらしているとかいないとか。
     </p>
 
@@ -181,7 +181,7 @@
 
     <p class="星群 ▼" style="margin-top: -8.5rem;"></p>
 
-    <div style="height: 100vh;"></div>
+    <div style="height: 90vh;"></div>
 
     <!-- 🔹対話 -->
 
@@ -264,7 +264,7 @@
             <div class="💬">
                 …あれ、お気に召されない？<br>
                 ちい〇わの方がよかったですかのう…。<br>
-                それともこっち…いや、これの方が……<small>ｳﾑﾑﾑﾑ</small>
+                それともこっち…いや、これの方が…<small>ｳﾑﾑﾑﾑ</small>
             </div>
         </div>
 
@@ -280,7 +280,7 @@
     <defs>
 
         <filter id="白枠">
-            <feMorphology in="SourceAlpha" operator="dilate" radius="1" result="expanded" />
+            <feMorphology in="SourceAlpha" operator="dilate" radius="2" result="expanded" />
             <feFlood flood-color="#fff4f0" flood-opacity="1" result="color" />
             <feComposite in="color" in2="expanded" operator="in" result="outline" />
             <!-- 元の画像をその上に重ねる -->
