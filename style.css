@@ -57,6 +57,8 @@ a {
 .左寄 { text-align: left; }
 .右寄 { text-align: right; }
 
+.ブロック { display: block; }
+
 /* 🔹フォント */
 
 .明朝 { font-family: "Noto Serif JP", serif; }
@@ -65,14 +67,19 @@ b     { font-size: 1.1rem; line-height: 1; }
 
 .極小 { font-size: 0.6rem; }
 .小字 { font-size: 0.8rem; }
+.中字 { font-size: 1.0rem; }
 .大字 { font-size: 1.5rem; line-height: 1; }
 .極大 { font-size: 2.5rem; line-height: 1; }
+
+.細字 { font-weight: normal; }
+.太字 { font-weight: bold; }
 
 /* 🔹カラー */
 
 .黄 { color: yellow; }
 .金 { color: gold; }
 .橙 { color: darkorange; }
+.桃 { color: pink; }
 .銀 { color: silver; }
 .灰 { color: gray; }
 
@@ -202,6 +209,7 @@ p {
 
 .拡大 {
     scale: 0;
+    transform-origin: var(--起点, center bottom);
     animation: 拡大 var(--時間, 1s) cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards var(--待機, 0s);
 }
 @keyframes 拡大 {
@@ -209,15 +217,25 @@ p {
     100% { scale: 1; }
 }
 
-.登場右 { --方向:  1; }
-.登場左 { --方向: -1; }
-.登場右, .登場左 {
+.スライド {
     opacity: 0;
-    animation: スライドイン var(--時間, 1s) cubic-bezier(0.175, 0.885, 0.32, 1.07) forwards var(--待機, 0s);
+    animation: スライド var(--時間, 1s) cubic-bezier(0.175, 0.885, 0.32, 1.07) forwards var(--待機, 0s);
 }
-@keyframes スライドイン {
-      0% { translate: calc(var(--方向) * 100vw) 0; }
+@keyframes スライド {
+      0% { translate: calc(var(--方向, 1) * 100vw) 0; }
     100% { translate: 0 0;
+           opacity: 1; }
+}
+
+.倒れ {
+    rotate:  var(--角度, -90deg);
+    opacity: 0;
+    transform-origin: var(--起点, left bottom);
+    animation: 倒れ var(--時間, 2s) cubic-bezier(0.175, 0.885, 0.32, 1.4) forwards var(--待機, 0s);
+}
+@keyframes 倒れ {
+      0% { rotate:  var(--角度, -90deg); }
+    100% { rotate:  0deg;
            opacity: 1; }
 }
 

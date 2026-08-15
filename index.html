@@ -31,7 +31,7 @@
 <header class="ヘッダー">
 
     <!-- 🔹ロゴ -->
-    <div class="ロゴ 登場右" style="--待機: 1s;">
+    <div class="ロゴ スライド" style="--待機: 1s;">
         <a href="#" class="効果">
             <img src="img/logo_subtitle.webp"  class="差分 消滅" style="--待機: 20s;">
             <img src="img/logo_onair_001.webp" class="差分 出現" style="--待機: 21s;">
@@ -123,21 +123,41 @@
 
     <p class="効果 改行">
         <span class="黒枠 極大 出現 ▼">🎙️</span>
-        <b class="差分 黒枠 大字 橙 登場右 ▼" style="top: 0.4em;">番組パーソナリティ</b>
+        <b class="差分 黒枠 大字 橙 スライド ▼" style="top: 0.4em;">番組パーソナリティ</b>
     </p>
 
-    <div class="画像 拡大 発光 ▼">
-        <img src="pic/prof_doc_001.webp" alt="アイドルライブを楽しむドク">
+    <div class="画像 発光">
+        <div class="拡大 ▼" data-threshold="0.8">
+            <img src="pic/prof_doc_001.webp" alt="アイドルライブを楽しむドク">
+        </div>
     </div>
 
     <p class="効果 出現 ▼" style="margin-top: -1.5rem;">
         <b class="黒枠 黄"><b class="極大">D</b>r. YOU (ドクター・ユー)</b>
     </p>
     <p class="出現 ▼">
-        世界でも指折りの<b>形而上学博士</b> (Ph.D. in Philosophy) らしいが、それ以上に日本のオタク文化に沼りすぎて生活もままならない<b>社会不適合者</b>。
+        世界でも指折りの<b>形而上学博士</b> (Ph.D. in Philosophy)
+        らしいが、それ以上に日本のオタク文化に沼りすぎて生活もままならない<b>社会不適合者</b>。
+    </p>
+    <p class="出現 改行2 ▼">
+        だが、その不適合ぶりを全力で<b>自愛</b>する姿は、人生を深刻にとらえて悩めるリスナーたちに安らぎをもたらしているとかいないとか。
+    </p>
+
+    <div class="画像 発光">
+        <div class="拡大 ▼" data-threshold="0.8">
+            <img src="pic/prof_uni_001.webp" alt="買い物中のユニちゃん">
+        </div>
+    </div>
+
+    <p class="効果 出現 ▼" style="margin-top: -1.5rem;">
+        <b class="黒枠 桃"><b class="極大">ユ</b>ニちゃん社長 (ユニ・バース)</b>
+    </p>
+    <p class="出現 ▼">
+        わずか5歳にして、倒産寸前のラジオ局の跡を継いでしまった健気な幼女。<br>
+        生活能力のないドクターを拾って彼女の番組にぶっこんだ結果、運よく人気番組となった。
     </p>
     <p class="出現 改行5 ▼">
-        だが、その不適合ぶりを全力で<b>自愛</b>する姿は、人生を深刻にとらえて悩めるリスナーたちに安らぎをもたらしているとかいないとか。
+        尊大なしゃべりと舌足らずのミスマッチは、大きなお友達の支持を集めているとかいないとか。
     </p>
 
 
@@ -145,14 +165,23 @@
 
     <!-- 🔹タイトル -->
 
-    <div class="画像 拡大 発光 改行20 ▼">
-        <img src="img/kachinko.webp">
-        <p class="中央" style="max-width: 380px; width: 95%; border: 1px solid #666; border-top: 1px solid #222; border-radius: 0 0 8px 8px; padding: 1rem 1rem; background: linear-gradient(160deg, #333, black); ">
-            <b class="大字" style="display: block; margin: 1rem 0;">ON AIR #001</b>
-            <b class="大字" style="display: block; margin: 2rem 0;">いけない♥️アイドル</b>
-            <span class="極小 銀 左寄" style="display: block;">👇画面をタップすると、効果音付きのリッチコンテンツをお楽しみいただけます。変更・調整したい時は、画面右上のラジオをタップして、お好みの設定にできます。</span>
-        </p>
+    <div class="画像 発光" style="z-index: 1;">
+        <div class="倒れ ▼" data-threshold="0.7">
+            <img src="img/kachinko.webp">
+            <p class="カチンコ 中央">
+                <span class="発光">
+                    <b class="ブロック 改行2" style="margin-top: 2rem;">ON AIR #001</b>
+                    <b class="ブロック 改行2 大字">いけない♥️アイドル</b>
+                </span>
+                <span class="ブロック 左寄 極小 銀">👇画面をタップすると、効果音付きのリッチコンテンツをお楽しみいただけます。
+                変更・調整したい時は、画面右上のラジオをタップして、お好みの設定にできます。</span>
+            </p>
+        </div>
     </div>
+
+    <p class="星群 ▼" style="margin-top: -8.5rem;"></p>
+
+    <div style="height: 100vh;"></div>
 
     <!-- 🔹対話 -->
 

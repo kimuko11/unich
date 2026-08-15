@@ -314,7 +314,6 @@ function 次キャラ処理() {
         if (イベント.propertyName !== 'transform') return;
         キャラ画像.removeEventListener('transitionend', スライドイン完了);
 
-        // 💡【追加】ふきだしが100%の大きさになった瞬間に実サイズを取得してCSS変数に代入
         ふきだし.style.setProperty('--横幅', `${ふきだし.offsetWidth}px`);
         ふきだし.style.setProperty('--縦幅', `${ふきだし.offsetHeight}px`);
 
@@ -349,7 +348,7 @@ const 監視 = new IntersectionObserver((項目一覧) => {
 const ページ開始時刻 = performance.now();
 const スクロール出現最短時刻 = 8000;
 const スクロール出現閾値既定値 = 1; // data-threshold 既定値
-const スクロール出現マップ = new Map(); // 監視対象要素 → 実際に .再生 を付与する要素の配列
+const スクロール出現マップ = new Map(); // 監視対象要素 → .再生 を付与する要素の配列
 const スクロール出現監視一覧 = new Map(); // threshold値 → IntersectionObserver（同じ閾値は1つに共有）
  
 function スクロール出現実行(要素) {
@@ -385,8 +384,8 @@ function スクロール出現監視取得(閾値) {
 }
 
 document.querySelectorAll('.▼').forEach((要素) => {
-    const 横スライド系 = 要素.classList.contains('登場右') || 要素.classList.contains('登場左');
-    const 監視対象 = 横スライド系 ? 要素.parentElement : 要素;
+    const 親要素監視系 = 要素.classList.contains('スライド') || 要素.classList.contains('拡大') || 要素.classList.contains('倒れ');
+    const 監視対象 = 親要素監視系 ? 要素.parentElement : 要素;
     const 指定閾値 = parseFloat(要素.dataset.threshold);
     const 閾値 = Number.isNaN(指定閾値) ? スクロール出現閾値既定値 : 指定閾値;
     const 監視 = スクロール出現監視取得(閾値);

@@ -1,5 +1,19 @@
 @charset "UTF-8";
 
+.カチンコ {
+    padding: 1rem;
+
+    max-width: 380px;
+    width:     95%;
+
+    border:        1px solid #666;
+    border-top:    1px solid #222;
+    border-radius: 0 0 8px 8px;
+
+    background: linear-gradient(160deg, #333, black);
+}
+
+
 /* #️⃣メインコンテンツ */
 .対話全体枠 {
     max-width:       800px;  /* 大型デバイスでの最大横幅 */
