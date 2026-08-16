@@ -112,18 +112,20 @@
         この番組は、喜びを与えない。<br>
         なぜなら、あなたが喜びの<b>中心</b>だから。
     </p>
+
     <p class="出現" style="--待機: 5s;">
         この番組は、誰の人生も良くしない。<br>
         なぜなら、誰もが<b>完璧</b>な配役で、何も良くする必要はないから。
     </p>
+
     <p class="出現 改行2" style="--待機: 6s;">
-        これは、天国のような充足感を未来ではなく、<b>今ここ</b>で味わうための番組である✨
+        これは、問題の克服を目指すのではなく、「<b>これで完璧である</b>」と、真実を選び直す番組である✨
     </p>
 
     <p class="浮遊 中央 改行2">
         <span class="連動消滅">
            <span class="出現" style="--待機: 7s;">🔻<span class="極小 銀">ゆっくりと下へ画面スクロールしてください</span>🔻</span>
-    </span>
+        </span>
     </p>
 
     <!-- 🔹キャラ紹介 -->
@@ -144,10 +146,12 @@
     <p class="効果 出現 ▼" style="margin-top: -1.5rem;">
         <b class="黒枠 黄"><b class="極大">D</b>r. YOU (ドクター・ユー)</b>
     </p>
+
     <p class="出現 ▼">
         世界でも指折りの<b>形而上学博士</b> (Ph.D. in Philosophy)
         らしいが、それ以上に日本のオタク文化に沼りすぎて生活もままならない<b>社会不適合者</b>。
     </p>
+
     <p class="出現 改行3 ▼">
         だが、その不適合ぶりを全力で<b>自愛</b>する姿は、人生を深刻にとらえて悩めるリスナーたちに安らぎをもたらしているとかいないとか。
     </p>
@@ -161,13 +165,21 @@
     <p class="効果 出現 ▼" style="margin-top: -1.5rem;">
         <b class="黒枠 桃"><b class="極大">ユ</b>ニちゃん社長 (ユニ・バース)</b>
     </p>
+
     <p class="出現 ▼">
-        わずか5歳にして、倒産寸前のラジオ局の跡を継いでしまった健気な幼女。<br>
+        わずか<b>５歳</b>にして、倒産寸前のラジオ局の跡を継いでしまった健気な幼女。<br>
         生活能力のないドクターを拾って彼女の番組にぶっこんだ結果、運よく人気番組となった。
     </p>
-    <p class="出現 改行5 ▼">
+
+    <p class="出現 改行10 ▼">
         尊大なしゃべりと舌足らずのミスマッチは、大きなお友達の支持を集めているとかいないとか。
     </p>
+
+    <!-- 🔹流星 -->
+
+    <div class="画像 改行5">
+        <img src="img/ryusei.gif" class="流星大 ▼">
+    </div>
 
 
     <!-- ↔️メインコンテンツ -->
@@ -188,9 +200,13 @@
         </div>
     </div>
 
-    <p class="星群 ▼" style="margin-top: -8.5rem;"></p>
+    <p class="星群 ▼" style="margin-top: -8.5rem; margin-bottom: 70vh;"></p>
 
-    <div style="height: 90vh;"></div>
+    <!-- 🔹1画面分の空白と流星 -->
+
+    <div class="画像" style="margin-bottom: 30vh;">
+        <img src="img/ryusei.gif" class="流星大 ▼">
+    </div>
 
     <!-- 🔹対話 -->
 
@@ -300,7 +316,7 @@
         </filter>
 
         <filter id="黒枠">
-            <feMorphology in="SourceAlpha" operator="dilate" radius="1" result="expanded" />
+            <feMorphology in="SourceAlpha" operator="dilate" radius="2" result="expanded" />
             <feFlood flood-color="black" flood-opacity="1" result="color" />
             <feComposite in="color" in2="expanded" operator="in" result="outline" />
 

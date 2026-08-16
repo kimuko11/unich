@@ -63,7 +63,8 @@ a {
 
 .明朝 { font-family: "Noto Serif JP", serif; }
 
-b     { font-size: 1.1rem; line-height: 1; }
+b     { font-size: 1.1rem; line-height: 1;
+        filter: drop-shadow(0 0 10px var(--中光)); }
 
 .極小 { font-size: 0.6rem; }
 .小字 { font-size: 0.8rem; }
