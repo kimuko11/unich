@@ -16,7 +16,7 @@
     pointer-events: none;
 }
 
-/* 🔹ロゴ */
+/* 🔹ロゴと設定 */
 
 .ロゴ, .設定 {
     display:        flex;
@@ -28,14 +28,8 @@
     pointer-events: auto;
 }
 
-.ロゴ { filter: drop-shadow(0 0 5px black); }
-
-/* 🔹設定 */
-
 .📻 {
-    cursor:  pointer;
-    filter:  drop-shadow(0 0 5px black);
-
+    cursor: pointer;
     transition: scale 0.3s ease;
 }
 .設定.オープン .📻 { scale: 1.1; }

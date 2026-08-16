@@ -165,6 +165,9 @@ p {
 }
 
 .発光 { filter: drop-shadow(0 0 10px var(--中光)); }
+.陰影 { filter: drop-shadow(0 0  5px black); }
+.光影 { filter: drop-shadow(0 0 10px var(--中光))
+                drop-shadow(0 0  5px black); }
 
 .効果 { filter: url(#白枠)
                 drop-shadow(0 0 10px var(--中光));
