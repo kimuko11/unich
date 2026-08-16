@@ -43,50 +43,78 @@ setTimeout(() => { // 3秒経過で強制
 
 // 🎛️設定 (初期値)
 
-let スライダー文字速度 = 4;
-let スライダー効果音量 = 4;
+let スライダー文字サイズ = 4;
+let スライダー文字速度   = 4;
+let スライダー効果音量   = 4;
 
 // ▫️計算用の派生変数
 
-let 設定速度ms = 90 - スライダー文字速度 * 10; // 0〜90ms
-let ボイス音量 = スライダー効果音量 * 0.03;    // 0.0〜0.27
-let 効果音音量 = ボイス音量 * 0.3;
+let 設定文字サイズ = 100;
+let 設定速度ms    = 90 - スライダー文字速度 * 10; // 0〜90ms
+let ボイス音量    = スライダー効果音量 * 0.03;    // 0.0〜0.27
+let 効果音音量    = ボイス音量 * 0.3;
 
 // ▫️設定更新関数
 
 function 設定更新() {
-    設定速度ms = 90 - スライダー文字速度 * 10;
-    ボイス音量 = スライダー効果音量 * 0.03;
-    効果音音量 = ボイス音量 * 0.3;
+    設定文字サイズ = 100 + (スライダー文字サイズ - 4) * 5;
+    document.documentElement.style.fontSize = `${設定文字サイズ}%`;
+    
+    設定速度ms    = 90 - スライダー文字速度 * 10;
+    ボイス音量    = スライダー効果音量 * 0.03;
+    効果音音量    = ボイス音量 * 0.3;
 }
 
 
 // 🎛️設定スライダーとリセット（localStorage対応）
 
 document.addEventListener('DOMContentLoaded', () => {
-    const 設定         = document.getElementById('設定');
-    const ラジオ       = document.getElementById('📻');
-    const 入力_文字速度 = document.getElementById('文字速度');
-    const 入力_効果音量 = document.getElementById('効果音量');
-    const リセット      = document.getElementById('リセット');
+    const 設定           = document.getElementById('設定');
+    const ラジオ         = document.getElementById('📻');
+    const 入力_文字サイズ = document.getElementById('文字サイズ');
+    const 入力_文字速度   = document.getElementById('文字速度');
+    const 入力_効果音量   = document.getElementById('効果音量');
+    const リセット        = document.getElementById('リセット');
 
-    const 初期値_文字速度 = 4;
-    const 初期値_効果音量 = 4;
+    const 初期値_文字サイズ = 4;
+    const 初期値_文字速度   = 4;
+    const 初期値_効果音量   = 4;
 
     // ▫️ストレージ保存用のKEY名
 
-    const KEY_文字速度 = 'site_text_speed';
-    const KEY_効果音量 = 'site_se_volume';
+    const KEY_文字サイズ = 'site_text_size';
+    const KEY_文字速度   = 'site_text_speed';
+    const KEY_効果音量   = 'site_se_volume';
 
     // ▫️保存データの読み込み（無ければデフォルト値）
 
-    const 保存_文字速度 = localStorage.getItem(KEY_文字速度);
-    const 保存_効果音量 = localStorage.getItem(KEY_効果音量);
+    const 保存_文字サイズ = localStorage.getItem(KEY_文字サイズ);
+    const 保存_文字速度   = localStorage.getItem(KEY_文字速度);
+    const 保存_効果音量   = localStorage.getItem(KEY_効果音量);
 
-    スライダー文字速度 = 保存_文字速度 !== null ? parseInt(保存_文字速度, 10) : 初期値_文字速度;
-    スライダー効果音量 = 保存_効果音量 !== null ? parseInt(保存_効果音量, 10) : 初期値_効果音量;
+    スライダー文字サイズ = 保存_文字サイズ !== null ? parseInt(保存_文字サイズ, 10) : 初期値_文字サイズ;
+    スライダー文字速度   = 保存_文字速度   !== null ? parseInt(保存_文字速度, 10)   : 初期値_文字速度;
+    スライダー効果音量   = 保存_効果音量   !== null ? parseInt(保存_効果音量, 10)   : 初期値_効果音量;
 
-    // ▫️文字速度 (画面のスライダー要素と数値表示に初期値を反映)
+
+    // ▫️文字サイズ (画面のスライダー要素と数値表示に初期値を反映)
+
+    if (入力_文字サイズ) {
+        入力_文字サイズ.value = スライダー文字サイズ;
+        const 表示 = 入力_文字サイズ.nextElementSibling;
+        if (表示) 表示.textContent = スライダー文字サイズ;
+
+        入力_文字サイズ.addEventListener('input', (e) => {
+            スライダー文字サイズ = parseInt(e.target.value, 10);
+            const 表示 = e.target.nextElementSibling;
+            if (表示) 表示.textContent = e.target.value;
+            
+            localStorage.setItem(KEY_文字サイズ, スライダー文字サイズ); // 変更時にブラウザへ即時保存
+            設定更新();
+        });
+    }
+
+    // ▫️文字速度
 
     if (入力_文字速度) {
         入力_文字速度.value = スライダー文字速度;
@@ -98,12 +126,12 @@ document.addEventListener('DOMContentLoaded', () => {
             const 表示 = e.target.nextElementSibling;
             if (表示) 表示.textContent = e.target.value;
             
-            localStorage.setItem(KEY_文字速度, スライダー文字速度); // 変更時にブラウザへ即時保存
+            localStorage.setItem(KEY_文字速度, スライダー文字速度);
             設定更新();
         });
     }
 
-    // ▫️効果音量 (上記文字速度と同様)
+    // ▫️効果音量
 
     if (入力_効果音量) {
         入力_効果音量.value = スライダー効果音量;
@@ -140,8 +168,16 @@ document.addEventListener('DOMContentLoaded', () => {
     if (リセット) {
         リセット.addEventListener('click', () => {
 
-            localStorage.removeItem(KEY_文字速度); // 保存データの消去
+            localStorage.removeItem(KEY_文字サイズ); // 保存データの消去
+            localStorage.removeItem(KEY_文字速度);
             localStorage.removeItem(KEY_効果音量);
+
+            if (入力_文字サイズ) {
+                入力_文字サイズ.value = 初期値_文字サイズ; // 文字サイズのリセット
+                スライダー文字サイズ  = 初期値_文字サイズ;
+                const 表示 = 入力_文字サイズ.nextElementSibling;
+                if (表示) 表示.textContent = 初期値_文字サイズ;
+            }
 
             if (入力_文字速度) {
                 入力_文字速度.value = 初期値_文字速度; // 文字速度のリセット
