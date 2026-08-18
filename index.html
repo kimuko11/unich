@@ -12,11 +12,11 @@
     <link rel="stylesheet" href="top.css">
     <link rel="stylesheet" href="main.css">
     <link rel="stylesheet" href="anime.css">
-
+<!--
     <link rel="preconnect" href="https://googleapis.com">
     <link rel="preconnect" href="https://gstatic.com" crossorigin>
     <link href="https://googleapis.com/css2?family=Noto+Serif+JP:wght@900&display=swap" rel="stylesheet">
-
+-->
     <script src="script.js" defer></script>
 </head>
 <body>
@@ -177,9 +177,7 @@
 
     <!-- 🔹流星 -->
 
-    <div class="画像 改行5">
-        <img src="img/ryusei.gif" class="流星大 ▼">
-    </div>
+
 
 
     <!-- ↔️メインコンテンツ -->
@@ -202,9 +200,7 @@
 
     <!-- 🔹1画面分の空白と流星 -->
 
-    <div class="画像" style="margin-bottom: 30vh;">
-        <img src="img/ryusei.gif" class="流星大 ▼">
-    </div>
+
 
     <!-- 🔹対話 -->
 
@@ -274,7 +270,7 @@
                 <img src="cha/uf_sizukana-ikari.webp">
                 <img src="cha/uf_sizukana-ikari_kekkan.webp" class="差分 高速伸縮">
             </div>
-            <div class="💬 無声 高速" data-wait="50">
+            <div class="💬 無声 高速" data-wait="40">
                 <b>……………</b>💢
             </div>
         </div>
@@ -303,7 +299,7 @@
     <defs>
 
         <filter id="白枠">
-            <feMorphology in="SourceAlpha" operator="dilate" radius="2" result="expanded" />
+            <feMorphology in="SourceAlpha" operator="dilate" radius="1" result="expanded" />
             <feFlood flood-color="#fff4f0" flood-opacity="1" result="color" />
             <feComposite in="color" in2="expanded" operator="in" result="outline" />
             <!-- 元の画像をその上に重ねる -->

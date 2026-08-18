@@ -84,7 +84,7 @@
     animation: 驚き汗 1s ease forwards paused;
 }
 @keyframes 驚き汗 {
-      0% { opacity: 0.0; scale: 0.5; }
+      0% { opacity: 0.001; scale: 0.5; }
      40% { opacity: 1.0; scale: 1.2; }
     100% { opacity: 1.0; scale: 1.0; }
 }

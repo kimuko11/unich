@@ -2,7 +2,7 @@
 
 /* #️⃣トップ画像 */
 .放送中 {
-    opacity: 0;
+    opacity: 0.001;
     animation: 落下 1s ease-out forwards 2s;
 }
 @keyframes 落下 {
@@ -44,5 +44,5 @@
 .放送灯   { filter: drop-shadow(0 0 5px red); }
 .オンエア { filter: drop-shadow(0 0 2px var(--強光)); }
 
-.▼ { animation-play-state: paused; }
+.▼     { animation-play-state: paused; }
 .▼.再生 { animation-play-state: running; }

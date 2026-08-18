@@ -63,8 +63,7 @@ a {
 
 .明朝 { font-family: "Noto Serif JP", serif; }
 
-b     { font-size: 1.1rem; line-height: 1;
-        filter: drop-shadow(0 0 10px var(--中光)); }
+b     { font-size: 1.1rem; line-height: 1; }
 
 .極小 { font-size: 0.6rem; }
 .小字 { font-size: 0.8rem; }
@@ -181,11 +180,11 @@ p {
 /* 🔹汎用アニメ */
 
 .出現 {
-    opacity: 0;
+    opacity: 0.001;
     animation: 出現 var(--時間, 1s) linear forwards var(--待機, 0s);
 }
 @keyframes 出現 {
-      0% { opacity: 0; }
+      0% { opacity: 0.001; }
     100% { opacity: 1; }
 }
 
@@ -201,39 +200,39 @@ p {
 }
 
 .出現→消滅 {
-    opacity: 0;
+    opacity: 0.001;
     animation: 出現→消滅 var(--時間, 50s) linear forwards var(--待機, 0s);
 }
 @keyframes 出現→消滅 {
-      0%      { opacity: 0; }
+      0%      { opacity: 0.001; }
       2%, 98% { opacity: 1; }
     100%      { opacity: 0;
                 visibility: hidden; }
 }
 
 .拡大 {
-    scale: 0;
+    scale: 0.001;
     transform-origin: var(--起点, center bottom);
     animation: 拡大 var(--時間, 1s) cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards var(--待機, 0s);
 }
 @keyframes 拡大 {
-      0% { scale: 0; }
+      0% { scale: 0.001; }
     100% { scale: 1; }
 }
 
 .スライド {
-    opacity: 0;
+    opacity: 0.001;
     animation: スライド var(--時間, 1s) cubic-bezier(0.175, 0.885, 0.32, 1.07) forwards var(--待機, 0s);
 }
 @keyframes スライド {
-      0% { translate: calc(var(--方向, 1) * 100vw) 0; }
+      0% { translate: calc(var(--方向, 1) * 99vw) 0; }
     100% { translate: 0 0;
            opacity: 1; }
 }
 
 .倒れ {
     rotate:  var(--角度, -90deg);
-    opacity: 0;
+    opacity: 0.001;
     transform-origin: var(--起点, left bottom);
     animation: 倒れ var(--時間, 2s) cubic-bezier(0.175, 0.885, 0.32, 1.4) forwards var(--待機, 0s);
 }

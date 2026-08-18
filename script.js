@@ -4,7 +4,7 @@ const 読み込みリスト = [
     'img/ucyu_enkei.webp',
     'img/ucyu_cyukei.webp',
     'img/ucyu_kinkei.webp',
-    'img/ucyu_seigun.webp',
+    'img/seigun.webp',
     'img/logo.webp',
     'img/logo_subtitle.webp',
     'img/logo_fukidasi.webp',
@@ -242,7 +242,8 @@ function スクロール出現監視取得(閾値) {
 }
 
 document.querySelectorAll('.▼').forEach((要素) => {
-    const 親要素監視系 = 要素.classList.contains('スライド') || 要素.classList.contains('拡大') || 要素.classList.contains('倒れ');
+    const 親要素監視系 = 要素.classList.contains('スライド') || 要素.classList.contains('拡大')
+                     || 要素.classList.contains('倒れ') || 要素.classList.contains('流星大');
     const 監視対象    = 親要素監視系 ? 要素.parentElement : 要素;
     const 指定閾値    = parseFloat(要素.dataset.threshold);
     const 閾値        = Number.isNaN(指定閾値) ? スクロール出現閾値既定値 : 指定閾値;

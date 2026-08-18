@@ -159,13 +159,14 @@
 }
 
 .流星大 {
-    opacity: 0;
+    opacity: 0.001;
+    visibility: hidden;
     animation: 流星大 1.4s linear forwards 1s;
 }
 @keyframes 流星大 {
-      0% { opacity: 0; translate: 200px -300px; }
+      0% { opacity: 0.001; translate: 200px -300px; visibility: visible; }
      70% { opacity: 1; }
-    100% { opacity: 0; translate: -200px 100px; }
+    100% { opacity: 0; translate: -200px 100px; visibility: hidden; }
 }
 
 
@@ -175,7 +176,7 @@
     margin-bottom:    -50px;
     height:           55px;
     background-image: url('img/seigun.webp');
-    opacity: 0;
+    opacity: 0.001;
 
     animation: 出現 var(--時間, 1s) linear forwards var(--待機, 0s),
                近景・瞬き 2s ease-in-out infinite alternate calc(var(--待機, 0s) + var(--時間, 1s));

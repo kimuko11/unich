@@ -88,7 +88,7 @@
     /* 出現前の位置 */
     transform: translateX(calc(var(--出現方向) * 150%)); /* JSのスライドイン完了検知専用として、身体アニメと干渉しない transform を使用 */
     scale:     var(--キャラ反転) 1;
-    opacity:   0;
+    opacity:   0.001;
 
     /* 出現の仕方 */
     transition: transform 1s cubic-bezier(0.34, 1.56, 0.64, 1),
@@ -106,15 +106,15 @@
 /* 🔹枠と文字のメインレイヤー (背景なし) */
 
 .💬 {
-    margin-left:      var(--左余白);
-    margin-right:     var(--右余白);
-    transform-origin: var(--起点);
+    margin-left:      var(--左余白, auto);
+    margin-right:     var(--右余白, auto);
+    transform-origin: var(--起点,   top center);
 
     word-break:       break-all; /* 右端で強制改行 */
     position:         relative;  /* 疑似要素の位置指定のため */
 
     /* 出現前 */
-    scale: 0;
+    scale: 0.001;
 
     /* 出現の仕方 */
     transition: scale 1s cubic-bezier(0.68, 0, 0.27, 1.55) 1s;
@@ -131,14 +131,14 @@
     content:  '';
     position: absolute;
     inset:    0;
-    z-index: -1; /* 文字の後ろに配置 */
+    z-index:  -1; /* 文字の後ろに配置 */
 
-    background-color: var(--色, var(--標準色));
-    border: 1px solid var(--中光);
+    background-color: var(--色, var(--標準色, gray));
+    border: 1px solid var(--中光, seashell);
     border-radius:    40px;
     backdrop-filter:  blur(3px);
-    box-shadow: 0    0 20px var(--弱光),        /* 後光 */
-          inset 0  2px 10px var(--弱光),        /* 光沢 */
+    box-shadow: 0    0 20px var(--弱光, seashell),        /* 後光 */
+          inset 0  2px 10px var(--弱光, seashell),        /* 光沢 */
           inset 0 -2px 20px rgb(0 0 0 / 50%); /* 影 */
 
     transform-origin: top center;
@@ -157,8 +157,8 @@
 @keyframes ふわふわ {
     0% { scale: 1; }
   100% { scale:
-            calc((var(--横幅, 300px) + var(--拡縮幅)) / var(--横幅, 300px))
-            calc((var(--縦幅, 100px) + var(--拡縮幅)) / var(--縦幅, 100px)); }
+            calc((var(--横幅, 300px) + var(--拡縮幅, 2px)) / var(--横幅, 300px))
+            calc((var(--縦幅, 100px) + var(--拡縮幅, 2px)) / var(--縦幅, 100px)); }
 }
 
 /* 🔹ふきだしのしっぽ */
@@ -215,7 +215,7 @@
 /* #️⃣文字送り（1文字ずつフェードイン） */
 
 .文字 {
-    opacity: 0;
+    opacity: 0.001;
     transition: opacity 0.15s ease-out;
 }
 .文字.表示済 { opacity: 1; }
