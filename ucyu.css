@@ -2,29 +2,7 @@
 
 /* #️⃣ローディング・マスク */
 
-#暗幕 {
-    position: fixed;
-    top:  0;
-    left: 0;
 
-    width:  100vw;
-    height: 100vh;
-
-    background-color: black;
-    z-index: 999;
-
-    visibility: visible;
-    opacity:    1;
-
-    transition: opacity    2s ease,
-                visibility 2s ease;
-}
-#暗幕.読み込み完了 {
-    opacity:    0;
-    visibility: hidden;
-
-    pointer-events: none;
-}
 
 
 /* #️⃣宇宙視差背景 */

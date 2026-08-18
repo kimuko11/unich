@@ -1,44 +1,6 @@
 // 🎛️ローディング・マスク
 
-const 読み込みリスト = [
-    'img/ucyu_enkei.webp',
-    'img/ucyu_cyukei.webp',
-    'img/ucyu_kinkei.webp',
-    'img/seigun.webp',
-    'img/logo.webp',
-    'img/logo_subtitle.webp',
-    'img/logo_fukidasi.webp',
-    'img/radio.webp',
-    'pic/hosocyu_yuka.webp',
-    'pic/hosocyu_ucyu-yoro.webp',
-    'pic/hosocyu.webp',
-    'pic/hosocyu_hosoto.webp',
-    'pic/hosocyu_onair.webp'
-];
 
-function ページオープン() {
-    const 暗幕 = document.getElementById('暗幕');
-  
-    if (暗幕 && !暗幕.classList.contains('読み込み完了')) {
-        暗幕.classList.add('読み込み完了');
-    }
-}
-
-function プリロード(対象URL) {
-    return new Promise((成功) => {
-        const 画像   = new Image();
-        画像.src     = 対象URL;
-        画像.onload  = 成功;
-        画像.onerror = 成功; // エラーでも
-    });
-}
-
-Promise.all(読み込みリスト.map(プリロード)).then(() => {
-    ページオープン();
-});
-setTimeout(() => { // 3秒経過で強制
-    ページオープン();
-}, 3000);
 
 
 // 🎛️設定 (初期値)
