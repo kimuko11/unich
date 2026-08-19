@@ -82,7 +82,7 @@
     position:      relative;             /* 差分を重ねるため */
     z-index:       1;
     
-    filter: url(#白枠) drop-shadow(0 0 10px var(--中光, #888));
+    filter: drop-shadow(0 0 10px var(--中光, #888));
 
     /* 出現前の位置 */
     transform: translateX(calc(var(--出現方向, 1) * 120%)); /* JSのスライドイン完了検知専用として、身体アニメと干渉しない transform を使用 */
