@@ -29,7 +29,7 @@
 }
 
 .📻 {
-    cursor: pointer;
+    cursor:     pointer;
     transition: scale 0.3s ease;
 }
 .設定.オープン .📻 { scale: 1.1; }
@@ -41,13 +41,13 @@
 
     width: 250px;
 
-    background-color: var(--標準色);
-    border: 1px solid var(--中光);
+    background-color: var(--標準色, #777);
+    border: 1px solid var(--中光,   #888);
     border-radius:    30px;
 
     backdrop-filter:  blur(4px);
     box-shadow:       0  2px 20px black,             /* 背景の影 */
-                inset 0  2px 10px var(--弱光),         /* 光沢 */
+                inset 0  2px 10px var(--弱光, #888), /* 光沢 */
                 inset 0 -2px 20px rgb(0 0 0 / 50%); /* 影 */
 
     transform-origin: top right;
@@ -64,6 +64,7 @@
     scale:      1;
     opacity:    1;
     visibility: visible;
+    animation:  none;
 }
 
 .設定💬::before { /* ふきだしのしっぽ */
@@ -74,7 +75,7 @@
 
     border-width: 0 1px 6px 3px;
     border-style: solid;
-    border-color: transparent transparent var(--中光) transparent;
+    border-color: transparent transparent var(--中光, #888) transparent;
 }
 
 .設定項目 {
@@ -106,7 +107,7 @@
     padding:   4px 8px;
     translate: -50%;
 
-    border:        1px solid var(--中光);
+    border:        1px solid var(--中光, #888);
     border-radius: 6px;
 
     background-color:     #555;
@@ -118,6 +119,7 @@
     /* フェード設定 */
     opacity:    0;
     visibility: hidden;
+    animation:  none;
 
     transition: opacity    0.2s ease,
                 visibility 0.2s ease;
@@ -125,6 +127,7 @@
 .スライダー:hover .スライダー数値, .スライダー input[type="range"]:focus + .スライダー数値 { /* フォーカス時 */
     opacity:    1;
     visibility: visible;
+    animation:  none;
 }
 
 .リセット {
@@ -133,12 +136,14 @@
     margin:  30px auto 0;
     padding: 4px 8px;
 
-    border:        1px solid var(--中光);
+    border:        1px solid var(--中光, #888);
     border-radius: 6px;
 
-    color:  var(--中光);
+    color:  var(--中光, #888);
     cursor: pointer;
 
     transition: all 0.2s ease;
 }
-.リセット:hover { color: var(--強光); }
+.リセット:hover { color:     var(--強光, seashell);
+                 animation: none;
+}

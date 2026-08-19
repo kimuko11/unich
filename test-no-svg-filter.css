@@ -1,6 +1,0 @@
-/* 🧪 検証用: SVGフィルターを一時的に無効化するテストCSS */
-/* index.html の </head> 直前などに <link rel="stylesheet" href="test-no-svg-filter.css"> を一時追加してください */
-
-.白枠, .黒枠, .効果, .キャラ画像 {
-    filter: none !important;
-}

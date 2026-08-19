@@ -2,7 +2,27 @@
 
 /* #️⃣ローディング・マスク */
 
+#暗幕 {
+    position: fixed;
+    top:      0;
+    left:     0;
 
+    width:  100vw;
+    height: 100vh;
+
+    background-color: black;
+    z-index: 999;
+
+    transition: opacity    2s ease,
+                visibility 2s ease;
+}
+#暗幕.読み込み完了 {
+    opacity:    0;
+    animation:  none;
+    visibility: hidden;
+
+    pointer-events: none;
+}
 
 
 /* #️⃣宇宙視差背景 */
@@ -15,8 +35,8 @@
 
 .宇宙レイヤー {
     position: fixed; /* scroll(root)と同期させるため固定 */
-    top:      0;
-    left:     0;
+    top:  0;
+    left: 0;
 
     width:  100%;
     height: 150vh; /* ⚠️スクロールしてズレる余白 (--視差速度によっては変更が必要) */
@@ -53,15 +73,15 @@
 
 @keyframes 遠景・動き {
     from { translate: 0 0; }
-    to   { translate: 0 var(--視差速度); } /* 低速 */
+    to   { translate: 0 var(--視差速度, -100px); } /* 低速 */
 }
 @keyframes 中景・動き {
     from { translate: 0 0; }
-    to   { translate: 0 calc(var(--視差速度) * 3); } /* 中速 */
+    to   { translate: 0 calc(var(--視差速度, -100px) * 3); } /* 中速 */
 }
 @keyframes 近景・動き {
     from { translate: 0 0; }
-    to   { translate: 0 calc(var(--視差速度) * 9); } /* 高速 */
+    to   { translate: 0 calc(var(--視差速度, -100px) * 9); } /* 高速 */
 }
 
 @keyframes 中景・瞬き {
@@ -83,8 +103,8 @@
     width:      100px; /* 長さ */
     height:     1px;   /* 太さ */
 
-    background: linear-gradient(-45deg, rgb(0 0 0 / 0), var(--強光));
-    filter:     drop-shadow(0 0 6px var(--強光));
+    background: linear-gradient(-45deg, rgb(0 0 0 / 0), var(--強光, seashell));
+    filter:     drop-shadow(0 0 6px var(--強光, seashell));
     opacity:    0;
 
     animation:  流星 1s linear; /* JSで起動 */
@@ -92,7 +112,7 @@
 
 .流星.反転 {
     animation-name: 流星反転;
-    background: linear-gradient(45deg, rgb(0 0 0 / 0), var(--中光));
+    background: linear-gradient(45deg, rgb(0 0 0 / 0), var(--中光, #888));
 }
 
 @keyframes 流星 {
@@ -109,10 +129,12 @@
         rotate:   -45deg;
     }
     100% {
-        opacity:   0;
-        translate:-300px 300px;
-        scale:     1 1;
-        rotate:   -45deg;
+        opacity:    0;
+        translate:  -300px 300px;
+        scale:      1 1;
+        rotate:     -45deg;
+        animation:  none;
+        visibility: hidden;
     }
 }
 @keyframes 流星反転 {
@@ -129,22 +151,29 @@
         rotate:    45deg;
     }
     100% {
-        opacity:   0;
-        translate: 300px 300px;
-        scale:     1 1;
-        rotate:    45deg;
+        opacity:    0;
+        translate:  300px 300px;
+        scale:      1 1;
+        rotate:     45deg;
+        animation:  none;
+        visibility: hidden;
     }
 }
 
 .流星大 {
     opacity: 0.001;
-    visibility: hidden;
-    animation: 流星大 1.4s linear forwards 1s;
+    animation: 流星大 1.3s linear forwards 1s;
 }
 @keyframes 流星大 {
-      0% { opacity: 0.001; translate: 200px -300px; visibility: visible; }
-     70% { opacity: 1; }
-    100% { opacity: 0; translate: -200px 100px; visibility: hidden; }
+      0% { opacity:    0.001;
+           translate:  200px -300px;
+    }
+     70% { opacity:    1; }
+    100% { opacity:    0;
+           translate:  -200px 100px;
+           animation:  none;
+           visibility: hidden;
+    }
 }
 
 
@@ -154,9 +183,8 @@
     margin-bottom:    -50px;
     height:           55px;
     background-image: url('img/seigun.webp');
-    opacity: 0.001;
+    opacity:          0.001;
 
     animation: 出現 var(--時間, 1s) linear forwards var(--待機, 0s),
                近景・瞬き 2s ease-in-out infinite alternate calc(var(--待機, 0s) + var(--時間, 1s));
 }
-

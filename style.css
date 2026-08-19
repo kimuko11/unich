@@ -22,7 +22,7 @@ body {
     font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif; /* 視認性の高い基本フォント */
     font-size:   1rem;
     line-height: 1.5;
-    color:     #fff4f0;
+    color:     seashell; /* fff5ee, rgb(255 245 238) */
 
     overflow-x: hidden; /* 画面のはみ出し防止 */
     -webkit-font-smoothing: antialiased; /* 文字を滑らかに */
@@ -63,7 +63,11 @@ a {
 
 .明朝 { font-family: "Noto Serif JP", serif; }
 
-b     { font-size: 1.1rem; line-height: 1; }
+b {
+    font-size:   1.1rem;
+    line-height: 1;
+    filter:      drop-shadow(0 0 10px var(--中光, #888));
+}
 
 .極小 { font-size: 0.6rem; }
 .小字 { font-size: 0.8rem; }
@@ -76,6 +80,7 @@ b     { font-size: 1.1rem; line-height: 1; }
 
 /* 🔹カラー */
 
+.白 { color: seashell; }
 .黄 { color: yellow; }
 .金 { color: gold; }
 .橙 { color: darkorange; }
@@ -84,10 +89,10 @@ b     { font-size: 1.1rem; line-height: 1; }
 .灰 { color: gray; }
 
 * {
-    --弱光:   rgb(255 244 240 / 25%);
-    --中光:   rgb(255 244 240 / 50%);
-    --強光:   rgb(255 244 240);
-    --標準色: rgb(100 100 100 / 50%); /* ふきだし背景 */
+    --弱光:   rgb(255 245 238 / 25%); /* #888 */
+    --中光:   rgb(255 245 238 / 50%); /* #888 */
+    --強光:   rgb(255 245 238);       /* seashell */
+    --標準色: rgb(100 100 100 / 50%); /* #777 (ふきだし背景) */
 }
 
 /* 🔹文字装飾 */
@@ -102,10 +107,10 @@ b     { font-size: 1.1rem; line-height: 1; }
     font-size:        2.5rem;
     font-weight:      bold;
     line-height:      1;
-    color:            var(--強光);
+    color:            var(--強光, seashell);
 
     box-shadow:  0 0 10px red;
-    text-shadow: 0 0 5px var(--強光);
+    text-shadow: 0 0 5px var(--強光, seashell);
 }
 
 /* 🔹文字枠, ふきだし */
@@ -125,7 +130,6 @@ p {
 
     margin:  0 auto;
     padding: 0 1rem 1rem 1rem;
-
     max-width: 600px; /* 最大横幅 600px */
 }
 
@@ -139,7 +143,6 @@ p {
     align-items:    center;
 
     margin: 0 auto;
-
     max-width: 75%; /* 最大横幅 400px (画像サイズは最大400pxで書き出しているから) */
 }
 
@@ -160,17 +163,15 @@ p {
 
 .白枠 { filter: url(#白枠); }
 .黒枠 { filter: url(#黒枠);
-        text-shadow: none;
-}
+        text-shadow: none; }
 
-.発光 { filter: drop-shadow(0 0 10px var(--中光)); }
+.発光 { filter: drop-shadow(0 0 10px var(--中光, #888)); }
 .陰影 { filter: drop-shadow(0 0  5px black); }
-.光影 { filter: drop-shadow(0 0 10px var(--中光))
+.光影 { filter: drop-shadow(0 0 10px var(--中光, #888))
                 drop-shadow(0 0  5px black); }
 
 .効果 { filter: url(#白枠)
-                drop-shadow(0 0 10px var(--中光));
-}
+                drop-shadow(0 0 10px var(--中光, #888)); }
 
 /* 🔹差分用 absolute ( class="差分 ◯◯◯" ) */
 
@@ -184,8 +185,9 @@ p {
     animation: 出現 var(--時間, 1s) linear forwards var(--待機, 0s);
 }
 @keyframes 出現 {
-      0% { opacity: 0.001; }
-    100% { opacity: 1; }
+      0% { opacity:   0.001; }
+    100% { opacity:   1;
+           animation: none; }
 }
 
 .消滅 { animation: 消滅 var(--時間, 1s) linear forwards var(--待機, 0s);
@@ -195,8 +197,10 @@ p {
     animation-timeline: view();
 }
 @keyframes 消滅 {
-      0% { opacity: 1; }
-    100% { opacity: 0; }
+      0% { opacity:    auto; }
+    100% { opacity:    0;
+           animation:  none;
+           visibility: hidden;}
 }
 
 .出現→消滅 {
@@ -204,9 +208,10 @@ p {
     animation: 出現→消滅 var(--時間, 50s) linear forwards var(--待機, 0s);
 }
 @keyframes 出現→消滅 {
-      0%      { opacity: 0.001; }
-      2%, 98% { opacity: 1; }
-    100%      { opacity: 0;
+      0%      { opacity:    0.001; }
+      2%, 98% { opacity:    1; }
+    100%      { opacity:    0;
+                animation:  none;
                 visibility: hidden; }
 }
 
@@ -216,8 +221,9 @@ p {
     animation: 拡大 var(--時間, 1s) cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards var(--待機, 0s);
 }
 @keyframes 拡大 {
-      0% { scale: 0.001; }
-    100% { scale: 1; }
+      0% { scale:     0.001; }
+    100% { scale:     1;
+           animation: none; }
 }
 
 .スライド {
@@ -227,7 +233,8 @@ p {
 @keyframes スライド {
       0% { translate: calc(var(--方向, 1) * 99vw) 0; }
     100% { translate: 0 0;
-           opacity: 1; }
+           opacity:   1;
+           animation: none; }
 }
 
 .倒れ {
@@ -237,9 +244,10 @@ p {
     animation: 倒れ var(--時間, 2s) cubic-bezier(0.175, 0.885, 0.32, 1.4) forwards var(--待機, 0s);
 }
 @keyframes 倒れ {
-      0% { rotate:  var(--角度, -90deg); }
-    100% { rotate:  0deg;
-           opacity: 1; }
+      0% { rotate:    var(--角度, -90deg); }
+    100% { rotate:    0deg;
+           opacity:   1;
+           animation: none; }
 }
 
 .浮遊 {

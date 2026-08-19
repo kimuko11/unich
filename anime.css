@@ -16,8 +16,8 @@
     animation: 縦伸縮 0.5s infinite ease-in-out alternate paused;
 }
 @keyframes 縦伸縮 {
-    0%, 100% { scale: var(--キャラ反転) 1.00; }
-    50%      { scale: var(--キャラ反転) 1.05; }
+    0%, 100% { scale: var(--キャラ反転, 1) 1.00; }
+    50%      { scale: var(--キャラ反転, 1) 1.05; }
 }
 
 .横揺れ {
@@ -43,8 +43,8 @@
                縦伸縮 0.5s infinite ease-in-out alternate 1s paused;
 }
 @keyframes 驚き {
-    0%, 100% { scale:      var(--キャラ反転)        1.0; }
-    40%      { scale: calc(var(--キャラ反転) * 1.2) 1.2; }
+    0%, 100% { scale:      var(--キャラ反転, 1)        1.0; }
+    40%      { scale: calc(var(--キャラ反転, 1) * 1.2) 1.2; }
 }
 
 .震え {
@@ -84,9 +84,13 @@
     animation: 驚き汗 1s ease forwards paused;
 }
 @keyframes 驚き汗 {
-      0% { opacity: 0.001; scale: 0.5; }
-     40% { opacity: 1.0; scale: 1.2; }
-    100% { opacity: 1.0; scale: 1.0; }
+      0% { opacity:   0.001;
+           scale:     0.5; }
+     40% { opacity:   1.0;
+           scale:     1.2; }
+    100% { opacity:   1.0;
+           scale:     1.0;
+           animation: none; }
 }
 
 .驚き目→目パチ {

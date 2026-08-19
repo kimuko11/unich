@@ -28,8 +28,9 @@
         animation-timing-function: ease-in;
     }
     100% {
-        opacity: 1;
+        opacity:   1;
         translate: 0 0;
+        animation: none;
     }
 }
 
@@ -42,7 +43,7 @@
   100% { filter: drop-shadow(0 0 2px #FF0055) hue-rotate(360deg); }
 }
 .放送灯   { filter: drop-shadow(0 0 5px red); }
-.オンエア { filter: drop-shadow(0 0 2px var(--強光)); }
+.オンエア { filter: drop-shadow(0 0 2px var(--強光, seashell)); }
 
 .▼     { animation-play-state: paused; }
 .▼.再生 { animation-play-state: running; }
