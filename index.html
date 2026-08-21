@@ -31,46 +31,70 @@
 <header class="ヘッダー">
 
     <!-- 🔹ロゴ -->
-    <div class="ロゴ 光影 スライド" style="--待機: 1s;">
-        <a href="#" class="白枠">
-            <img src="img/logo_subtitle.webp"  class="差分 消滅" style="--待機: 50s;">
-            <img src="img/logo_onair_001.webp" class="差分 出現" style="--待機: 51s;">
+
+    <div class="ロゴ 発光 スライド" style="--待機: 1s;">
+        <a href="#">
+            <img src="img/logo_subtitle.webp"  class="差分 消滅" style="--待機: 10s;">
+            <img src="img/logo_onair_001.webp" class="差分 出現" style="--待機: 11s;">
             <img src="img/logo.webp" alt="宇宙よろず相談室 ロゴ">
         </a>
-        <img src="img/logo_fukidasi.webp" class="差分 出現→消滅" style="--待機: 2s; --時間: 49s; pointer-events: none;">
+        <img src="img/logo_fukidasi.webp" class="差分 出現→消滅" style="--待機: 2s; --時間: 9s; pointer-events: none;">
     </div>
 
     <!-- 🔹設定 -->
 
     <div class="設定" id="設定">
-
-        <span class="光影"><img src="img/radio.webp" alt="ラジオ" id="📻" class="📻 出現" style="--待機: 1s;"></span>
-        <div class="極小 出現→消滅" style="--待機: 1s;">設定</div>
+        <img src="img/radio.webp" alt="ラジオ" id="📻" class="📻 発光 出現" style="--待機: 1s;">
+        <div class="極小 出現→消滅" style="--待機: 1s; margin: -20px 18px 0 0;">設定</div>
 
         <div class="設定💬 小字">
 
             <div class="設定項目">
                 文字サイズ
-                <div class="スライダー">
+                <label class="スライダー">
                     小<input type="range" id="文字サイズ" max="9" min="0" value="4">大
                     <span class="スライダー数値">4</span>
-                </div>
+                </label>
             </div>
 
             <div class="設定項目">
                 文字速度
-                <div class="スライダー">
+                <dlabel class="スライダー">
                     遅<input type="range" id="文字速度" max="9" min="0" value="4">速
                     <span class="スライダー数値">4</span>
-                </div>
+                </label>
             </div>
             
             <div class="設定項目">
                 効果音量
-                <div class="スライダー">
+                <label class="スライダー">
                     小<input type="range" id="効果音量" max="9" min="0" value="4">大
                     <span class="スライダー数値">4</span>
-                </div>
+                </label>
+            </div>
+
+            <div class="設定項目">
+                光の効果
+                <label class="スイッチ">
+                    <input type="checkbox" id="光の効果" checked>
+                    <span class="スイッチ背景"></span>
+                </label>
+            </div>
+
+            <div class="設定項目">
+                登場アニメ
+                <label class="スイッチ">
+                    <input type="checkbox" id="登場アニメ" checked>
+                    <span class="スイッチ背景"></span>
+                </label>
+            </div>
+
+            <div class="設定項目">
+                表情アニメ
+                <label class="スイッチ">
+                    <input type="checkbox" id="表情アニメ" checked>
+                    <span class="スイッチ背景"></span>
+                </label>
             </div>
 
             <button type="button" id="リセット" class="リセット 極小">初期値に戻す</button>
@@ -94,7 +118,7 @@
     <div class="宇宙レイヤー 近景"></div>
     <div class="星群"></div>
 
-    <div style="height: 12vw;"></div> <!-- トップ画像をサイズ可変のロゴに被せないために vw で縦余白を決定 -->
+    <div style="height: 13vw;"></div> <!-- トップ画像をサイズ可変のロゴに被せないために vw で縦余白を決定 -->
 
     <!-- 🔹トップ画像 -->
 
@@ -103,7 +127,7 @@
         <img src="pic/hosocyu_ucyu-yoro.webp" class="差分 ネオン">
         <img src="pic/hosocyu_hosoto.webp"    class="差分 放送灯 出現"  style="--待機: 3s;">
         <img src="pic/hosocyu_onair.webp"     class="差分 オンエア 出現" style="--待機: 3s;">
-        <img src="pic/hosocyu.webp"           class="差分 放送中 効果"  alt="ドクとユニちゃん">
+        <img src="pic/hosocyu.webp"           class="差分 放送中 発光"  alt="ドクとユニちゃん">
     </div>
 
     <!-- 🔹概要文 -->
@@ -119,7 +143,7 @@
     </p>
 
     <p class="出現 改行2" style="--待機: 6s;">
-        これは、問題の克服を目指すのではなく、「最初から問題はなかった」と、あなたの<b>前提</b>を切り替える番組である✨
+        これは、問題の克服を目指すのではなく、「最初から問題はなかった」と、<b>前提</b>を切り替える番組である✨
     </p>
 
     <p class="浮遊 中央 改行2">
@@ -132,9 +156,9 @@
 
     <p class="星群 ▼"></p>
 
-    <p class="効果 改行">
+    <p class="白枠 改行">
         <span class="黒枠 極大 出現 ▼">🎙️</span>
-        <b class="差分 黒枠 大字 橙 スライド ▼" style="top: 0.4em;">番組パーソナリティ</b>
+        <span class="差分 黒枠 大字 太字 橙 スライド ▼" style="top: 0.4em;">番組パーソナリティ</span>
     </p>
 
     <div class="画像 発光">
@@ -143,8 +167,8 @@
         </div>
     </div>
 
-    <p class="効果 出現 ▼" style="margin-top: -1.5rem;">
-        <b class="黒枠 黄"><span class="極大">D</span>r. YOU (ドクター・ユー)</b>
+    <p class="白枠 出現 ▼" style="margin-top: -1.75rem;">
+        <em class="黒枠 黄"><span class="極大">D</span>r. YOU (ドクター・ユー)</em>
     </p>
 
     <p class="出現 ▼">
@@ -162,8 +186,8 @@
         </div>
     </div>
 
-    <p class="効果 出現 ▼" style="margin-top: -1.5rem;">
-        <b class="黒枠 桃"><span class="極大">ユ</span>ニちゃん社長 (ユニ・バース)</b>
+    <p class="白枠 出現 ▼" style="margin-top: -1.75rem;">
+        <em class="黒枠 桃"><span class="極大">ユ</span>ニちゃん社長 (ユニ・バース)</em>
     </p>
 
     <p class="出現 ▼">
@@ -178,7 +202,7 @@
     <!-- 🔹流星 -->
 
     <div class="画像 改行5">
-        <img src="img/ryusei.gif" class="流星大 ▼">
+        <img src="img/ryusei.webp" class="流星大 ▼">
     </div>
 
 
@@ -203,7 +227,7 @@
     <!-- 🔹1画面分の空白と流星 -->
 
     <div class="画像" style="margin-bottom: 30vh;">
-        <img src="img/ryusei.gif" class="流星大 ▼">
+        <img src="img/ryusei.webp" class="流星大 ▼">
     </div>
 
     <!-- 🔹対話 -->
@@ -218,10 +242,10 @@
 
         <div class="🐰">
             <div class="キャラ画像 横揺れ">
-                <img src="cha/ut_genkina-aisatu.webp" class="陰影">
+                <img src="cha/ut_genkina-aisatu.webp">
                 <img src="cha/ut_genkina-aisatu_kuchi.webp" class="差分 口パク">
                 <img src="cha/ut_genkina-aisatu_heart.webp" class="差分 ハート">
-                <img src="cha/ut_genkina-aisatu_ude.webp"   class="差分 腕振り 陰影">
+                <img src="cha/ut_genkina-aisatu_ude.webp"   class="差分 腕振り">
             </div>
             <div class="💬 中速">
                 人類の起源から魂の行き先まで、リスナーのあらゆゆ疑問や謎にこたえゆ「<b>宇宙よろず相談室</b>」！<br>
@@ -304,7 +328,7 @@
 
         <filter id="白枠">
             <feMorphology in="SourceAlpha" operator="dilate" radius="2" result="expanded" />
-            <feFlood flood-color="#fff4f0" flood-opacity="1" result="color" />
+            <feFlood flood-color="seashell" flood-opacity="1" result="color" />
             <feComposite in="color" in2="expanded" operator="in" result="outline" />
             <!-- 元の画像をその上に重ねる -->
             <feMerge>

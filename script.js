@@ -46,6 +46,7 @@ setTimeout(() => { // 3秒経過で強制
 let スライダー文字サイズ = 4;
 let スライダー文字速度   = 4;
 let スライダー効果音量   = 4;
+let スイッチ光の効果     = true;
 
 // ▫️計算用の派生変数
 
@@ -63,39 +64,49 @@ function 設定更新() {
     設定速度ms    = 90 - スライダー文字速度 * 10;
     ボイス音量    = スライダー効果音量 * 0.03;
     効果音音量    = ボイス音量 * 0.3;
+
+    if (スイッチ光の効果) {
+        document.body.classList.remove('消光');
+    } else {
+        document.body.classList.add('消光');
+    }
 }
 
 
 // 🎛️設定スライダーとリセット（localStorage対応）
 
 document.addEventListener('DOMContentLoaded', () => {
-    const 設定           = document.getElementById('設定');
-    const ラジオ         = document.getElementById('📻');
-    const 入力_文字サイズ = document.getElementById('文字サイズ');
-    const 入力_文字速度   = document.getElementById('文字速度');
-    const 入力_効果音量   = document.getElementById('効果音量');
-    const リセット        = document.getElementById('リセット');
+    const 設定            = document.getElementById('設定');
+    const ラジオ          = document.getElementById('📻');
+    const 入力_文字サイズ  = document.getElementById('文字サイズ');
+    const 入力_文字速度    = document.getElementById('文字速度');
+    const 入力_効果音量    = document.getElementById('効果音量');
+    const チェック_光の効果 = document.getElementById('光の効果');
+    const リセット         = document.getElementById('リセット');
 
     const 初期値_文字サイズ = 4;
     const 初期値_文字速度   = 4;
     const 初期値_効果音量   = 4;
+    const 初期値_光の効果   = true;
 
     // ▫️ストレージ保存用のKEY名
 
     const KEY_文字サイズ = 'site_text_size';
     const KEY_文字速度   = 'site_text_speed';
     const KEY_効果音量   = 'site_se_volume';
+    const KEY_光の効果   = 'site_glow_effect';
 
     // ▫️保存データの読み込み（無ければデフォルト値）
 
     const 保存_文字サイズ = localStorage.getItem(KEY_文字サイズ);
     const 保存_文字速度   = localStorage.getItem(KEY_文字速度);
     const 保存_効果音量   = localStorage.getItem(KEY_効果音量);
+    const 保存_光の効果   = localStorage.getItem(KEY_光の効果);
 
     スライダー文字サイズ = 保存_文字サイズ !== null ? parseInt(保存_文字サイズ, 10) : 初期値_文字サイズ;
     スライダー文字速度   = 保存_文字速度   !== null ? parseInt(保存_文字速度, 10)   : 初期値_文字速度;
     スライダー効果音量   = 保存_効果音量   !== null ? parseInt(保存_効果音量, 10)   : 初期値_効果音量;
-
+    スイッチ光の効果     = 保存_光の効果   !== null ? 保存_光の効果 === 'true'      : 初期値_光の効果;
 
     // ▫️文字サイズ (画面のスライダー要素と数値表示に初期値を反映)
 
@@ -148,6 +159,18 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // ▫️光の効果
+
+    if (チェック_光の効果) {
+        チェック_光の効果.checked = スイッチ光の効果;
+
+        チェック_光の効果.addEventListener('change', (e) => {
+            スイッチ光の効果 = e.target.checked;
+            localStorage.setItem(KEY_光の効果, スイッチ光の効果);
+            設定更新();
+        });
+    }
+
     // ▫️開閉切り替え
 
     ラジオ.addEventListener('click', (e) => {
@@ -171,33 +194,39 @@ document.addEventListener('DOMContentLoaded', () => {
             localStorage.removeItem(KEY_文字サイズ); // 保存データの消去
             localStorage.removeItem(KEY_文字速度);
             localStorage.removeItem(KEY_効果音量);
+            localStorage.removeItem(KEY_光の効果);
 
             if (入力_文字サイズ) {
-                入力_文字サイズ.value = 初期値_文字サイズ; // 文字サイズのリセット
+                入力_文字サイズ.value = 初期値_文字サイズ; // リセット
                 スライダー文字サイズ  = 初期値_文字サイズ;
                 const 表示 = 入力_文字サイズ.nextElementSibling;
                 if (表示) 表示.textContent = 初期値_文字サイズ;
             }
 
             if (入力_文字速度) {
-                入力_文字速度.value = 初期値_文字速度; // 文字速度のリセット
+                入力_文字速度.value = 初期値_文字速度;
                 スライダー文字速度  = 初期値_文字速度;
                 const 表示 = 入力_文字速度.nextElementSibling;
                 if (表示) 表示.textContent = 初期値_文字速度;
             }
 
             if (入力_効果音量) {
-                入力_効果音量.value = 初期値_効果音量; // 効果音量のリセット
+                入力_効果音量.value = 初期値_効果音量;
                 スライダー効果音量  = 初期値_効果音量;
                 const 表示 = 入力_効果音量.nextElementSibling;
                 if (表示) 表示.textContent = 初期値_効果音量;
             }
 
-            設定更新(); // 変数と音量の再計算
+            if (チェック_光の効果) {
+                チェック_光の効果.checked = 初期値_光の効果;
+                スイッチ光の効果          = 初期値_光の効果;
+            }
+
+            設定更新(); // 再計算
         });
     }
 
-    設定更新(); // 初回の音量・速度設定の反映
+    設定更新(); // 初回反映
 });
 
 

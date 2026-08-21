@@ -5,7 +5,7 @@
 .ヘッダー {
     position: fixed;
     top:      0;
-    left:     2px;
+    left:     0;
     right:    2px;
     z-index:  99;
 
@@ -21,7 +21,7 @@
 .ロゴ, .設定 {
     display:        flex;
     flex-direction: column;
-    align-items:    center;
+    align-items:    flex-end;
 
     max-width: 45%; /* 横幅 */
 
@@ -41,9 +41,10 @@
 
     width: 250px;
 
-    background-color: var(--標準色, #777);
     border: 1px solid var(--中光,   #888);
     border-radius:    30px;
+
+    background-color: var(--標準色, #777);
 
     backdrop-filter:  blur(4px);
     box-shadow:       0  2px 20px black,             /* 背景の影 */
@@ -68,7 +69,8 @@
 }
 
 .設定💬::before { /* ふきだしのしっぽ */
-    content:  '';
+    content: '';
+
     position: absolute;
     top:      -6px;
     right:    27px;
@@ -82,7 +84,7 @@
     display:        flex;
     flex-direction: column;
 
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
 }
 
 .スライダー {
@@ -110,8 +112,9 @@
     border:        1px solid var(--中光, #888);
     border-radius: 6px;
 
-    background-color:     #555;
+    background-color:     #444;
     color:                gold;
+
     box-shadow: 0 2px 5px black;
 
     pointer-events: none;
@@ -129,6 +132,89 @@
     visibility: visible;
     animation:  none;
 }
+
+.スイッチ {
+    position: relative;
+    display:  inline-block;
+
+    width:  55px;
+    height: 20px;
+}
+
+.スイッチ input { /* 元の形は隠す */
+    width:   0;
+    height:  0;
+    opacity: 0;
+}
+
+.スイッチ背景 { /* OFF */
+    position: absolute;
+    top:      0;
+    left:     0;
+    right:    0;
+    bottom:   0;
+
+    border:        1px solid var(--中光, #888);
+    border-radius: 10px;
+
+    cursor: pointer;
+
+    transition: 0.4s;
+}
+
+.スイッチ背景:before { /* OFFのツマミ */
+    content: "";
+
+    position: absolute;
+    left:     2px;
+    bottom:   2px;
+    z-index:  1;
+
+    width:  14px;
+    height: 14px;
+
+    border-radius:    50%;
+    background-color: gold;
+
+    transition: 0.4s;
+}
+
+.スイッチ背景:after { /* OFFの文字 */
+    content: "OFF";
+
+    position: absolute;
+    top:      50%;
+    right:    10px;
+
+    font-size:   12px;
+    color:       var(--中光, #888);
+    text-shadow: none;
+
+    translate:  0 -50%;
+    transition: 0.4s;
+}
+
+input:checked + .スイッチ背景 { /* ON */
+    background-color:             goldenrod;
+    box-shadow: inset 1px 2px 3px rgb(0 0 0 / 50%);
+}
+
+input:checked + .スイッチ背景:before { /* ONのツマミ */
+    background-color: var(--強光, seashell);
+    box-shadow: 0px 1px 2px rgb(0 0 0 / 50%);
+
+    translate: 36px 0;
+}
+
+input:checked + .スイッチ背景:after { /* ONの文字 */
+    content: "ON";
+
+    left:  10px;
+    right: auto;
+
+    color: var(--強光, seashell);
+}
+
 
 .リセット {
     display: block;

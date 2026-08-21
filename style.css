@@ -63,10 +63,11 @@ a {
 
 .明朝 { font-family: "Noto Serif JP", serif; }
 
-b {
+b, em {
     font-size:   1.1rem;
+    font-style:  normal;
+    font-weight: 900;
     line-height: 1;
-    filter:      drop-shadow(0 0 10px var(--中光, #888));
 }
 
 .極小 { font-size: 0.6rem; }
@@ -76,7 +77,7 @@ b {
 .極大 { font-size: 2.5rem; line-height: 1; }
 
 .細字 { font-weight: normal; }
-.太字 { font-weight: bold; }
+.太字 { font-weight: 900; }
 
 /* 🔹カラー */
 
@@ -89,10 +90,10 @@ b {
 .灰 { color: gray; }
 
 * {
-    --弱光:   rgb(255 245 238 / 25%); /* #888 */
-    --中光:   rgb(255 245 238 / 50%); /* #888 */
-    --強光:   rgb(255 245 238);       /* seashell */
-    --標準色: rgb(100 100 100 / 50%); /* #777 (ふきだし背景) */
+    --弱光:   rgba(255, 245, 238, 0.25); /* #888 */
+    --中光:   rgba(255, 245, 238, 0.50); /* #888 */
+    --強光:   seashell;
+    --標準色: rgba(169, 169, 169, 0.25); /* #777 (ふきだし背景) */
 }
 
 /* 🔹文字装飾 */
@@ -131,6 +132,8 @@ p {
     margin:  0 auto;
     padding: 0 1rem 1rem 1rem;
     max-width: 600px; /* 最大横幅 600px */
+
+
 }
 
 /* 🔹画像枠 */
@@ -161,17 +164,20 @@ p {
 
 /* 🔹フィルター */
 
-.白枠 { filter: url(#白枠); }
 .黒枠 { filter: url(#黒枠);
         text-shadow: none; }
 
-.発光 { filter: drop-shadow(0 0 10px var(--中光, #888)); }
+.発光, b, .キャラ画像 { filter: drop-shadow(0 0 10px var(--中光, #888)); }
 .陰影 { filter: drop-shadow(0 0  5px black); }
 .光影 { filter: drop-shadow(0 0 10px var(--中光, #888))
                 drop-shadow(0 0  5px black); }
 
-.効果 { filter: url(#白枠)
+.白枠 { filter: url(#白枠)
                 drop-shadow(0 0 10px var(--中光, #888)); }
+
+body.消光 .発光, body.消光 .白枠, body.消光 b, body.消光 .キャラ画像, body.消光 .💬 {
+    filter: none !important;
+}
 
 /* 🔹差分用 absolute ( class="差分 ◯◯◯" ) */
 
@@ -205,11 +211,11 @@ p {
 
 .出現→消滅 {
     opacity: 0.001;
-    animation: 出現→消滅 var(--時間, 50s) linear forwards var(--待機, 0s);
+    animation: 出現→消滅 var(--時間, 10s) linear forwards var(--待機, 0s);
 }
 @keyframes 出現→消滅 {
       0%      { opacity:    0.001; }
-      2%, 98% { opacity:    1; }
+     10%, 90% { opacity:    1; }
     100%      { opacity:    0;
                 animation:  none;
                 visibility: hidden; }
