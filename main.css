@@ -92,7 +92,8 @@
     /* 🔹スライドインの仕方 */
 
     transition: transform 1s cubic-bezier(0.34, 1.56, 0.64, 1),
-                opacity 1s ease-out;
+                opacity   1s ease-out,
+                filter    1s ease; /* 消光用 */
 }
 
 .キャラ画像.スライドイン {
@@ -142,9 +143,11 @@
     background-color: var(--色, var(--標準色, #777));
 
     backdrop-filter:  blur(3px);
-    box-shadow: 0    0 10px var(--中光, #888), /* 後光 */
+    box-shadow: 0    0 20px var(--弱光, #888), /* 後光 */
           inset 0  2px 10px var(--弱光, #888), /* 光沢 */
           inset 0 -2px 20px rgb(0 0 0 / 50%);  /* 影 */
+
+    transition: backdrop-filter 1s, box-shadow 1s; /* 消光用 */
 
     transform-origin: top center;
 

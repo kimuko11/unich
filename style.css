@@ -162,22 +162,29 @@ p {
 .改行40 { margin-bottom: 40rem; }
 .改行50 { margin-bottom: 50rem; }
 
-/* 🔹フィルター */
+/* 🔹枠フィルター */
 
-.黒枠 { filter: url(#黒枠);
-        text-shadow: none; }
+.黒枠 {
+    filter: url(#黒枠);
+    text-shadow: none;
+}
+
+/* 🔹発光フィルター */
+
+.白枠 { 
+    filter: url(#白枠)
+            drop-shadow(0 0 10px var(--中光, #888)); 
+}
 
 .発光, b, .キャラ画像 { filter: drop-shadow(0 0 10px var(--中光, #888)); }
-.陰影 { filter: drop-shadow(0 0  5px black); }
-.光影 { filter: drop-shadow(0 0 10px var(--中光, #888))
-                drop-shadow(0 0  5px black); }
+.発光, b { transition: filter 1s ease; }
 
-.白枠 { filter: url(#白枠)
-                drop-shadow(0 0 10px var(--中光, #888)); }
+/* 🔹消光 */
 
-body.消光 .発光, body.消光 .白枠, body.消光 b, body.消光 .キャラ画像, body.消光 .💬 {
-    filter: none !important;
-}
+body.消光 .発光, body.消光 .白枠, body.消光 b, body.消光 .キャラ画像, body.消光 .💬::before
+    { filter: none; backdrop-filter: none; box-shadow: none; }
+
+body.消光 .白枠 { filter: url(#白枠); } /* 白枠は消さない */
 
 /* 🔹差分用 absolute ( class="差分 ◯◯◯" ) */
 
