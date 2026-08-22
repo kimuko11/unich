@@ -19,13 +19,17 @@
 /* 🔹ロゴと設定 */
 
 .ロゴ, .設定 {
+    max-width: 48%; /* 横幅 */
+    
+    pointer-events: auto;
+}
+
+.設定 { 
     display:        flex;
     flex-direction: column;
-    align-items:    flex-end;
+    align-items:    center;
 
-    max-width: 45%; /* 横幅 */
-
-    pointer-events: auto;
+    max-width: 10%;
 }
 
 .📻 {
@@ -37,13 +41,13 @@
 
 .設定💬 {
     position: absolute;
-    top:      65px; /* 位置 */
+    top:      54px; /* 位置 */
     right:    0;
 
     width: 250px;
 
-    border: 1px solid var(--中光,   #888);
-    border-radius:    30px;
+    border: 1px solid var(--中光, #888);
+    border-radius:    25px;
 
     background-color: rgba(60, 60, 60, 0.75);
 
@@ -74,7 +78,7 @@
 
     position: absolute;
     top:      -6px;
-    right:    27px;
+    right:    25px;
 
     border-width: 0 1px 6px 3px;
     border-style: solid;
