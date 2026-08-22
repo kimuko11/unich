@@ -47,6 +47,7 @@ let スライダー文字サイズ = 4;
 let スライダー文字速度   = 4;
 let スライダー効果音量   = 4;
 let スイッチ光の効果     = true;
+let スイッチ登場アニメ   = true;
 
 // ▫️計算用の派生変数
 
@@ -70,6 +71,12 @@ function 設定更新() {
     } else {
         document.body.classList.add('消光');
     }
+
+    if (スイッチ登場アニメ) {
+        document.body.classList.remove('即時');
+    } else {
+        document.body.classList.add('即時');
+    }
 }
 
 
@@ -81,13 +88,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const 入力_文字サイズ  = document.getElementById('文字サイズ');
     const 入力_文字速度    = document.getElementById('文字速度');
     const 入力_効果音量    = document.getElementById('効果音量');
-    const チェック_光の効果 = document.getElementById('光の効果');
+    const 選択_光の効果    = document.getElementById('光の効果');
+    const 選択_登場アニメ  = document.getElementById('登場アニメ');
     const リセット         = document.getElementById('リセット');
 
     const 初期値_文字サイズ = 4;
     const 初期値_文字速度   = 4;
     const 初期値_効果音量   = 4;
     const 初期値_光の効果   = true;
+    const 初期値_登場アニメ = true;
 
     // ▫️ストレージ保存用のKEY名
 
@@ -95,6 +104,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const KEY_文字速度   = 'site_text_speed';
     const KEY_効果音量   = 'site_se_volume';
     const KEY_光の効果   = 'site_glow_effect';
+    const KEY_登場アニメ = 'site_app_anime';
 
     // ▫️保存データの読み込み（無ければデフォルト値）
 
@@ -102,11 +112,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const 保存_文字速度   = localStorage.getItem(KEY_文字速度);
     const 保存_効果音量   = localStorage.getItem(KEY_効果音量);
     const 保存_光の効果   = localStorage.getItem(KEY_光の効果);
+    const 保存_登場アニメ = localStorage.getItem(KEY_登場アニメ);
 
     スライダー文字サイズ = 保存_文字サイズ !== null ? parseInt(保存_文字サイズ, 10) : 初期値_文字サイズ;
-    スライダー文字速度   = 保存_文字速度   !== null ? parseInt(保存_文字速度, 10)   : 初期値_文字速度;
-    スライダー効果音量   = 保存_効果音量   !== null ? parseInt(保存_効果音量, 10)   : 初期値_効果音量;
-    スイッチ光の効果     = 保存_光の効果   !== null ? 保存_光の効果 === 'true'      : 初期値_光の効果;
+    スライダー文字速度   = 保存_文字速度   !== null ? parseInt(保存_文字速度, 10)  : 初期値_文字速度;
+    スライダー効果音量   = 保存_効果音量   !== null ? parseInt(保存_効果音量, 10)  : 初期値_効果音量;
+    スイッチ光の効果     = 保存_光の効果   !== null ? 保存_光の効果 === 'true'     : 初期値_光の効果;
+    スイッチ登場アニメ   = 保存_登場アニメ !== null ? 保存_登場アニメ === 'true'    : 初期値_登場アニメ;
 
     // ▫️文字サイズ (画面のスライダー要素と数値表示に初期値を反映)
 
@@ -161,12 +173,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // ▫️光の効果
 
-    if (チェック_光の効果) {
-        チェック_光の効果.checked = スイッチ光の効果;
+    if (選択_光の効果) {
+        選択_光の効果.checked = スイッチ光の効果;
 
-        チェック_光の効果.addEventListener('change', (e) => {
+        選択_光の効果.addEventListener('change', (e) => {
             スイッチ光の効果 = e.target.checked;
             localStorage.setItem(KEY_光の効果, スイッチ光の効果);
+            設定更新();
+        });
+    }
+
+    // ▫️登場アニメ
+
+    if (選択_登場アニメ) {
+        選択_登場アニメ.checked = スイッチ登場アニメ;
+
+        選択_登場アニメ.addEventListener('change', (e) => {
+            スイッチ登場アニメ = e.target.checked;
+            localStorage.setItem(KEY_登場アニメ, スイッチ登場アニメ);
             設定更新();
         });
     }
@@ -195,6 +219,7 @@ document.addEventListener('DOMContentLoaded', () => {
             localStorage.removeItem(KEY_文字速度);
             localStorage.removeItem(KEY_効果音量);
             localStorage.removeItem(KEY_光の効果);
+            localStorage.removeItem(KEY_登場アニメ);
 
             if (入力_文字サイズ) {
                 入力_文字サイズ.value = 初期値_文字サイズ; // リセット
@@ -217,9 +242,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (表示) 表示.textContent = 初期値_効果音量;
             }
 
-            if (チェック_光の効果) {
-                チェック_光の効果.checked = 初期値_光の効果;
-                スイッチ光の効果          = 初期値_光の効果;
+            if (選択_光の効果) {
+                選択_光の効果.checked = 初期値_光の効果;
+                スイッチ光の効果      = 初期値_光の効果;
+            }
+
+            if (選択_登場アニメ) {
+                選択_登場アニメ.checked = 初期値_登場アニメ;
+                スイッチ登場アニメ      = 初期値_登場アニメ;
             }
 
             設定更新(); // 再計算
@@ -353,12 +383,12 @@ function 次キャラ処理() {
     const キャラ画像 = エリア.querySelector('.キャラ画像');
     const ふきだし   = エリア.querySelector('.💬');
 
-    キャラ画像.classList.add('スライドイン');
+    キャラ画像.classList.add('登場');
     ふきだし  .classList.add('発話');
 
-    キャラ画像.addEventListener('transitionend', function スライドイン完了(イベント) {
+    キャラ画像.addEventListener('transitionend', function 登場完了(イベント) {
         if (イベント.propertyName !== 'transform') return;
-        キャラ画像.removeEventListener('transitionend', スライドイン完了);
+        キャラ画像.removeEventListener('transitionend', 登場完了);
 
         ふきだし.style.setProperty('--横幅', `${ふきだし.offsetWidth}px`); // ふきだしを均等にフワフワさせるため取得
         ふきだし.style.setProperty('--縦幅', `${ふきだし.offsetHeight}px`);

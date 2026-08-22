@@ -1,0 +1,150 @@
+@charset "UTF-8";
+
+/* #️⃣JSによるクラスの付け外しで再生開始(停止回帰)されるアニメの指定 (初期 paused 必須) */
+
+/* 身体 */ .縦伸縮.再生, .横揺れ.再生, .横揺れ小.再生, .驚き→縦伸縮.再生, .震え.再生,
+/* 口元 */ .口パク.再生,
+/* 表情 */ .驚き汗.再生, .驚き目→目パチ.再生
+
+    { animation-play-state: running; }
+
+
+/* #️⃣登場で再生、次ターンで停止される身体アニメ ( class="キャラ画像 ◯◯◯" ) */
+
+.縦伸縮 { /* もっとも汎用的な会話動作 */
+    transform-origin: center bottom;
+    animation: 縦伸縮 0.5s infinite ease-in-out alternate paused;
+}
+@keyframes 縦伸縮 {
+    0%, 100% { scale: var(--キャラ反転, 1) 1.00; }
+    50%      { scale: var(--キャラ反転, 1) 1.05; }
+}
+
+.横揺れ {
+    transform-origin: center bottom;
+    animation: 横揺れ 0.5s infinite ease-in-out alternate paused;
+}
+.横揺れ小 {
+    transform-origin: center bottom;
+    animation: 横揺れ小 1s infinite ease-in-out alternate paused;
+}
+@keyframes 横揺れ {
+      0% { rotate: -5deg; }
+    100% { rotate:  5deg; }
+}
+@keyframes 横揺れ小 {
+      0% { rotate: -2deg; }
+    100% { rotate:  2deg; }
+}
+
+.驚き→縦伸縮 {
+    transform-origin: center bottom;
+    animation: 驚き   1.0s ease paused,
+               縦伸縮 0.5s infinite ease-in-out alternate 1s paused;
+}
+@keyframes 驚き {
+    0%, 100% { scale:      var(--キャラ反転, 1)        1.0; }
+    40%      { scale: calc(var(--キャラ反転, 1) * 1.2) 1.2; }
+}
+
+.震え {
+    animation: 震え 0.5s infinite linear paused;
+}
+@keyframes 震え {
+    0%, 100% { translate:  0    0;   }
+    10%      { translate: -2px  1px; }
+    20%      { translate:  1px -2px; }
+    30%      { translate: -1px  2px; }
+    40%      { translate:  2px -1px; }
+    50%      { translate: -2px -2px; }
+    60%      { translate:  1px  2px; }
+    70%      { translate: -1px -1px; }
+    80%      { translate:  2px  1px; }
+    90%      { translate: -2px  2px; }
+}
+
+
+/* #️⃣差分アニメ ( class="差分 ◯◯◯" ) */
+
+/* 🔹登場で再生、文字送り完了で停止される口元アニメ */
+
+.口パク {
+    transform-origin: 50% 77%;
+    animation: 口パク 0.2s infinite ease-in-out alternate paused;
+}
+@keyframes 口パク {
+      0% { scale: 1 1.0; }
+    100% { scale: 1 0.1; }
+}
+
+/* 🔹登場で再生、秒数経過で自動終了する表情アニメ */
+
+.驚き汗 {
+    opacity: 0;
+    animation: 驚き汗 1s ease forwards paused;
+}
+@keyframes 驚き汗 {
+      0% { opacity:   0.001;
+           scale:     0.5; }
+     40% { opacity:   1.0;
+           scale:     1.2; }
+    100% { opacity:   1.0;
+           scale:     1.0;
+           animation: none; }
+}
+
+.驚き目→目パチ {
+    transform-origin: center 68%;
+    animation: 驚き目 1s ease forwards paused,
+               目パチ 1s infinite ease-in-out alternate 1s paused;
+}
+@keyframes 驚き目 {
+    0%, 100% { scale: 1.0; }
+    40%      { scale: 1.2; }
+}
+
+/* 登場で再生、無限アニメへ移行 */
+
+@keyframes 目パチ {
+    0%, 90% { scale: 1 1.0; }
+    100%    { scale: 1 0.1; }
+}
+
+/* 🔹最初から再生されていて停止しない無限アニメ */
+
+.ハート { animation: ハート 1s infinite ease-in-out alternate; }
+@keyframes ハート {
+      0% { scale: 1.0; }
+    100% { scale: 0.9; }
+}
+.高速伸縮 { animation: ハート 0.5s infinite ease-in-out alternate; }
+
+.星回転 {
+    transform-origin: 25% 20.8%;
+    animation: 星回転 5s infinite linear;
+}
+@keyframes 星回転 {
+      0% { rotate: 360deg; }
+    100% { rotate:   0deg; }
+}
+
+.腕振り {
+    transform-origin: 25% 95%;
+    animation: 横揺れ 0.5s infinite ease-in-out alternate;
+}
+
+.ちいかわ {
+    transform-origin: center bottom;
+    animation: 横揺れ小 1s infinite ease-in-out alternate;
+}
+
+.フィギュア { 
+    transform-origin: 40% 90%;
+    animation: フィギュア 4s infinite ease alternate;
+}
+@keyframes フィギュア {
+      0% { translate: 0 -3px; }
+     20% { rotate:  2deg; }
+     80% { rotate: -3deg; }
+    100% { translate: 0  3px; }
+}

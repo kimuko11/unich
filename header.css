@@ -20,7 +20,7 @@
 
 .ロゴ, .設定 {
     max-width: 48%; /* 横幅 */
-    
+
     pointer-events: auto;
 }
 
@@ -137,6 +137,7 @@
     visibility: visible;
     animation:  none;
 }
+
 
 .スイッチ {
     position: relative;

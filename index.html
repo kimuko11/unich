@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="top.css">
     <link rel="stylesheet" href="main.css">
     <link rel="stylesheet" href="anime.css">
+    <link rel="stylesheet" href="anime_001.css">
 <!--
     <link rel="preconnect" href="https://googleapis.com">
     <link rel="preconnect" href="https://gstatic.com" crossorigin>
@@ -127,7 +128,7 @@
         <img src="pic/hosocyu_ucyu-yoro.webp" class="差分 ネオン">
         <img src="pic/hosocyu_hosoto.webp"    class="差分 放送灯 出現"  style="--待機: 3s;">
         <img src="pic/hosocyu_onair.webp"     class="差分 オンエア 出現" style="--待機: 3s;">
-        <img src="pic/hosocyu.webp"           class="差分 放送中 発光"  alt="ドクとユニちゃん">
+        <img src="pic/hosocyu.webp"           class="差分 落下 発光"  alt="ドクとユニちゃん">
     </div>
 
     <!-- 🔹概要文 -->
@@ -154,7 +155,7 @@
 
     <!-- 🔹キャラ紹介 -->
 
-    <p class="星群 ▼"></p>
+    <p class="星群 ▼"></p> <!-- ▼ は JS でスクロール出現を監視 -->
 
     <p class="白枠 改行">
         <span class="黒枠 極大 出現 ▼">🎙️</span>
@@ -224,7 +225,7 @@
 
     <p class="星群 ▼" style="margin-top: -8.5rem; margin-bottom: 50vh;"></p>
 
-    <!-- 🔹1画面分の空白と流星 -->
+    <!-- 🔹1画面弱の空白と流星 -->
 
     <div class="画像" style="margin-bottom: 30vh;">
         <img src="img/ryusei.webp" class="流星大 ▼">
@@ -234,7 +235,7 @@
 
     <main class="対話全体枠">
 
-        <!-- #️⃣デフォルト CSS 変数
+        <!-- デフォルト CSS 変数
         🥸🐰     "--間隔: 0px;"
         キャラ画像 "--サイズ: 25%;", "--被り幅: -25px;"
         💬        "--左余白: 16%;", "--右余白: 14%;"
@@ -323,6 +324,7 @@
 
 
 <!-- ↔️SVGフィルター -->
+
 <svg style="position: absolute; width: 0; height: 0; overflow: hidden;">
     <defs>
 
@@ -330,8 +332,8 @@
             <feMorphology in="SourceAlpha" operator="dilate" radius="2" result="expanded" />
             <feFlood flood-color="seashell" flood-opacity="1" result="color" />
             <feComposite in="color" in2="expanded" operator="in" result="outline" />
-            <!-- 元の画像をその上に重ねる -->
-            <feMerge>
+
+            <feMerge> <!-- 元の画像をその上に重ねる -->
                 <feMergeNode in="outline" />
                 <feMergeNode in="SourceGraphic" />
             </feMerge>

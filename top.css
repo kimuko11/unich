@@ -1,7 +1,7 @@
 @charset "UTF-8";
 
 /* #️⃣トップ画像 */
-.放送中 {
+.落下 {
     opacity: 0.001;
     animation: 落下 1s ease-out forwards 2s;
 }
@@ -36,14 +36,12 @@
 
 .ネオン {
     filter: drop-shadow(0 0 20px #FF0055);
-    animation: レインボー 7s infinite linear alternate;
+    animation: ネオン 7s infinite linear alternate;
 }
-@keyframes レインボー {
+@keyframes ネオン {
     0% { filter: drop-shadow(0 0 2px #FF0055) hue-rotate(  0deg); }
   100% { filter: drop-shadow(0 0 2px #FF0055) hue-rotate(360deg); }
 }
 .放送灯   { filter: drop-shadow(0 0 5px red); }
 .オンエア { filter: drop-shadow(0 0 2px var(--強光, seashell)); }
 
-.▼     { animation-play-state: paused; }
-.▼.再生 { animation-play-state: running; }

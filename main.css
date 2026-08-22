@@ -83,20 +83,20 @@
     max-width:     var(--サイズ,  25%);   /* 対話全体枠における横幅の割合 */
     margin-bottom: var(--被り幅, -25px);  /* ふきだしへの被り幅 */
 
-    /* 🔹スライドイン前の位置 */
+    /* 🔹登場前の位置 */
 
-    transform: translateX(calc(var(--出現方向, 1) * 120%)); /* JSのスライドイン完了検知専用として、身体アニメと干渉しない transform を使用 */
+    transform: translateX(calc(var(--出現方向, 1) * 120%)); /* JSの登場完了検知専用として、身体アニメと干渉しない transform を使用 */
     opacity:   0.001;
     scale:     var(--キャラ反転, 1) 1;
 
-    /* 🔹スライドインの仕方 */
+    /* 🔹登場の仕方 */
 
     transition: transform 1s cubic-bezier(0.34, 1.56, 0.64, 1),
                 opacity   1s ease-out,
                 filter    1s ease; /* 消光用 */
 }
 
-.キャラ画像.スライドイン {
+.キャラ画像.登場 {
     transform: translateX(0);
     opacity:   1;
 }
