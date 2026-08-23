@@ -302,7 +302,7 @@ function スクロール出現監視取得(閾値) {
 
 document.querySelectorAll('.▼').forEach((要素) => {
     const 親要素監視系 = 要素.classList.contains('スライド') || 要素.classList.contains('拡大')
-                     || 要素.classList.contains('倒れ'); // 初期配置が本配置と異なり、threshold 計算不能な要素
+                     || 要素.classList.contains('倒れ') || 要素.classList.contains('流星大');
     const 監視対象    = 親要素監視系 ? 要素.parentElement : 要素;
     const 指定閾値    = parseFloat(要素.dataset.threshold);
     const 閾値        = Number.isNaN(指定閾値) ? スクロール出現閾値既定値 : 指定閾値;
@@ -553,7 +553,7 @@ function セリフ表示(エリア, 完了コールバック) {
     // ▫️1文字進めるステップ関数
 
     function 次文字表示() {
-        if (設定速度ms <= 0 || !スイッチ登場アニメ) { // 文字速度 0ms以下(最速)と、登場アニメOFFの場合、待ち時間なしで全表示＆即完了
+        if (設定速度ms <= 0) { // 0ms以下(最速)の場合、待ち時間なしで全表示＆即完了
             for (let i = 現在位置; i < 文字一覧.length; i++) {
                 文字一覧[i].classList.add('表示済');
             }

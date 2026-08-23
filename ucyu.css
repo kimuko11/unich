@@ -1,30 +1,5 @@
 @charset "UTF-8";
 
-/* #️⃣ローディング・マスク */
-
-#暗幕 {
-    position: fixed;
-    top:      0;
-    left:     0;
-
-    width:  100vw;
-    height: 100vh;
-
-    background-color: black;
-    z-index: 999;
-
-    transition: opacity    2s ease,
-                visibility 2s ease;
-}
-#暗幕.読み込み完了 {
-    opacity:    0;
-    animation:  none;
-    visibility: hidden;
-
-    pointer-events: none;
-}
-
-
 /* #️⃣宇宙視差背景 */
 
 .宇宙全体 {
@@ -107,7 +82,7 @@
     filter:     drop-shadow(0 0 6px var(--強光, seashell));
     opacity:    0;
 
-    animation:  流星 1s linear; /* JSで起動 */
+    animation:  流星 1s linear forwards; /* JSで起動 */
 }
 
 .流星.反転 {
@@ -133,7 +108,6 @@
         translate:  -300px 300px;
         scale:      1 1;
         rotate:     -45deg;
-        animation:  none;
         visibility: hidden;
     }
 }
@@ -155,7 +129,6 @@
         translate:  300px 300px;
         scale:      1 1;
         rotate:     45deg;
-        animation:  none;
         visibility: hidden;
     }
 }
@@ -171,7 +144,6 @@
      70% { opacity:    1; }
     100% { opacity:    0;
            translate:  -200px 100px;
-           animation:  none;
            visibility: hidden;
     }
 }

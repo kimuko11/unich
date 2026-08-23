@@ -2,13 +2,20 @@
 
 /* #️⃣汎用アニメ */
 
+/* 🔹スクロール出現監視 */
+
+.▼      { animation-play-state: paused; }
+.▼.再生 { animation-play-state: running; }
+
+/* 🔹汎用アニメ */
+
 .出現 {
-    opacity:   0.001;
+    opacity: 0.001;
     animation: 出現 var(--時間, 1s) linear forwards var(--待機, 0s);
 }
 @keyframes 出現 {
-      0% { opacity: 0.001; }
-    100% { opacity: 1; }
+      0% { opacity:   0.001; }
+    100% { opacity:   1; }
 }
 
 .消滅 { animation: 消滅 var(--時間, 1s) linear forwards var(--待機, 0s);
@@ -40,8 +47,8 @@
     animation: 拡大 var(--時間, 1s) cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards var(--待機, 0s);
 }
 @keyframes 拡大 {
-      0% { scale: 0.001; }
-    100% { scale: 1; }
+      0% { scale:     0.001; }
+    100% { scale:     1; }
 }
 
 .スライド {
@@ -61,9 +68,9 @@
     animation: 倒れ var(--時間, 2s) cubic-bezier(0.175, 0.885, 0.32, 1.4) forwards var(--待機, 0s);
 }
 @keyframes 倒れ {
-      0% { rotate:  var(--角度, -90deg); }
-    100% { rotate:  0deg;
-           opacity: 1; }
+      0% { rotate:    var(--角度, -90deg); }
+    100% { rotate:    0deg;
+           opacity:   1; }
 }
 
 .浮遊 {
@@ -75,37 +82,45 @@
 }
 
 
-/* #️⃣登場アニメ OFF */
+/* #️⃣即時 (アニメ打ち消し) */
 
-body.即時 .出現,
-body.即時 .スライド,
-body.即時 .倒れ,
+/* ▼（スクロール監視）がついている要素は、画面内に入って .再生 がついてから即時表示させる */
+body.即時 .▼.再生.出現,
+body.即時 .出現:not(.▼) {
+    opacity:   1 !important;
+    animation: none !important;
+}
+
+body.即時 .▼.再生.消滅,
+body.即時 .消滅:not(.▼) {
+    opacity:    0 !important;
+    animation:  none !important;
+    visibility: hidden !important;
+}
+
+body.即時 .▼.再生.出現→消滅,
+body.即時 .出現→消滅:not(.▼) {
+    opacity:    0 !important;
+    animation:  none !important;
+    visibility: hidden !important;
+}
+
+body.即時 .▼.再生.拡大,
+body.即時 .拡大:not(.▼),
+body.即時 .💬 {
+    scale:     1 !important;
+    animation: none !important;
+}
+
+body.即時 .▼.再生.スライド,
+body.即時 .スライド:not(.▼),
+body.即時 .▼.再生.倒れ,
+body.即時 .倒れ:not(.▼),
 body.即時 .落下, 
 body.即時 .キャラ画像 {
-    opacity:   1;
-    translate: 0 0;
-    rotate:    0deg;
-    transform: translateX(0);
-    animation: none;
+    transform: translateX(0) !important;
+    translate: 0 0 !important;
+    rotate:    0deg !important;
+    opacity:   1 !important;
+    animation: none !important;
 }
-
-body.即時 .拡大,
-body.即時 .💬 {
-    scale:     1;
-    animation: none;
-}
-
-body.即時 .消滅,
-body.即時 .出現→消滅 {
-    opacity:    0;
-    animation:  none;
-    visibility: hidden;
-}
-
-body.即時 .星群 { animation-play-state: running; }
-
-
-/* #️⃣スクロール出現監視 (必ずアニメのショートハンドより後に配置) */
-
-.▼      { animation-play-state: paused; }
-.▼.再生 { animation-play-state: running; }

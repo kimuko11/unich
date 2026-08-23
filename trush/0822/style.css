@@ -49,7 +49,9 @@ a {
 }
 
 
-/* #️⃣配置 */
+/* #️⃣共通 CSS */
+
+/* 🔹配置 */
 
 .中央 { text-align: center; }
 .左寄 { text-align: left; }
@@ -57,10 +59,7 @@ a {
 
 .ブロック { display: block; }
 
-.差分 { position: absolute; top: 0%; }
-
-
-/* #️⃣フォント */
+/* 🔹フォント */
 
 .明朝 { font-family: "Noto Serif JP", serif; }
 
@@ -115,26 +114,10 @@ b, em {
     text-shadow: 0 0 5px var(--強光, seashell);
 }
 
-
-/* #️⃣画像枠 */
-
-.画像 {
-    position: relative;
-
-    display:        flex;
-    flex-direction: column;
-    align-items:    center;
-
-    margin: 0 auto;
-
-    max-width: 75%; /* 最大横幅 400px (画像は最大400pxで書き出しているから) */
-}
-
-
-/* #️⃣文字枠, ふきだし */
+/* 🔹文字枠, ふきだし */
 
 p, .💬, .設定💬 {
-    padding: 20px; /* ふきだし用 */
+    padding: 20px;
     
     text-shadow:
         0  1px #000,      /* 下 */
@@ -148,13 +131,25 @@ p {
     position: relative;
 
     margin:  0 auto;
-    padding: 0 1rem 1rem 1rem; /* 文字枠用に上書き */
+    padding: 0 1rem 1rem 1rem;
 
     max-width: 600px; /* 最大横幅 600px */
 }
 
+/* 🔹画像枠 */
 
-/* #️⃣改行 */
+.画像 {
+    position: relative;
+
+    display:        flex;
+    flex-direction: column;
+    align-items:    center;
+
+    margin: 0 auto;
+    max-width: 75%; /* 最大横幅 400px (画像サイズは最大400pxで書き出しているから) */
+}
+
+/* 🔹改行 */
 
 .改行   { margin-bottom: var(--改行, 1rem); } /* 変数使用で何行でも可 */
 .改行2  { margin-bottom:  2rem; }
@@ -167,8 +162,7 @@ p {
 .改行40 { margin-bottom: 40rem; }
 .改行50 { margin-bottom: 50rem; }
 
-
-/* #️⃣フィルター */
+/* 🔹枠フィルター */
 
 .黒枠 {
     filter: url(#黒枠);
@@ -183,18 +177,16 @@ p {
 }
 
 .発光, b, .キャラ画像 { filter: drop-shadow(0 0 10px var(--中光, #888)); }
-.発光, b { transition: filter 1s ease; } /* 滑らかな発光・消光 (transition がすでにある要素は2重にしないようそちらで行う) */
+.発光, b { transition: filter 1s ease; }
 
 /* 🔹消光 */
 
-body.消光 .発光,
-body.消光 .白枠,
-body.消光 b,
-body.消光 .キャラ画像,
-body.消光 .💬::before {
-    filter:          none;
-    backdrop-filter: none;
-    box-shadow:      none;
-}
+body.消光 .発光, body.消光 .白枠, body.消光 b, body.消光 .キャラ画像, body.消光 .💬::before
+    { filter: none; backdrop-filter: none; box-shadow: none; }
 
 body.消光 .白枠 { filter: url(#白枠); } /* 白枠は消さない */
+
+
+/* 🔹差分用 absolute ( class="差分 ◯◯◯" ) */
+
+.差分 { position: absolute; top: 0%; }

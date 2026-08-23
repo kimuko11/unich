@@ -7,6 +7,11 @@
     -webkit-tap-highlight-color: transparent; /* タップ影を消す */
 }
 
+/* 🔹スクロール出現監視 (htmlより速い読み込み必須) */
+
+.▼      { animation-play-state: paused; }
+.▼.再生 { animation-play-state: running; }
+
 /* 🔹個別リセット */
 
 html {
@@ -49,6 +54,49 @@ a {
 }
 
 
+/* #️⃣差分用 absolute ( class="差分 ◯◯◯" ) */
+
+.差分 { position: absolute; top: 0%; }
+
+
+/* #️⃣画像枠 */
+
+.画像 {
+    position: relative;
+
+    display:        flex;
+    flex-direction: column;
+    align-items:    center;
+
+    margin: 0 auto;
+
+    max-width: 75%; /* 最大横幅 400px (画像は最大400pxで書き出しているから) */
+}
+
+
+/* #️⃣文字枠, ふきだし */
+
+p {
+    position: relative;
+
+    margin:  0 auto;
+    padding: 0 1rem 1rem 1rem;
+
+    max-width: 600px; /* 最大横幅 600px */
+}
+
+p, .💬, .設定💬 {
+    padding: 20px;
+    
+    text-shadow:
+        0  1px #000,      /* 下 */
+       -1px  0 #111,      /* 左 */
+        1px  0 #111,      /* 右 */
+        0 -1px #222,      /* 上 */
+        0  2px 2px #000;  /* 影 */
+}
+
+
 /* #️⃣配置 */
 
 .中央 { text-align: center; }
@@ -56,8 +104,6 @@ a {
 .右寄 { text-align: right; }
 
 .ブロック { display: block; }
-
-.差分 { position: absolute; top: 0%; }
 
 
 /* #️⃣フォント */
@@ -113,44 +159,6 @@ b, em {
 
     box-shadow:  0 0 10px red;
     text-shadow: 0 0 5px var(--強光, seashell);
-}
-
-
-/* #️⃣画像枠 */
-
-.画像 {
-    position: relative;
-
-    display:        flex;
-    flex-direction: column;
-    align-items:    center;
-
-    margin: 0 auto;
-
-    max-width: 75%; /* 最大横幅 400px (画像は最大400pxで書き出しているから) */
-}
-
-
-/* #️⃣文字枠, ふきだし */
-
-p, .💬, .設定💬 {
-    padding: 20px; /* ふきだし用 */
-    
-    text-shadow:
-        0  1px #000,      /* 下 */
-       -1px  0 #111,      /* 左 */
-        1px  0 #111,      /* 右 */
-        0 -1px #222,      /* 上 */
-        0  2px 2px #000;  /* 影 */
-}
-
-p {
-    position: relative;
-
-    margin:  0 auto;
-    padding: 0 1rem 1rem 1rem; /* 文字枠用に上書き */
-
-    max-width: 600px; /* 最大横幅 600px */
 }
 
 

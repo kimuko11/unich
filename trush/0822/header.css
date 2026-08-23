@@ -1,6 +1,6 @@
 @charset "UTF-8";
 
-/* #️⃣ロゴと設定 */
+/* #️⃣ヘッダー */
 
 .ヘッダー {
     position: fixed;
@@ -15,6 +15,8 @@
 
     pointer-events: none;
 }
+
+/* 🔹ロゴと設定 */
 
 .ロゴ, .設定 {
     max-width: 48%; /* 横幅 */
@@ -35,11 +37,7 @@
     transition: scale  0.3s ease,
                 filter 1.0s ease; /* 消光用 */
 }
-
 .設定.オープン .📻 { scale: 1.1; }
-
-
-/* #️⃣設定ふきだし */
 
 .設定💬 {
     position: absolute;
@@ -68,7 +66,6 @@
         opacity    0.3s ease,
         visibility 0.4s;
 }
-
 .設定.オープン .設定💬 {
     scale:      1;
     opacity:    1;
@@ -87,8 +84,6 @@
     border-style: solid;
     border-color: transparent transparent var(--中光, #888) transparent;
 }
-
-/* 🔹設定ふきだしの中身 */
 
 .設定項目 {
     display:        flex;
@@ -129,8 +124,7 @@
 
     pointer-events: none;
     
-    /* 🔹フェード設定 */
-
+    /* フェード設定 */
     opacity:    0;
     visibility: hidden;
     animation:  none;
@@ -138,7 +132,6 @@
     transition: opacity    0.2s ease,
                 visibility 0.2s ease;
 }
-
 .スライダー:hover .スライダー数値, .スライダー input[type="range"]:focus + .スライダー数値 { /* フォーカス時 */
     opacity:    1;
     visibility: visible;
