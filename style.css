@@ -185,7 +185,7 @@ p {
 .発光, b, .キャラ画像 { filter: drop-shadow(0 0 10px var(--中光, #888)); }
 .発光, b { transition: filter 1s ease; } /* 滑らかな発光・消光 (transition がすでにある要素は2重にしないようそちらで行う) */
 
-/* 🔹消光 */
+/* 🔹光の効果 OFF */
 
 body.消光 .発光,
 body.消光 .白枠,

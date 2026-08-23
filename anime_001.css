@@ -10,6 +10,16 @@
 
     { animation-play-state: running; }
 
+/* 🔹表情アニメ OFF */
+
+/* 身体 */ body.停止 .縦伸縮, body.停止 .横揺れ, body.停止 .横揺れ小, body.停止 .驚き→縦伸縮, body.停止 .震え,
+/* 口元 */ body.停止 .口パク,
+/* 表情 */ body.停止 .驚き汗, body.停止 .驚き目→目パチ,
+/* 無限 */ body.停止 .ハート, body.停止 .高速伸縮, body.停止 .星回転, body.停止 .腕振り, body.停止 .ちいかわ, body.停止 .フィギュア,
+/* 吹出 */ body.停止 .💬::before, body.停止 .💬::after
+
+    { animation: none; }
+
 
 /* #️⃣登場で再生、次ターンで停止される身体アニメ ( class="キャラ画像 ◯◯◯" ) */
 

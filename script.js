@@ -48,6 +48,7 @@ let スライダー文字速度   = 4;
 let スライダー効果音量   = 4;
 let スイッチ光の効果     = true;
 let スイッチ登場アニメ   = true;
+let スイッチ表情アニメ   = true;
 
 // ▫️計算用の派生変数
 
@@ -77,26 +78,34 @@ function 設定更新() {
     } else {
         document.body.classList.add('即時');
     }
+
+    if (スイッチ表情アニメ) {
+        document.body.classList.remove('停止');
+    } else {
+        document.body.classList.add('停止');
+    }
 }
 
 
 // 🎛️設定スライダーとリセット（localStorage対応）
 
 document.addEventListener('DOMContentLoaded', () => {
-    const 設定            = document.getElementById('設定');
-    const ラジオ          = document.getElementById('📻');
-    const 入力_文字サイズ  = document.getElementById('文字サイズ');
-    const 入力_文字速度    = document.getElementById('文字速度');
-    const 入力_効果音量    = document.getElementById('効果音量');
-    const 選択_光の効果    = document.getElementById('光の効果');
-    const 選択_登場アニメ  = document.getElementById('登場アニメ');
-    const リセット         = document.getElementById('リセット');
+    const 設定           = document.getElementById('設定');
+    const ラジオ         = document.getElementById('📻');
+    const 入力_文字サイズ = document.getElementById('文字サイズ');
+    const 入力_文字速度   = document.getElementById('文字速度');
+    const 入力_効果音量   = document.getElementById('効果音量');
+    const 選択_光の効果   = document.getElementById('光の効果');
+    const 選択_登場アニメ = document.getElementById('登場アニメ');
+    const 選択_表情アニメ = document.getElementById('表情アニメ');
+    const リセット       = document.getElementById('リセット');
 
     const 初期値_文字サイズ = 4;
     const 初期値_文字速度   = 4;
     const 初期値_効果音量   = 4;
     const 初期値_光の効果   = true;
     const 初期値_登場アニメ = true;
+    const 初期値_表情アニメ = true;
 
     // ▫️ストレージ保存用のKEY名
 
@@ -105,6 +114,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const KEY_効果音量   = 'site_se_volume';
     const KEY_光の効果   = 'site_glow_effect';
     const KEY_登場アニメ = 'site_app_anime';
+    const KEY_表情アニメ = 'site_face_anime';
 
     // ▫️保存データの読み込み（無ければデフォルト値）
 
@@ -113,12 +123,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const 保存_効果音量   = localStorage.getItem(KEY_効果音量);
     const 保存_光の効果   = localStorage.getItem(KEY_光の効果);
     const 保存_登場アニメ = localStorage.getItem(KEY_登場アニメ);
+    const 保存_表情アニメ = localStorage.getItem(KEY_表情アニメ);
 
     スライダー文字サイズ = 保存_文字サイズ !== null ? parseInt(保存_文字サイズ, 10) : 初期値_文字サイズ;
     スライダー文字速度   = 保存_文字速度   !== null ? parseInt(保存_文字速度, 10)  : 初期値_文字速度;
     スライダー効果音量   = 保存_効果音量   !== null ? parseInt(保存_効果音量, 10)  : 初期値_効果音量;
     スイッチ光の効果     = 保存_光の効果   !== null ? 保存_光の効果 === 'true'     : 初期値_光の効果;
     スイッチ登場アニメ   = 保存_登場アニメ !== null ? 保存_登場アニメ === 'true'    : 初期値_登場アニメ;
+    スイッチ表情アニメ   = 保存_表情アニメ !== null ? 保存_表情アニメ === 'true'    : 初期値_表情アニメ;
 
     // ▫️文字サイズ (画面のスライダー要素と数値表示に初期値を反映)
 
@@ -195,6 +207,18 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // ▫️表情アニメ
+
+    if (選択_表情アニメ) {
+        選択_表情アニメ.checked = スイッチ表情アニメ;
+
+        選択_表情アニメ.addEventListener('change', (e) => {
+            スイッチ表情アニメ = e.target.checked;
+            localStorage.setItem(KEY_表情アニメ, スイッチ表情アニメ);
+            設定更新();
+        });
+    }
+
     // ▫️開閉切り替え
 
     ラジオ.addEventListener('click', (e) => {
@@ -220,6 +244,7 @@ document.addEventListener('DOMContentLoaded', () => {
             localStorage.removeItem(KEY_効果音量);
             localStorage.removeItem(KEY_光の効果);
             localStorage.removeItem(KEY_登場アニメ);
+            localStorage.removeItem(KEY_表情アニメ);
 
             if (入力_文字サイズ) {
                 入力_文字サイズ.value = 初期値_文字サイズ; // リセット
@@ -250,6 +275,11 @@ document.addEventListener('DOMContentLoaded', () => {
             if (選択_登場アニメ) {
                 選択_登場アニメ.checked = 初期値_登場アニメ;
                 スイッチ登場アニメ      = 初期値_登場アニメ;
+            }
+
+            if (選択_表情アニメ) {
+                選択_表情アニメ.checked = 初期値_表情アニメ;
+                スイッチ表情アニメ      = 初期値_表情アニメ;
             }
 
             設定更新(); // 再計算
