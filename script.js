@@ -10,10 +10,9 @@ const 読み込みリスト = [
     'img/logo_fukidasi.webp',
     'img/radio.webp',
     'pic/hosocyu_yuka.webp',
-    'pic/hosocyu_ucyu-yoro.webp',
+    'pic/hosocyu_unich.webp',
     'pic/hosocyu.webp',
-    'pic/hosocyu_hosoto.webp',
-    'pic/hosocyu_onair.webp'
+    'pic/hosocyu_hosoto.webp'
 ];
 
 function ページオープン() {
