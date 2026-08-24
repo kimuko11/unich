@@ -86,7 +86,7 @@ body.停止 .驚き汗 {
 /* 🔹登場で再生、文字送り完了で停止される口元アニメ */
 
 .口パク {
-    transform-origin: 50% 77%;
+    transform-origin: 50% 75%;
     animation: 口パク 0.2s infinite ease-in-out alternate paused;
 }
 @keyframes 口パク {
