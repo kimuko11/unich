@@ -48,7 +48,7 @@
 
     width: 250px;
 
-    border: 1px solid var(--中光, #888);
+    border: 1px solid var(--強光, seashell);
     border-radius:    25px;
 
     background-color: rgba(60, 60, 60, 0.75);
@@ -85,7 +85,7 @@
 
     border-width: 0 1px 6px 3px;
     border-style: solid;
-    border-color: transparent transparent var(--中光, #888) transparent;
+    border-color: transparent transparent var(--強光, seashell) transparent;
 }
 
 /* 🔹設定ふきだしの中身 */
