@@ -27,7 +27,7 @@
     flex-direction: column;
     align-items:    center;
 
-    max-width: calc(6% + var(--画像サイズ, 4) * 1%);
+    max-width: calc(8% + var(--画像サイズ, 4) * 0.5%);
 }
 
 .📻 {
@@ -43,7 +43,7 @@
 
 .設定💬 {
     position: absolute;
-    top:      54px; /* 位置 */
+    top:      53px; /* 位置 */
     right:    0;
 
     width: 250px;
@@ -254,4 +254,5 @@ input:checked + .スイッチ背景:after { /* ONの文字 */
     .設定項目:has(#画像サイズ) {
         display: none;
     }
+    :root { --画像サイズ: 4 !important; }
 }
