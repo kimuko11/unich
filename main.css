@@ -29,7 +29,7 @@
 
     max-width: 800px; /* 大型デバイスでの最大横幅 */
     width:     100%;  /* スマホでの画面合わせ */
-    gap:       10px;  /* キャラごとの間隔 */
+    gap:       calc(45px - var(--画像サイズ, 4) * 5px); /* キャラごとの間隔 45～0px */
 }
 
 
@@ -73,7 +73,7 @@
     flex-direction: column;
     align-items:    var(--配置, flex-start); /* 左右の配置決め */
 
-    margin-top:     var(--間隔, 0); /* キャラ間隔(gap)の変更に */
+    margin-top:     calc(var(--画像サイズ, 4) * -3px + var(--間隔, 0px)); /* キャラ間隔の変更 0 ～ -27px */
 }
 
 .キャラ画像 {

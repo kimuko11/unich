@@ -27,7 +27,7 @@
     flex-direction: column;
     align-items:    center;
 
-    max-width: calc(8% + var(--画像サイズ, 4) * 0.5%);
+    max-width: calc(9% + var(--画像サイズ, 4) * 0.25%);
 }
 
 .📻 {
@@ -43,7 +43,7 @@
 
 .設定💬 {
     position: absolute;
-    top:      53px; /* 位置 */
+    top:      calc(46px + var(--画像サイズ, 4) * 1px); /* 位置 */
     right:    0;
 
     width: 250px;
