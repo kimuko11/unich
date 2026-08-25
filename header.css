@@ -17,7 +17,7 @@
 }
 
 .ロゴ, .設定 {
-    max-width: 48%; /* 横幅 */
+    max-width: calc(44% + var(--画像サイズ, 4) * 1%); /* 横幅 */
 
     pointer-events: auto;
 }
@@ -27,7 +27,7 @@
     flex-direction: column;
     align-items:    center;
 
-    max-width: 10%;
+    max-width: calc(6% + var(--画像サイズ, 4) * 1%);
 }
 
 .📻 {
@@ -245,4 +245,13 @@ input:checked + .スイッチ背景:after { /* ONの文字 */
 }
 .リセット:hover { color:     var(--強光, seashell);
                  animation: none;
+}
+
+
+/* #️⃣画面横幅 600px 以上の時、画像サイズ項目を隠す */
+
+@media (min-width: 600px) {
+    .設定項目:has(#画像サイズ) {
+        display: none;
+    }
 }

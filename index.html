@@ -75,6 +75,14 @@
             </div>
 
             <div class="設定項目">
+                画像サイズ
+                <label class="スライダー">
+                    小<input type="range" id="画像サイズ" max="9" min="0" value="4">大
+                    <span class="スライダー数値">4</span>
+                </label>
+            </div>
+
+            <div class="設定項目">
                 光の効果
                 <label class="スイッチ">
                     <input type="checkbox" id="光の効果" checked>
@@ -143,7 +151,7 @@
     </p>
 
     <p class="出現 改行2" style="--待機: 6s;">
-        これは、問題の克服を目指すのではなく、「最初から問題はなかった」と、<b>前提</b>を切り替える番組である✨
+        これは、問題の克服を目指すのではなく、「最初から問題はなかった」と、<b>前提</b>を替える番組である✨
     </p>
 
     <p class="浮遊 中央 改行2">
@@ -234,11 +242,11 @@
 
     <main class="対話全体枠">
 
-        <!-- デフォルト CSS 変数
-        🥸🐰     "--間隔: 0px;"
-        キャラ画像 "--サイズ: 25%;", "--被り幅: -25px;"
-        💬        "--左余白: 16%;", "--右余白: 14%;"
-        変更したい時は、該当クラスの後に style=" " を追加して上記変数を代入 -->
+        <!-- 利用できる CSS 変数
+        🥸, 🐰:   --間隔 px
+        キャラ画像: --サイズ %, --被り幅 px
+        💬:        --左割合 %, --右割合 %
+        標準より増減したい時は、該当クラスの後に style を追加 -->
 
         <div class="🐰">
             <div class="キャラ画像 横揺れ">
@@ -254,12 +262,12 @@
         </div>
 
         <div class="🥸">
-            <div class="キャラ画像 縦伸縮" style="--被り幅: -40px;">
+            <div class="キャラ画像 縦伸縮" style="--被り幅: 15px;">
                 <img src="cha/dt_figure.webp">
                 <img src="cha/dt_figure_heart.webp"  class="差分 ハート">
                 <img src="cha/dt_figure_figure.webp" class="差分 フィギュア">
             </div>
-            <div class="💬" style="--右余白: 19%;">
+            <div class="💬" style="--右割合: 5%;">
                 デュフフww<br>
                 本日は行きつけの中古ショップでプレミア価格10倍の絶版フィギュアを保護できて大満足の <b>Dr. YOU</b> (ドクター・ユー) ですぢゃ♥️
             </div>
@@ -280,11 +288,11 @@
         </div>
 
         <div class="🥸">
-            <div class="キャラ画像 縦伸縮" style="--サイズ: 27%; --被り幅: -45px;">
+            <div class="キャラ画像 縦伸縮" style="--サイズ: 2%; --被り幅: 20px;">
                 <img src="cha/dt_precure.webp">
                 <img src="cha/dt_precure_hosi.webp" class="差分 星回転">
             </div>
-            <div class="💬" data-wait="20" style="--右余白: 19%;">
+            <div class="💬" data-wait="20" style="--右割合: 5%;">
                 オウフwww<br>
                 そんな難しい言葉、よくぞご存知でwww<br>
                 そーゆーユニちゃそ社長には、年相応なプリ〇ュアの人形をあげませう。<br>
@@ -294,7 +302,7 @@
         </div>
 
         <div class="🐰" style="--間隔: 20px;">
-            <div class="キャラ画像 震え" style="--サイズ: 23%;">
+            <div class="キャラ画像 震え" style="--サイズ: -2%;">
                 <img src="cha/uf_sizukana-ikari.webp">
                 <img src="cha/uf_sizukana-ikari_kekkan.webp" class="差分 高速伸縮">
             </div>
@@ -304,7 +312,7 @@
         </div>
 
         <div class="🥸" style="--間隔: -60px;">
-            <div class="キャラ画像 横揺れ小" style="--サイズ: 23%;">
+            <div class="キャラ画像 横揺れ小" style="--サイズ: -2%;">
                 <img src="cha/df_chiikawa.webp">
                 <img src="cha/df_chiikawa_chiikawa.webp" class="差分 ちいかわ">
             </div>
@@ -353,4 +361,4 @@
 </svg>
 
 </body>
-</html
+</html>

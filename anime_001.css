@@ -110,7 +110,7 @@ body.停止 .驚き汗 {
 }
 
 .驚き目→目パチ {
-    transform-origin: center 68%;
+    transform-origin: center 67%;
     animation: 驚き目 1s ease forwards paused,
                目パチ 1s infinite ease-in-out alternate 1s paused;
 }

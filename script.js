@@ -45,6 +45,7 @@ setTimeout(() => { // 3秒経過で強制
 let スライダー文字サイズ = 4;
 let スライダー文字速度   = 4;
 let スライダー効果音量   = 4;
+let スライダー画像サイズ = 4;
 let スイッチ光の効果     = true;
 let スイッチ登場アニメ   = true;
 let スイッチ表情アニメ   = true;
@@ -60,11 +61,11 @@ let 効果音音量    = ボイス音量 * 0.3;
 
 function 設定更新() {
     設定文字サイズ = 100 + (スライダー文字サイズ - 4) * 5;
-    document.documentElement.style.fontSize = `${設定文字サイズ}%`;
-    
     設定速度ms    = 90 - スライダー文字速度 * 10;
     ボイス音量    = スライダー効果音量 * 0.03;
     効果音音量    = ボイス音量 * 0.3;
+    document.documentElement.style.fontSize = `${設定文字サイズ}%`;
+    document.documentElement.style.setProperty('--画像サイズ', スライダー画像サイズ);
 
     if (スイッチ光の効果) {
         document.body.classList.remove('消光');
@@ -94,6 +95,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const 入力_文字サイズ = document.getElementById('文字サイズ');
     const 入力_文字速度   = document.getElementById('文字速度');
     const 入力_効果音量   = document.getElementById('効果音量');
+    const 入力_画像サイズ = document.getElementById('画像サイズ');
     const 選択_光の効果   = document.getElementById('光の効果');
     const 選択_登場アニメ = document.getElementById('登場アニメ');
     const 選択_表情アニメ = document.getElementById('表情アニメ');
@@ -102,6 +104,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const 初期値_文字サイズ = 4;
     const 初期値_文字速度   = 4;
     const 初期値_効果音量   = 4;
+    const 初期値_画像サイズ = 4;
     const 初期値_光の効果   = true;
     const 初期値_登場アニメ = true;
     const 初期値_表情アニメ = true;
@@ -111,6 +114,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const KEY_文字サイズ = 'site_text_size';
     const KEY_文字速度   = 'site_text_speed';
     const KEY_効果音量   = 'site_se_volume';
+    const KEY_画像サイズ = 'site_img_size';
     const KEY_光の効果   = 'site_glow_effect';
     const KEY_登場アニメ = 'site_app_anime';
     const KEY_表情アニメ = 'site_face_anime';
@@ -120,6 +124,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const 保存_文字サイズ = localStorage.getItem(KEY_文字サイズ);
     const 保存_文字速度   = localStorage.getItem(KEY_文字速度);
     const 保存_効果音量   = localStorage.getItem(KEY_効果音量);
+    const 保存_画像サイズ = localStorage.getItem(KEY_画像サイズ);
     const 保存_光の効果   = localStorage.getItem(KEY_光の効果);
     const 保存_登場アニメ = localStorage.getItem(KEY_登場アニメ);
     const 保存_表情アニメ = localStorage.getItem(KEY_表情アニメ);
@@ -127,6 +132,7 @@ document.addEventListener('DOMContentLoaded', () => {
     スライダー文字サイズ = 保存_文字サイズ !== null ? parseInt(保存_文字サイズ, 10) : 初期値_文字サイズ;
     スライダー文字速度   = 保存_文字速度   !== null ? parseInt(保存_文字速度, 10)  : 初期値_文字速度;
     スライダー効果音量   = 保存_効果音量   !== null ? parseInt(保存_効果音量, 10)  : 初期値_効果音量;
+    スライダー画像サイズ = 保存_画像サイズ !== null ? parseInt(保存_画像サイズ, 10) : 初期値_画像サイズ;
     スイッチ光の効果     = 保存_光の効果   !== null ? 保存_光の効果 === 'true'     : 初期値_光の効果;
     スイッチ登場アニメ   = 保存_登場アニメ !== null ? 保存_登場アニメ === 'true'    : 初期値_登場アニメ;
     スイッチ表情アニメ   = 保存_表情アニメ !== null ? 保存_表情アニメ === 'true'    : 初期値_表情アニメ;
@@ -178,6 +184,23 @@ document.addEventListener('DOMContentLoaded', () => {
             if (表示) 表示.textContent = e.target.value;
 
             localStorage.setItem(KEY_効果音量, スライダー効果音量);
+            設定更新();
+        });
+    }
+
+    // ▫️画像サイズ
+
+    if (入力_画像サイズ) {
+        入力_画像サイズ.value = スライダー画像サイズ;
+        const 表示 = 入力_画像サイズ.nextElementSibling;
+        if (表示) 表示.textContent = スライダー画像サイズ;
+
+        入力_画像サイズ.addEventListener('input', (e) => {
+            スライダー画像サイズ = parseInt(e.target.value, 10);
+            const 表示 = e.target.nextElementSibling;
+            if (表示) 表示.textContent = e.target.value;
+            
+            localStorage.setItem(KEY_画像サイズ, スライダー画像サイズ);
             設定更新();
         });
     }
@@ -241,6 +264,7 @@ document.addEventListener('DOMContentLoaded', () => {
             localStorage.removeItem(KEY_文字サイズ); // 保存データの消去
             localStorage.removeItem(KEY_文字速度);
             localStorage.removeItem(KEY_効果音量);
+            localStorage.removeItem(KEY_画像サイズ);
             localStorage.removeItem(KEY_光の効果);
             localStorage.removeItem(KEY_登場アニメ);
             localStorage.removeItem(KEY_表情アニメ);
@@ -264,6 +288,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 スライダー効果音量  = 初期値_効果音量;
                 const 表示 = 入力_効果音量.nextElementSibling;
                 if (表示) 表示.textContent = 初期値_効果音量;
+            }
+
+            if (入力_画像サイズ) {
+                入力_画像サイズ.value = 初期値_画像サイズ;
+                スライダー画像サイズ  = 初期値_画像サイズ;
+                const 表示 = 入力_画像サイズ.nextElementSibling;
+                if (表示) 表示.textContent = 初期値_画像サイズ;
             }
 
             if (選択_光の効果) {
