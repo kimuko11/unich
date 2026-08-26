@@ -27,7 +27,7 @@
     flex-direction: column;
     align-items:    center;
 
-    max-width: calc(9% + var(--画像サイズ, 4) * 0.25%);
+    max-width: calc(10% + var(--画像サイズ, 4) * 0.25%);
 }
 
 .📻 {
@@ -121,7 +121,7 @@
     padding:   2px 10px;
     translate: -50%;
 
-    border:        1px solid var(--中光, #888);
+    border:        1px solid var(--強光, seashell);
     border-radius: 6px;
 
     background-color:#444;
