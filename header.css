@@ -262,9 +262,9 @@ input:checked + .スイッチ背景:after { /* ONの文字 */
 .リセット:hover { color: var(--強光, seashell); }
 
 
-/* #️⃣画面横幅 600px 以上の時、画像サイズ項目を隠す */
+/* #️⃣画面横幅 501px 以上の時、画像サイズ項目を隠す */
 
-@media (min-width: 600px) {
+@media (min-width: 501px) {
     .設定項目:has(#画像サイズ) {
         display: none;
     }
