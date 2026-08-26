@@ -80,7 +80,7 @@
     position:      relative;
     z-index:       1;
 
-    max-width:     calc( 25% + (var(--画像サイズ, 4) * 2%) + var(--サイズ, 0%)); /* 対話全体枠における横幅の割合 25～43% */
+    max-width:     calc( 30% + (var(--画像サイズ, 4) * 2%) + var(--サイズ, 0%)); /* 対話全体枠における横幅の割合 30～48% */
     margin-bottom: calc(-25px - var(--被り幅, 0px)); /* ふきだしへの被り幅 */
 
     /* 🔹登場前の位置 */
