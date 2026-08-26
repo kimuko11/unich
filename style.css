@@ -40,7 +40,7 @@ button {
     cursor:     pointer;
 }
 
-input, button, textarea, select { font-family: inherit; }
+input, button, textarea, select { font: inherit; } /* フォントは親要素から継承 */
 
 a {
     text-decoration: none;

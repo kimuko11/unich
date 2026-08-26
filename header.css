@@ -53,6 +53,8 @@
 
     background-color: rgba(60, 60, 60, 0.75);
 
+    font-size: 12px;
+
     backdrop-filter:  blur(6px);
     box-shadow:       0  2px 20px black,             /* 背景の影 */
                 inset 0  2px 10px var(--弱光, #888), /* 光沢 */
@@ -88,13 +90,13 @@
     border-color: transparent transparent var(--強光, seashell) transparent;
 }
 
-/* 🔹設定ふきだしの中身 */
+/* 🔹スライダー群 */
 
 .設定項目 {
     display:        flex;
     flex-direction: column;
 
-    margin-bottom: 1rem;
+    margin-bottom: 18px;
 }
 
 .スライダー {
@@ -113,17 +115,19 @@
 
 .スライダー数値 {
     position:  absolute;
-    top:       -6px; /* 位置 */
+    top:       -8px; /* 位置 */
     left:      50%;
 
-    padding:   4px 8px;
+    padding:   2px 10px;
     translate: -50%;
 
     border:        1px solid var(--中光, #888);
     border-radius: 6px;
 
-    background-color:     #444;
-    color:                gold;
+    background-color:#444;
+
+    font-size: 1rem;
+    color:   gold;
 
     box-shadow: 0 2px 5px black;
 
@@ -145,6 +149,18 @@
     animation:  none;
 }
 
+/* 🔹スイッチ群 */
+
+.設定グループ {
+    display:         flex;
+    flex-wrap:       wrap;          /* 下段折り返し */
+    justify-content: space-between; /* 均等化 */
+}
+
+.設定グループ .設定項目 {
+    align-items: center;
+    white-space: nowrap;
+}
 
 .スイッチ {
     position: relative;
@@ -199,7 +215,6 @@
     top:      50%;
     right:    10px;
 
-    font-size:   12px;
     color:       var(--中光, #888);
     text-shadow: none;
 
@@ -228,24 +243,22 @@ input:checked + .スイッチ背景:after { /* ONの文字 */
     color: var(--強光, seashell);
 }
 
+/* 🔹初期化 */
 
 .リセット {
     display: block;
 
-    margin:  30px auto 0;
+    margin:  0 auto;
     padding: 4px 8px;
 
     border:        1px solid var(--中光, #888);
     border-radius: 6px;
 
-    color:  var(--中光, #888);
-    cursor: pointer;
+    color: var(--中光, #888);
 
     transition: all 0.2s ease;
 }
-.リセット:hover { color:     var(--強光, seashell);
-                 animation: none;
-}
+.リセット:hover { color: var(--強光, seashell); }
 
 
 /* #️⃣画面横幅 600px 以上の時、画像サイズ項目を隠す */
