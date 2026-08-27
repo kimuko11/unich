@@ -602,7 +602,8 @@ function セリフ表示(エリア, 完了コールバック) {
     const キャラ     = キャラ取得(エリア);
     const 文字一覧   = 文字分解(ふきだし);
 
-    const タメ文字数 = parseInt(ふきだし.dataset.wait || '0', 10); // HTMLの data-wait から追加文字数を取得（未設定なら0）
+    const タメ文字数 = parseInt(ふきだし.dataset.wait || '0', 10); // data-wait  追加の文字数   (未設定時 0)
+    const 速度倍率   = parseFloat(ふきだし.dataset.speed || '1');  // data-speed 文字速度の増減 (未設定時 1)
 
     身体アニメ開始(エリア);
 
@@ -643,7 +644,7 @@ function セリフ表示(エリア, 完了コールバック) {
 
         現在位置++;
 
-        タイマーID = setTimeout(次文字表示, 設定速度ms); // 毎回その時点の「設定速度ms」を取得して次のタイマーを設定
+        タイマーID = setTimeout(次文字表示, 設定速度ms * 速度倍率); // 毎回その時点の「設定速度ms」を取得して次のタイマーを設定
     }
 
     次文字表示(); // 処理開始

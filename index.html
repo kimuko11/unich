@@ -39,7 +39,7 @@
             <img src="img/logo_onair_001.webp" class="差分 出現" style="--待機: 11s;">
             <img src="img/logo.webp" alt="宇宙よろず相談室 ロゴ">
         </a>
-        <img src="img/logo_fukidasi.webp" class="差分 出現→消滅" style="--待機: 2s; --時間: 9s; pointer-events: none;">
+        <img src="img/logo_fukidasi.webp" class="差分 出現→消滅" style="--待機: 3s; --時間: 8s; pointer-events: none;">
     </div>
 
     <!-- 🔹設定 -->
@@ -166,7 +166,7 @@
 
     <!-- 🔹キャラ紹介 -->
 
-    <p class="星群 ▼"></p> <!-- ▼ は JS でスクロール出現を監視 -->
+    <p class="星群 ▼"></p> <!-- ▼ は JS でスクロール出現を監視 (data-threshold 出現割合の指定) -->
 
     <p class="白枠 改行">
         <span class="黒枠 極大 出現 ▼">🎙️</span>
@@ -174,7 +174,7 @@
     </p>
 
     <div class="画像 発光">
-        <div class="拡大 ▼" data-threshold="0.8">
+        <div class="拡大 ▼" data-threshold="0.9">
             <img src="pic/prof_doc_001.webp" alt="アイドルライブを楽しむドク">
         </div>
     </div>
@@ -193,7 +193,7 @@
     </p>
 
     <div class="画像 発光">
-        <div class="拡大 ▼" data-threshold="0.8">
+        <div class="拡大 ▼" data-threshold="0.9">
             <img src="pic/prof_uni_001.webp" alt="買い物中のユニちゃん">
         </div>
     </div>
@@ -207,13 +207,13 @@
         生活能力のないドクターを拾って彼女の番組にぶっこんだ結果、運よく人気番組となった。
     </p>
 
-    <p class="出現 改行20 ▼">
+    <p class="出現 改行15 ▼">
         <b>尊大なしゃべり</b>と<b>舌足らず</b>のミスマッチは、大きなお友達の支持を集めているとかいないとか。
     </p>
 
     <!-- 🔹流星 -->
 
-    <div class="画像 改行10">
+    <div class="画像 改行2">
         <img src="img/ryusei.webp" class="流星大 ▼">
     </div>
 
@@ -223,7 +223,7 @@
     <!-- 🔹タイトル -->
 
     <div class="画像 発光" style="z-index: 1;">
-        <div class="倒れ ▼" data-threshold="0.7">
+        <div class="倒れ ▼">
             <img src="img/kachinko.webp">
             <p class="カチンコ 中央">
                 <b class="ブロック 改行2" style="margin-top: 2rem;">ON AIR #001</b>
@@ -271,7 +271,7 @@
                 <img src="cha/dt_figure_heart.webp"  class="差分 ハート">
                 <img src="cha/dt_figure_figure.webp" class="差分 フィギュア">
             </div>
-            <div class="💬" style="--右割合: 5%;">
+            <div class="💬" style="--右割合: 6%;">
                 デュフフww<br>
                 本日は行きつけの中古ショップでプレミア価格10倍の絶版フィギュアを保護できて大満足の <b>Dr. YOU</b> (ドクター・ユー) ですぢゃ♥️
             </div>
@@ -284,7 +284,7 @@
                 <img src="cha/ut_odoroki_me.webp"      class="差分 驚き目→目パチ">
                 <img src="cha/ut_odoroki_kuchi.webp"   class="差分 口パク">
             </div>
-            <div class="💬 高速" data-se="se/odoroki.mp3">
+            <div class="💬 高速" data-se="se/odoroki.mp3" data-volume="0.5">
                 ぬわにっ!?<br>
                 おま、今月の生活費は残りきびちーって口をすっぱくちてゆってたのにまた…耳をなくちたんか！<br>
                 だいたいフィギュアなどと…精神的に成長ちた人間は「偶像崇拝」などちないのだから、ドクターなら年相応におちついて局の財政に貢献すゆがとーぜんなのでしゅ！
@@ -296,7 +296,7 @@
                 <img src="cha/dt_precure.webp">
                 <img src="cha/dt_precure_hosi.webp" class="差分 星回転">
             </div>
-            <div class="💬" data-wait="20" style="--右割合: 7.5%;">
+            <div class="💬" data-wait="10" style="--右割合: 5%;">
                 オウフwww<br>
                 そんな難しい言葉、よくぞご存知でwww<br>
                 そーゆーユニちゃそ社長には、年相応なプリ〇ュアの人形をあげませう。<br>
@@ -310,8 +310,8 @@
                 <img src="cha/uf_sizukana-ikari.webp">
                 <img src="cha/uf_sizukana-ikari_kekkan.webp" class="差分 高速伸縮">
             </div>
-            <div class="💬 高速" data-se="se/gogogo.mp3" data-volume="5" data-wait="50">
-                <em>……………</em>💢
+            <div class="💬 無声 高速" data-speed="20" data-se="se/gogogo.mp3" data-volume="3">
+                <em>・・・・</em>💢
             </div>
         </div>
 
