@@ -408,7 +408,7 @@ const 監視 = new IntersectionObserver((項目一覧) => {
         }
     });
     次キャラ処理();
-}, { threshold: 0.9 });
+}, { threshold: 1 });
 
 キャラ一覧.forEach((エリア) => { 監視.observe(エリア); });
 
@@ -482,7 +482,7 @@ function 次キャラ処理() {
 
     キャラ画像.addEventListener('transitionend', 登場完了);
 
-    // 万が一 transitionend が発火しなかった場合の保険（1.2秒後に強制実行）
+    // transitionend が発火しなかった場合の保険（1.2秒後に強制実行）
     setTimeout(登場完了, 1200);
 }
 
