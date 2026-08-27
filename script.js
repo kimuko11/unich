@@ -400,17 +400,44 @@ function 種別取得(エリア) {
 
 // 🎛️キャラの画面内出現の監視
 
-const 監視 = new IntersectionObserver((項目一覧) => {
-    項目一覧.forEach((項目) => {
-        if (項目.isIntersecting) {
-            待機リスト.push(項目.target);
-            監視.unobserve(項目.target);
-        }
-    });
-    次キャラ処理();
-}, { threshold: 1 });
+// ▫️threshold (デフォ 1) をふきだし100文字超過から20文字ごとに 0.05 減算
 
-キャラ一覧.forEach((エリア) => { 監視.observe(エリア); });
+function 閾値計算(エリア) {
+    const ふきだし = エリア.querySelector('.💬');
+    if (!ふきだし) return 1;
+
+    const 文字数    = ふきだし.textContent.trim().length;
+    const 基準文字数 = 100;
+    const 一行文字数 = 20;
+
+    if (文字数 <= 基準文字数) {
+        return 1;
+    }
+
+    const 超過文字数 = 文字数 - 基準文字数;
+    const 減算分    = (超過文字数 / 一行文字数) * 0.05;
+    const 計算閾値  = 1 - 減算分;
+
+    return Math.max(0.5, 計算閾値); // 最小で 0.5 まで
+}
+
+// ▫️個別に IntersectionObserver を生成して監視
+
+キャラ一覧.forEach((エリア) => {
+    const 計算済threshold = 閾値計算(エリア);
+
+    const 個別監視 = new IntersectionObserver((項目一覧) => {
+        項目一覧.forEach((項目) => {
+            if (項目.isIntersecting) {
+                待機リスト.push(項目.target);
+                個別監視.unobserve(項目.target); // 一度検知したら監視解除
+                次キャラ処理();
+            }
+        });
+    }, { threshold: 計算済threshold });
+
+    個別監視.observe(エリア);
+});
 
 
 // 🎛️「上から順番に登場 → セリフ」を管理する待機キュー (高速スクロール対策)
