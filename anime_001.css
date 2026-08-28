@@ -6,7 +6,7 @@
 
 /* 身体 */ .縦伸縮.再生, .横揺れ.再生, .横揺れ小.再生, .驚き→縦伸縮.再生, .震え.再生,
 /* 口元 */ .口パク.再生,
-/* 表情 */ .驚き汗.再生, .驚き目→目パチ.再生
+/* 表情 */ .驚き汗.再生, .驚き目→目パチ.再生, .雷.再生
 
     { animation-play-state: running; }
 
@@ -14,7 +14,7 @@
 
 /* 身体 */ body.停止 .縦伸縮, body.停止 .横揺れ, body.停止 .横揺れ小, body.停止 .驚き→縦伸縮, body.停止 .震え,
 /* 口元 */ body.停止 .口パク,
-/* 表情 */ body.停止 .驚き汗, body.停止 .驚き目→目パチ,
+/* 表情 */ body.停止 .驚き汗, body.停止 .驚き目→目パチ, body.停止 .雷.再生,
 /* 無限 */ body.停止 .ハート, body.停止 .高速伸縮, body.停止 .星回転, body.停止 .腕振り, body.停止 .ちいかわ, body.停止 .フィギュア,
 /* 吹出 */ body.停止 .💬::before, body.停止 .💬::after
 
@@ -33,7 +33,7 @@ body.停止 .驚き汗 {
     animation: 縦伸縮 0.5s infinite ease-in-out alternate paused;
 }
 @keyframes 縦伸縮 {
-    0%, 100% { scale: var(--キャラ反転, 1) 1.00; }
+    0%, 100% { scale: var(--キャラ反転, 1) 1.00; } /* ⚠️scale は --キャラ反転 必須 */
     50%      { scale: var(--キャラ反転, 1) 1.05; }
 }
 
@@ -60,8 +60,8 @@ body.停止 .驚き汗 {
                縦伸縮 0.5s infinite ease-in-out alternate 1s paused;
 }
 @keyframes 驚き {
-    0%, 100% { scale:      var(--キャラ反転, 1)        1.0; }
-    40%      { scale: calc(var(--キャラ反転, 1) * 1.2) 1.2; }
+    0%, 100% { scale: calc(var(--キャラ反転, 1) * 1.0) 1.0; }
+    40%      { scale: calc(var(--キャラ反転, 1) * 1.1) 1.1; }
 }
 
 .震え {
@@ -90,8 +90,8 @@ body.停止 .驚き汗 {
     animation: 口パク 0.2s infinite ease-in-out alternate paused;
 }
 @keyframes 口パク {
-      0% { scale: 1 1.0; }
-    100% { scale: 1 0.1; }
+      0% { scale: var(--キャラ反転, 1) 1.0; }
+    100% { scale: var(--キャラ反転, 1) 0.1; }
 }
 
 /* 🔹登場で再生、秒数経過で自動終了する表情アニメ */
@@ -102,11 +102,11 @@ body.停止 .驚き汗 {
 }
 @keyframes 驚き汗 {
       0% { opacity:   0.001;
-           scale:     0.5; }
+           scale:     calc(var(--キャラ反転, 1) * 0.5) 0.5; }
      40% { opacity:   1.0;
-           scale:     1.2; }
+           scale:     calc(var(--キャラ反転, 1) * 1.2) 1.2; }
     100% { opacity:   1.0;
-           scale:     1.0; }
+           scale:     calc(var(--キャラ反転, 1) * 1.0) 1.0; }
 }
 
 .驚き目→目パチ {
@@ -115,23 +115,28 @@ body.停止 .驚き汗 {
                目パチ 1s infinite ease-in-out alternate 1s paused;
 }
 @keyframes 驚き目 {
-    0%, 100% { scale: 1.0; }
-    40%      { scale: 1.2; }
+    0%, 100% { scale: calc(var(--キャラ反転, 1) * 1.0) 1.0; }
+    40%      { scale: calc(var(--キャラ反転, 1) * 1.2) 1.2; }
+}
+
+.雷 {
+    animation: 驚き汗 1s ease forwards paused,
+               ハート 0.5s infinite ease-in-out alternate 1s paused;
 }
 
 /* 🔹登場で再生、無限アニメへ移行 */
 
 @keyframes 目パチ {
-    0%, 90% { scale: 1 1.0; }
-    100%    { scale: 1 0.1; }
+    0%, 90% { scale: var(--キャラ反転, 1) 1.0; }
+    100%    { scale: var(--キャラ反転, 1) 0.1; }
 }
 
 /* 🔹最初から再生されていて停止しない無限アニメ */
 
 .ハート { animation: ハート 1s infinite ease-in-out alternate; }
 @keyframes ハート {
-      0% { scale: 1.0; }
-    100% { scale: 0.9; }
+      0% { scale: calc(var(--キャラ反転, 1) * 1.0) 1.0; }
+    100% { scale: calc(var(--キャラ反転, 1) * 1.1) 1.1; }
 }
 .高速伸縮 { animation: ハート 0.5s infinite ease-in-out alternate; }
 
