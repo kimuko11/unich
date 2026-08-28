@@ -1,26 +1,26 @@
 @charset "UTF-8";
 
-/* #️⃣ #001 使用アニメ
+/* #️⃣ #001 キャラアニメ
 
 /* 🔹初期停止(paused) → 再生クラス付与のアニメ指定 */
 
-/* 身体 */ .縦伸縮.再生, .横揺れ.再生, .横揺れ小.再生, .驚き→縦伸縮.再生, .震え.再生,
-/* 口元 */ .口パク.再生,
-/* 表情 */ .驚き汗.再生, .驚き目→目パチ.再生, .雷.再生
+/* 身体 */ .伸縮.再生, .横揺.再生, .拡縮→伸縮.再生, .震動.再生,
+/* 口元 */ .口元.再生,
+/* 表情 */ .射出.再生, .拡縮→瞬き.再生, .射出→拍動.再生
 
     { animation-play-state: running; }
 
 /* 🔹表情アニメ OFF */
 
-/* 身体 */ body.停止 .縦伸縮, body.停止 .横揺れ, body.停止 .横揺れ小, body.停止 .驚き→縦伸縮, body.停止 .震え,
-/* 口元 */ body.停止 .口パク,
-/* 表情 */ body.停止 .驚き汗, body.停止 .驚き目→目パチ, body.停止 .雷.再生,
-/* 無限 */ body.停止 .ハート, body.停止 .高速伸縮, body.停止 .星回転, body.停止 .腕振り, body.停止 .ちいかわ, body.停止 .フィギュア,
+/* 身体 */ body.停止 .伸縮, body.停止 .横揺, body.停止 .拡縮→伸縮, body.停止 .震動,
+/* 口元 */ body.停止 .口元,
+/* 表情 */ body.停止 .射出, body.停止 .拡縮→瞬き, body.停止 .射出→拍動.再生,
+/* 無限 */ body.停止 .拍動, body.停止 .回転, body.停止 .フィギュア,
 /* 吹出 */ body.停止 .💬::before, body.停止 .💬::after
 
     { animation: none; }
 
-body.停止 .驚き汗 {
+body.停止 .射出 {
     opacity: 1;
     scale:   1;
 }
@@ -28,46 +28,38 @@ body.停止 .驚き汗 {
 
 /* #️⃣登場で再生、次ターンで停止される身体アニメ ( class="キャラ画像 ◯◯◯" ) */
 
-.縦伸縮 {
+.伸縮 {
     transform-origin: center bottom;
-    animation: 縦伸縮 0.5s infinite ease-in-out alternate paused;
+    animation: 伸縮 var(--時間, 0.5s) var(--待機, 0s) ease-in-out infinite alternate paused;
 }
-@keyframes 縦伸縮 {
+@keyframes 伸縮 {
     0%, 100% { scale: var(--キャラ反転, 1) 1.00; } /* ⚠️scale は --キャラ反転 必須 */
     50%      { scale: var(--キャラ反転, 1) 1.05; }
 }
 
-.横揺れ {
-    transform-origin: center bottom;
-    animation: 横揺れ 0.5s infinite ease-in-out alternate paused;
+.横揺 {
+    transform-origin: var(--起点, center bottom);
+    animation: 横揺 var(--時間, 0.5s) var(--待機, 0s) ease-in-out infinite alternate paused;
 }
-.横揺れ小 {
-    transform-origin: center bottom;
-    animation: 横揺れ小 1s infinite ease-in-out alternate paused;
-}
-@keyframes 横揺れ {
-      0% { rotate: -5deg; }
-    100% { rotate:  5deg; }
-}
-@keyframes 横揺れ小 {
-      0% { rotate: -2deg; }
-    100% { rotate:  2deg; }
+@keyframes 横揺 {
+      0% { rotate: calc(var(--角度, 5deg) *  1); }
+    100% { rotate: calc(var(--角度, 5deg) * -1); }
 }
 
-.驚き→縦伸縮 {
+.拡縮→伸縮 {
     transform-origin: center bottom;
-    animation: 驚き   1.0s ease paused,
-               縦伸縮 0.5s infinite ease-in-out alternate 1s paused;
+    animation: 拡縮 var(--時間1, 1.0s) var(--待機1, 0s) paused,
+               伸縮 var(--時間2, 0.5s) var(--待機2, 1s) ease-in-out infinite alternate paused;
 }
-@keyframes 驚き {
-    0%, 100% { scale: calc(var(--キャラ反転, 1) * 1.0) 1.0; }
-    40%      { scale: calc(var(--キャラ反転, 1) * 1.1) 1.1; }
+@keyframes 拡縮 {
+    0%, 100% { scale: calc(var(--キャラ反転, 1) * 1) 1; }
+    40%      { scale: calc(var(--キャラ反転, 1) * var(--拡大, 1.1)) var(--拡大, 1.1); }
 }
 
-.震え {
-    animation: 震え 0.5s infinite linear paused;
+.震動 {
+    animation: 震動 var(--時間, 0.5s) var(--待機, 0s) linear infinite paused;
 }
-@keyframes 震え {
+@keyframes 震動 {
     0%, 100% { translate:  0    0;   }
     10%      { translate: -2px  1px; }
     20%      { translate:  1px -2px; }
@@ -85,78 +77,63 @@ body.停止 .驚き汗 {
 
 /* 🔹登場で再生、文字送り完了で停止される口元アニメ */
 
-.口パク {
-    transform-origin: 50% 75%;
-    animation: 口パク 0.2s infinite ease-in-out alternate paused;
+.口元 {
+    transform-origin: center var(--起点, 75%);
+    animation: 口元 var(--時間, 0.2s) var(--待機, 0s) ease-in-out infinite alternate paused;
 }
-@keyframes 口パク {
+@keyframes 口元 {
       0% { scale: var(--キャラ反転, 1) 1.0; }
     100% { scale: var(--キャラ反転, 1) 0.1; }
 }
 
 /* 🔹登場で再生、秒数経過で自動終了する表情アニメ */
 
-.驚き汗 {
+.射出 {
     opacity: 0;
-    animation: 驚き汗 1s ease forwards paused;
+    animation: 射出 var(--時間, 1s) var(--待機, 0s) forwards paused;
 }
-@keyframes 驚き汗 {
-      0% { opacity:   0.001;
-           scale:     calc(var(--キャラ反転, 1) * 0.5) 0.5; }
-     40% { opacity:   1.0;
-           scale:     calc(var(--キャラ反転, 1) * 1.2) 1.2; }
-    100% { opacity:   1.0;
-           scale:     calc(var(--キャラ反転, 1) * 1.0) 1.0; }
+@keyframes 射出 {
+      0% { opacity: 0;
+           scale:   calc(var(--キャラ反転, 1) * 0.3) 0.3; }
+     40% { opacity: 1;
+           scale:   calc(var(--キャラ反転, 1) * 1.2) 1.2; }
+    100% { opacity: 1;
+           scale:   calc(var(--キャラ反転, 1) * 1.0) 1.0; }
 }
 
-.驚き目→目パチ {
+.拡縮→瞬き {
     transform-origin: center 67%;
-    animation: 驚き目 1s ease forwards paused,
-               目パチ 1s infinite ease-in-out alternate 1s paused;
-}
-@keyframes 驚き目 {
-    0%, 100% { scale: calc(var(--キャラ反転, 1) * 1.0) 1.0; }
-    40%      { scale: calc(var(--キャラ反転, 1) * 1.2) 1.2; }
+    animation: 拡縮 1s forwards paused,
+               瞬き 1s ease-in-out infinite alternate 1s paused;
 }
 
-.雷 {
-    animation: 驚き汗 1s ease forwards paused,
-               ハート 0.5s infinite ease-in-out alternate 1s paused;
+.射出→拍動 {
+    animation: 射出 1s ease forwards paused,
+               拍動 0.5s infinite ease-in-out alternate 1s paused;
 }
 
 /* 🔹登場で再生、無限アニメへ移行 */
 
-@keyframes 目パチ {
+@keyframes 瞬き {
     0%, 90% { scale: var(--キャラ反転, 1) 1.0; }
     100%    { scale: var(--キャラ反転, 1) 0.1; }
 }
 
 /* 🔹最初から再生されていて停止しない無限アニメ */
 
-.ハート { animation: ハート 1s infinite ease-in-out alternate; }
-@keyframes ハート {
+.拍動 { animation: 拍動 var(--時間, 1s) var(--待機, 0s) ease-in-out infinite alternate; }
+@keyframes 拍動 {
       0% { scale: calc(var(--キャラ反転, 1) * 1.0) 1.0; }
     100% { scale: calc(var(--キャラ反転, 1) * 1.1) 1.1; }
 }
-.高速伸縮 { animation: ハート 0.5s infinite ease-in-out alternate; }
 
-.星回転 {
-    transform-origin: 25% 20.8%;
-    animation: 星回転 5s infinite linear;
+.回転 {
+    transform-origin: var(--起点, center center);
+    animation: 回転 var(--時間, 5s) var(--待機, 0s) linear infinite;
 }
-@keyframes 星回転 {
+@keyframes 回転 {
       0% { rotate: 360deg; }
     100% { rotate:   0deg; }
-}
-
-.腕振り {
-    transform-origin: 25% 95%;
-    animation: 横揺れ 0.5s infinite ease-in-out alternate;
-}
-
-.ちいかわ {
-    transform-origin: center bottom;
-    animation: 横揺れ小 1s infinite ease-in-out alternate;
 }
 
 .フィギュア { 

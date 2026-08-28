@@ -361,8 +361,8 @@ function スクロール出現監視取得(閾値) {
 }
 
 document.querySelectorAll('.▼').forEach((要素) => {
-    const 親要素監視系 = 要素.classList.contains('スライド') || 要素.classList.contains('拡大')
-                     || 要素.classList.contains('倒れ'); // 初期配置が本配置と異なり、threshold 計算不能な要素
+    const 親要素監視系 = 要素.classList.contains('横滑') || 要素.classList.contains('拡大')
+                     || 要素.classList.contains('半倒'); // 初期配置が本配置と異なり、threshold 計算不能な要素
     const 監視対象    = 親要素監視系 ? 要素.parentElement : 要素;
     const 指定閾値    = parseFloat(要素.dataset.threshold);
     const 閾値        = Number.isNaN(指定閾値) ? スクロール出現閾値既定値 : 指定閾値;
@@ -517,7 +517,7 @@ function 次キャラ処理() {
 // 🎛️身体・差分アニメ
 
 function 身体アニメ開始(エリア) {
-    エリア.querySelectorAll('.縦伸縮, .横揺れ, .横揺れ小, .驚き→縦伸縮, .震え, .驚き目→目パチ, .驚き汗, .雷').forEach((要素) => {
+    エリア.querySelectorAll('.伸縮, .横揺, .拡縮→伸縮, .震動, .拡縮→瞬き, .射出, .射出→拍動').forEach((要素) => {
         要素.style.animation  = '';
         要素.style.rotate     = '';
         要素.style.scale      = '';
@@ -529,25 +529,25 @@ function 身体アニメ開始(エリア) {
 // ▫️身体アニメ終了
 
 function 身体アニメ終了(エリア) {
-    エリア.querySelectorAll('.横揺れ, .横揺れ小').forEach((要素) => {
+    エリア.querySelectorAll('.横揺').forEach((要素) => {
         要素.classList.remove('再生');
         ニュートラル復帰(要素, 'rotate', '0deg');
     });
 
-    エリア.querySelectorAll('.縦伸縮, .驚き→縦伸縮').forEach((要素) => {
+    エリア.querySelectorAll('.伸縮, .拡縮→伸縮').forEach((要素) => {
         要素.classList.remove('再生');
         const キャラ反転 = getComputedStyle(要素).getPropertyValue('--キャラ反転').trim() || '1';
         ニュートラル復帰(要素, 'scale', `${キャラ反転} 1`);
     });
 
-    エリア.querySelectorAll('.震え').forEach((要素) => {
+    エリア.querySelectorAll('.震動').forEach((要素) => {
         要素.classList.remove('再生');
     });
 }
 
 // ▫️アニメ終了時のニュートラル復帰
 
-function ニュートラル復帰(要素, プロパティ, 目標値, 秒数 = 0.5) {
+function ニュートラル復帰(要素, プロパティ, 目標値, 秒数 = 0.3) {
     const 現在値 = getComputedStyle(要素)[プロパティ];
 
     要素.style.animation  = 'none';
@@ -564,7 +564,7 @@ function ニュートラル復帰(要素, プロパティ, 目標値, 秒数 = 0
 // 🎛️口元アニメ
 
 function 口元アニメ開始(エリア) {
-    エリア.querySelectorAll('.口パク').forEach((要素) => {
+    エリア.querySelectorAll('.口元').forEach((要素) => {
         要素.style.animation  = '';
         要素.style.rotate     = '';
         要素.style.scale      = '';
@@ -576,7 +576,7 @@ function 口元アニメ開始(エリア) {
 // ▫️口元アニメ終了
 
 function 口元アニメ終了(エリア) {
-    エリア.querySelectorAll('.口パク').forEach((要素) => {
+    エリア.querySelectorAll('.口元').forEach((要素) => {
         要素.classList.remove('再生');
         ニュートラル復帰(要素, 'scale', '1');
     });
@@ -664,7 +664,7 @@ function セリフ表示(エリア, 完了コールバック) {
 
             if (!モノローグ && 文字span.textContent !== ' ') 音声再生(キャラ);
 
-            if (現在位置 === 文字一覧.length - 1 && !モノローグ) { // 最後の1文字を表示し終えた瞬間に口パクを止める
+            if (現在位置 === 文字一覧.length - 1 && !モノローグ) { // 最後の1文字を表示し終えた瞬間に口元を止める
                 口元アニメ終了(エリア);
             }
         }

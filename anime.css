@@ -3,15 +3,16 @@
 /* #️⃣汎用アニメ */
 
 .出現 {
-    opacity:   0.001;
-    animation: 出現 var(--時間, 1s) linear forwards var(--待機, 0s);
+    opacity: 0;
+
+    animation: 出現 var(--時間, 1s) var(--待機, 0s) linear forwards;
 }
 @keyframes 出現 {
-      0% { opacity: 0.001; }
+      0% { opacity: 0; }
     100% { opacity: 1; }
 }
 
-.消滅 { animation: 消滅 var(--時間, 1s) linear forwards var(--待機, 0s);
+.消滅 { animation: 消滅 var(--時間, 1s) var(--待機, 0s) linear forwards;
 }
 .連動消滅 {
     animation: 消滅 auto linear forwards;
@@ -20,54 +21,58 @@
 @keyframes 消滅 {
       0% { opacity:    auto; }
     100% { opacity:    0;
-           visibility: hidden;}
+           visibility: hidden; }
 }
 
 .出現→消滅 {
-    opacity: 0.001;
-    animation: 出現→消滅 var(--時間, 10s) linear forwards var(--待機, 0s);
+    opacity: 0;
+
+    animation: 出現→消滅 var(--時間, 10s) var(--待機, 0s) linear forwards;
 }
 @keyframes 出現→消滅 {
-      0%      { opacity:    0.001; }
+      0%      { opacity:    0; }
      10%, 90% { opacity:    1; }
     100%      { opacity:    0;
                 visibility: hidden; }
 }
 
 .拡大 {
-    scale: 0.001;
+    scale: 0;
+
     transform-origin: var(--起点, center bottom);
-    animation: 拡大 var(--時間, 1s) cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards var(--待機, 0s);
+    animation: 拡大 var(--時間, 1s) var(--待機, 0s) cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
 }
 @keyframes 拡大 {
-      0% { scale: 0.001; }
+      0% { scale: 0; }
     100% { scale: 1; }
 }
 
-.スライド {
-    opacity: 0.001;
-    animation: スライド var(--時間, 1s) cubic-bezier(0.175, 0.885, 0.32, 1.07) forwards var(--待機, 0s);
+.横滑 {
+    opacity: 0;
+
+    animation: 横滑 var(--時間, 1s) var(--待機, 0s) cubic-bezier(0.175, 0.885, 0.32, 1.07) forwards;
 }
-@keyframes スライド {
+@keyframes 横滑 {
       0% { translate: calc(var(--方向, 1) * 99vw) 0; }
     100% { translate: 0 0;
            opacity:   1; }
 }
 
-.倒れ {
+.半倒 {
     rotate:  var(--角度, -90deg);
-    opacity: 0.001;
+    opacity: 0;
+
     transform-origin: var(--起点, left bottom);
-    animation: 倒れ var(--時間, 1.5s) cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards var(--待機, 0s);
+    animation: 半倒 var(--時間, 1.5s) var(--待機, 0s) cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
 }
-@keyframes 倒れ {
+@keyframes 半倒 {
       0% { rotate:  var(--角度, -90deg); }
     100% { rotate:  0deg;
            opacity: 1; }
 }
 
 .浮遊 {
-    animation: 浮遊 var(--時間, 1s) infinite ease-in-out alternate var(--待機, 0s);
+    animation: 浮遊 var(--時間, 1s) var(--待機, 0s) ease-in-out infinite alternate;
 }
 @keyframes 浮遊 {
       0% { translate: 0  3px; }
@@ -78,8 +83,8 @@
 /* #️⃣登場アニメ OFF */
 
 body.即時 .出現,
-body.即時 .スライド,
-body.即時 .倒れ,
+body.即時 .横滑,
+body.即時 .半倒,
 body.即時 .落下, 
 body.即時 .キャラ画像 {
     opacity:   1;
