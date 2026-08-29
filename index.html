@@ -228,13 +228,13 @@
             <p class="カチンコ 中央">
                 <b class="ブロック 改行2" style="margin-top: 2rem;">ON AIR #001</b>
                 <b class="ブロック 改行2 大字">いけない♥️アイドル</b>
-                <span class="ブロック 左寄 極小 銀">👇画面をタップすると、効果音付きのリッチコンテンツをお楽しみいただけます。
+                <span class="ブロック 左寄 小字 銀">👇画面をタップすると、効果音付きのリッチコンテンツをお楽しみいただけます。
                 変更・調整したい時は、画面右上のラジオをタップして、お好みの設定にできます。</span>
             </p>
         </div>
     </div>
 
-    <p class="星群 ▼" style="margin-top: -18.5rem; margin-bottom: 40vh; --待機: 2s;"></p>
+    <p class="星群 ▼" style="margin-top: -20rem; margin-bottom: 40vh; --待機: 2s;"></p>
 
     <!-- 🔹1画面弱の空白と流星 -->
 
@@ -246,11 +246,21 @@
 
     <main class="対話全体枠">
 
-        <!-- 利用できる CSS 変数
-        🥸, 🐰:   --間隔 px
+        <!-- 
+        ◾利用できる CSS 変数
+        🥸, 🐰:   --間隔 px (上との間隔を増減)
         キャラ画像: --サイズ %, --被り幅 px
         💬:        --左割合 %, --右割合 %
-        標準より増減したい時は、該当クラスに style で指定 -->
+
+        ◾アニメ変数
+        --起点 %, --時間 s, --待機 s, (--角度 deg, --拡大)
+
+        ◾カスタムデータ
+        data-speed  文字速度の倍率 (20倍で通常の1行相当の時間)
+        data-wait   セリフ終了後のタメ文字数
+        data-se     効果音 URL
+        data-volume 音量の倍率 (SE音量はデフォ0.1、最大0.22なので、5倍までを推奨)
+        -->
 
         <div class="🐰">
             <div class="キャラ画像 横揺" style="--起点: center bottom;">
@@ -311,8 +321,8 @@
                 <img src="cha/uf_sizukana-ikari.webp">
                 <img src="cha/uf_sizukana-ikari_kekkan.webp" class="差分 拍動" style="--時間: 0.5s;">
             </div>
-            <div class="💬 高速" data-speed="15" data-se="se/gogogo.mp3" data-volume="5">
-                <em>・・・・</em>💢
+            <div class="💬 高速" data-speed="15">
+                ・・・・💢
             </div>
         </div>
 
@@ -321,10 +331,10 @@
                 <img src="cha/df_chiikawa.webp">
                 <img src="cha/df_chiikawa_chiikawa.webp" class="差分 横揺" style="--時間: 0.5s;">
             </div>
-            <div class="💬" data-wait="10">
-                あれ、お気に召されない？<br>
-                ちい〇わの方がよかったですかのう…<br>
-                <small>それともこっち…いや、これの方が…ｳﾑﾑﾑﾑ</small>
+            <div class="💬" data-wait="20">
+                おや、お気に召されない？<br>
+                ちい〇わの方がよかったですかのう…
+                <div class="ト書き下">（次々フィギュアを出してくる）</div>
             </div>
         </div>
 
@@ -335,7 +345,7 @@
                 <img src="cha/ut_ikari_kekkan.webp"   class="差分 拍動" style="--時間: 0.5s;">
                 <img src="cha/ut_ikari_kuchi.webp"    class="差分 口元" style="--起点: 79%; --時間: 0.15s;">
             </div>
-            <div class="💬 高速">
+            <div class="💬 高速" data-se="se/gogogo.mp3" data-volume="5">
                 それを買うおカネはどこから出たああ〜〜！<br>
                 モーロクぢぢい〜〜！
             </div>

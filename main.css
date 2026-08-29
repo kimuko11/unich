@@ -120,7 +120,7 @@
 
     /* 🔹発話前 */
 
-    scale: 0.001;
+    scale: 0;
 
     /* 🔹発話の仕方 */
 
@@ -128,7 +128,7 @@
 }
 
 .💬.発話 {
-        scale:   1;
+        scale: 1;
     }
 
 /* 🔹ふきだし背景の疑似レイヤー (文字と切り離すことでアニメしても文字は固定のまま、かつメインレイヤーの再構築を回避) */
@@ -230,10 +230,28 @@
 /* #️⃣文字送り（1文字ずつフェードイン） */
 
 .文字 {
-    opacity:    0.001;
+    opacity:    0;
     transition: opacity 0.15s ease-out;
 }
 .文字.表示済 {
     opacity:   1;
     animation: none;
 }
+
+
+/* #️⃣ト書き */
+
+.ト書き上, .ト書き下 {
+    font-size: 0.8rem;
+    opacity:   0;
+}
+.ト書き上 {
+    margin:    -45px -20px  25px;
+    animation: 出現 1s 0.5s linear forwards;
+}
+.ト書き下 {
+    margin:     25px -20px -45px;
+    text-align: right;
+    transition: opacity 1s linear;
+}
+.ト書き下.表示 { opacity: 1; }

@@ -583,7 +583,7 @@ function 口元アニメ終了(エリア) {
 }
 
 
-// 🎛️文字分解（ふきだし内のHTML構造を保ったまま、文字を1つずつ <span class="文字"> に分解）
+// 🎛️文字分解（ふきだし内のHTML構造を保ったまま、文字を1つずつ<span class="文字">に分解。ト書きは除外）
 
 function 文字分解(要素) {
     const 文字要素一覧 = [];
@@ -600,6 +600,12 @@ function 文字分解(要素) {
                     文字要素一覧.push(文字span);
                 });
             } else if (子ノード.nodeType === Node.ELEMENT_NODE) {
+                if (子ノード.classList.contains('ト書き上') || 子ノード.classList.contains('ト書き下')) {
+                    const 複製ト書き = 子ノード.cloneNode(true);
+                    複製先.appendChild(複製ト書き);
+                    return;
+                }
+
                 if (子ノード.tagName === 'BR') {
                     複製先.appendChild(document.createElement('br'));
                 } else {
@@ -632,6 +638,15 @@ function セリフ表示(エリア, 完了コールバック) {
     const タメ文字数 = parseInt(ふきだし.dataset.wait || '0', 10); // data-wait  追加の文字数   (未設定時 0)
     const 速度倍率   = parseFloat(ふきだし.dataset.speed || '1');  // data-speed 文字速度の増減 (未設定時 1)
 
+    // ▫️ト書き下の表示関数
+
+    function ト書き下表示() {
+        const ト書き下 = ふきだし.querySelector('.ト書き下');
+        if (ト書き下) {
+            ト書き下.classList.add('表示');
+        }
+    }
+
     身体アニメ開始(エリア);
 
     if (!モノローグ) 口元アニメ開始(エリア);
@@ -647,6 +662,7 @@ function セリフ表示(エリア, 完了コールバック) {
                 文字一覧[i].classList.add('表示済');
             }
             if (!モノローグ) 口元アニメ終了(エリア);
+            ト書き下表示();
             完了コールバック();
             return;
         }
@@ -664,8 +680,9 @@ function セリフ表示(エリア, 完了コールバック) {
 
             if (!モノローグ && 文字span.textContent !== ' ') 音声再生(キャラ);
 
-            if (現在位置 === 文字一覧.length - 1 && !モノローグ) { // 最後の1文字を表示し終えた瞬間に口元を止める
-                口元アニメ終了(エリア);
+            if (現在位置 === 文字一覧.length - 1) { // 最後の1文字を表示し終えた瞬間
+                if (!モノローグ) 口元アニメ終了(エリア);
+                ト書き下表示();
             }
         }
 
