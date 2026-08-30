@@ -86,9 +86,11 @@
     max-width:     calc( 30% + (var(--画像サイズ, 4) * 2%) + var(--サイズ, 0%)); /* 対話全体枠における横幅の割合 30～48% (デフォ 38%) */
     margin-bottom: calc(-25px - var(--被り幅, 0px)); /* ふきだしへの被り幅 */
 
+    --起点: 50% 50%;
+
     /* 🔹登場前の位置 */
 
-    transform: translateX(calc(var(--出現方向, 1) * 120%)); /* JSの登場完了検知専用として、身体アニメと干渉しない transform を使用 */
+    transform: translateX(calc(var(--出現方向, 1) * 99%)); /* JSの登場完了検知専用として、身体アニメと干渉しない transform を使用 */
     opacity:   0.001;
     scale:     var(--キャラ反転, 1) 1;
 
@@ -96,7 +98,7 @@
 
     transition: transform 1s cubic-bezier(0.34, 1.56, 0.64, 1),
                 opacity   1s ease-out,
-                filter    1s ease; /* 消光用 */
+                filter    1s linear; /* 消光用 */
 }
 
 .キャラ画像.登場 {
@@ -114,7 +116,7 @@
 
     margin-left:      calc(var(--左余白, auto) + var(--左割合, 0%));
     margin-right:     calc(var(--右余白, auto) + var(--右割合, 0%));
-    transform-origin: var(--起点,   top center);
+    transform-origin: var(--起点, top center);
 
     word-break: break-all; /* 右端で強制改行 */
 

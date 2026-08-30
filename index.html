@@ -35,11 +35,11 @@
 
     <div class="ロゴ 発光 横滑" style="--待機: 1s;">
         <a href="#">
-            <img src="img/logo_subtitle.webp"  class="差分 消滅" style="--待機: 10s;">
-            <img src="img/logo_onair_001.webp" class="差分 出現" style="--待機: 11s;">
+            <img src="img/logo_subtitle.webp"  class="動作 消滅" style="--待機: 10s;">
+            <img src="img/logo_onair_001.webp" class="動作 出現" style="--待機: 11s;">
             <img src="img/logo.webp" alt="宇宙よろず相談室 ロゴ">
         </a>
-        <img src="img/logo_fukidasi.webp" class="差分 出現→消滅" style="--待機: 3s; --時間: 8s; pointer-events: none;">
+        <img src="img/logo_fukidasi.webp" class="動作 出現→消滅" style="--待機: 3s; --時間: 8s; pointer-events: none;">
     </div>
 
     <!-- 🔹設定 -->
@@ -137,9 +137,9 @@
 
     <div class="画像 改行2">
         <img src="pic/hosocyu_yuka.webp">
-        <img src="pic/hosocyu_unich.webp"  class="差分 ネオン">
-        <img src="pic/hosocyu_hosoto.webp" class="差分 出現" style="--待機: 3s;">
-        <img src="pic/hosocyu.webp"        class="差分 落下 発光" alt="ドクとユニちゃん">
+        <img src="pic/hosocyu_unich.webp"  class="動作 ネオン">
+        <img src="pic/hosocyu_hosoto.webp" class="動作 出現" style="--待機: 3s;">
+        <img src="pic/hosocyu.webp"        class="動作 落下 発光" alt="ドクとユニちゃん">
     </div>
 
     <!-- 🔹概要文 -->
@@ -170,7 +170,7 @@
 
     <p class="白枠 改行">
         <span class="黒枠 極大 出現 ▼">🎙️</span>
-        <span class="差分 黒枠 大字 太字 橙 横滑 ▼" style="top: 0.4em;">番組パーソナリティ</span>
+        <span class="動作 黒枠 大字 太字 橙 横滑 ▼" style="top: 0.4em;">番組パーソナリティ</span>
     </p>
 
     <div class="画像 発光">
@@ -253,7 +253,7 @@
         💬:        --左割合 %, --右割合 %
 
         ◾アニメ変数
-        --起点 %, --時間 s, --待機 s, (--角度 deg, --拡大)
+        --起点 %, --時間 s, --待機 s, ( --倍率 0, --距離 px, --角度 deg)
 
         ◾カスタムデータ
         data-speed  文字速度の倍率 (20倍で通常の1行相当の時間)
@@ -263,11 +263,11 @@
         -->
 
         <div class="🐰">
-            <div class="キャラ画像 横揺" style="--起点: center bottom;">
+            <div class="キャラ画像 身体_横揺">
                 <img src="cha/ut_genkina-aisatu.webp">
-                <img src="cha/ut_genkina-aisatu_kuchi.webp" class="差分 口元" style="--起点: 75%;">
-                <img src="cha/ut_genkina-aisatu_heart.webp" class="差分 拍動">
-                <img src="cha/ut_genkina-aisatu_ude.webp"   class="差分 横揺" style="--起点: 25% 95%;">
+                <img src="cha/ut_genkina-aisatu_heart.webp" alt="♥️" class="動作 発射→拍動" style="--時間1: 2s; --時間2: 2s;">
+                <img src="cha/ut_genkina-aisatu_kuchi.webp" alt="👄" class="動作 口元"       style="--起点:  50% 75%;">
+                <img src="cha/ut_genkina-aisatu_ude.webp"   alt="💪" class="動作 横揺"       style="--起点:  25% 95%;">
             </div>
             <div class="💬 中速">
                 人類の起源から魂の行き先まで、リスナーのあらゆゆ疑問や謎にこたえゆ「<b>宇宙よろず相談室</b>」！<br>
@@ -276,10 +276,10 @@
         </div>
 
         <div class="🥸">
-            <div class="キャラ画像 伸縮" style="--被り幅: 20px;">
+            <div class="キャラ画像 身体_縦伸" style="--被り幅: 20px;">
                 <img src="cha/dt_figure.webp">
-                <img src="cha/dt_figure_heart.webp"  class="差分 拍動">
-                <img src="cha/dt_figure_figure.webp" class="差分 フィギュア">
+                <img src="cha/dt_figure_heart.webp"  alt="♥️" class="動作 発射→拍動" style="--時間1: 3s; --時間2: 3s;">
+                <img src="cha/dt_figure_figure.webp" alt="💪" class="動作 フィギュア">
             </div>
             <div class="💬" style="--右割合: 6%;">
                 デュフフww<br>
@@ -288,11 +288,11 @@
         </div>
 
         <div class="🐰">
-            <div class="キャラ画像 拡縮→伸縮">
+            <div class="キャラ画像 身体_拍動">
                 <img src="cha/ut_odoroki.webp">
-                <img src="cha/ut_odoroki_odoroki.webp" class="差分 射出">
-                <img src="cha/ut_odoroki_me.webp"      class="差分 拡縮→瞬き" style="--拡大: 1.2;">
-                <img src="cha/ut_odoroki_kuchi.webp"   class="差分 口元"     style="--起点: 75%;">
+                <img src="cha/ut_odoroki_odoroki.webp" alt="⚡" class="動作 発射">
+                <img src="cha/ut_odoroki_me.webp"      alt="👀" class="動作 拍動→目瞬" style="--起点: 50% 67%; --倍率: 1.2;">
+                <img src="cha/ut_odoroki_kuchi.webp"   alt="👄" class="動作 口元"       style="--起点: 50% 75%;">
             </div>
             <div class="💬 高速" data-se="se/odoroki.mp3" data-volume="0.5">
                 ぬわにっ!?<br>
@@ -303,9 +303,9 @@
         </div>
 
         <div class="🥸">
-            <div class="キャラ画像 伸縮" style="--サイズ: 3%; --被り幅: 20px;">
+            <div class="キャラ画像 身体_縦伸" style="--サイズ: 4%; --被り幅: 20px;">
                 <img src="cha/dt_precure.webp">
-                <img src="cha/dt_precure_hosi.webp" class="差分 回転" style="--起点: 25% 20.8%;">
+                <img src="cha/dt_precure_hosi.webp" alt="⭐" class="動作 回転" style="--起点: 25% 21%; --時間: 5s;">
             </div>
             <div class="💬" style="--右割合: 6%;">
                 オウフwww<br>
@@ -317,9 +317,9 @@
         </div>
 
         <div class="🐰" style="--間隔: 20px;">
-            <div class="キャラ画像 震動" style="--サイズ: -3%;">
+            <div class="キャラ画像 身体_震動" style="--サイズ: -4%;">
                 <img src="cha/uf_sizukana-ikari.webp">
-                <img src="cha/uf_sizukana-ikari_kekkan.webp" class="差分 拍動" style="--時間: 0.5s;">
+                <img src="cha/uf_sizukana-ikari_kekkan.webp" alt="💢" class="動作 拍動" style="--時間: 0.5s;">
             </div>
             <div class="💬 高速" data-speed="15">
                 ・・・・💢
@@ -327,9 +327,9 @@
         </div>
 
         <div class="🥸" style="--間隔: -20px;">
-            <div class="キャラ画像 横揺" style="--サイズ: -3%; --被り幅: 10px; --起点: center bottom; --時間: 1s; --角度: 2deg;">
+            <div class="キャラ画像 身体_横揺" style="--サイズ: -4%; --被り幅: 10px; --起点: 50% 100%; --時間: 1s;">
                 <img src="cha/df_chiikawa.webp">
-                <img src="cha/df_chiikawa_chiikawa.webp" class="差分 横揺" style="--時間: 0.5s;">
+                <img src="cha/df_chiikawa_chiikawa.webp" alt="🤲" class="動作 フィギュア">
             </div>
             <div class="💬" data-wait="20">
                 おや、お気に召されない？<br>
@@ -339,13 +339,13 @@
         </div>
 
         <div class="🐰">
-            <div class="キャラ画像 拡縮→伸縮">
+            <div class="キャラ画像 身体_拍動">
                 <img src="cha/ut_ikari.webp">
-                <img src="cha/ut_ikari_kaminari.webp" class="差分 射出→拍動">
-                <img src="cha/ut_ikari_kekkan.webp"   class="差分 拍動" style="--時間: 0.5s;">
-                <img src="cha/ut_ikari_kuchi.webp"    class="差分 口元" style="--起点: 79%; --時間: 0.15s;">
+                <img src="cha/ut_ikari_kaminari.webp" alt="⚡" class="動作 発射→拍動">
+                <img src="cha/ut_ikari_kekkan.webp"   alt="💢" class="動作 拍動" style="--時間: 0.5s;">
+                <img src="cha/ut_ikari_kuchi.webp"    alt="👄" class="動作 口元" style="--起点: 50% 79%; --時間: 0.15s;">
             </div>
-            <div class="💬 高速" data-se="se/gogogo.mp3" data-volume="5">
+            <div class="💬 高速" data-se="se/gogogo.mp3" data-volume="5" style="--左割合: 1%;">
                 それを買うおカネはどこから出たああ〜〜！<br>
                 モーロクぢぢい〜〜！
             </div>

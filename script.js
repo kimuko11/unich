@@ -53,17 +53,17 @@ let スイッチ表情アニメ   = true;
 // ▫️計算用の派生変数
 
 let 設定文字サイズ = 100;
-let 設定速度ms    = 90 - スライダー文字速度 * 10; // 0 〜 90ms (デフォ 50ms)
-let ボイス音量    = スライダー効果音量 * 0.05;    // 0 〜 0.45 (デフォ 0.2)
-let 効果音音量    = ボイス音量 * 0.5;            // 0 〜 0.22 (デフォ 0.1)
+let 設定速度ms     = 90 - スライダー文字速度 * 10; // 0 〜 90ms (デフォ 50ms)
+let ボイス音量     = スライダー効果音量 * 0.05;    // 0 〜 0.45 (デフォ 0.2)
+let 効果音音量     = ボイス音量 * 0.5;             // 0 〜 0.22 (デフォ 0.1)
 
 // ▫️設定更新関数
 
 function 設定更新() {
     設定文字サイズ = 100 + (スライダー文字サイズ - 4) * 5;
-    設定速度ms    = 90 - スライダー文字速度 * 10;
-    ボイス音量    = スライダー効果音量 * 0.05;
-    効果音音量    = ボイス音量 * 0.5;
+    設定速度ms     = 90 - スライダー文字速度 * 10;
+    ボイス音量     = スライダー効果音量 * 0.05;
+    効果音音量     = ボイス音量 * 0.5;
     document.documentElement.style.fontSize = `${設定文字サイズ}%`;
     document.documentElement.style.setProperty('--画像サイズ', スライダー画像サイズ);
 
@@ -90,8 +90,8 @@ function 設定更新() {
 // 🎛️設定スライダーとリセット（localStorage対応）
 
 document.addEventListener('DOMContentLoaded', () => {
-    const 設定           = document.getElementById('設定');
-    const ラジオ         = document.getElementById('📻');
+    const 設定            = document.getElementById('設定');
+    const ラジオ          = document.getElementById('📻');
     const 入力_文字サイズ = document.getElementById('文字サイズ');
     const 入力_文字速度   = document.getElementById('文字速度');
     const 入力_効果音量   = document.getElementById('効果音量');
@@ -99,7 +99,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const 選択_光の効果   = document.getElementById('光の効果');
     const 選択_登場アニメ = document.getElementById('登場アニメ');
     const 選択_表情アニメ = document.getElementById('表情アニメ');
-    const リセット       = document.getElementById('リセット');
+    const リセット        = document.getElementById('リセット');
 
     const 初期値_文字サイズ = 4;
     const 初期値_文字速度   = 4;
@@ -111,13 +111,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // ▫️ストレージ保存用のKEY名
 
-    const KEY_文字サイズ = 'site_text_size';
-    const KEY_文字速度   = 'site_text_speed';
-    const KEY_効果音量   = 'site_se_volume';
-    const KEY_画像サイズ = 'site_img_size';
-    const KEY_光の効果   = 'site_glow_effect';
-    const KEY_登場アニメ = 'site_app_anime';
-    const KEY_表情アニメ = 'site_face_anime';
+    const KEY_文字サイズ   = 'site_text_size';
+    const KEY_文字速度     = 'site_text_speed';
+    const KEY_効果音量     = 'site_se_volume';
+    const KEY_画像サイズ   = 'site_img_size';
+    const KEY_光の効果     = 'site_glow_effect';
+    const KEY_登場アニメ   = 'site_app_anime';
+    const KEY_表情アニメ   = 'site_face_anime';
 
     // ▫️保存データの読み込み（無ければデフォルト値）
 
@@ -514,10 +514,12 @@ function 次キャラ処理() {
 }
 
 
-// 🎛️身体・差分アニメ
+// 🎛️再生クラス付与で作動するアニメ(11) */
+
+// ▫️身体アニメ(4) & 汎用アニメ(6)
 
 function 身体アニメ開始(エリア) {
-    エリア.querySelectorAll('.伸縮, .横揺, .拡縮→伸縮, .震動, .拡縮→瞬き, .射出, .射出→拍動').forEach((要素) => {
+    エリア.querySelectorAll('.身体_縦伸, .身体_拍動, .身体_横揺, .身体_震動, .縦伸, .拍動, .横揺, .拍動→目瞬, .発射, .発射→拍動').forEach((要素) => {
         要素.style.animation  = '';
         要素.style.rotate     = '';
         要素.style.scale      = '';
@@ -526,42 +528,26 @@ function 身体アニメ開始(エリア) {
     });
 }
 
-// ▫️身体アニメ終了
+// ▫️身体アニメ終了 (次のターン)
 
 function 身体アニメ終了(エリア) {
-    エリア.querySelectorAll('.横揺').forEach((要素) => {
-        要素.classList.remove('再生');
-        ニュートラル復帰(要素, 'rotate', '0deg');
-    });
-
-    エリア.querySelectorAll('.伸縮, .拡縮→伸縮').forEach((要素) => {
+    エリア.querySelectorAll('.身体_縦伸, .身体_拍動').forEach((要素) => {
         要素.classList.remove('再生');
         const キャラ反転 = getComputedStyle(要素).getPropertyValue('--キャラ反転').trim() || '1';
         ニュートラル復帰(要素, 'scale', `${キャラ反転} 1`);
     });
 
-    エリア.querySelectorAll('.震動').forEach((要素) => {
+    エリア.querySelectorAll('.身体_横揺').forEach((要素) => {
+        要素.classList.remove('再生');
+        ニュートラル復帰(要素, 'rotate', '0deg');
+    });
+
+    エリア.querySelectorAll('.身体_震動').forEach((要素) => {
         要素.classList.remove('再生');
     });
 }
 
-// ▫️アニメ終了時のニュートラル復帰
-
-function ニュートラル復帰(要素, プロパティ, 目標値, 秒数 = 0.3) {
-    const 現在値 = getComputedStyle(要素)[プロパティ];
-
-    要素.style.animation  = 'none';
-    要素.style.transition = 'none';
-    要素.style[プロパティ] = 現在値;
-
-    void 要素.offsetWidth;
-
-    要素.style.transition = `${プロパティ} ${秒数}s ease-out`;
-    要素.style[プロパティ] = 目標値;
-}
-
-
-// 🎛️口元アニメ
+// ▫️口元アニメ(1)
 
 function 口元アニメ開始(エリア) {
     エリア.querySelectorAll('.口元').forEach((要素) => {
@@ -573,13 +559,28 @@ function 口元アニメ開始(エリア) {
     });
 }
 
-// ▫️口元アニメ終了
+// ▫️口元アニメ終了 (文字送り終了)
 
 function 口元アニメ終了(エリア) {
     エリア.querySelectorAll('.口元').forEach((要素) => {
         要素.classList.remove('再生');
         ニュートラル復帰(要素, 'scale', '1');
     });
+}
+
+// ▫️アニメ終了時のニュートラル復帰
+
+function ニュートラル復帰(要素, プロパティ, 目標値, 秒数 = 0.25) {
+    const 現在値 = getComputedStyle(要素)[プロパティ];
+
+    要素.style.animation  = 'none';
+    要素.style.transition = 'none';
+    要素.style[プロパティ] = 現在値;
+
+    void 要素.offsetWidth;
+
+    要素.style.transition = `${プロパティ} ${秒数}s ease-out`;
+    要素.style[プロパティ] = 目標値;
 }
 
 
