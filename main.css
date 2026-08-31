@@ -237,7 +237,6 @@
 }
 .文字.表示済 {
     opacity:   1;
-    animation: none;
 }
 
 
@@ -249,11 +248,11 @@
 }
 .ト書き上 {
     margin:    -45px -20px  25px;
-    animation: 出現 1s 0.5s linear forwards;
+    animation: 出現 0.5s 0.5s linear forwards;
 }
 .ト書き下 {
     margin:     25px -20px -45px;
     text-align: right;
-    transition: opacity 1s linear;
+    transition: opacity 0.5s linear;
 }
 .ト書き下.表示 { opacity: 1; }

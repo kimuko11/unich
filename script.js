@@ -421,7 +421,21 @@ function 閾値計算(エリア) {
     return Math.max(0.5, 計算閾値); // 最小で 0.5 まで
 }
 
-// ▫️個別に IntersectionObserver を生成して監視
+// ▫️画面外アニメの停止・再開
+
+const 画面外停止監視 = new IntersectionObserver((項目一覧) => {
+    項目一覧.forEach((項目) => {
+        if (項目.isIntersecting) {
+            項目.target.classList.remove('画面外'); // アニメ再開
+        } else {
+            項目.target.classList.add('画面外');    // アニメ停止
+        }
+    });
+}, {
+    rootMargin: '100px 0px 100px 0px' // 上下に100px 感知の余裕
+});
+
+// ▫️初回登場トリガー用 ＆ 常時監視の登録
 
 キャラ一覧.forEach((エリア) => {
     const 計算済threshold = 閾値計算(エリア);
@@ -430,13 +444,14 @@ function 閾値計算(エリア) {
         項目一覧.forEach((項目) => {
             if (項目.isIntersecting) {
                 待機リスト.push(項目.target);
-                個別監視.unobserve(項目.target); // 一度検知したら監視解除
+                個別監視.unobserve(項目.target); // 一度検知したら初回登場監視は解除
                 次キャラ処理();
             }
         });
     }, { threshold: 計算済threshold });
 
     個別監視.observe(エリア);
+    画面外停止監視.observe(エリア);
 });
 
 

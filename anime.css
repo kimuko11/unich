@@ -62,16 +62,16 @@
 }
 
 @keyframes 消滅 { /* 表示から非表示 */
-      0% { opacity:    auto; }
-    100% { opacity:    0;
-           visibility: hidden; }
+      0% { opacity: auto; }
+    100% { opacity: 0;
+           display: none; }
 }
 
 @keyframes 出現→消滅 { /* 非表示から表示、再び非表示 */
-      0%      { opacity:    0; }
-     10%, 90% { opacity:    1; }
-    100%      { opacity:    0;
-                visibility: hidden; }
+      0%      { opacity: 0; }
+     10%, 90% { opacity: 1; }
+    100%      { opacity: 0;
+                display: none; }
 }
 
 /* 🔹Scale */
@@ -124,9 +124,9 @@ body.即時 .💬 {
 
 body.即時 .消滅,
 body.即時 .出現→消滅 {
-    opacity:    0;
-    animation:  none;
-    visibility: hidden;
+    opacity:   0;
+    animation: none;
+    display:   none;
 }
 
 /* 🔹OFF時表示 */

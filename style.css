@@ -51,6 +51,7 @@ a {
 /* #️⃣グローバル変数 */
 
 :root {
+    --視差速度:   -100px; /* ⚠️ページ長さによって px 増減する */
     --画像サイズ: 4;
 }
 
@@ -174,6 +175,16 @@ p {
     padding: 0 1rem 1rem 1rem; /* 文字枠用に上書き */
 
     max-width: 600px; /* 最大横幅 600px */
+}
+
+
+/* #️⃣描画省略 */
+
+.描画省略 {
+    width: 100%;
+
+    content-visibility:     auto;
+    contain-intrinsic-size: auto var(--省略, 100vh);
 }
 
 
