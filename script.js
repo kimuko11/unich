@@ -320,7 +320,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
-// 🎛️スクロールによる画面出現(▼クラス)の監視
+// 🎛️スクロールによる画面内出現の監視 (▼クラス)
 
 const ページ開始時刻          = performance.now();
 const スクロール出現最短時刻   = 8000;      // ⚠️ページ開始から自動アニメ経過時間 + 1000ms
@@ -373,6 +373,24 @@ document.querySelectorAll('.▼').forEach((要素) => {
         監視.observe(監視対象);
     }
     スクロール出現マップ.get(監視対象).push(要素);
+});
+
+
+// 🎛️スクロールによる画面外退去の監視 (連動消滅クラス)
+
+const 画面外消去監視 = new IntersectionObserver((項目一覧, 監視) => {
+    項目一覧.forEach((項目) => {
+        if (!項目.isIntersecting && 項目.boundingClientRect.top < 0) { // 画面外、かつY座標が画面上部より上
+            監視.unobserve(項目.target); // 監視解除
+            項目.target.remove();        // DOMとメモリから完全消去
+        }
+    });
+}, {
+    threshold: 0 // 画面上部に消えた瞬間
+});
+
+document.querySelectorAll('.連動消滅').forEach((要素) => {
+    画面外消去監視.observe(要素);
 });
 
 
@@ -659,7 +677,7 @@ function セリフ表示(エリア, 完了コールバック) {
     function ト書き下表示() {
         const ト書き下 = ふきだし.querySelector('.ト書き下');
         if (ト書き下) {
-            ト書き下.classList.add('表示');
+            ト書き下.classList.add('表示済');
         }
     }
 

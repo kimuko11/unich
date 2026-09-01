@@ -235,9 +235,7 @@
     opacity:    0;
     transition: opacity 0.15s ease-out;
 }
-.文字.表示済 {
-    opacity:   1;
-}
+.文字.表示済 { opacity:   1; }
 
 
 /* #️⃣ト書き */
@@ -255,4 +253,4 @@
     text-align: right;
     transition: opacity 0.5s linear;
 }
-.ト書き下.表示 { opacity: 1; }
+.ト書き下.表示済 { opacity: 1; }
