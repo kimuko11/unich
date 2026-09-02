@@ -13,13 +13,43 @@
     justify-content: space-between; /* 左寄せ(ロゴ)と右寄せ(設定)に分離 */
     align-items:     flex-start;
 
-    pointer-events: none;
-}
-
-.ロゴ, .設定 {
-    max-width: calc(44% + var(--画像サイズ, 4) * 1%); /* 横幅 */
+    font-size: 12px;
 
     pointer-events: auto;
+}
+
+.ロゴ { max-width: calc(44% + var(--画像サイズ, 4) * 1%); }
+
+.表示範囲 {
+    opacity: 0.5;
+    transition: opacity 0.3s;
+}
+
+.表示範囲:hover { opacity: 1; }
+
+#非表示上, #非表示下 {
+    width: 40px;
+
+    border: 1px dashed gray;
+    border-radius: 8px;
+
+    background-color: transparent;
+
+    font-size:  24px;
+    text-align: center;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button { -webkit-appearance: none; }
+
+.縦列 {
+    display:        flex;
+    flex-direction: column;
+}
+
+.スピンボタン {
+    font-size:   18px;
+    line-height: 1;
 }
 
 .設定 { 
@@ -27,17 +57,16 @@
     flex-direction: column;
     align-items:    center;
 
-    max-width: calc(11% + var(--画像サイズ, 4) * 0.25%);
-}
+    max-width: calc(11% + var(--画像サイズ, 4) * 0.25%); }
 
 .📻 {
-    cursor:     pointer;
+    cursor: pointer;
 
-    transition: scale  0.3s ease,
-                filter 1.0s ease; /* 消光用 */
+    transition: scale  0.3s,
+                filter 1.0s; /* 消光用 */
 }
 
-.設定.オープン .📻 { scale: 1.1; }
+.設定.オープン .📻 { scale: 1.2; }
 
 
 /* #️⃣設定ふきだし */
@@ -53,8 +82,6 @@
     border-radius:    25px;
 
     background-color: rgba(60, 60, 60, 0.75);
-
-    font-size: 12px;
 
     backdrop-filter:  blur(6px);
     box-shadow:       0  2px 20px black,             /* 背景の影 */

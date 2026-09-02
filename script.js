@@ -320,6 +320,155 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
+// 🎛️ 表示範囲絞り込み（プレビュー・検証機能）
+
+// 1. 表示範囲の更新と保存
+function 表示範囲更新() {
+    const 入力上 = document.getElementById('非表示上');
+    const 入力下 = document.getElementById('非表示下');
+    if (!入力上 || !入力下) return;
+
+    const 値上 = 入力上.value;
+    const 値下 = 入力下.value;
+
+    // ブラウザに設定値を保存（空文字の場合は削除）
+    if (値上 !== '') {
+        localStorage.setItem('preview_from', 値上);
+    } else {
+        localStorage.removeItem('preview_from');
+    }
+
+    if (値下 !== '') {
+        localStorage.setItem('preview_to', 値下);
+    } else {
+        localStorage.removeItem('preview_to');
+    }
+
+    // 表示制御の適用
+    表示制御実行(値上, 値下);
+}
+
+// 2. 実際の表示・非表示切り替えロジック（★マージン補正を追加！）
+function 表示制御実行(値上, 値下) {
+    const 上数値 = parseInt(値上, 10);
+    const 下数値 = parseInt(値下, 10);
+
+    const 上あり = !isNaN(上数値);
+    const 下あり = !isNaN(下数値);
+
+    const セリフ一覧 = document.querySelectorAll('.対話全体枠 > div');
+    const 総数 = セリフ一覧.length;
+
+    let 開始位置 = 1;
+    let 終了位置 = 総数;
+
+    // 💡 フォームの入力状況に応じた範囲判定
+    if (上あり && 下あり) {
+        開始位置 = Math.min(上数値, 下数値);
+        終了位置 = Math.max(上数値, 下数値);
+    } else if (上あり) {
+        開始位置 = 上数値;
+        終了位置 = 上数値;
+    } else if (下あり) {
+        開始位置 = 下数値;
+        終了位置 = 下数値;
+    }
+
+    const 絞り込み有効 = 上あり || 下あり;
+
+    // 範囲の制御と先頭要素のマージン補正
+    セリフ一覧.forEach((el, index) => {
+        const 番号 = index + 1;
+        if (番号 >= 開始位置 && 番号 <= 終了位置) {
+            el.style.display = '';
+
+            // 絞り込み表示中、かつ「表示範囲の先頭セリフ」の場合のみ margin-top を補正
+            if (絞り込み有効 && 番号 === 開始位置) {
+                el.style.marginTop = '0px';
+            } else {
+                el.style.marginTop = ''; // 通常時のCSSに戻す
+            }
+        } else {
+            el.style.display = 'none';
+            el.style.marginTop = ''; // 非表示時は元に戻す
+        }
+    });
+
+    // 入力が1つでもあればメインコンテンツより上の要素（トップ画像・キャラ紹介等）を隠す
+    const トップコンテンツ = document.querySelectorAll('.宇宙全体 > :not(.対話全体枠):not(.描画省略):not(.宇宙レイヤー):not(.星群)');
+
+    トップコンテンツ.forEach(el => {
+        if (絞り込み有効) {
+            el.style.display = 'none';
+        } else {
+            el.style.display = '';
+        }
+    });
+}
+
+// 3. ページ読み込み時の復元処理
+document.addEventListener('DOMContentLoaded', () => {
+    const 入力上 = document.getElementById('非表示上');
+    const 入力下 = document.getElementById('非表示下');
+
+    if (入力上 && 入力下) {
+        // 保存された値があれば復元
+        const 保存上 = localStorage.getItem('preview_from') || '';
+        const 保存下 = localStorage.getItem('preview_to') || '';
+
+        入力上.value = 保存上;
+        入力下.value = 保存下;
+
+        // 復元された値で初回表示を切り替え
+        表示制御実行(保存上, 保存下);
+
+        // 入力変更イベントのバインド
+        入力上.addEventListener('input', 表示範囲更新);
+        入力下.addEventListener('input', 表示範囲更新);
+    }
+});
+
+
+function 範囲リセット() {
+    const 入力上 = document.getElementById('非表示上');
+    const 入力下 = document.getElementById('非表示下');
+    if (入力上) 入力上.value = '';
+    if (入力下) 入力下.value = '';
+
+    localStorage.removeItem('preview_from');
+    localStorage.removeItem('preview_to');
+
+    表示制御実行('', '');
+}
+
+// 🎛️ 独自▲▼ボタンによる数値変更処理
+function 数値変更(targetId, diff) {
+    const input = document.getElementById(targetId);
+    if (!input) return;
+
+    const セリフ一覧 = document.querySelectorAll('.対話全体枠 > div');
+    const 総数 = セリフ一覧.length;
+
+    let 現在値 = parseInt(input.value, 10);
+
+    if (isNaN(現在値)) {
+        // 空欄時に▲（前へ）を押したら「1」、▼（次へ）を押したら「1」からスタート
+        現在値 = 1;
+    } else {
+        現在値 += diff;
+    }
+
+    // 範囲外のガード（1未満にはならず、最大セリフ数を超えない）
+    if (現在値 < 1) 現在値 = 1;
+    if (総数 > 0 && 現在値 > 総数) 現在値 = 総数;
+
+    input.value = 現在値;
+
+    // 表示を更新＆保存
+    表示範囲更新();
+}
+
+
 // 🎛️スクロールによる画面内出現の監視 (▼クラス)
 
 const ページ開始時刻          = performance.now();

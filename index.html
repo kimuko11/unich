@@ -42,13 +42,41 @@
         <img src="img/logo_fukidasi.webp" class="動作 出現→消滅" style="--待機: 3s; --時間: 8s; pointer-events: none;">
     </div>
 
+    <!-- 🔹表示範囲 (検証用) -->
+
+    <div class="表示範囲">
+        表示範囲
+        <button type="button" onclick="範囲リセット()">🗑️</button>
+        
+        <div style="display: flex; gap: 9px;">
+
+            <div style="display: flex;">
+                <input type="number" id="非表示上" min="1">
+                <div class="縦列">
+                    <button type="button" class="スピンボタン" onclick="数値変更('非表示上', -1)">🔼</button>
+                    <button type="button" class="スピンボタン" onclick="数値変更('非表示上',  1)">🔽</button>
+                </div>
+            </div>
+
+            <div style="display: flex;">
+                <input type="number" id="非表示下" min="1">
+                <div class="縦列">
+                    <button type="button" class="スピンボタン" onclick="数値変更('非表示下', -1)">🔼</button>
+                    <button type="button" class="スピンボタン" onclick="数値変更('非表示下',  1)">🔽</button>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
     <!-- 🔹設定 -->
 
     <div class="設定" id="設定">
         <img src="img/radio.webp" alt="ラジオ" id="📻" class="📻 発光 出現" style="--待機: 1s;">
-        <div class="極小 出現→消滅" style="--待機: 1s; margin: -14px -10px 0 0;">設定</div>
+        <div class="出現→消滅" style="--待機: 1s; margin: -14px -10px 0 0;">設定</div>
 
-        <div class="設定💬 小字">
+        <div class="設定💬">
 
             <div class="設定項目">
                 文字サイズ
@@ -129,7 +157,7 @@
     <div class="宇宙レイヤー 中景"></div>
     <div class="宇宙レイヤー 流星"></div>
     <div class="宇宙レイヤー 近景"></div>
-    <div class="星群"></div>
+    <div class="トップ星群"></div>
 
     <div style="height: 13vw;"></div> <!-- トップ画像をサイズ可変のロゴに被せないために vw で縦余白を決定 -->
 
@@ -160,7 +188,7 @@
 
     <p class="浮遊 中央 改行2">
         <span class="連動消滅">
-           <span class="出現" style="--待機: 7s;">🔻<span class="極小 銀">ゆっくりと下へ画面スクロールしてください</span>🔻</span>
+           <span class="出現" style="--待機: 7s;">🔻<span class="小字 銀">ゆっくりと下へ画面スクロールしてください</span>🔻</span>
         </span>
     </p>
 

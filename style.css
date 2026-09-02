@@ -40,7 +40,11 @@ button {
     cursor:     pointer;
 }
 
-input, button, textarea, select { font: inherit; } /* フォントは親要素から継承 */
+input, button, textarea, select {
+    font:        inherit;
+    color:       inherit;
+    text-shadow: inherit;
+}
 
 a {
     text-decoration: none;
@@ -54,6 +58,45 @@ a {
     --視差速度:   -100px; /* ⚠️ページ長さによって px 増減する */
     --画像サイズ: 4;
 }
+
+
+/* #️⃣文字枠, ふきだし */
+
+p, .💬, .ヘッダー {    
+    text-shadow:
+        0  1px #000,      /* 下 */
+       -1px  0 #111,      /* 左 */
+        1px  0 #111,      /* 右 */
+        0 -1px #222,      /* 上 */
+        0  2px 2px #000;  /* 影 */
+}
+
+p {
+    position: relative;
+
+    margin:  0 auto;
+    padding: 0 1rem 1rem 1rem;
+
+    max-width: 600px; /* 最大横幅 600px */
+}
+
+.💬, .設定💬 { padding: 20px; }
+
+
+/* #️⃣画像枠 */
+
+.画像 {
+    position: relative;
+
+    display:        flex;
+    flex-direction: column;
+    align-items:    center;
+
+    margin: 0 auto;
+
+    max-width: calc(82% + var(--画像サイズ, 4) * 2%); /* 最大横幅 400px (画像は最大400pxで書き出しているから) */
+}
+
 
 /* #️⃣配置 */
 
@@ -138,44 +181,6 @@ b, em {
 .改行30 { margin-bottom: 30rem; }
 .改行40 { margin-bottom: 40rem; }
 .改行50 { margin-bottom: 50rem; }
-
-
-/* #️⃣画像枠 */
-
-.画像 {
-    position: relative;
-
-    display:        flex;
-    flex-direction: column;
-    align-items:    center;
-
-    margin: 0 auto;
-
-    max-width: calc(82% + var(--画像サイズ, 4) * 2%); /* 最大横幅 400px (画像は最大400pxで書き出しているから) */
-}
-
-
-/* #️⃣文字枠, ふきだし */
-
-p, .💬, .設定💬 {
-    padding: 20px; /* ふきだし用 */
-    
-    text-shadow:
-        0  1px #000,      /* 下 */
-       -1px  0 #111,      /* 左 */
-        1px  0 #111,      /* 右 */
-        0 -1px #222,      /* 上 */
-        0  2px 2px #000;  /* 影 */
-}
-
-p {
-    position: relative;
-
-    margin:  0 auto;
-    padding: 0 1rem 1rem 1rem; /* 文字枠用に上書き */
-
-    max-width: 600px; /* 最大横幅 600px */
-}
 
 
 /* #️⃣描画省略 */
