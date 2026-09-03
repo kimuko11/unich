@@ -19,7 +19,7 @@
 }
 
 .ロゴ {
-    max-width: calc(44% + var(--画像サイズ, 4) * 1%);
+    max-width:   calc(44% + var(--画像サイズ, 4) * 1%);
     flex-shrink: 0;
 }
 
@@ -63,7 +63,10 @@ input[type="number"]::-webkit-inner-spin-button { -webkit-appearance: none; }
     align-items:    center;
 
     margin-left: auto;
-    max-width: calc(11% + var(--画像サイズ, 4) * 0.25%); }
+
+    max-width:   calc(11% + var(--画像サイズ, 4) * 0.25%);
+    flex-shrink: 0;
+}
 
 .📻 {
     cursor: pointer;
