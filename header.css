@@ -10,7 +10,7 @@
     z-index:  99;
 
     display:         flex;
-    justify-content: space-between; /* 左寄せ(ロゴ)と右寄せ(設定)に分離 */
+    justify-content: flex-start;
     align-items:     flex-start;
 
     font-size: 12px;
@@ -18,11 +18,16 @@
     pointer-events: auto;
 }
 
-.ロゴ { max-width: calc(44% + var(--画像サイズ, 4) * 1%); }
+.ロゴ {
+    max-width: calc(44% + var(--画像サイズ, 4) * 1%);
+    flex-shrink: 0;
+}
 
 .表示範囲 {
-    opacity: 0.5;
-    transition: opacity 0.3s;
+    margin-left: 9px;
+
+    opacity:    0.5;
+    transition: opacity 0.2s;
 }
 
 .表示範囲:hover { opacity: 1; }
@@ -57,12 +62,13 @@ input[type="number"]::-webkit-inner-spin-button { -webkit-appearance: none; }
     flex-direction: column;
     align-items:    center;
 
+    margin-left: auto;
     max-width: calc(11% + var(--画像サイズ, 4) * 0.25%); }
 
 .📻 {
     cursor: pointer;
 
-    transition: scale  0.3s,
+    transition: scale  calc(var(--時間, 0.2s) / var(--アニメ速度, 1)),
                 filter 1.0s; /* 消光用 */
 }
 
@@ -94,9 +100,9 @@ input[type="number"]::-webkit-inner-spin-button { -webkit-appearance: none; }
     visibility: hidden;
 
     transition:
-        scale      0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275),
-        opacity    0.3s,
-        visibility 0.4s;
+        scale      calc(var(--時間, 0.3s) / var(--アニメ速度, 1)) cubic-bezier(0.175, 0.885, 0.32, 1.275),
+        opacity    calc(var(--時間, 0.3s) / var(--アニメ速度, 1)),
+        visibility calc(var(--時間, 0.3s) / var(--アニメ速度, 1));
 }
 
 .設定.オープン .設定💬 {
@@ -213,7 +219,7 @@ input[type="number"]::-webkit-inner-spin-button { -webkit-appearance: none; }
 
     cursor: pointer;
 
-    transition: 0.3s;
+    transition: calc(var(--時間, 0.3s) / var(--アニメ速度, 1));
 }
 
 .スイッチ背景:before { /* OFFのツマミ */
@@ -230,7 +236,7 @@ input[type="number"]::-webkit-inner-spin-button { -webkit-appearance: none; }
     border-radius:    50%;
     background-color: gold;
 
-    transition: 0.3s;
+    transition: calc(var(--時間, 0.3s) / var(--アニメ速度, 1));
 }
 
 .スイッチ背景:after { /* OFFの文字 */
@@ -244,7 +250,7 @@ input[type="number"]::-webkit-inner-spin-button { -webkit-appearance: none; }
     text-shadow: none;
 
     translate:  0 -50%;
-    transition: 0.3s;
+    transition: calc(var(--時間, 0.3s) / var(--アニメ速度, 1));
 }
 
 input:checked + .スイッチ背景 { /* ON */

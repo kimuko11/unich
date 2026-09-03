@@ -42,10 +42,12 @@ setTimeout(() => { // 3秒経過で強制
 
 // 🎛️設定 (初期値)
 
-let スライダー文字サイズ = 4;
-let スライダー文字速度   = 4;
 let スライダー効果音量   = 4;
+let スライダー文字サイズ = 4;
 let スライダー画像サイズ = 4;
+let スライダー文字速度   = 4;
+let スライダーアニメ速度 = 4;
+
 let スイッチ光の効果     = true;
 let スイッチ登場アニメ   = true;
 let スイッチ表情アニメ   = true;
@@ -66,6 +68,8 @@ function 設定更新() {
     効果音音量     = ボイス音量 * 0.5;
     document.documentElement.style.fontSize = `${設定文字サイズ}%`;
     document.documentElement.style.setProperty('--画像サイズ', スライダー画像サイズ);
+    const アニメ速度 = Math.max(0.1, 1 + (スライダーアニメ速度 - 4) * 0.2); // 0.2 〜 2 (デフォ 1)
+    document.documentElement.style.setProperty('--アニメ速度', アニメ速度);
 
     if (スイッチ光の効果) {
         document.body.classList.remove('消光');
@@ -96,6 +100,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const 入力_文字速度   = document.getElementById('文字速度');
     const 入力_効果音量   = document.getElementById('効果音量');
     const 入力_画像サイズ = document.getElementById('画像サイズ');
+    const 入力_アニメ速度 = document.getElementById('アニメ速度');
     const 選択_光の効果   = document.getElementById('光の効果');
     const 選択_登場アニメ = document.getElementById('登場アニメ');
     const 選択_表情アニメ = document.getElementById('表情アニメ');
@@ -105,19 +110,21 @@ document.addEventListener('DOMContentLoaded', () => {
     const 初期値_文字速度   = 4;
     const 初期値_効果音量   = 4;
     const 初期値_画像サイズ = 4;
+    const 初期値_アニメ速度 = 4;
     const 初期値_光の効果   = true;
     const 初期値_登場アニメ = true;
     const 初期値_表情アニメ = true;
 
     // ▫️ストレージ保存用のKEY名
 
-    const KEY_文字サイズ   = 'site_text_size';
-    const KEY_文字速度     = 'site_text_speed';
-    const KEY_効果音量     = 'site_se_volume';
-    const KEY_画像サイズ   = 'site_img_size';
-    const KEY_光の効果     = 'site_glow_effect';
-    const KEY_登場アニメ   = 'site_app_anime';
-    const KEY_表情アニメ   = 'site_face_anime';
+    const KEY_文字サイズ = 'site_text_size';
+    const KEY_文字速度   = 'site_text_speed';
+    const KEY_効果音量   = 'site_se_volume';
+    const KEY_画像サイズ = 'site_img_size';
+    const KEY_アニメ速度 = 'site_anime_speed';
+    const KEY_光の効果   = 'site_glow_effect';
+    const KEY_登場アニメ = 'site_app_anime';
+    const KEY_表情アニメ = 'site_face_anime';
 
     // ▫️保存データの読み込み（無ければデフォルト値）
 
@@ -125,15 +132,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const 保存_文字速度   = localStorage.getItem(KEY_文字速度);
     const 保存_効果音量   = localStorage.getItem(KEY_効果音量);
     const 保存_画像サイズ = localStorage.getItem(KEY_画像サイズ);
+    const 保存_アニメ速度 = localStorage.getItem(KEY_アニメ速度);
     const 保存_光の効果   = localStorage.getItem(KEY_光の効果);
     const 保存_登場アニメ = localStorage.getItem(KEY_登場アニメ);
     const 保存_表情アニメ = localStorage.getItem(KEY_表情アニメ);
 
     スライダー文字サイズ = 保存_文字サイズ !== null ? parseInt(保存_文字サイズ, 10) : 初期値_文字サイズ;
-    スライダー文字速度   = 保存_文字速度   !== null ? parseInt(保存_文字速度, 10)  : 初期値_文字速度;
-    スライダー効果音量   = 保存_効果音量   !== null ? parseInt(保存_効果音量, 10)  : 初期値_効果音量;
+    スライダー文字速度   = 保存_文字速度   !== null ? parseInt(保存_文字速度, 10)   : 初期値_文字速度;
+    スライダー効果音量   = 保存_効果音量   !== null ? parseInt(保存_効果音量, 10)   : 初期値_効果音量;
     スライダー画像サイズ = 保存_画像サイズ !== null ? parseInt(保存_画像サイズ, 10) : 初期値_画像サイズ;
-    スイッチ光の効果     = 保存_光の効果   !== null ? 保存_光の効果 === 'true'     : 初期値_光の効果;
+    スライダーアニメ速度 = 保存_アニメ速度 !== null ? parseInt(保存_アニメ速度, 10) : 初期値_アニメ速度;
+    スイッチ光の効果     = 保存_光の効果   !== null ? 保存_光の効果 === 'true'      : 初期値_光の効果;
     スイッチ登場アニメ   = 保存_登場アニメ !== null ? 保存_登場アニメ === 'true'    : 初期値_登場アニメ;
     スイッチ表情アニメ   = 保存_表情アニメ !== null ? 保存_表情アニメ === 'true'    : 初期値_表情アニメ;
 
@@ -205,6 +214,23 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // ▫️アニメ速度
+
+    if (入力_アニメ速度) {
+        入力_アニメ速度.value = スライダーアニメ速度;
+        const 表示 = 入力_アニメ速度.nextElementSibling;
+        if (表示) 表示.textContent = スライダーアニメ速度;
+
+        入力_アニメ速度.addEventListener('input', (e) => {
+            スライダーアニメ速度 = parseInt(e.target.value, 10);
+            const 表示 = e.target.nextElementSibling;
+            if (表示) 表示.textContent = e.target.value;
+            
+            localStorage.setItem(KEY_アニメ速度, スライダーアニメ速度);
+            設定更新();
+        });
+    }
+
     // ▫️光の効果
 
     if (選択_光の効果) {
@@ -265,6 +291,7 @@ document.addEventListener('DOMContentLoaded', () => {
             localStorage.removeItem(KEY_文字速度);
             localStorage.removeItem(KEY_効果音量);
             localStorage.removeItem(KEY_画像サイズ);
+            localStorage.removeItem(KEY_アニメ速度);
             localStorage.removeItem(KEY_光の効果);
             localStorage.removeItem(KEY_登場アニメ);
             localStorage.removeItem(KEY_表情アニメ);
@@ -297,6 +324,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (表示) 表示.textContent = 初期値_画像サイズ;
             }
 
+            if (入力_アニメ速度) {
+                入力_アニメ速度.value = 初期値_アニメ速度;
+                スライダーアニメ速度  = 初期値_アニメ速度;
+                const 表示 = 入力_アニメ速度.nextElementSibling;
+                if (表示) 表示.textContent = 初期値_アニメ速度;
+            }
+
             if (選択_光の効果) {
                 選択_光の効果.checked = 初期値_光の効果;
                 スイッチ光の効果      = 初期値_光の効果;
@@ -320,9 +354,10 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
-// 🎛️ 表示範囲絞り込み（プレビュー・検証機能）
+// 🎛️ 表示範囲の絞り込み（検証用）
 
-// 1. 表示範囲の更新と保存
+// ▫️表示範囲の更新と保存
+
 function 表示範囲更新() {
     const 入力上 = document.getElementById('非表示上');
     const 入力下 = document.getElementById('非表示下');
@@ -331,11 +366,10 @@ function 表示範囲更新() {
     const 値上 = 入力上.value;
     const 値下 = 入力下.value;
 
-    // ブラウザに設定値を保存（空文字の場合は削除）
     if (値上 !== '') {
-        localStorage.setItem('preview_from', 値上);
+        localStorage.setItem('preview_from', 値上); // ブラウザに設定値を保存
     } else {
-        localStorage.removeItem('preview_from');
+        localStorage.removeItem('preview_from');    // 空文字の場合は削除
     }
 
     if (値下 !== '') {
@@ -344,11 +378,11 @@ function 表示範囲更新() {
         localStorage.removeItem('preview_to');
     }
 
-    // 表示制御の適用
     表示制御実行(値上, 値下);
 }
 
-// 2. 実際の表示・非表示切り替えロジック（★マージン補正を追加！）
+// ▫️表示・非表示の切り替え
+
 function 表示制御実行(値上, 値下) {
     const 上数値 = parseInt(値上, 10);
     const 下数値 = parseInt(値下, 10);
@@ -362,8 +396,7 @@ function 表示制御実行(値上, 値下) {
     let 開始位置 = 1;
     let 終了位置 = 総数;
 
-    // 💡 フォームの入力状況に応じた範囲判定
-    if (上あり && 下あり) {
+    if (上あり && 下あり) { // フォームの入力状況に応じた範囲判定
         開始位置 = Math.min(上数値, 下数値);
         終了位置 = Math.max(上数値, 下数値);
     } else if (上あり) {
@@ -376,26 +409,24 @@ function 表示制御実行(値上, 値下) {
 
     const 絞り込み有効 = 上あり || 下あり;
 
-    // 範囲の制御と先頭要素のマージン補正
-    セリフ一覧.forEach((el, index) => {
+    セリフ一覧.forEach((el, index) => { // 範囲の制御
         const 番号 = index + 1;
         if (番号 >= 開始位置 && 番号 <= 終了位置) {
             el.style.display = '';
 
-            // 絞り込み表示中、かつ「表示範囲の先頭セリフ」の場合のみ margin-top を補正
-            if (絞り込み有効 && 番号 === 開始位置) {
+            if (絞り込み有効 && 番号 === 開始位置) {// 絞り込み表示中、かつ「表示範囲の先頭」の場合のみ margin-top を補正
                 el.style.marginTop = '0px';
             } else {
                 el.style.marginTop = ''; // 通常時のCSSに戻す
             }
         } else {
             el.style.display = 'none';
-            el.style.marginTop = ''; // 非表示時は元に戻す
+            el.style.marginTop = '';     // 非表示時は元に戻す
         }
     });
 
-    // 入力が1つでもあればメインコンテンツより上の要素（トップ画像・キャラ紹介等）を隠す
-    const トップコンテンツ = document.querySelectorAll('.宇宙全体 > :not(.対話全体枠):not(.描画省略):not(.宇宙レイヤー):not(.星群)');
+    // 入力が1つでもあればメインコンテンツより上は隠す
+    const トップコンテンツ = document.querySelectorAll('.宇宙全体 > :not(.対話全体枠):not(.描画省略):not(.宇宙レイヤー):not(.カチンコ星群)');
 
     トップコンテンツ.forEach(el => {
         if (絞り込み有効) {
@@ -406,28 +437,28 @@ function 表示制御実行(値上, 値下) {
     });
 }
 
-// 3. ページ読み込み時の復元処理
+// ▫️ページ読み込み時の復元
+
 document.addEventListener('DOMContentLoaded', () => {
     const 入力上 = document.getElementById('非表示上');
     const 入力下 = document.getElementById('非表示下');
 
     if (入力上 && 入力下) {
-        // 保存された値があれば復元
-        const 保存上 = localStorage.getItem('preview_from') || '';
-        const 保存下 = localStorage.getItem('preview_to') || '';
+        const 保存上 = localStorage.getItem('preview_from') || ''; // 保存された値があれば復元
+        const 保存下 = localStorage.getItem('preview_to')   || '';
 
         入力上.value = 保存上;
         入力下.value = 保存下;
 
-        // 復元された値で初回表示を切り替え
-        表示制御実行(保存上, 保存下);
+        表示制御実行(保存上, 保存下); // 復元された値で初回表示を切り替え
 
-        // 入力変更イベントのバインド
-        入力上.addEventListener('input', 表示範囲更新);
+        入力上.addEventListener('input', 表示範囲更新); // 入力変更イベントのバインド
         入力下.addEventListener('input', 表示範囲更新);
     }
 });
 
+
+// ▫️範囲のリセット
 
 function 範囲リセット() {
     const 入力上 = document.getElementById('非表示上');
@@ -441,7 +472,8 @@ function 範囲リセット() {
     表示制御実行('', '');
 }
 
-// 🎛️ 独自▲▼ボタンによる数値変更処理
+// ▫️独自スピンボタンによる数値変更
+
 function 数値変更(targetId, diff) {
     const input = document.getElementById(targetId);
     if (!input) return;
@@ -451,20 +483,18 @@ function 数値変更(targetId, diff) {
 
     let 現在値 = parseInt(input.value, 10);
 
-    if (isNaN(現在値)) {
-        // 空欄時に▲（前へ）を押したら「1」、▼（次へ）を押したら「1」からスタート
+    if (isNaN(現在値)) { // 空欄時に▲▼を押したら「1」からスタート
         現在値 = 1;
     } else {
         現在値 += diff;
     }
 
-    // 範囲外のガード（1未満にはならず、最大セリフ数を超えない）
+    // 1未満にはならず、最大セリフ数を超えない
     if (現在値 < 1) 現在値 = 1;
     if (総数 > 0 && 現在値 > 総数) 現在値 = 総数;
 
     input.value = 現在値;
 
-    // 表示を更新＆保存
     表示範囲更新();
 }
 
@@ -472,13 +502,18 @@ function 数値変更(targetId, diff) {
 // 🎛️スクロールによる画面内出現の監視 (▼クラス)
 
 const ページ開始時刻          = performance.now();
-const スクロール出現最短時刻   = 8000;      // ⚠️ページ開始から自動アニメ経過時間 + 1000ms
+const スクロール出現基準時間   = 8000;      // ⚠️ページ開始から自動アニメ経過時間 + 1000ms
 const スクロール出現閾値既定値 = 1;         // data-threshold 既定値
 const スクロール出現マップ     = new Map(); // 監視対象要素 → .再生 を付与する要素の配列
 const スクロール出現監視一覧   = new Map(); // threshold値 → IntersectionObserver（同じ閾値は1つに共有）
  
 function スクロール出現実行(要素) {
     要素.classList.add('再生');
+}
+
+function アニメ速度取得() {
+    const 計算値 = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--アニメ速度'));
+    return (isNaN(計算値) || 計算値 <= 0) ? 1 : 計算値;
 }
  
 function スクロール出現交差時(項目一覧, 監視) {
@@ -487,7 +522,11 @@ function スクロール出現交差時(項目一覧, 監視) {
         監視.unobserve(項目.target); // 一度再生したら監視終了
         const 対象一覧 = スクロール出現マップ.get(項目.target) || [項目.target];
         const 経過時刻 = performance.now() - ページ開始時刻;
-        const 残り時刻 = スクロール出現最短時刻 - 経過時刻;
+
+        const 現在倍率 = アニメ速度取得();
+        const 実効最短時刻 = スクロール出現基準時間 / 現在倍率;
+
+        const 残り時刻 = 実効最短時刻 - 経過時刻;
         const 再生実行 = () => 対象一覧.forEach(スクロール出現実行);
 
         if (残り時刻 > 0) {
@@ -691,8 +730,8 @@ function 次キャラ処理() {
 
     キャラ画像.addEventListener('transitionend', 登場完了);
 
-    // transitionend が発火しなかった場合の保険（1.2秒後に強制実行）
-    setTimeout(登場完了, 1200);
+    // transitionend が発火しなかった場合の保険（5秒後に強制実行）
+    setTimeout(登場完了, 5000);
 }
 
 

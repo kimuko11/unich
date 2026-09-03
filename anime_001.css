@@ -84,24 +84,44 @@ body.停止 .発射 {
 
 .身体_縦伸 { /* scale: 通常の発話 */
     transform-origin: 50% 100%;
-    animation: 縦伸   var(--時間, 0.25s) var(--待機, 0s) ease-in-out infinite alternate paused;
+    animation: 縦伸 calc(var(--時間, 0.25s) / var(--アニメ速度, 1)) var(--待機, 0s) ease-in-out infinite alternate paused;
 }
-.🥸 .身体_縦伸 { --時間: 0.50s; }
-.🐰 .身体_縦伸 { --時間: 0.25s; }
 
 .身体_拍動 { /* scale x 2: 感情大からの発話 */
     transform-origin: 50% 100%;
-    animation: 拍動   var(--時間1, 1.00s) var(--待機1, 0s) paused,
-               縦伸   var(--時間2, 0.25s) calc(var(--待機1, 0s) + var(--時間1, 1s)) ease-in-out infinite alternate paused;
+    animation: 拍動 calc(var(--時間1, 1.00s) / var(--アニメ速度, 1)) var(--待機1, 0s) paused,
+               縦伸 calc(var(--時間2, 0.25s) / var(--アニメ速度, 1)) calc(calc(var(--待機1, 0s) + var(--時間1, 1s)) / var(--アニメ速度, 1)) ease-in-out infinite alternate paused;
 }
 
 .身体_横揺 { /* rotate: 横にユラユラ */
     transform-origin: 50% 100%;
-    animation: 横揺   var(--時間, 0.5s) var(--待機, 0s) ease-in-out infinite alternate paused;
+    animation: 横揺 calc(var(--時間, 0.5s) / var(--アニメ速度, 1)) var(--待機, 0s) ease-in-out infinite alternate paused;
 }
 
 .身体_震動 { /* translate: 小刻みな震え */
-    animation: 震動   var(--時間, 0.5s) var(--待機, 0s) linear infinite paused;
+    animation: 震動 calc(var(--時間, 0.5s) / var(--アニメ速度, 1)) var(--待機, 0s) linear infinite paused;
+}
+
+/* 🔹キャラ別変数指定 */
+
+.🥸 .身体_縦伸 { --時間: 0.50s; }
+.🐰 .身体_縦伸 { --時間: 0.25s; }
+
+.🥸 .身体_拍動 { --時間2: 0.50s; }
+.🐰 .身体_拍動 { --時間2: 0.25s; }
+
+.🥸 .身体_横揺 { --時間: 1.0s; }
+.🐰 .身体_横揺 { --時間: 0.5s; }
+
+.🥸 .身体_縦伸 > *,
+.🐰 .身体_縦伸 > *,
+.🥸 .身体_拍動 > *,
+.🐰 .身体_拍動 > *,
+.🥸 .身体_横揺 > *,
+.🐰 .身体_横揺 > * { /* 子要素に引き継がない */
+    --起点: initial;
+    --時間: initial; --時間1: initial; --時間2: initial;
+    --待機: initial; --待機1: initial; --待機2: initial;
 }
 
 
@@ -110,7 +130,7 @@ body.停止 .発射 {
 .口元 { /* scale: 口パク */
     --倍率: 0.1;
     transform-origin: var(--起点, 50% 75%);
-    animation: 縦伸   var(--時間, 0.2s) var(--待機, 0s) ease-in-out infinite alternate paused;
+    animation: 縦伸 calc(var(--時間, 0.2s) / var(--アニメ速度, 1)) var(--待機, 0s) ease-in-out infinite alternate paused;
 }
 
 
@@ -118,48 +138,48 @@ body.停止 .発射 {
 
 .縦伸 { /* scale: 上下に伸張 */
     transform-origin: var(--起点, 50% 100%);
-    animation: 縦伸   var(--時間, 0.25s) var(--待機, 0s) ease-in-out infinite alternate paused;
+    animation: 縦伸 calc(var(--時間, 0.25s) / var(--アニメ速度, 1)) var(--待機, 0s) ease-in-out infinite alternate paused;
 }
 
 .拍動 { /* scale: 原型から速く拡張、原型にゆっくり収縮 */
-    animation: 拍動 var(--時間, 1s) var(--待機, 0s) ease-in-out infinite alternate;
+    animation: 拍動 calc(var(--時間, 1s) / var(--アニメ速度, 1)) var(--待機, 0s) ease-in-out infinite alternate;
 }
 
 .拍動→目瞬 { /* scale x 2: 目が一瞬飛び出してからの目瞬き */
     transform-origin: var(--起点, 50% 67%);
-    animation: 拍動   var(--時間1, 1s) var(--待機1, 0s) paused,
-               目瞬   var(--時間2, 1s) calc(var(--待機1, 0s) + var(--時間1, 1s)) infinite alternate paused;
+    animation: 拍動 calc(var(--時間1, 1s) / var(--アニメ速度, 1)) var(--待機1, 0s) paused,
+               目瞬 calc(var(--時間2, 1s) / var(--アニメ速度, 1)) calc(calc(var(--待機1, 0s) + var(--時間1, 1s)) / var(--アニメ速度, 1)) infinite alternate paused;
 }
 
 .発射 { /* scale: 空中に飛び出す驚きマークなど */
     opacity: 0;
     transform-origin: var(--起点, 50% 50%);
-    animation: 発射   var(--時間, 1s) var(--待機, 0s) forwards paused;
+    animation: 発射 calc(var(--時間, 1s) / var(--アニメ速度, 1)) var(--待機, 0s) forwards paused;
 }
 
 .発射→拍動 { /* scale x 2: 空中に飛び出してから拍動するハートや雷など */
     opacity: 0;
     transform-origin: var(--起点, 50% 50%);
-    animation: 発射   var(--時間1, 1s) var(--待機1, 0s) forwards paused,
-               拍動   var(--時間2, 1s) calc(var(--待機1, 0s) + var(--時間1, 1s)) ease-in-out infinite alternate paused;
+    animation: 発射 calc(var(--時間1, 1s) / var(--アニメ速度, 1)) var(--待機1, 0s) forwards paused,
+               拍動 calc(var(--時間2, 1s) / var(--アニメ速度, 1)) calc(calc(var(--待機1, 0s) + var(--時間1, 1s)) / var(--アニメ速度, 1)) ease-in-out infinite alternate paused;
 }
 
 .横揺 { /* rotate: 腕振りなど */
     transform-origin: var(--起点, 50% 100%);
-    animation: 横揺   var(--時間, 0.5s) var(--待機, 0s) ease-in-out infinite alternate paused;
+    animation: 横揺 calc(var(--時間, 0.5s) / var(--アニメ速度, 1)) var(--待機, 0s) ease-in-out infinite alternate paused;
 }
 
 
 /* #️⃣即時アニメクラス(2) ※最初から作動 */
 
 .回転 { /* rotate: 星の回転など */
-    transform-origin: var(--起点, center center);
-    animation: 回転 var(--時間, 5s) var(--待機, 0s) linear infinite;
+    transform-origin: var(--起点, 50% 50%);
+    animation: 回転 calc(var(--時間, 5s) / var(--アニメ速度, 1)) var(--待機, 0s) linear infinite;
 }
 
 .フィギュア { /* translate + rotate: 不定な動き */
     transform-origin: 40% 90%;
-    animation: フィギュア 4s infinite ease alternate;
+    animation: フィギュア calc(var(--時間, 4s) / var(--アニメ速度, 1)) infinite ease alternate;
 }
 
 

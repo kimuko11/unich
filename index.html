@@ -79,25 +79,17 @@
         <div class="設定💬">
 
             <div class="設定項目">
-                文字サイズ
+                効果音量
                 <label class="スライダー">
-                    小<input type="range" id="文字サイズ" max="9" min="0" value="4">大
+                    小<input type="range" id="効果音量" max="9" min="0" value="4">大
                     <span class="スライダー数値">4</span>
                 </label>
             </div>
 
             <div class="設定項目">
-                文字速度
-                <dlabel class="スライダー">
-                    遅<input type="range" id="文字速度" max="9" min="0" value="4">速
-                    <span class="スライダー数値">4</span>
-                </label>
-            </div>
-            
-            <div class="設定項目">
-                効果音量
+                文字サイズ
                 <label class="スライダー">
-                    小<input type="range" id="効果音量" max="9" min="0" value="4">大
+                    小<input type="range" id="文字サイズ" max="9" min="0" value="4">大
                     <span class="スライダー数値">4</span>
                 </label>
             </div>
@@ -110,6 +102,22 @@
                 </label>
             </div>
 
+            <div class="設定項目">
+                文字速度
+                <dlabel class="スライダー">
+                    遅<input type="range" id="文字速度" max="9" min="0" value="4">速
+                    <span class="スライダー数値">4</span>
+                </label>
+            </div>
+
+            <div class="設定項目">
+                アニメ速度
+                <label class="スライダー">
+                    遅<input type="range" id="アニメ速度" max="9" min="0" value="4">速
+                    <span class="スライダー数値">4</span>
+                </label>
+            </div>
+            
             <div class="設定グループ">
 
                 <div class="設定項目">
@@ -157,7 +165,7 @@
     <div class="宇宙レイヤー 中景"></div>
     <div class="宇宙レイヤー 流星"></div>
     <div class="宇宙レイヤー 近景"></div>
-    <div class="トップ星群"></div>
+    <div class="星群"></div>
 
     <div style="height: 13vw;"></div> <!-- トップ画像をサイズ可変のロゴに被せないために vw で縦余白を決定 -->
 
@@ -262,7 +270,7 @@
         </div>
     </div>
 
-    <p class="星群 ▼" style="margin-top: -20rem; margin-bottom: 40vh; --待機: 2s;"></p>
+    <p class="カチンコ星群 ▼" style="margin-top: -20rem; margin-bottom: 40vh; --待機: 2s;"></p>
 
     <!-- 🔹1画面弱の空白と流星 -->
 
@@ -295,7 +303,7 @@
             <div class="キャラ画像 身体_横揺">
                 <img src="cha/ut_genkina-aisatu.webp">
                 <img src="cha/ut_genkina-aisatu_heart.webp" alt="♥️" class="動作 発射→拍動" style="--時間1: 2s; --時間2: 2s;">
-                <img src="cha/ut_genkina-aisatu_kuchi.webp" alt="👄" class="動作 口元"       style="--起点:  50% 75%;">
+                <img src="cha/ut_genkina-aisatu_kuchi.webp" alt="👄" class="動作 口元">
                 <img src="cha/ut_genkina-aisatu_ude.webp"   alt="💪" class="動作 横揺"       style="--起点:  25% 95%;">
             </div>
             <div class="💬 中速">
@@ -320,8 +328,8 @@
             <div class="キャラ画像 身体_拍動">
                 <img src="cha/ut_odoroki.webp">
                 <img src="cha/ut_odoroki_odoroki.webp" alt="⚡" class="動作 発射">
-                <img src="cha/ut_odoroki_me.webp"      alt="👀" class="動作 拍動→目瞬" style="--起点: 50% 67%; --倍率: 1.2;">
-                <img src="cha/ut_odoroki_kuchi.webp"   alt="👄" class="動作 口元"       style="--起点: 50% 75%;">
+                <img src="cha/ut_odoroki_me.webp"      alt="👀" class="動作 拍動→目瞬" style="--倍率: 1.2;">
+                <img src="cha/ut_odoroki_kuchi.webp"   alt="👄" class="動作 口元">
             </div>
             <div class="💬 高速" data-se="se/odoroki.mp3" data-volume="0.5">
                 ぬわにっ!?<br>
@@ -334,7 +342,7 @@
         <div class="🥸">
             <div class="キャラ画像 身体_縦伸" style="--サイズ: 4%; --被り幅: 20px;">
                 <img src="cha/dt_precure.webp">
-                <img src="cha/dt_precure_hosi.webp" alt="⭐" class="動作 回転" style="--起点: 25% 21%; --時間: 5s;">
+                <img src="cha/dt_precure_hosi.webp" alt="⭐" class="動作 回転" style="--起点: 25% 21%;">
             </div>
             <div class="💬" style="--右割合: 6%;">
                 オウフwww<br>
@@ -356,7 +364,7 @@
         </div>
 
         <div class="🥸" style="--間隔: -20px;">
-            <div class="キャラ画像 身体_横揺" style="--サイズ: -4%; --被り幅: 10px; --起点: 50% 100%; --時間: 1s;">
+            <div class="キャラ画像 身体_横揺" style="--サイズ: -4%; --被り幅: 10px;">
                 <img src="cha/df_chiikawa.webp">
                 <img src="cha/df_chiikawa_chiikawa.webp" alt="🤲" class="動作 フィギュア">
             </div>

@@ -6,11 +6,11 @@
 
 .出現 { /* 非表示から表示 */
     opacity: 0;
-    animation: 出現 var(--時間, 1s) var(--待機, 0s) linear forwards;
+    animation: 出現 calc(var(--時間, 1s) / var(--アニメ速度, 1)) calc(var(--待機, 0s) / var(--アニメ速度, 1)) linear forwards;
 }
 
 .消滅 { /* 表示から非表示 */
-    animation: 消滅 var(--時間, 1s) var(--待機, 0s) linear forwards;
+    animation: 消滅 calc(var(--時間, 1s) / var(--アニメ速度, 1)) calc(var(--待機, 0s) / var(--アニメ速度, 1)) linear forwards;
 }
 
 .連動消滅 { /* 画面スクロールで表示から非表示 */
@@ -20,7 +20,7 @@
 
 .出現→消滅 { /* 非表示から表示、再び非表示 */
     opacity: 0;
-    animation: 出現→消滅 var(--時間, 10s) var(--待機, 0s) linear forwards;
+    animation: 出現→消滅 calc(var(--時間, 10s) / var(--アニメ速度, 1)) calc(var(--待機, 0s) / var(--アニメ速度, 1)) linear forwards;
 }
 
 /* 🔹Scale */
@@ -28,7 +28,7 @@
 .拡大 { /* ゼロ縮小から原型拡大 */
     scale: 0;
     transform-origin: var(--起点, 50% 100%);
-    animation: 拡大 var(--時間, 1s) var(--待機, 0s) cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+    animation: 拡大 calc(var(--時間, 1s) / var(--アニメ速度, 1)) calc(var(--待機, 0s) / var(--アニメ速度, 1)) cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
 }
 
 /* 🔹Rotate */
@@ -37,18 +37,18 @@
     opacity: 0;
     rotate:  var(--角度, -90deg);
     transform-origin: var(--起点, 0% 100%);
-    animation: 半倒 var(--時間, 1.5s) var(--待機, 0s) cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+    animation: 半倒 calc(var(--時間, 1.5s) / var(--アニメ速度, 1)) calc(var(--待機, 0s) / var(--アニメ速度, 1)) cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
 }
 
 /* 🔹Translate */
 
 .横滑 { /* 画面端から定位置へ移動 */
     opacity: 0;
-    animation: 横滑 var(--時間, 1s) var(--待機, 0s) cubic-bezier(0.175, 0.885, 0.32, 1.07) forwards;
+    animation: 横滑 calc(var(--時間, 1s) / var(--アニメ速度, 1)) calc(var(--待機, 0s) / var(--アニメ速度, 1)) cubic-bezier(0.175, 0.885, 0.32, 1.07) forwards;
 }
 
 .浮遊 { /* 上下移動 */
-    animation: 浮遊 var(--時間, 1s) var(--待機, 0s) ease-in-out infinite alternate;
+    animation: 浮遊 calc(var(--時間, 1s) / var(--アニメ速度, 1)) calc(var(--待機, 0s) / var(--アニメ速度, 1)) ease-in-out infinite alternate;
 }
 
 

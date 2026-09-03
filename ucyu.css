@@ -136,7 +136,7 @@
 
 .流星大 {
     opacity:   0;
-    animation: 流星大 1.3s linear forwards 1s;
+    animation: 流星大 calc(1.3s / var(--アニメ速度, 1)) linear forwards 1s;
 }
 @keyframes 流星大 {
       0% { opacity:    0;
@@ -152,12 +152,12 @@
 
 /* #️⃣ライン */
 
-.トップ星群, .星群 {
+.星群, .カチンコ星群 {
     margin-bottom:   -50px;
     height:           55px;
     background-image: url('img/seigun.webp');
     opacity:          0;
 
-    animation: 出現 var(--時間, 1s) linear forwards var(--待機, 0s),
-               近景・瞬き 2s ease-in-out infinite alternate calc(var(--待機, 0s) + var(--時間, 1s));
+    animation: 出現 calc(1s / var(--アニメ速度, 1)) calc(var(--待機, 0s) / var(--アニメ速度, 1)) linear forwards,
+               近景・瞬き 2s calc(var(--待機, 0s) + 1s / var(--アニメ速度, 1)) ease-in-out infinite alternate;
 }
