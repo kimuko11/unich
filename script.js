@@ -791,7 +791,7 @@ function 口元アニメ終了(エリア) {
 
 // ▫️アニメ終了時のニュートラル復帰
 
-function ニュートラル復帰(要素, プロパティ, 目標値, 秒数 = 0.25) {
+function ニュートラル復帰(要素, プロパティ, 目標値, 秒数 = 0.2) {
     const 現在値 = getComputedStyle(要素)[プロパティ];
 
     要素.style.animation  = 'none';
