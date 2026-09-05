@@ -47,8 +47,8 @@
     animation: 横滑 calc(var(--時間, 1s) / var(--アニメ速度, 1)) calc(var(--待機, 0s) / var(--アニメ速度, 1)) cubic-bezier(0.175, 0.885, 0.32, 1.07) forwards;
 }
 
-.浮遊 { /* 上下移動 */
-    animation: 浮遊 calc(var(--時間, 1s) / var(--アニメ速度, 1)) calc(var(--待機, 0s) / var(--アニメ速度, 1)) ease-in-out infinite alternate;
+.上下 { /* 上下移動 */
+    animation: 上下 calc(var(--時間, 1s) / var(--アニメ速度, 1)) calc(var(--待機, 0s) / var(--アニメ速度, 1)) ease-in-out infinite alternate;
 }
 
 
@@ -97,7 +97,7 @@
            opacity:   1; }
 }
 
-@keyframes 浮遊 { /* 上下移動 */
+@keyframes 上下 { /* 上下移動 */
       0% { translate: 0 calc(var(--距離, 3px) *  1); }
     100% { translate: 0 calc(var(--距離, 3px) * -1); }
 }

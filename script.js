@@ -771,7 +771,7 @@ function 身体アニメ終了(エリア) {
 // ▫️口元アニメ(1)
 
 function 口元アニメ開始(エリア) {
-    エリア.querySelectorAll('.口元').forEach((要素) => {
+    エリア.querySelectorAll('.口元, .ヒゲ').forEach((要素) => {
         要素.style.animation  = '';
         要素.style.rotate     = '';
         要素.style.scale      = '';
@@ -783,7 +783,7 @@ function 口元アニメ開始(エリア) {
 // ▫️口元アニメ終了 (文字送り終了)
 
 function 口元アニメ終了(エリア) {
-    エリア.querySelectorAll('.口元').forEach((要素) => {
+    エリア.querySelectorAll('.口元, .ヒゲ').forEach((要素) => {
         要素.classList.remove('再生');
         ニュートラル復帰(要素, 'scale', '1');
     });

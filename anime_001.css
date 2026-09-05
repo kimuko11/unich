@@ -12,6 +12,7 @@
 /* 🔹口元アニメ(1) */
 
 .口元.再生,
+.ヒゲ.再生,
 
 /* 🔹汎用アニメ(6) */
 
@@ -35,6 +36,7 @@ body.停止 .身体_横揺,
 body.停止 .身体_震動,
 
 body.停止 .口元,
+body.停止 .ヒゲ,
 
 body.停止 .縦伸.再生,
 body.停止 .拍動.再生,
@@ -46,7 +48,7 @@ body.停止 .横揺.再生,
 /* 🔹即時アニメ(2)とふきだし */
 
 body.停止 .回転,
-body.停止 .フィギュア,
+body.停止 .微動,
 
 body.停止 .💬::before,
 body.停止 .💬::after
@@ -75,7 +77,7 @@ body.停止 .発射 {
 .🥸.画面外 .回転,
 .🐰.画面外 .回転,
 .👤.画面外 .回転,
-.🥸.画面外 .フィギュア
+.🥸.画面外 .微動
 
     { animation-play-state: paused; }
 
@@ -133,6 +135,11 @@ body.停止 .発射 {
     animation: 縦伸 calc(var(--時間, 0.2s) / var(--アニメ速度, 1)) var(--待機, 0s) ease-in-out infinite alternate paused;
 }
 
+.ヒゲ { /* translate: ヒゲの上下 */
+    --距離: 1px;
+    animation: 上下 calc(var(--時間, 0.2s) / var(--アニメ速度, 1)) var(--待機, 0s) ease-in-out infinite alternate paused;
+}
+
 
 /* #️⃣汎用アニメクラス(6) ※再生クラス付与で作動 */
 
@@ -177,9 +184,9 @@ body.停止 .発射 {
     animation: 回転 calc(var(--時間, 5s) / var(--アニメ速度, 1)) var(--待機, 0s) linear infinite;
 }
 
-.フィギュア { /* translate + rotate: 不定な動き */
+.微動 { /* translate + rotate: 不定な動き */
     transform-origin: 40% 90%;
-    animation: フィギュア calc(var(--時間, 4s) / var(--アニメ速度, 1)) infinite ease alternate;
+    animation: 微動 calc(var(--時間, 4s) / var(--アニメ速度, 1)) infinite ease alternate;
 }
 
 
@@ -240,7 +247,7 @@ body.停止 .発射 {
 
 /* 🔹Complex */
 
-@keyframes フィギュア {
+@keyframes 微動 {
       0% { translate: 0 -3px; }
      20% { rotate:  2deg; }
      80% { rotate: -3deg; }
