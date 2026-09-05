@@ -86,13 +86,13 @@ body.停止 .発射 {
 
 .身体_縦伸 { /* scale: 通常の発話 */
     transform-origin: 50% 100%;
-    animation: 縦伸 calc(var(--時間, 0.25s) / var(--アニメ速度, 1)) var(--待機, 0s) ease-in-out infinite alternate paused;
+    animation: 縦伸 calc(var(--時間, 0.4s) / var(--アニメ速度, 1)) var(--待機, 0s) ease-in-out infinite alternate paused;
 }
 
 .身体_拍動 { /* scale x 2: 感情大からの発話 */
     transform-origin: 50% 100%;
-    animation: 拍動 calc(var(--時間1, 1.00s) / var(--アニメ速度, 1)) var(--待機1, 0s) paused,
-               縦伸 calc(var(--時間2, 0.25s) / var(--アニメ速度, 1)) calc(calc(var(--待機1, 0s) + var(--時間1, 1s)) / var(--アニメ速度, 1)) ease-in-out infinite alternate paused;
+    animation: 拍動 calc(var(--時間1, 1.0s) / var(--アニメ速度, 1)) var(--待機1, 0s) paused,
+               縦伸 calc(var(--時間2, 0.4s) / var(--アニメ速度, 1)) calc(calc(var(--待機1, 0s) + var(--時間1, 1s)) / var(--アニメ速度, 1)) ease-in-out infinite alternate paused;
 }
 
 .身体_横揺 { /* rotate: 横にユラユラ */

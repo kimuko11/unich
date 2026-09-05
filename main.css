@@ -88,7 +88,7 @@
 
     /* 🔹登場前の位置 */
 
-    transform: translateX(calc(var(--出現方向, 1) * 99%)); /* JSの登場完了検知専用として、身体アニメと干渉しない transform を使用 */
+    transform: translateX(calc(var(--出現方向, -1) * 99%)); /* JSの登場完了検知専用として、身体アニメと干渉しない transform を使用 */
     opacity:   0;
     scale:     var(--キャラ反転, 1) 1;
 
@@ -112,12 +112,12 @@
 .💬 {
     position:   relative;
 
-    margin-left:  calc(var(--左余白, auto) + var(--左割合, 0%));
-    margin-right: calc(var(--右余白, auto) + var(--右割合, 0%));
+    margin-left:  calc(var(--左余白, 16%) + var(--左割合, 0%));
+    margin-right: calc(var(--右余白, 0)   + var(--右割合, 0%));
 
     word-break: break-all;
 
-    transform-origin: var(--起点, top center);
+    transform-origin: var(--起点, top left);
 
     /* 🔹発話前 */
 
@@ -181,8 +181,8 @@
     position: absolute;
     display:  block;
     top:      -5.5px;
-    left:     var(--しっぽ左, 50%);
-    right:    var(--しっぽ右, 50%);
+    left:     var(--しっぽ左, 80px);
+    right:    var(--しっぽ右, auto);
 
     border-width: var(--しっぽ形, 0 3px 6px 0);
     border-style: solid;
@@ -196,14 +196,14 @@
 
 @keyframes しっぽ {
     0% {
-        rotate:    calc(var(--出現方向, 1) * 2deg);
+        rotate:    calc(var(--出現方向, -1) * 2deg);
         scale:     1 1;
-        transform: skew(calc(var(--出現方向, 1) * -2deg), 0);
+        transform: skew(calc(var(--出現方向, -1) * -2deg), 0);
     }
     100% {
-        rotate:    calc(var(--出現方向, 1) * 8deg);
+        rotate:    calc(var(--出現方向, -1) * 8deg);
         scale:     1 1.5;
-        transform: skew(calc(var(--出現方向, 1) * -8deg), 0);
+        transform: skew(calc(var(--出現方向, -1) * -8deg), 0);
     }
 }
 
