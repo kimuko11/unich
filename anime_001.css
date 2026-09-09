@@ -57,7 +57,8 @@ body.停止 .💬::after
 
 /* 🔹OFF時表示 */
 
-body.停止 .発射 {
+body.停止 .発射,
+body.停止 .発射→拍動 {
     opacity: 1;
     scale:   1;
 }
