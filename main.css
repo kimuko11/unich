@@ -36,8 +36,8 @@
 /* #️⃣キャラの基本配置とふきだしの指定（:where()で囲み詳細度0に） */
 
 :where(.🐰), :where(.👤) {
-	--配置:   flex-start; --出現方向: -1; --キャラ反転: 1;
-	--左余白: calc(12%  + var(--画像サイズ, 4) * 1%);  --右余白:   0;
+	--配置:   flex-start; --方向: -1; --反転: 1;
+	--余白左: calc(12%  + var(--画像サイズ, 4) * 1%);  --余白右:   0;
 	--尻尾左: calc(54px + var(--画像サイズ, 4) * 4px); --尻尾右: auto;
 	--尻尾形: 0 3px 6px 0; --起点: top left;
     --色: rgba(255, 105, 180, 0.5); /* hotpink #ff69b4 */
@@ -46,8 +46,8 @@
     --色: rgba(70, 130, 180, 0.5); /* steelblue #4682b4 */
 }
 :where(.🥸) {
-	--配置:   flex-end;	--出現方向: 1; --キャラ反転: 1;
-	--左余白: 0;	--右余白: calc(10%  + var(--画像サイズ, 4) * 1%);
+	--配置:   flex-end;	--方向: 1; --反転: 1;
+	--余白左: 0;	--余白右: calc(10%  + var(--画像サイズ, 4) * 1%);
 	--尻尾左: auto;	--尻尾右: calc(54px + var(--画像サイズ, 4) * 4px);
 	--尻尾形: 0 0 6px 3px; --起点: top right;
     --色: rgba(210, 180, 140, 0.5); /* tan #d2b48c */
@@ -56,14 +56,14 @@
 /* 🔹配置の左右指定（詳細度1なので上書き可能）*/
 
 .左側 {
-	--配置:   flex-start; --出現方向: -1; --キャラ反転: -1;
-	--左余白: calc(12%  + var(--画像サイズ, 4) * 1%);  --右余白:   0;
+	--配置:   flex-start; --方向: -1; --反転: -1;
+	--余白左: calc(12%  + var(--画像サイズ, 4) * 1%);  --余白右:   0;
 	--尻尾左: calc(54px + var(--画像サイズ, 4) * 4px); --尻尾右: auto;
 	--尻尾形: 0 3px 6px 0; --起点: top left;
 }
 .右側 {
-	--配置:   flex-end;	--出現方向: 1;    --キャラ反転: -1;
-	--左余白: 0;	--右余白: calc(10%  + var(--画像サイズ, 4) * 1%);
+	--配置:   flex-end;	--方向: 1; --反転: -1;
+	--余白左: 0;	--余白右: calc(10%  + var(--画像サイズ, 4) * 1%);
 	--尻尾左: auto;	--尻尾右: calc(54px + var(--画像サイズ, 4) * 4px);
 	--尻尾形: 0 0 6px 3px; --起点: top right;
 }
@@ -91,9 +91,9 @@
 
     /* 🔹登場前の位置 */
 
-    transform: translateX(calc(var(--出現方向, -1) * 99%)); /* JSの登場完了検知専用として、身体アニメと干渉しない transform を使用 */
+    transform: translateX(calc(var(--方向, -1) * 99%)); /* JSの登場完了検知専用として、身体アニメと干渉しない transform を使用 */
     opacity:   0;
-    scale:     var(--キャラ反転, 1) 1;
+    scale:     var(--反転, 1) 1;
 
     /* 🔹登場の仕方 */
 
@@ -115,8 +115,8 @@
 .💬 {
     position:   relative;
 
-    margin-left:  calc(var(--左余白, 16%) + var(--左割合, 0%));
-    margin-right: calc(var(--右余白, 0)   + var(--右割合, 0%));
+    margin-left:  calc(var(--余白左, 16%) + var(--左余白, 0%));
+    margin-right: calc(var(--余白右, 0)   + var(--右余白, 0%));
 
     word-break: break-all;
 
@@ -150,9 +150,9 @@
     background-color: var(--色, var(--標準色, #777));
 
     backdrop-filter:  blur(3px);
-    box-shadow: 0    0 10px var(--中光, #888), /* 後光 */
-          inset 0  2px 10px var(--弱光, #888), /* 光沢 */
-          inset 0 -2px 15px rgb(0 0 0 / 50%);  /* 影 */
+    box-shadow: 0    0 10px var(--中光, #888),  /* 後光 */
+          inset 0  2px 10px var(--弱光, #888),  /* 光沢 */
+          inset 0 -2px 15px rgba(0, 0, 0, 0.5); /* 影 */
 
     transition: backdrop-filter 1s, box-shadow 1s; /* 消光用 */
 
@@ -199,21 +199,21 @@
 
 @keyframes 尻尾 {
     0% {
-        rotate:    calc(var(--出現方向, -1) * 2deg);
+        rotate:    calc(var(--方向, -1) * 2deg);
         scale:     1 1;
-        transform: skew(calc(var(--出現方向, -1) * -2deg), 0);
+        transform: skew(calc(var(--方向, -1) * -2deg), 0);
     }
     100% {
-        rotate:    calc(var(--出現方向, -1) * 8deg);
+        rotate:    calc(var(--方向, -1) * 8deg);
         scale:     1 1.5;
-        transform: skew(calc(var(--出現方向, -1) * -8deg), 0);
+        transform: skew(calc(var(--方向, -1) * -8deg), 0);
     }
 }
 
 
 /* #️⃣モノローグのふきだし */
 
-.無声 { color: rgb(192 183 180); }
+.無声 { color: silver; }
 
 .💬.無声::before {
     background-color: rgb(from var(--色, var(--標準色, #777)) r g b / calc(alpha / 1.5));

@@ -762,8 +762,8 @@ function 身体アニメ開始(エリア) {
 function 身体アニメ終了(エリア) {
     エリア.querySelectorAll('.身体_縦伸, .身体_拍動').forEach((要素) => {
         要素.classList.remove('再生');
-        const キャラ反転 = getComputedStyle(要素).getPropertyValue('--キャラ反転').trim() || '1';
-        ニュートラル復帰(要素, 'scale', `${キャラ反転} 1`);
+        const 反転 = getComputedStyle(要素).getPropertyValue('--反転').trim() || '1';
+        ニュートラル復帰(要素, 'scale', `${反転} 1`);
     });
 
     エリア.querySelectorAll('.身体_横揺').forEach((要素) => {

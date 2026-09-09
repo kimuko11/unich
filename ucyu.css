@@ -79,7 +79,7 @@
     width:      100px; /* 長さ */
     height:     1px;   /* 太さ */
 
-    background: linear-gradient(-45deg, rgb(0 0 0 / 0), var(--強光, seashell));
+    background: linear-gradient(-45deg, rgba(0, 0, 0, 0), var(--強光, seashell));
     filter:     drop-shadow(0 0 6px var(--強光, seashell));
     opacity:    0;
 
@@ -88,7 +88,7 @@
 
 .流星.反転 {
     animation-name: 流星反転;
-    background: linear-gradient(45deg, rgb(0 0 0 / 0), var(--中光, #888));
+    background: linear-gradient(45deg, rgba(0, 0, 0, 0), var(--中光, #888));
 }
 
 @keyframes 流星 {

@@ -190,7 +190,7 @@ b, em {
     width: 100%;
 
     content-visibility:     auto;
-    contain-intrinsic-size: auto var(--省略, 100vh);
+    contain-intrinsic-size: auto var(--省略幅, 100vh);
 }
 
 
