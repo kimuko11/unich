@@ -439,6 +439,8 @@ function 表示制御実行(値上, 値下) {
 
 // ▫️ページ読み込み時の復元
 
+let 表示遅延タイマー = null;
+
 document.addEventListener('DOMContentLoaded', () => {
     const 入力上 = document.getElementById('非表示上');
     const 入力下 = document.getElementById('非表示下');
@@ -452,11 +454,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
         表示制御実行(保存上, 保存下); // 復元された値で初回表示を切り替え
 
-        入力上.addEventListener('input', 表示範囲更新); // 入力変更イベントのバインド
-        入力下.addEventListener('input', 表示範囲更新);
+        const 遅延付き表示更新 = () => {
+            clearTimeout(表示遅延タイマー); // キーが入るたびに前のタイマーをキャンセル
+            表示遅延タイマー = setTimeout(() => {
+                表示範囲更新();
+            }, 1000); // 1秒入力が止まったら実行
+        };
+
+        入力上.addEventListener('input', 遅延付き表示更新);
+        入力下.addEventListener('input', 遅延付き表示更新);
     }
 });
-
 
 // ▫️範囲のリセット
 

@@ -36,36 +36,36 @@
 /* #️⃣キャラの基本配置とふきだしの指定（:where()で囲み詳細度0に） */
 
 :where(.🐰), :where(.👤) {
-	--配置: flex-start; --出現方向: -1;   --キャラ反転: 1;
-	--左余白:   calc(12% + var(--画像サイズ, 4) * 1%);    --右余白:   0;
-	--しっぽ左: calc(54px + var(--画像サイズ, 4) * 4px);  --しっぽ右: auto;
-	--起点: top left;	--しっぽ形: 0 3px 6px 0;
+	--配置:   flex-start; --出現方向: -1; --キャラ反転: 1;
+	--左余白: calc(12%  + var(--画像サイズ, 4) * 1%);  --右余白:   0;
+	--尻尾左: calc(54px + var(--画像サイズ, 4) * 4px); --尻尾右: auto;
+	--尻尾形: 0 3px 6px 0; --起点: top left;
     --色: rgba(255, 105, 180, 0.5); /* hotpink #ff69b4 */
 }
 :where(.👤) {
     --色: rgba(70, 130, 180, 0.5); /* steelblue #4682b4 */
 }
 :where(.🥸) {
-	--配置: flex-end;	--出現方向: 1;    --キャラ反転: 1;
-	--左余白:   0;		--右余白:   calc(10% + var(--画像サイズ, 4) * 1%);
-	--しっぽ左: auto;	--しっぽ右: calc(54px + var(--画像サイズ, 4) * 4px);
-	--起点: top right;  --しっぽ形: 0 0 6px 3px;
+	--配置:   flex-end;	--出現方向: 1; --キャラ反転: 1;
+	--左余白: 0;	--右余白: calc(10%  + var(--画像サイズ, 4) * 1%);
+	--尻尾左: auto;	--尻尾右: calc(54px + var(--画像サイズ, 4) * 4px);
+	--尻尾形: 0 0 6px 3px; --起点: top right;
     --色: rgba(210, 180, 140, 0.5); /* tan #d2b48c */
 }
 
 /* 🔹配置の左右指定（詳細度1なので上書き可能）*/
 
 .左側 {
-	--配置: flex-start; --出現方向: -1;   --キャラ反転: -1;
-	--左余白:   calc(12% + var(--画像サイズ, 4) * 1%);    --右余白:   0;
-	--しっぽ左: calc(54px + var(--画像サイズ, 4) * 4px);  --しっぽ右: auto;
-	--起点: top left;	--しっぽ形: 0 3px 6px 0;
+	--配置:   flex-start; --出現方向: -1; --キャラ反転: -1;
+	--左余白: calc(12%  + var(--画像サイズ, 4) * 1%);  --右余白:   0;
+	--尻尾左: calc(54px + var(--画像サイズ, 4) * 4px); --尻尾右: auto;
+	--尻尾形: 0 3px 6px 0; --起点: top left;
 }
 .右側 {
-	--配置: flex-end;	--出現方向: 1;    --キャラ反転: -1;
-	--左余白:   0;		--右余白:   calc(10% + var(--画像サイズ, 4) * 1%);
-	--しっぽ左: auto;	--しっぽ右: calc(54px + var(--画像サイズ, 4) * 4px);
-	--起点: top right;  --しっぽ形: 0 0 6px 3px;
+	--配置:   flex-end;	--出現方向: 1;    --キャラ反転: -1;
+	--左余白: 0;	--右余白: calc(10%  + var(--画像サイズ, 4) * 1%);
+	--尻尾左: auto;	--尻尾右: calc(54px + var(--画像サイズ, 4) * 4px);
+	--尻尾形: 0 0 6px 3px; --起点: top right;
 }
 
 
@@ -177,27 +177,27 @@
             calc((var(--縦幅, 100px) + var(--拡縮幅, 2px)) / var(--縦幅, 100px)); }
 }
 
-/* 🔹ふきだしのしっぽ */
+/* 🔹ふきだしの尻尾 */
 
 .💬::after {
     content: '';
     position: absolute;
     display:  block;
     top:      -5.5px;
-    left:     var(--しっぽ左, 70px);
-    right:    var(--しっぽ右, auto);
+    left:     calc(var(--尻尾左, 70px) + var(--左尻尾, 0px));
+    right:    calc(var(--尻尾右, auto) + var(--右尻尾, 0px));
 
-    border-width: var(--しっぽ形, 0 3px 6px 0);
+    border-width: var(--尻尾形, 0 3px 6px 0);
     border-style: solid;
     border-color: transparent transparent var(--強光, seashell) transparent;
 
     transform-origin: center bottom;
-    animation: しっぽ calc(0.6s / var(--アニメ速度, 1)) infinite ease-in-out alternate;  /* 低速 */
+    animation: 尻尾 calc(0.6s / var(--アニメ速度, 1)) infinite ease-in-out alternate;  /* 低速 */
 }
-.💬.中速::after { animation: しっぽ calc(0.5s / var(--アニメ速度, 1)) infinite ease-in-out alternate; }
-.💬.高速::after { animation: しっぽ calc(0.4s / var(--アニメ速度, 1)) infinite ease-in-out alternate; }
+.💬.中速::after { animation: 尻尾 calc(0.5s / var(--アニメ速度, 1)) infinite ease-in-out alternate; }
+.💬.高速::after { animation: 尻尾 calc(0.4s / var(--アニメ速度, 1)) infinite ease-in-out alternate; }
 
-@keyframes しっぽ {
+@keyframes 尻尾 {
     0% {
         rotate:    calc(var(--出現方向, -1) * 2deg);
         scale:     1 1;
@@ -224,7 +224,7 @@
     width:  3px;
     height: 3px;
 
-    border:        none;   /* しっぽ消去 */
+    border:        none;   /* 尻尾消去 */
     border-radius: 50%;
 
     background-color: var(--中光, #888);
