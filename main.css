@@ -251,7 +251,7 @@
     animation: 出現 0.5s calc(0.5s / var(--アニメ速度, 1)) linear forwards;
 }
 .ト書き下 {
-    margin:     25px -20px -45px;
+    margin:     25px -80px -45px;
     text-align: right;
     transition: opacity 0.5s linear;
 }
