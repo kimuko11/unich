@@ -286,7 +286,7 @@
         <!-- 
         ◾利用できる CSS 変数
         🥸, 🐰:    --間隔 px (上との間隔の増減)
-        キャラ画像: --サイズ % (画像サイズの増減),  --被り幅 px (ふきだしへの被り幅の増減)
+        キャラ画像: --サイズ % (画像サイズの増減),  --被り幅 px (ふきだしへの被り幅の増減), --戻り 0 (登場アニメのわずかな戻り)
         💬:        --左/右尻尾 px (尻尾距離の増減) --左/右余白 % (ふきだし占有率の増減)
 
         ◾アニメ変数
@@ -560,7 +560,7 @@
                 <img src="cha/da_pyo-n_kuchi.webp"   alt="👄" class="動作 口元" style="--起点: 50% 60%;">
             </div>
             <div class="💬 高速" data-se="se/pyo-n.mp3" data-wait="20">
-                バブみ盛り盛り、チパ〜イ♥️
+                バブみ盛り盛り、<br>チパ〜イ♥️
                 <div class="ト書き下">(ユニちゃんに抱きつこうとする)</div>
             </div>
         </div>
@@ -574,6 +574,25 @@
             <div class="💬 高速" data-se="se/hammer.mp3" style="--左尻尾: 20px;">
                 <em>キモっ！<br>
                 近よゆなでしゅ！</em>
+            </div>
+        </div>
+
+        <div class="🥸">
+            <div class="キャラ画像 身体_震動" style="--サイズ: 4%; --被り幅: 15px;">
+                <img src="cha/df_tankobu.webp">
+                <img src="cha/df_tankobu_tori.webp"     alt="🦉" class="動作 微動"       style="--時間:  9s; z-index: -1;">
+                <img src="cha/df_tankobu_hukidasi.webp" alt="💨" class="動作 発射"       style="--時間:  2s; --起点: 70% 20%; --待機: 1s;">
+                <img src="cha/df_tankobu_zukizuki.webp" alt="⚡" class="動作 発射→拍動" style="--時間1: 3s; --倍率: 1.15;">
+                <img src="cha/df_tankobu_tankobu.webp"  alt="🤕" class="動作 発射→拍動" style="--時間1: 3s;">
+                <img src="cha/df_tankobu_ude.webp"      alt="💪" class="動作">
+                <div class="動作 震動">
+                    <img src="cha/df_tankobu_ooo.webp"  alt="💨" class="発射"            style="--時間: 60s; --起点: 48% 75%;">
+                </div>
+            </div>
+            <div class="💬">
+                <div class="ト書き上">(殴られた頭をさすりながら)</div>
+                結果として偶像崇拝しないなら、それでいーんじゃないっスかね♪<br>
+                結構なことですぞいw
             </div>
         </div>
 

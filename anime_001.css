@@ -47,9 +47,10 @@ body.停止 .発射→拍動,
 body.停止 .横揺.再生,
 body.停止 .一転.再生,
 
-/* 🔹即時アニメ(2)とふきだし */
+/* 🔹即時アニメ(3)とふきだし */
 
 body.停止 .回転,
+body.停止 .震動,
 body.停止 .微動,
 
 body.停止 .💬::before,
@@ -123,7 +124,9 @@ body.停止 .発射→拍動 {
 .🥸 .身体_拍動 > *,
 .🐰 .身体_拍動 > *,
 .🥸 .身体_横揺 > *,
-.🐰 .身体_横揺 > * { /* 子要素に引き継がない */
+.🐰 .身体_横揺 > *,
+.🥸 .身体_震動 > *,
+.🐰 .身体_震動 > * { /* 子要素に引き継がない */
     --起点: initial;
     --時間: initial; --時間1: initial; --時間2: initial;
     --待機: initial; --待機1: initial; --待機2: initial;
@@ -192,7 +195,11 @@ body.停止 .発射→拍動 {
     animation: 回転 calc(var(--時間, 5s) / var(--アニメ速度, 1)) var(--待機, 0s) linear infinite;
 }
 
-.微動 { /* translate + rotate: 不定な動き */
+.震動 { /* translate: 小刻みな震え */
+    animation: 震動 calc(var(--時間, 0.5s) / var(--アニメ速度, 1)) var(--待機, 0s) linear infinite;
+}
+
+.微動 { /* rotate + translate: 不定な動き */
     transform-origin: 40% 90%;
     animation: 微動 calc(var(--時間, 4s) / var(--アニメ速度, 1)) infinite ease alternate;
 }
