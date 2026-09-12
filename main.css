@@ -248,7 +248,7 @@
 }
 .ト書き上 {
     margin:    -45px -20px  25px;
-    animation: 出現 0.5s calc(1s / var(--アニメ速度, 1)) linear forwards;
+    animation: 出現 0.5s 1s linear forwards;
 }
 .ト書き下 {
     margin:     25px -60px -45px;
