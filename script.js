@@ -454,15 +454,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
         表示制御実行(保存上, 保存下); // 復元された値で初回表示を切り替え
 
-        const 遅延付き表示更新 = () => {
-            clearTimeout(表示遅延タイマー); // キーが入るたびに前のタイマーをキャンセル
+        const 遅延付きページ更新 = () => {
+            clearTimeout(表示遅延タイマー);
             表示遅延タイマー = setTimeout(() => {
-                表示範囲更新();
+                if (入力上.value !== '') localStorage.setItem('preview_from', 入力上.value);
+                else localStorage.removeItem('preview_from');
+
+                if (入力下.value !== '') localStorage.setItem('preview_to', 入力下.value);
+                else localStorage.removeItem('preview_to');
+
+                location.reload();
             }, 1000); // 1秒入力が止まったら実行
         };
 
-        入力上.addEventListener('input', 遅延付き表示更新);
-        入力下.addEventListener('input', 遅延付き表示更新);
+        入力上.addEventListener('input', 遅延付きページ更新);
+        入力下.addEventListener('input', 遅延付きページ更新);
     }
 });
 
@@ -477,7 +483,7 @@ function 範囲リセット() {
     localStorage.removeItem('preview_from');
     localStorage.removeItem('preview_to');
 
-    表示制御実行('', '');
+    location.reload();
 }
 
 // ▫️独自スピンボタンによる数値変更
@@ -491,19 +497,23 @@ function 数値変更(targetId, diff) {
 
     let 現在値 = parseInt(input.value, 10);
 
-    if (isNaN(現在値)) { // 空欄時に▲▼を押したら「1」からスタート
-        現在値 = 1;
+    if (isNaN(現在値)) { // 空欄時に▲▼を押したら最大値からスタート
+        現在値 = 総数;
     } else {
         現在値 += diff;
     }
 
-    // 1未満にはならず、最大セリフ数を超えない
-    if (現在値 < 1) 現在値 = 1;
+    if (現在値 < 1) 現在値 = 1; // 1未満にはならず、最大セリフ数を超えない
     if (総数 > 0 && 現在値 > 総数) 現在値 = 総数;
 
     input.value = 現在値;
 
-    表示範囲更新();
+    const 入力上 = document.getElementById('非表示上');
+    const 入力下 = document.getElementById('非表示下');
+    if (入力上 && 入力上.value !== '') localStorage.setItem('preview_from', 入力上.value);
+    if (入力下 && 入力下.value !== '') localStorage.setItem('preview_to'  , 入力下.value);
+
+    location.reload();
 }
 
 
