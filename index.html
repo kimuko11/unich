@@ -286,7 +286,7 @@
         <!-- 
         ◾利用できる CSS 変数
         🥸, 🐰:    --間隔 px (上との間隔の増減)
-        キャラ画像: --サイズ % (画像サイズの増減),  --被り幅 px (ふきだしへの被り幅の増減), --戻り 0 (登場アニメのわずかな戻り)
+        キャラ画像: --サイズ % (画像サイズの増減),  --被り幅 px (ふきだしへの被り幅の増減)
         💬:        --左/右尻尾 px (尻尾距離の増減) --左/右余白 % (ふきだし占有率の増減)
 
         ◾アニメ変数
@@ -302,10 +302,10 @@
         <div class="🐰">
             <div class="キャラ画像 身体_横揺">
                 <img src="cha/ut_genkina-aisatu.webp">
-                <img src="cha/ut_genkina-aisatu_heart.webp" alt="♥️" class="動作 発射→拍動" style="--時間1: 2s; --時間2: 2s;">
-                <img src="cha/ut_genkina-aisatu_kuchi.webp" alt="👄" class="動作 口元">
+                <img src="cha/ut_genkina-aisatu_heart.webp"   alt="♥️" class="動作 発射→拍動" style="--時間1: 2s; --時間2: 2s;">
+                <img src="cha/ut_genkina-aisatu_kuchi.webp"   alt="👄" class="動作 口元">
                 <div class="動作 発射" style="--起点: 40% 100%; --倍率: 1.05;">
-                    <img src="cha/ut_genkina-aisatu_ude.webp"   alt="💪" class="横揺" style="--起点: 25% 95%; --角度: 10deg;">
+                    <img src="cha/ut_genkina-aisatu_ude.webp" alt="💪" class="横揺" style="--起点: 25% 95%; --角度: 10deg;">
                 </div>
             </div>
             <div class="💬 中速">
@@ -330,10 +330,10 @@
 
         <div class="🐰">
             <div class="キャラ画像 身体_拍動">
-                <img src="cha/ut_odoroki.webp">
-                <img src="cha/ut_odoroki_odoroki.webp" alt="⚡" class="動作 発射">
-                <img src="cha/ut_odoroki_me.webp"      alt="👀" class="動作 拍動→目瞬" style="--倍率: 1.2;">
-                <img src="cha/ut_odoroki_kuchi.webp"   alt="👄" class="動作 口元">
+                <img src="cha/ut_kyogaku.webp">
+                <img src="cha/ut_kyogaku_odoroki.webp" alt="⚡" class="動作 発射">
+                <img src="cha/ut_kyogaku_me.webp"      alt="👀" class="動作 拍動→目瞬" style="--倍率: 1.2;">
+                <img src="cha/ut_kyogaku_kuchi.webp"   alt="👄" class="動作 口元">
             </div>
             <div class="💬 高速" data-se="se/odoroki.mp3" data-volume="0.5">
                 ぬわにっ!?<br>
@@ -538,7 +538,7 @@
         <div class="🥸" style="--間隔: -20px;">
             <div class="キャラ画像 身体_縦伸">
                 <img src="cha/da_megane.webp">
-                <img src="cha/da_megane_hikari.webp" alt="✨" class="動作 発射→拍動" style="--起点: 40% 53%; --倍率: 1.2;">
+                <img src="cha/da_megane_hikari.webp" alt="✨" class="動作 発射→拍動" style="--起点: 40% 53%; --倍率: 1.3;">
                 <img src="cha/da_megane_kuchi.webp"  alt="👄" class="動作 ヒゲ">
             </div>
             <div class="💬" style="--右尻尾: 25px;">
@@ -560,8 +560,8 @@
             </div>
         </div>
 
-        <div class="🥸" style="--間隔: -10px;">
-            <div class="キャラ画像 身体_縦伸" style="--サイズ: 8%; --被り幅: -25px; --戻り: 0; --時間: 0.3s;">
+        <div class="🥸" style="--間隔: -10px; --配置: center;">
+            <div class="キャラ画像 身体_縦伸" style="--サイズ: 8%; --被り幅: -25px; --時間: 0.3s;">
                 <img src="cha/da_pyo-n.webp">
                 <img src="cha/da_pyo-n_pyo-n.webp"   alt="💨" class="動作 発射" style="--起点: 99% 45%; --時間: 1.5s; --倍率: 1.3; z-index: -1;">
                 <img src="cha/da_pyo-n_odoroki.webp" alt="⚡" class="動作 発射" style="--起点: 64% 12%;">
@@ -569,7 +569,7 @@
             </div>
             <div class="💬 高速" data-se="se/pyo-n.mp3" data-wait="20">
                 バブみ盛り盛り、<br>チパ〜イ♥️
-                <div class="ト書き下">(ユニちゃんに抱きつこうとする)</div>
+                <div class="ト書き下" style="margin-right: -120px;">(ユニちゃんに抱きつこうとする)</div>
             </div>
         </div>
 
@@ -594,7 +594,7 @@
                 <img src="cha/df_tankobu_tankobu.webp"  alt="🤕" class="動作 発射→拍動" style="--時間1: 3s;">
                 <img src="cha/df_tankobu_ude.webp"      alt="💪" class="動作">
                 <div class="動作 震動">
-                    <img src="cha/df_tankobu_ooo.webp"  alt="💨" class="発射"            style="--時間: 50s; --起点: 48% 75%;">
+                    <img src="cha/df_tankobu_ooo.webp"  alt="💨" class="発射"            style="--時間: 30s; --起点: 48% 75%;">
                 </div>
             </div>
             <div class="💬" data-se="se/katakata.mp3" style="--右尻尾: 20px;">
@@ -641,17 +641,44 @@
             </div>
         </div>
 
-        <div class="🥸">
+        <div class="🥸" style="--間隔: -20px;">
             <div class="キャラ画像 身体_横揺" style="--角度: 2deg;">
                 <img src="cha/da_heart.webp">
-                <img src="cha/da_heart_hikari.webp" alt="✨" class="動作 発射→拍動" style="--起点: 16.5% 33%; --時間1: 2s; --時間2: 2s; --倍率: 1.2;">
+                <img src="cha/da_heart_hikari.webp" alt="✨" class="動作 発射→拍動" style="--起点: 16.5% 33%; --時間1: 2s; --時間2: 2s; --倍率: 1.3;">
                 <img src="cha/da_heart_heart.webp"  alt="♥️" class="動作 発射→拍動" style="--起点:  50% 100%; --時間1: 9s; --時間2: 3s; --倍率: 1.1;">
                 <img src="cha/da_heart_kuchi.webp"  alt="👄" class="動作 ヒゲ">
-                <img src="cha/da_heart_ude.webp"    alt="💪" class="動作 発射"       style="--起点:  90% 100%; --時間:  2s; --倍率: 1.05;">
+                <img src="cha/da_heart_ude.webp"    alt="💪" class="動作">
             </div>
             <div class="💬" style="--右尻尾: 20px;">
                 偶像崇拝を「正しい」とか「間違ってる」とか、そーゆー目で見てないって意味ですぢゃw<br>
                 小生が判断基準にしてるのは、自分が採用する<em>その見方</em>が「自分をよい気分にするか？ イヤな気分にするか？」、ただそれだけナリ♥️
+            </div>
+        </div>
+
+        <div class="🐰">
+            <div class="キャラ画像 身体_拍動" style="--サイズ: 4%;">
+                <img src="cha/ut_odoroki.webp">
+                <img src="cha/ut_odoroki_odoroki.webp" alt="⚡" class="動作 発射">
+                <img src="cha/ut_odoroki_me.webp"      alt="👀" class="動作 拍動→目瞬" style="--起点: 40% 73%;">
+                <img src="cha/ut_odoroki_kuchi.webp"   alt="👄" class="動作 口元"       style="--起点: 50% 81%; --時間: 0.15s;">
+                <img src="cha/ut_odoroki_ude.webp"     alt="💪" class="動作 発射"       style="--起点: 50% 99%; --倍率: 1.05;">
+            </div>
+            <div class="💬 高速" data-se="se/odoroki.mp3" data-volume="0.5">
+                ええ〜、なにそれっ！<br>
+                じぶんが気分よければ、まちがっててもいーのっ！<br>
+                おま、それでも学者のはちくれか！？
+            </div>
+        </div>
+
+        <div class="🥸">
+            <div class="キャラ画像 身体_縦伸" style="--時間: 0.4s; --被り幅: 5px;">
+                <img src="cha/da_sibuki.webp">
+                <img src="cha/da_sibuki_sibuki.webp" alt="💦" class="動作 発射" style="--起点: 60% 80%;">
+            </div>
+            <div class="💬 中速" style="--右尻尾: 10px;">
+                ドプフォwww<br>
+                そもそも「<b>間違い</b>」て何ですぞな？<br>
+                それって宇宙のどこかに存在するものぞな？
             </div>
         </div>
 
