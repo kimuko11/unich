@@ -21,6 +21,7 @@
 .拍動→目瞬.再生,
 .発射.再生,
 .発射→拍動.再生,
+.発射→拍微動.再生,
 .横揺.再生,
 .一転.再生
 
@@ -44,14 +45,15 @@ body.停止 .拍動.再生,
 body.停止 .拍動→目瞬,
 body.停止 .発射,
 body.停止 .発射→拍動,
+body.停止 .発射→拍微動,
 body.停止 .横揺.再生,
 body.停止 .一転.再生,
 
 /* 🔹即時アニメ(3)とふきだし */
 
 body.停止 .回転,
-body.停止 .震動,
 body.停止 .微動,
+body.停止 .震動,
 
 body.停止 .💬::before,
 body.停止 .💬::after
@@ -61,7 +63,8 @@ body.停止 .💬::after
 /* 🔹OFF時表示 */
 
 body.停止 .発射,
-body.停止 .発射→拍動 {
+body.停止 .発射→拍動,
+body.停止 .発射→拍微動 {
     opacity: 1;
     scale:   1;
 }
@@ -155,6 +158,7 @@ body.停止 .発射→拍動 {
 }
 
 .拍動 { /* scale: 原型から速く拡張、原型にゆっくり収縮 */
+    transform-origin: var(--起点, 50% 50%);
     animation: 拍動 calc(var(--時間, 1s) / var(--アニメ速度, 1)) var(--待機, 0s) ease-in-out infinite alternate;
 }
 
@@ -175,6 +179,14 @@ body.停止 .発射→拍動 {
     transform-origin: var(--起点, 50% 50%);
     animation: 発射 calc(var(--時間1, 1s) / var(--アニメ速度, 1)) var(--待機1, 0s) forwards paused,
                拍動 calc(var(--時間2, 1s) / var(--アニメ速度, 1)) calc(calc(var(--待機1, 0s) + var(--時間1, 1s)) / var(--アニメ速度, 1)) ease-in-out infinite alternate paused;
+}
+
+.発射→拍微動 { /* scale x 2 + translate: 腕の動作など */
+    opacity: 0;
+    transform-origin: var(--起点, 50% 50%);
+    animation: 発射 calc(var(--時間1, 1s) / var(--アニメ速度, 1)) var(--待機1, 0s) forwards paused,
+               拍動 calc(var(--時間2, 1s) / var(--アニメ速度, 1)) calc(calc(var(--待機1, 0s) + var(--時間1, 1s)) / var(--アニメ速度, 1)) ease-in-out infinite alternate paused,
+               微動 calc(var(--時間3, 4s) / var(--アニメ速度, 1)) calc(calc(var(--待機1, 0s) + var(--時間1, 1s)) / var(--アニメ速度, 1)) infinite alternate paused;
 }
 
 .横揺 { /* rotate: 腕振りなど */
@@ -200,13 +212,13 @@ body.停止 .発射→拍動 {
     animation: 回転 calc(var(--時間, 5s) / var(--アニメ速度, 1)) var(--待機, 0s) linear infinite;
 }
 
-.震動 { /* translate: 小刻みな震え */
-    animation: 震動 calc(var(--時間, 0.5s) / var(--アニメ速度, 1)) var(--待機, 0s) linear infinite;
+.微動 { /* rotate + translate: 不定な動き */
+    transform-origin: var(--起点, 50% 90%);
+    animation: 微動 calc(var(--時間, 4s) / var(--アニメ速度, 1)) infinite alternate;
 }
 
-.微動 { /* rotate + translate: 不定な動き */
-    transform-origin: 40% 90%;
-    animation: 微動 calc(var(--時間, 4s) / var(--アニメ速度, 1)) infinite alternate;
+.震動 { /* translate: 小刻みな震え */
+    animation: 震動 calc(var(--時間, 0.5s) / var(--アニメ速度, 1)) var(--待機, 0s) linear infinite;
 }
 
 
@@ -250,6 +262,14 @@ body.停止 .発射→拍動 {
     100% { rotate: 360deg; }
 }
 
+@keyframes 微動 {
+      0% { rotate:  0deg; }
+     25% { rotate: -3deg; }
+     50% { translate: 0 -3px; }
+     75% { rotate:  3deg; }
+    100% { translate: 0  3px; }
+}
+
 /* 🔹Translate */
 
 @keyframes 震動 { /* 小刻みな震え */
@@ -263,13 +283,4 @@ body.停止 .発射→拍動 {
     70%      { translate: -1px -1px; }
     80%      { translate:  2px  1px; }
     90%      { translate: -2px  2px; }
-}
-
-/* 🔹Complex */
-
-@keyframes 微動 {
-      0% { translate: 0 -3px; }
-     20% { rotate:  2deg; }
-     80% { rotate: -3deg; }
-    100% { translate: 0  3px; }
 }
