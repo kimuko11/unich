@@ -1,20 +1,20 @@
 @charset "UTF-8";
 
-/* #️⃣再生クラス付与で作動するアニメの指定(13) */
+/* #️⃣再生クラス付与で作動するアニメの指定(14) */
 
 /* 🔹身体アニメ(4) */
 
 .身体_縦伸.再生,
 .身体_拍動.再生,
 .身体_横揺.再生,
-.身体_震動.再生,
+.身体_振動.再生,
 
 /* 🔹口元アニメ(2) */
 
 .口元.再生,
 .ヒゲ.再生,
 
-/* 🔹汎用アニメ(7) */
+/* 🔹汎用アニメ(8) */
 
 .縦伸.再生,
 .拍動.再生,
@@ -30,12 +30,12 @@
 
 /* #️⃣設定: 表情アニメ OFF */
 
-/* 🔹再生アニメ(13) */
+/* 🔹再生アニメ(14) */
 
 body.停止 .身体_縦伸,
 body.停止 .身体_拍動,
 body.停止 .身体_横揺,
-body.停止 .身体_震動,
+body.停止 .身体_振動,
 
 body.停止 .口元,
 body.停止 .ヒゲ,
@@ -53,7 +53,7 @@ body.停止 .一転.再生,
 
 body.停止 .回転,
 body.停止 .微動,
-body.停止 .震動,
+body.停止 .振動,
 
 body.停止 .💬::before,
 body.停止 .💬::after
@@ -107,8 +107,8 @@ body.停止 .発射→拍微動 {
     animation: 横揺 calc(var(--時間, 0.5s) / var(--アニメ速度, 1)) var(--待機, 0s) ease-in-out infinite alternate paused;
 }
 
-.身体_震動 { /* translate: 小刻みな震え */
-    animation: 震動 calc(var(--時間, 0.5s) / var(--アニメ速度, 1)) var(--待機, 0s) linear infinite paused;
+.身体_振動 { /* translate: 小刻みな震え */
+    animation: 振動 calc(var(--時間, 0.5s) / var(--アニメ速度, 1)) var(--待機, 0s) linear infinite paused;
 }
 
 /* 🔹キャラ別変数指定 */
@@ -128,8 +128,8 @@ body.停止 .発射→拍微動 {
 .🐰 .身体_拍動 > *,
 .🥸 .身体_横揺 > *,
 .🐰 .身体_横揺 > *,
-.🥸 .身体_震動 > *,
-.🐰 .身体_震動 > * { /* 子要素に引き継がない */
+.🥸 .身体_振動 > *,
+.🐰 .身体_振動 > * { /* 子要素に引き継がない */
     --起点: initial;
     --時間: initial; --時間1: initial; --時間2: initial;
     --待機: initial; --待機1: initial; --待機2: initial;
@@ -217,8 +217,8 @@ body.停止 .発射→拍微動 {
     animation: 微動 calc(var(--時間, 4s) / var(--アニメ速度, 1)) infinite alternate;
 }
 
-.震動 { /* translate: 小刻みな震え */
-    animation: 震動 calc(var(--時間, 0.5s) / var(--アニメ速度, 1)) var(--待機, 0s) linear infinite;
+.振動 { /* translate: 小刻みな震え */
+    animation: 振動 calc(var(--時間, 0.5s) / var(--アニメ速度, 1)) var(--待機, 0s) linear infinite;
 }
 
 
@@ -272,7 +272,7 @@ body.停止 .発射→拍微動 {
 
 /* 🔹Translate */
 
-@keyframes 震動 { /* 小刻みな震え */
+@keyframes 振動 { /* 小刻みな震え */
     0%, 100% { translate:  0    0;   }
     10%      { translate: -2px  1px; }
     20%      { translate:  1px -2px; }
