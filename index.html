@@ -332,6 +332,7 @@
                 <img src="cha/ut_kyogaku_odoroki.webp" alt="⚡" class="動作 発射">
                 <img src="cha/ut_kyogaku_me.webp"      alt="👀" class="動作 拍動→目瞬" style="--倍率: 1.2;">
                 <img src="cha/ut_kyogaku_kuchi.webp"   alt="👄" class="動作 口元">
+                <img src="cha/ut_kyogaku_ude.webp"     alt="💪" class="動作 発射→拍動" style="--起点: 50% 90%; --時間2: 0.1s; --倍率: 1.03;">
             </div>
             <div class="💬 高速" data-se="se/odoroki.mp3" data-volume="0.5">
                 ぬわにっ!?<br>
@@ -362,7 +363,7 @@
                 <img src="cha/uf_sizukana-ikari.webp">
                 <img src="cha/uf_sizukana-ikari_kekkan.webp" alt="💢" class="動作 拍動" style="--起点: 33% 55%; --時間: 0.5s;">
             </div>
-            <div class="💬 高速" data-speed="10" style="--左余白: 5%; --左尻尾: -10px;">
+            <div class="💬 高速" data-speed="10" style="--左余白: 5%; --左尻尾: -20px;">
                 <b>・・・・💢</b>
             </div>
         </div>
@@ -561,7 +562,7 @@
                 <img src="cha/da_pyo-n_odoroki.webp" alt="⚡" class="動作 発射" style="--起点: 64% 12%;">
                 <img src="cha/da_pyo-n_kuchi.webp"   alt="👄" class="動作 口元" style="--起点: 50% 60%;">
             </div>
-            <div class="💬 高速" data-se="se/pyo-n.mp3" data-wait="20" style="--起点: top center; --余白右: 0%; --右尻尾: 10px;">
+            <div class="💬 高速" data-se="se/pyo-n.mp3" data-wait="20" style="--起点: top center; --余白右: 0%;">
                 バブみ盛り盛り、<br>チパ〜イ♥️
                 <div class="ト書き下" style="margin-right: -100px;">(ユニちゃんに抱きつこうとする)</div>
             </div>
@@ -575,7 +576,7 @@
                     <img src="cha/ud_hammer_hammer.webp" alt="🔨" class="一転"      style="--起点: 60% 79%;">
                 </div>
             </div>
-            <div class="💬 高速" data-se="se/hammer.mp3" style="--左余白: 5%; --左尻尾: 10px;">
+            <div class="💬 高速" data-se="se/hammer.mp3" style="--左余白: 5%;">
                 <b>キモっ！<br>
                 近よゆなでしゅ！</b>
             </div>
@@ -589,8 +590,8 @@
                 <img src="cha/df_tankobu_zukizuki.webp" alt="⚡" class="動作 発射→拍動" style="--時間1: 3s; --起点: 50% 50%; --倍率: 1.15;">
                 <img src="cha/df_tankobu_tankobu.webp"  alt="🤕" class="動作 発射→拍動" style="--時間1: 3s;">
                 <img src="cha/df_tankobu_ude.webp"      alt="💪" class="動作">
-                <div class="動作 振動">
-                    <img src="cha/df_tankobu_ooo.webp"  alt="💨" class="発射"            style="--時間: 30s; --起点: 48% 75%;">
+                <div class="動作 発射" style="--時間: 30s; --起点: 48% 75%;">
+                    <img src="cha/df_tankobu_ooo.webp"  alt="💨" class="拍動" style="--時間: 0.1s; --倍率: 1.02;">
                 </div>
             </div>
             <div class="💬" data-se="se/katakata.mp3" style="--右尻尾: 20px;">
@@ -731,7 +732,7 @@
                 <img src="cha/ua_hatena_kuchi.webp"  alt="👄" class="動作">
                 <img src="cha/ua_hatena_ude.webp"    alt="💪" class="動作">
             </div>
-            <div class="💬" style="--左余白: 6%; --左尻尾: -10px;">
+            <div class="💬" style="--左余白: 6%; --左尻尾: -20px;">
                 ・・・・？
             </div>
         </div>
@@ -750,12 +751,12 @@
         </div>
 
         <div class="🐰">
-            <div class="キャラ画像 身体_縦伸" style="--サイズ: 4%;">
+            <div class="キャラ画像 身体_振動" style="--サイズ: 4%;">
                 <img src="cha/ut_odoroki.webp">
                 <img src="cha/ut_odoroki_me.webp"    alt="👀" class="動作 目瞬" style="--起点: 40% 73%;">
                 <img src="cha/ut_odoroki_kuchi.webp" alt="👄" class="動作">
             </div>
-            <div class="💬" style="--左余白: 5%; --左尻尾: -10px;">
+            <div class="💬 中速" data-se="se/katakata.mp3" style="--左余白: 5%; --左尻尾: -20px;">
                 <b>・・・・！</b>
             </div>
         </div>
@@ -774,11 +775,14 @@
         <div class="🐰">
             <div class="キャラ画像 身体_拍動">
                 <img src="cha/ut_kyogaku.webp">
-                <img src="cha/ut_kyogaku_odoroki.webp" alt="⚡" class="動作 発射">
-                <img src="cha/ut_kyogaku_me.webp"      alt="👀" class="動作 拍動→目瞬">
-                <img src="cha/ut_kyogaku_kuchi.webp"   alt="👄" class="動作 口元">
+                <div class="動作 発射">
+                    <img src="cha/ut_kyogaku_hosi.webp" alt="⭐" class="回転" style="--起点: 87% 31%;">
+                </div>
+                <img src="cha/ut_kyogaku_me.webp"       alt="👀" class="動作 拍動→目瞬">
+                <img src="cha/ut_kyogaku_kuchi.webp"    alt="👄" class="動作 口元">
+                <img src="cha/ut_kyogaku_ude.webp"      alt="💪" class="動作 発射" style="--起点: 50% 90%; --倍率: 1;">
             </div>
-            <div class="💬 中速" data-se="se/odoroki.mp3" data-volume="0.5" style="--左余白: 3%;">
+            <div class="💬 中速" data-se="se/pikon.mp3" style="--左余白: 3%;">
                 なにそれ…!!<br>
                 あああ…そっか…<br>
                 そーでしゅよね…。
@@ -792,7 +796,7 @@
             </div>
             <div class="💬" style="--右尻尾: 25px;">
                 何かを間違ってるとケテーイしたら、イヤな気分はゼターイ不可避。<br>
-                だってそれは、あなたという神による「自己否定のクリエイト」以外の何ものでもないからww
+                だってそれは、あなたという神による「自己拒絶のクリエイト」以外の何ものでもないからww
             </div>
         </div>
 
@@ -827,13 +831,13 @@
                 <img src="cha/ut_hojihoji.webp">
                 <img src="cha/ut_hojihoji_hojihoji.webp" alt="💨" class="動作 発射">
             </div>
-            <div class="💬" style="--左余白: 2%;">
+            <div class="💬">
                 心配すゆな、<br>
                 ドクは権威者じゃないでしゅ。
             </div>
         </div>
 
-        <div class="🥸" style="--間隔: -20px;">
+        <div class="🥸" style="--間隔: -10px;">
             <div class="キャラ画像 身体_縦伸" style="--時間: 0.4s; --被り幅: 5px;">
                 <img src="cha/da_sibuki.webp">
                 <img src="cha/da_sibuki_sibuki.webp" alt="💦" class="動作 発射" style="--起点: 60% 80%;">
