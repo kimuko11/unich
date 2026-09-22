@@ -730,28 +730,56 @@ function 次キャラ処理() {
         });
     }
 
-    // ▫️登場アニメOFF（即時モード）なら待たずにすぐセリフ開始
+// ▫️登場アニメONなら transitionend を待つ
 
-    if (!スイッチ登場アニメ) {
-        セリフ開始();
-        return;
+    let 画像完了 = false;
+    let ふきだし完了 = false;
+
+    function 完了チェック() {
+        if (画像完了 && ふきだし完了) {
+            セリフ開始();
+        }
     }
 
-    // ▫️登場アニメONなら transitionend を待つ
-
-    let 完了済 = false;
-    function 登場完了(イベント) {
+    // ▫️キャラ画像の移動（transform）完了を監視
+    
+    function 画像登場完了(イベント) {
         if (イベント && イベント.propertyName !== 'transform') return;
-        if (完了済) return;
-        完了済 = true;
-
-        キャラ画像.removeEventListener('transitionend', 登場完了);
-        セリフ開始();
+        if (画像完了) return;
+        画像完了 = true;
+        キャラ画像.removeEventListener('transitionend', 画像登場完了);
+        完了チェック();
     }
 
-    キャラ画像.addEventListener('transitionend', 登場完了);
+    // ▫️ふきだしの拡大（scale）完了を監視
 
-    setTimeout(登場完了, 5000); // transitionend が発火しなかった場合の保険（5秒後に強制実行）
+    function ふきだし登場完了(イベント) {
+        if (イベント && イベント.propertyName !== 'scale') return;
+        if (ふきだし完了) return;
+        ふきだし完了 = true;
+        ふきだし.removeEventListener('transitionend', ふきだし登場完了);
+        完了チェック();
+    }
+
+    キャラ画像.addEventListener('transitionend', 画像登場完了);
+    ふきだし.addEventListener('transitionend', ふきだし登場完了);
+
+    // ▫️すでに拡大完了している場合や発火しない場合の保険処理（安全装置）
+
+    const アニメ速度 = アニメ速度取得();
+    const 保険待機時間 = 1200 / アニメ速度; // アニメ速度に合わせた待機ミリ秒
+
+    setTimeout(() => {
+        if (!画像完了) {
+            画像完了 = true;
+            キャラ画像.removeEventListener('transitionend', 画像登場完了);
+        }
+        if (!ふきだし完了) {
+            ふきだし完了 = true;
+            ふきだし.removeEventListener('transitionend', ふきだし登場完了);
+        }
+        完了チェック();
+    }, 保険待機時間);
 }
 
 
