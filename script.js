@@ -713,6 +713,7 @@ function 次キャラ処理() {
     ふきだし  .classList.add('発話');
 
     // ▫️セリフ開始の共通処理
+
     function セリフ開始() {
         ふきだし.style.setProperty('--横幅', `${ふきだし.offsetWidth}px`); // ふきだしを均等にフワフワさせるため取得
         ふきだし.style.setProperty('--縦幅', `${ふきだし.offsetHeight}px`);
@@ -730,12 +731,14 @@ function 次キャラ処理() {
     }
 
     // ▫️登場アニメOFF（即時モード）なら待たずにすぐセリフ開始
+
     if (!スイッチ登場アニメ) {
         セリフ開始();
         return;
     }
 
     // ▫️登場アニメONなら transitionend を待つ
+
     let 完了済 = false;
     function 登場完了(イベント) {
         if (イベント && イベント.propertyName !== 'transform') return;
@@ -748,8 +751,7 @@ function 次キャラ処理() {
 
     キャラ画像.addEventListener('transitionend', 登場完了);
 
-    // transitionend が発火しなかった場合の保険（5秒後に強制実行）
-    setTimeout(登場完了, 5000);
+    setTimeout(登場完了, 5000); // transitionend が発火しなかった場合の保険（5秒後に強制実行）
 }
 
 

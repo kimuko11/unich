@@ -17,12 +17,10 @@
     height: var(--ずれ幅, 1500vh); /* スクロールしてズレる余白 */
 
     pointer-events: none;
-
-    will-change: translate, opacity;
 }
 
 .遠景 {
-    background: url('img/ucyu_enkei.webp') no-repeat;
+    background: url('img/ucyu_enkei.webp') center top no-repeat;
 
     animation:          遠景・動き auto linear forwards;
     animation-timeline: scroll(root);
