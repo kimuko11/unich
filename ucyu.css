@@ -14,23 +14,24 @@
     left:     0;
 
     width:  100%;
-    height: 150vh; /* ⚠️スクロールしてズレる余白 (--視差速度によっては変更が必要) */
-
-    background-repeat:   no-repeat;
-    background-position: center;
-    background-size:     cover;
+    height: var(--ずれ幅, 1500vh); /* スクロールしてズレる余白 */
 
     pointer-events: none;
+
+    will-change: translate, opacity;
 }
 
 .遠景 {
-    background-image:   url('img/ucyu_enkei.webp');
+    background: url('img/ucyu_enkei.webp') no-repeat;
 
     animation:          遠景・動き auto linear forwards;
     animation-timeline: scroll(root);
 }
+@media (min-width: 2000px) { /* 画面が遠景の横幅以上の時は拡大 */
+    .遠景 { background-size: 100%; }
+}
 .中景 {
-    background-image:   url('img/ucyu_cyukei.webp');
+    background: url('img/ucyu_cyukei.webp');
 
     animation:          中景・動き auto linear forwards,
                         中景・瞬き 1.7s ease-in-out infinite alternate;
@@ -38,7 +39,7 @@
                         auto;
 }
 .近景 {
-    background-image:   url('img/ucyu_kinkei.webp');
+    background: url('img/ucyu_kinkei.webp');
 
     animation:          近景・動き auto linear forwards,
                         近景・瞬き 1.3s ease-in-out infinite alternate;
@@ -48,15 +49,15 @@
 
 @keyframes 遠景・動き {
     from { translate: 0 0; }
-    to   { translate: 0 var(--視差速度, -100px); } /* 低速 */
+    to   { translate: 0 var(--視差速度, -1000px); } /* 低速 */
 }
 @keyframes 中景・動き {
     from { translate: 0 0; }
-    to   { translate: 0 calc(var(--視差速度, -100px) * 3); } /* 中速 */
+    to   { translate: 0 calc(var(--視差速度, -1000px) * 3); } /* 中速 */
 }
 @keyframes 近景・動き {
     from { translate: 0 0; }
-    to   { translate: 0 calc(var(--視差速度, -100px) * 9); } /* 高速 */
+    to   { translate: 0 calc(var(--視差速度, -1000px) * 9); } /* 高速 */
 }
 
 @keyframes 中景・瞬き {

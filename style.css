@@ -17,7 +17,7 @@ html {
 }
 
 body {
-    background:black url(img/ucyu_enkei.webp) fixed no-repeat center / cover;
+    background:black;
     font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif; /* 視認性の高い基本フォント */
     font-size:   1rem;
     line-height: 1.5;
@@ -55,7 +55,6 @@ a {
 /* #️⃣グローバル変数 */
 
 :root {
-    --視差速度:   -100px; /* ⚠️ページ長さによって px 増減する */
     --画像サイズ: 4;
     --アニメ速度: 1;
 }
