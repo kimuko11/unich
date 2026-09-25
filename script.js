@@ -95,7 +95,7 @@ function 設定更新() {
 
 document.addEventListener('DOMContentLoaded', () => {
     const 設定            = document.getElementById('設定');
-    const ラジオ          = document.getElementById('📻');
+    const ラジオ          = document.getElementById('ラジオ');
     const 入力_文字サイズ = document.getElementById('文字サイズ');
     const 入力_文字速度   = document.getElementById('文字速度');
     const 入力_効果音量   = document.getElementById('効果音量');
@@ -602,7 +602,7 @@ document.querySelectorAll('.連動消滅').forEach((要素) => {
 
 // 🎛️キャラ一覧
 
-const キャラ一覧 = document.querySelectorAll('.🥸, .🐰, .👩, .👤');
+const キャラ一覧 = document.querySelectorAll('.🥸, .🐰, .👩, .👤, .📻');
 
 // ▫️エリアのクラスからキャラ判定
 
@@ -615,7 +615,7 @@ function キャラ取得(エリア) {
 // ▫️エリアのクラスから「身体アニメ管理用の種別」を判定
 
 function 種別取得(エリア) {
-    for (const 種別 of ['🥸', '🐰', '👩', '👤']) {
+    for (const 種別 of ['🥸', '🐰', '👩', '👤', '📻']) {
         if (エリア.classList.contains(種別)) return 種別;
     }
     return '__既定__';

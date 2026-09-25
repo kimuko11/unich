@@ -68,21 +68,21 @@ input[type="number"]::-webkit-inner-spin-button { -webkit-appearance: none; }
     flex-shrink: 0;
 }
 
-.📻 {
+.ラジオ {
     cursor: pointer;
 
     transition: scale  calc(var(--時間, 0.2s) / var(--アニメ速度, 1)),
                 filter 1.0s; /* 消光用 */
 }
 
-.設定.オープン .📻 { scale: 1.2; }
+.設定.オープン .ラジオ { scale: 1.2; }
 
 
 /* #️⃣設定ふきだし */
 
 .設定💬 {
     position: absolute;
-    top:      calc(48px + var(--画像サイズ, 4) * 1px); /* 位置 */
+    top:      55%; /* 位置 */
     right:    0;
 
     width: 250px;
@@ -119,7 +119,7 @@ input[type="number"]::-webkit-inner-spin-button { -webkit-appearance: none; }
 
     position: absolute;
     top:      -6px;
-    right:    25px;
+    right:    50px;
 
     border-width: 0 1px 6px 3px;
     border-style: solid;

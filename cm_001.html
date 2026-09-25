@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>📻宇宙よろず相談室 🎬#001 - 2</title>
+    <title>📻宇宙よろず相談室 🎬#001 - CM</title>
 
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="ucyu.css">
@@ -25,52 +25,12 @@
 
 <!-- ↔️ヘッダー -->
 
-<header class="ヘッダー">
-
-    <!-- 🔹ロゴ -->
-
-    <div class="ロゴ 発光 横滑" style="--待機: 1s;">
-        <a href="index.html">
-            <img src="img/logo_subtitle.webp"  class="動作 消滅" style="--待機: 10s;">
-            <img src="img/logo_onair_001.webp" class="動作 出現" style="--待機: 11s;">
-            <img src="img/logo.webp" alt="宇宙よろず相談室 ロゴ">
-        </a>
-        <img src="img/logo_fukidasi.webp" class="動作 出現→消滅" style="--待機: 3s; --時間: 8s; pointer-events: none;">
-    </div>
-
-    <!-- 🔹表示範囲 (検証用) -->
-
-    <div class="表示範囲">
-        表示範囲
-        <button type="button" onclick="範囲リセット()">🗑️</button>
-        
-        <div style="display: flex; gap: 2px;">
-
-            <div style="display: flex;">
-                <input type="number" id="非表示上" min="1">
-                <div class="縦列">
-                    <button type="button" class="スピンボタン" onclick="数値変更('非表示上', -1)">🔼</button>
-                    <button type="button" class="スピンボタン" onclick="数値変更('非表示上',  1)">🔽</button>
-                </div>
-            </div>
-
-            <div style="display: flex;">
-                <input type="number" id="非表示下" min="1">
-                <div class="縦列">
-                    <button type="button" class="スピンボタン" onclick="数値変更('非表示下', -1)">🔼</button>
-                    <button type="button" class="スピンボタン" onclick="数値変更('非表示下',  1)">🔽</button>
-                </div>
-            </div>
-
-        </div>
-
-    </div>
+<header class="ヘッダー" style="height: 130px;">
 
     <!-- 🔹設定 -->
 
     <div class="設定" id="設定">
-        <img src="img/radio-s.webp" alt="ラジオ" id="ラジオ" class="ラジオ 発光 出現" style="--待機: 1s;">
-        <div class="出現→消滅" style="--待機: 1s; margin-top: -8px;">設定</div>
+        <img src="img/radio-s.webp" alt="ラジオ" id="ラジオ" class="ラジオ 発光 出現">
 
         <div class="設定💬">
 
@@ -151,11 +111,11 @@
 </header>
 
 
-<!-- ↔️サイト概要 -->
+<!-- ↔️メインコンテンツ -->
 
 <!-- 🔹宇宙視差背景 ⚠️--ずれ幅と--視差速度はページ長さによって調整する -->
 
-<main class="宇宙全体" style="--ずれ幅: 1500vh; --視差速度: -1000px;">
+<main class="宇宙全体" style="--ずれ幅: 150vh; --視差速度: -10px;">
 
     <div class="宇宙レイヤー 遠景"></div>
     <div class="宇宙レイヤー 中景"></div>
@@ -163,56 +123,53 @@
     <div class="宇宙レイヤー 近景"></div>
     <div class="星群"></div>
 
+    <!-- 🔹架空CM -->
 
-    <!-- ↔️メインコンテンツ -->
+    <p class="白枠 改行">
+        <span class="黒枠 極大 出現" style="--待機: 1s;">🎞️</span>
+        <span class="動作 黒枠 大字 太字 水 横滑" style="top: 0.4em; margin-left: 0.5rem; --待機: 1s;">こまーしゃる</span>
+    </p>
 
-    <!-- 🔹1画面弱の空白と流星 -->
+    <!-- 🔹広告 -->
 
-    <div class="画像" style="margin: calc(40vh - var(--画像サイズ, 4) * 4vh) 0;">
-        <img src="img/ryusei.webp" class="流星大">
+    <div class="画像 改行2">
+        <img src="pic/cm_001.webp" class="発光 拡大" style="--待機: 3s; --時間: 2s;">
     </div>
 
-    <!-- 🔹対話 -->
+    <!-- 🔹演奏隊 -->
 
-    <div class="描画省略" style="--省略幅: 550vh;"> <!-- 60 ～  -->
+    <p class="改行12" style="display: flex; justify-content: space-between;">
+        <img src="img/pixy_chello.gif" class="横滑" style="--待機: 2s; --方向: -1;">
+        <img src="img/pixy_acco.gif"   class="落下" style="--待機: 2s;">
+        <img src="img/pixy_drum.gif"   class="落下" style="--待機: 2s;">
+        <img src="img/pixy_rappa.gif"  class="横滑" style="--待機: 2s; --方向: 1;">
+    </p>
+
+    <!-- 🔹流星 -->
+
+    <div class="画像 改行3">
+        <img src="img/ryusei.webp" class="流星大 ▼">
+    </div>
+
+    <!-- 🔹次ページへ -->
+
     <div class="対話全体枠">
-
-        <!-- 
-        ◾利用できる CSS 変数
-        🥸, 🐰:    --間隔 px (上との間隔の増減)
-        キャラ画像: --サイズ % (画像サイズの増減),  --被り幅 px (ふきだしへの被り幅の増減)
-        💬:        --左/右尻尾 px (尻尾距離の増減) --左/右余白 % (ふきだし占有率の増減)
-
-        ◾アニメ変数
-        --起点 %, --時間 s, --待機 s, ( --倍率 0, --距離 px, --角度 deg)
-
-        ◾カスタムデータ
-        data-speed  文字速度の倍率 (20倍で通常の1行相当の時間)
-        data-wait   セリフ終了後のタメ文字数
-        data-se     効果音 URL
-        data-volume 音量の倍率 (SE音量はデフォ0.1、最大0.22なので、5倍までを推奨)
-        -->
-
-        <div class="🐰">
-            <div class="キャラ画像 身体_縦伸" style="--被り幅: 10px;">
-                <img src="cha/ua_makasero.webp">
-                <img src="cha/ua_makasero_hikari.webp"   alt="✨" class="動作 発射→拍動" style="--起点: 90% 43.5%; --倍率: 1.3;">
-                <img src="cha/ua_makasero_kuchi.webp"    alt="👄" class="動作 口元" style="--起点: 50% 59%;">
-                <img src="cha/ua_makasero_makasero.webp" alt="💨" class="動作 発射" style="--起点: 50% 70%; --時間: 2s; --待機: 1s;">
-                <img src="cha/ua_makasero_ude.webp"      alt="💪" class="動作 発射" style="--起点: 50% 90%; --倍率: 1.05;">
-
+        <div class="📻">
+            <div class="キャラ画像">
+                <a href="index2.html">
+                    <img src="img/radio.webp">
+                    <img src="img/radio_onpu.webp" alt="🎵" class="動作 発射→拍微動" style="--起点: 50% 50%; --時間2: 2s;">
+                </a>
             </div>
-            <div class="💬 中速" style="--左尻尾: 30px;">
-                じゃあ、ユニちゃんがよい気分を保てゆと思う見方を発表すゆでしゅ。
+            <div class="💬" style="--右尻尾: 15px;">
+                <a href="index2.html">
+                    タップして、<br>
+                    「宇宙よろず相談室」<br>
+                    再開します♪
+                </a>
             </div>
         </div>
-
-       
-
     </div>
-    </div> <!--  ～  ここまで -->
-
-    <div style="height: 100vh;"></div>
 
 </main> <!-- 宇宙全体 ここまで -->
 

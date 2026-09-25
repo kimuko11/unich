@@ -139,12 +139,11 @@
 }
 @keyframes 流星大 {
       0% { opacity:    0;
-           translate:  200px -300px;
+           translate:  200px -200px;
     }
      70% { opacity:    1; }
     100% { opacity:    0;
-           translate:  -200px 100px;
-           display:    none;
+           translate:  -200px 200px;
     }
 }
 

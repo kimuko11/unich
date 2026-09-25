@@ -45,12 +45,15 @@
 :where(.👤) {
     --色: rgba(70, 130, 180, 0.5); /* steelblue #4682b4 */
 }
-:where(.🥸) {
+:where(.🥸), :where(.📻) {
 	--配置:   flex-end;	--方向: 1; --反転: 1;
 	--余白左: 0;	--余白右: calc(10%  + var(--画像サイズ, 4) * 1%);
 	--尻尾左: auto;	--尻尾右: calc(74px + var(--画像サイズ, 4) * 4px);
 	--尻尾形: 0 0 6px 3px; --起点: top right;
     --色: rgba(210, 180, 140, 0.5); /* tan #d2b48c */
+}
+:where(.📻) {
+    --色: rgba(169, 169, 169, 0.5); /* silver #c0c0c0 */
 }
 
 /* 🔹配置の左右指定（詳細度1なので上書き可能）*/
@@ -71,7 +74,7 @@
 
 /* #️⃣キャラの指定と登場 */
 
-.🥸, .🐰, .👩, .👤 {
+.🥸, .🐰, .👩, .👤, .📻 {
     display:        flex;
     flex-direction: column;
     align-items:    var(--配置, flex-start); /* 左右の配置決め */
@@ -159,15 +162,15 @@
     transform-origin: top center;
 
     --拡縮幅: 2px;
-    animation: ふわふわ calc(0.6s / var(--アニメ速度, 1)) infinite ease-in-out alternate 1.1s; /* 低速 */
+    animation: ふわふわ calc(0.6s / var(--アニメ速度, 1)) 1.1s infinite ease-in-out alternate; /* 低速 */
 }
 .💬.中速::before {
     --拡縮幅: 3px;
-    animation: ふわふわ calc(0.5s / var(--アニメ速度, 1)) infinite ease-in-out alternate 1.1s;
+    animation: ふわふわ calc(0.5s / var(--アニメ速度, 1)) 1.1s infinite ease-in-out alternate;
 }
 .💬.高速::before {
     --拡縮幅: 4px;
-    animation: ふわふわ calc(0.4s / var(--アニメ速度, 1)) infinite ease-in-out alternate 1.1s;
+    animation: ふわふわ calc(0.4s / var(--アニメ速度, 1)) 1.1s infinite ease-in-out alternate;
 }
 
 @keyframes ふわふわ {

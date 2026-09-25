@@ -34,7 +34,7 @@
 @keyframes 落下 {
      0% {
         opacity:   1;
-        translate: 0 -50vh;
+        translate: 0 -99vh;
         animation-timing-function: ease-in;
     }
     60% {
