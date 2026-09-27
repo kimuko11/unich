@@ -11,8 +11,8 @@
 
 /* 🔹口元アニメ(2) */
 
-.口元.再生,
-.ヒゲ.再生,
+.パク.再生,
+.ピク.再生,
 
 /* 🔹汎用アニメ(8) */
 
@@ -37,8 +37,8 @@ body.停止 .身体_拍動,
 body.停止 .身体_横揺,
 body.停止 .身体_振動,
 
-body.停止 .口元,
-body.停止 .ヒゲ,
+body.停止 .パク,
+body.停止 .ピク,
 
 body.停止 .縦伸.再生,
 body.停止 .拍動.再生,
@@ -138,13 +138,13 @@ body.停止 .発射→拍微動 {
 
 /* #️⃣口元アニメクラス(1) ※再生クラス付与で作動、文字送り終了で停止 */
 
-.口元 { /* scale: 口パク */
+.パク { /* scale: 口パク */
     --倍率: 0.1;
     transform-origin: var(--起点, 50% 75%);
     animation: 縦伸 calc(var(--時間, 0.2s) / var(--アニメ速度, 1)) var(--待機, 0s) ease-in-out infinite alternate paused;
 }
 
-.ヒゲ { /* translate: ヒゲの上下 */
+.ピク { /* translate: 閉じた口の上下 */
     --距離: 1px;
     animation: 上下 calc(var(--時間, 0.2s) / var(--アニメ速度, 1)) var(--待機, 0s) ease-in-out infinite alternate paused;
 }
