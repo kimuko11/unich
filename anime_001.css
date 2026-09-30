@@ -17,6 +17,7 @@
 /* 🔹汎用アニメ(8) */
 
 .縦伸.再生,
+.縦開.再生,
 .拍動.再生,
 .拍動→目瞬.再生,
 .発射.再生,
@@ -157,6 +158,11 @@ body.停止 .発射→拍微動 {
     animation: 縦伸 calc(var(--時間, 0.25s) / var(--アニメ速度, 1)) var(--待機, 0s) ease-in-out infinite alternate paused;
 }
 
+.縦開 { /* scale: 1回だけ縦に開く */
+    transform-origin: var(--起点, 50% 70%);
+    animation: 縦開 calc(var(--時間, 1s) / var(--アニメ速度, 1)) var(--待機, 0s) ease-in-out forwards paused;
+}
+
 .拍動 { /* scale: 原型から速く拡張、原型にゆっくり収縮 */
     transform-origin: var(--起点, 50% 50%);
     animation: 拍動 calc(var(--時間, 1s) / var(--アニメ速度, 1)) var(--待機, 0s) ease-in-out infinite alternate;
@@ -194,9 +200,9 @@ body.停止 .発射→拍微動 {
     animation: 横揺 calc(var(--時間, 0.5s) / var(--アニメ速度, 1)) var(--待機, 0s) ease-in-out infinite alternate paused;
 }
 
-.一転 { /* rotate: ハンマーなど */
+.一転 { /* rotate: 1回だけ回すハンマーなど */
     transform-origin: var(--起点, 50% 100%);
-    animation: 回転 calc(var(--時間, 0.5s) / var(--アニメ速度, 1)) var(--待機, 0s) ease-in-out forwards alternate paused;
+    animation: 回転 calc(var(--時間, 0.5s) / var(--アニメ速度, 1)) var(--待機, 0s) ease-in-out forwards paused;
 }
 
 
@@ -229,6 +235,11 @@ body.停止 .発射→拍微動 {
 @keyframes 縦伸 { /* 原型から縦方向に伸張 */
       0% { scale: var(--反転, 1) 1; }
     100% { scale: var(--反転, 1) var(--倍率, 1.05); }
+}
+
+@keyframes 縦開 { /* 線状から縦方向に開く */
+      0% { scale: var(--反転, 1) 0.02; }
+    100% { scale: var(--反転, 1) 1.0; }
 }
 
 @keyframes 目瞬 { /* 原型停留9割、縦に収縮1割 */

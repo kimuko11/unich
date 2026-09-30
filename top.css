@@ -29,7 +29,7 @@
 
 .落下 {
     opacity:   0;
-    animation: 落下 calc(1s / var(--アニメ速度, 1)) calc(var(--待機, 2s) / var(--アニメ速度, 1)) ease-out forwards;
+    animation: 落下 calc(var(--時間, 1s) / var(--アニメ速度, 1)) calc(var(--待機, 2s) / var(--アニメ速度, 1)) ease-out forwards;
 }
 @keyframes 落下 {
      0% {
