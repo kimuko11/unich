@@ -166,10 +166,10 @@
 
     <!-- ↔️メインコンテンツ -->
 
-    <!-- 🔹1画面弱の空白と流星 -->
+    <!-- 🔹1画面弱の空白と流星 ⚠️ * 〇vh は セリフ数 / 10 -->
 
-    <div class="画像" style="margin: calc(55vh - var(--画像サイズ, 4) * 4vh) 0;">
-        <img src="img/ryusei.webp" class="流星大">
+    <div class="画像" style="margin: calc(54vh - var(--画像サイズ, 4) * 1vh) 0;">
+        <img src="img/ryusei.webp" class="流星大" style="--待機: 3s;">
     </div>
 
     <!-- 🔹対話 -->
@@ -197,12 +197,12 @@
             <div class="キャラ画像 身体_縦伸" style="--被り幅: 10px;">
                 <img src="cha/ua_makasero.webp">
                 <img src="cha/ua_makasero_hikari.webp"   alt="✨" class="差分 発射→拍動" style="--起点: 90% 43.5%; --倍率: 1.3;">
-                <img src="cha/ua_makasero_kuchi.webp"    alt="👄" class="差分 パク" style="--起点: 50% 59%;">
-                <img src="cha/ua_makasero_makasero.webp" alt="💨" class="差分 発射" style="--起点: 50% 70%; --時間: 2s; --待機: 1s;">
-                <img src="cha/ua_makasero_ude.webp"      alt="💪" class="差分 発射" style="--起点: 50% 90%; --倍率: 1.05;">
+                <img src="cha/ua_makasero_kuchi.webp"    alt="👄" class="差分 パク"       style="--起点: 50% 59%;">
+                <img src="cha/ua_makasero_makasero.webp" alt="💨" class="差分 発射"       style="--起点: 50% 70%; --時間: 2s; --待機: 1s;">
+                <img src="cha/ua_makasero_ude.webp"      alt="💪" class="差分 発射"       style="--起点: 50% 90%; --倍率: 1.05;">
 
             </div>
-            <div class="💬 中速" style="--左尻尾: 30px;">
+            <div class="💬 中速" style="--左尻尾: 25px;">
                 じゃあ、<br>
                 ユニちゃんがよい気分を保てゆと思う見方を発表すゆでしゅ。
             </div>
@@ -244,7 +244,7 @@
                 <img src="cha/da_kanrui_hikari.webp" alt="✨" class="差分 発射→拍動" style="--起点: 11% 40%; --時間1: 2s; --時間2: 2s; --倍率: 1.2;">
                 <img src="cha/da_kanrui_kuchi.webp"  alt="👄" class="差分 ピク">
             </div>
-            <div class="💬" data-wait="10">
+            <div class="💬" data-wait="20">
                 ドヤ顔いただきますたww<br>
                 ユニちゃそ社長、わかりみ深すぎて全小生が泣いたwww<br>
                 そーしてよい気分を保ち続けたなら、おたがいに神として選んだ遊びのテーマは違っても、自分が好む世界線に進むことは確実ですぢゃ♥️
@@ -266,7 +266,7 @@
                 <img src="cha/dt_yorokobi.webp">
                 <img src="cha/dt_yorokobi_hikari.webp" alt="⚡" class="差分 発射→拍動">
                 <img src="cha/dt_yorokobi_kuchi.webp"  alt="👄" class="差分 パク"         style="--起点: 50% 71%;">
-                <img src="cha/dt_ok-migi_ude.webp"     alt="💪" class="差分 発射→拍微動" style="--起点: 80% 100%; --倍率: 1.05;">
+                <img src="cha/dt_ok-migi_ude.webp"     alt="👌" class="差分 発射→拍微動" style="--起点: 80% 100%; --倍率: 1.05;">
             </div>
             <div class="💬" data-wait="20">
                 それを把握してるだけで控えめに言って神すぎワロタww<br>
@@ -283,10 +283,10 @@
                 <img src="cha/uf_mojimoji_heart.webp"    alt="♥️" class="差分 発射→拍動"   style="--起点: 50% 90%; --時間1: 2s; --時間2: 2s; --待機1: 2s;">
                 <img src="cha/uf_mojimoji_me.webp"       alt="👀" class="差分 目瞬"         style="--起点: 50% 76%;">
                 <img src="cha/uf_mojimoji_mojimoji.webp" alt="💨" class="差分 発射"         style="--起点: 50% 95%; --時間: 2s; --待機: 1s;">
-                <img src="cha/uf_mojimoji_ude.webp"      alt="💪" class="差分 発射→拍微動" style="--起点: 50% 95%; --倍率: 1.03;">
+                <img src="cha/uf_mojimoji_ude.webp"      alt="🙏" class="差分 発射→拍微動" style="--起点: 50% 95%; --倍率: 1.03;">
 
             </div>
-            <div class="💬">
+            <div class="💬" style="--左尻尾: 10px;">
                 ……あのねえ、じつははじめて告白すゆんだけど、ユニちゃん、大好きな推ちキャラがいゆのでしゅ。
             </div>
         </div>
@@ -296,10 +296,10 @@
                 <img src="cha/dt_nani.webp">
                 <img src="cha/dt_nani_odoroki.webp" alt="⚡" class="差分 発射">
                 <img src="cha/dt_nani_me.webp"      alt="👀" class="差分 拍動→目瞬" style="--起点: 50% 58%;">
-                <img src="cha/dt_nani_me2.webp"     alt="👀" class="差分 出現→消滅" style="--時間: 2s;">
+                <img src="cha/dt_nani_me2.webp"     alt="👀" class="差分 出現→消滅" style="--時間: 1s; --待機: 1s;">
                 <img src="cha/dt_nani_kuchi.webp"   alt="👄" class="差分 パク"       style="--起点: 50% 71%; --時間: 0.17s;">
             </div>
-            <div class="💬 高速" data-wait="10" data-se="se/odoroki.mp3" data-volume="0.5">
+            <div class="💬 高速" data-wait="20" data-se="se/odoroki.mp3" data-volume="0.5">
                 キタコレwww<br>
                 何ですかのう、イマドキの女児は何にエモみ爆発なのか、極めて興味シンシンですじゃ！ﾌﾝｽﾌﾝｽ!!
             </div>
@@ -311,7 +311,7 @@
                 <img src="cha/ua_munekyun_me.webp"    alt="👀" class="差分 目瞬" style="--起点: 50% 55%;">
                 <img src="cha/ua_munekyun_kuchi.webp" alt="👄" class="差分 ピク">
             </div>
-            <div class="💬" style="--左尻尾: 30px;">
+            <div class="💬" data-wait="20" style="--左尻尾: 25px;">
                 ユニちゃん……聖帝サ〇ザーさまをひとめ見た瞬間から胸キュン母性がとまらないのでしゅ♥️♥️<br>
                 サウ〇ーさまのフィギュアなら、もらってやってもいっこうにかまわぬでしゅぞ。
             </div>
@@ -322,7 +322,7 @@
                 <img src="cha/dt_abon.webp">
                 <img src="cha/dt_abon_kuchi.webp" alt="👄" class="差分 縦開" style="--起点: 50% 70%;">
             </div>
-            <div class="💬" style="--右余白: 6%; --右尻尾: -20px; padding-left: 40px; padding-right: 40px;">
+            <div class="💬" data-speed="5" style="--右余白: 6%; --右尻尾: -20px; padding-left: 40px; padding-right: 40px;">
                 あぼーん
             </div>
         </div>

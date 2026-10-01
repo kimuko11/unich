@@ -120,7 +120,7 @@ body.即時 .💬 {
     animation: none;
 }
 
-/* 🔹OFF時非表示 */
+/* 🔹OFF時に非表示 */
 
 body.即時 .消滅,
 body.即時 .出現→消滅 {
@@ -129,7 +129,7 @@ body.即時 .出現→消滅 {
     display:   none;
 }
 
-/* 🔹OFF時表示 */
+/* 🔹OFF時に表示 */
 
 body.即時 .星群 { animation-play-state: running; }
 
