@@ -171,7 +171,7 @@
         <img src="pic/hosocyu_yuka.webp">
         <img src="pic/hosocyu_unich.webp"  class="差分 ネオン">
         <img src="pic/hosocyu_hosoto.webp" class="差分 出現"      style="--待機: 3s;">
-        <img src="pic/hosocyu.webp"        class="差分 落下 発光" style="--待機: 2s;" alt="ドクとユニちゃん">
+        <img src="pic/hosocyu.webp"        class="差分 落下 発光" style="--待機: 2s;" alt="🥸ドクと🐰ユニちゃん">
     </div>
 
     <!-- 🔹概要文 -->
@@ -207,7 +207,7 @@
 
     <div class="画像 発光">
         <div class="拡大 ▼" data-threshold="0.9">
-            <img src="pic/prof_doc_001.webp" alt="アイドルライブを楽しむドク">
+            <img src="pic/prof_doc_001.webp" alt="🥸アイドルライブを楽しむドク">
         </div>
     </div>
 
@@ -226,7 +226,7 @@
 
     <div class="画像 発光">
         <div class="拡大 ▼" data-threshold="0.9">
-            <img src="pic/prof_uni_001.webp" alt="買い物中のユニちゃん">
+            <img src="pic/prof_uni_001.webp" alt="🐰買い物中のユニちゃん">
         </div>
     </div>
 
@@ -254,7 +254,8 @@
             <p class="カチンコ 中央">
                 <em class="ブロック 改行2" style="margin-top: 2rem;">ON AIR #001</em>
                 <em class="ブロック 改行2 大字">いけない♥️アイドル</em>
-                <span class="ブロック 左寄 小字 銀">👇画面をタップすると、効果音付きのリッチコンテンツをお楽しみいただけます。
+                <span class="ブロック 左寄 小字 銀">
+                👇画面をタップすると、効果音付きのリッチコンテンツをお楽しみいただけます。
                 変更・調整したい時は、画面右上のラジオをタップして、お好みの設定にできます。</span>
             </p>
         </div>
@@ -270,7 +271,7 @@
 
     <!-- 🔹対話 -->
 
-    <div class="描画省略" style="--省略幅: 550vh;"> <!-- 1 ～ 11 -->
+    <div class="描画省略" style="--省略幅: 550vh;"> <!-- セリフ1 ～ 11 -->
     <div class="対話全体枠">
 
         <!-- 
@@ -283,22 +284,23 @@
         --起点 %, --時間 s, --待機 s, ( --倍率 0, --距離 px, --角度 deg)
 
         ◾カスタムデータ
-        data-speed  文字速度の倍率 (20倍で通常の1行相当の時間)
-        data-wait   セリフ終了後のタメ文字数
         data-se     効果音 URL
+        data-speed  文字速度の倍率 (20倍で通常の1行相当の時間)
         data-volume 音量の倍率 (SE音量はデフォ0.1、最大0.22なので、5倍までを推奨)
+        data-wait   セリフ終了後のタメ文字数
         -->
 
         <div class="🐰">
             <div class="キャラ画像 身体_横揺">
-                <img src="cha/ut_genkina-aisatu.webp">
+                <img src="cha/ut_genkina-aisatu.webp"         alt="🐰">
                 <img src="cha/ut_genkina-aisatu_heart.webp"   alt="♥️" class="差分 発射→拍動" style="--時間1: 2s; --時間2: 2s;">
                 <img src="cha/ut_genkina-aisatu_kuchi.webp"   alt="👄" class="差分 パク">
                 <div class="差分 発射" style="--起点: 40% 100%; --倍率: 1.05;">
                     <img src="cha/ut_genkina-aisatu_ude.webp" alt="💪" class="横揺"            style="--起点: 25% 95%; --角度: 10deg;">
                 </div>
             </div>
-            <div class="💬 中速">
+            <div class  = "💬 中速"
+                data-se = "se/pyokopyoko.mp3">
                 人類の起源から魂の行き先まで、リスナーのあらゆゆ疑問や謎にこたえゆ「<em>宇宙よろず相談室</em>」！<br>
                 みんなのアイドル、<em>ユニちゃん</em>でしゅ！
             </div>
@@ -306,11 +308,13 @@
 
         <div class="🥸">
             <div class="キャラ画像 身体_縦伸" style="--被り幅: 20px;">
-                <img src="cha/dt_figure.webp">
+                <img src="cha/dt_figure.webp"        alt="🥸">
                 <img src="cha/dt_figure_heart.webp"  alt="♥️" class="差分 発射→拍動"   style="--時間1: 3s; --時間2: 3s;">
                 <img src="cha/dt_figure_figure.webp" alt="💪" class="差分 発射→拍微動" style="--起点: 50% 100%; --倍率: 1.03;">
             </div>
-            <div class="💬" style="--右尻尾: 15px;">
+            <div class  = "💬"
+                data-se = "se/hyoi.mp3"
+                style   = "--右尻尾: 15px;">
                 デュフフww<br>
                 本日は行きつけの中古ショップでプレミア価格10倍の絶版フィギュアを保護できて大満足の <em>Dr. YOU</em> (ドクター・ユー) ですぢゃ♥️
             </div>
@@ -318,13 +322,14 @@
 
         <div class="🐰">
             <div class="キャラ画像 身体_拍動">
-                <img src="cha/ut_kyogaku.webp">
+                <img src="cha/ut_kyogaku.webp"         alt="🐰">
                 <img src="cha/ut_kyogaku_odoroki.webp" alt="⚡" class="差分 発射">
                 <img src="cha/ut_kyogaku_me.webp"      alt="👀" class="差分 拍動→目瞬" style="--倍率: 1.2;">
                 <img src="cha/ut_kyogaku_kuchi.webp"   alt="👄" class="差分 パク">
                 <img src="cha/ut_kyogaku_ude.webp"     alt="💪" class="差分 発射"       style="--起点: 50% 90%; --倍率: 1.03;">
             </div>
-            <div class="💬 高速" data-se="se/odoroki.mp3" data-volume="0.5">
+            <div class  = "💬 高速"
+                data-se = "se/odoroki.mp3">
                 ぬわにっ!?<br>
                 おま、今月の生活費は残りきびちーって口をすっぱくちてゆってたのにまた…耳をなくちたんか！<br>
                 だいたいフィギュアなどと…
@@ -334,12 +339,14 @@
 
         <div class="🥸">
             <div class="キャラ画像 身体_縦伸" style="--サイズ: 4%; --被り幅: 20px;">
-                <img src="cha/dt_precure.webp">
+                <img src="cha/dt_precure.webp"          alt="🥸">
                 <div class="差分 発射">
                     <img src="cha/dt_precure_hosi.webp" alt="⭐" class="回転" style="--起点: 26% 22%;">
                 </div>
             </div>
-            <div class="💬" style="--右尻尾: 20px;">
+            <div class  = "💬"
+                data-se = "se/kira.mp3"
+                style   = "--右尻尾: 20px;">
                 オウフwww<br>
                 そんな難しい言葉、よくぞご存知でwww<br>
                 そーゆーユニちゃそ社長には、年相応なプリ〇ュアの人形をあげませう。<br>
@@ -350,20 +357,26 @@
 
         <div class="🐰" style="--間隔: 20px;">
             <div class="キャラ画像 身体_振動" style="--サイズ: -4%;">
-                <img src="cha/uf_sizukana-ikari.webp">
+                <img src="cha/uf_sizukana-ikari.webp"        alt="🐰">
                 <img src="cha/uf_sizukana-ikari_kekkan.webp" alt="💢" class="差分 拍動" style="--起点: 33% 55%; --時間: 0.5s;">
             </div>
-            <div class="💬 高速" data-speed="10" style="--左余白: 5%; --左尻尾: -20px;">
+            <div class     = "💬 高速"
+                data-se    = "se/katakata.mp3"
+                data-speed = "10"
+                style      = "--左余白: 5%; --左尻尾: -20px;">
                 <b>・・・・💢</b>
             </div>
         </div>
 
         <div class="🥸" style="--間隔: -20px;">
             <div class="キャラ画像 身体_横揺" style="--サイズ: -4%; --被り幅: 10px;">
-                <img src="cha/df_chiikawa.webp">
+                <img src="cha/df_chiikawa.webp"          alt="🥸">
                 <img src="cha/df_chiikawa_chiikawa.webp" alt="🤲" class="差分 発射→拍微動" style="--起点: 50% 100%; --時間1: 2s; --時間2: 2s; --倍率: 1.02;">
             </div>
-            <div class="💬" data-wait="20" style="--右尻尾: -10px;">
+            <div class    = "💬"
+                data-se   = "se/hyoi.mp3"
+                data-wait = "30"
+                style     = "--右尻尾: -10px;">
                 おや、お気に召されない？<br>
                 ちい〇わの方がよかったですかのう…
                 <div class="ト書き下">（次々フィギュアを出してくる）</div>
@@ -372,12 +385,15 @@
 
         <div class="🐰" style="--間隔: 20px;">
             <div class="キャラ画像 身体_拍動">
-                <img src="cha/ut_ikari.webp">
+                <img src="cha/ut_ikari.webp"          alt="🐰">
                 <img src="cha/ut_ikari_kaminari.webp" alt="⚡" class="差分 発射→拍動">
                 <img src="cha/ut_ikari_kekkan.webp"   alt="💢" class="差分 拍動" style="--起点: 32% 51%; --時間: 0.5s;">
                 <img src="cha/ut_ikari_kuchi.webp"    alt="👄" class="差分 パク" style="--起点: 50% 79%; --時間: 0.15s;">
             </div>
-            <div class="💬 高速" data-se="se/gogogo.mp3" data-volume="5" style="--左尻尾: 10px;">
+            <div class      = "💬 高速"
+                data-se     = "se/gogogo.mp3"
+                data-volume = "5"
+                style       = "--左尻尾: 10px;">
                 <b>それを買うおカネはどこから出たああ〜〜！<br>
                 モーロクぢぢい〜〜！</b>
             </div>
@@ -385,7 +401,7 @@
 
         <div class="🥸">
             <div class="キャラ画像 身体_横揺" style="--角度: 2deg;">
-                <img src="cha/da_okane.webp">
+                <img src="cha/da_okane.webp"            alt="🥸">
                 <img src="cha/da_okane_kuchi.webp"      alt="👄" class="差分 ピク">
                 <img src="cha/da_okane_heart.webp"      alt="♥️" class="差分 発射→拍動" style="--時間1: 3s; --時間2: 3s; --待機1: 2s;">
                 <div class="差分 微動">
@@ -393,7 +409,8 @@
                     <img src="cha/da_okane_ude.webp"    alt="🤌" class="差分 発射"       style="--起点: 100%   95%; --時間:  2s; --倍率: 1.05;">
                 </div>
             </div>
-            <div class="💬">
+            <div class  = "💬"
+                data-se = "se/jarajara.mp3">
                 またまたそんなイケナイ言葉wをどこで覚えたのやら…ﾌﾟﾌｫww<br>
                 そんなにプリプリしてると、やって来たるものも来たれなくなっちゃいますぞい♥️
             </div>
@@ -401,7 +418,7 @@
 
         <div class="🐰" style="--間隔: 20px;">
             <div class="キャラ画像 身体_拍動" style="--時間: 0.2s; --被り幅: 10px;">
-                <img src="cha/ud_gekido.webp">
+                <img src="cha/ud_gekido.webp"          alt="🐰">
                 <img src="cha/ud_gekido_mimi.webp"     alt="👂" class="差分 縦伸"       style="--時間:  0.2s;">
                 <img src="cha/ud_gekido_kaminari.webp" alt="⚡" class="差分 発射→拍動" style="--時間1: 0.8s; --時間2: 0.8s; --倍率: 1.2;">
                 <img src="cha/ud_gekido_kekkan.webp"   alt="💢" class="差分 拍動"       style="--起点: 35% 45%; --時間:  0.4s;">
@@ -410,18 +427,21 @@
                     <img src="cha/ud_gekido_ude.webp"  alt="🙌" class="縦伸"            style="--起点: 50% 81%; --時間: 0.05s; --倍率: 1.8;">
                 </div>
             </div>
-            <div class="💬 高速" data-se="se/fire.mp3" style="--左尻尾: 10px;">
+            <div class  = "💬 高速"
+                data-se = "se/fire.mp3"
+                style   = "--左尻尾: 10px;">
                 <b>ハートマークつけとゆばやいか、反省ちろ〜〜〜！！💢</b>
             </div>
         </div>
 
         <div class="🥸">
             <div class="キャラ画像 身体_縦伸" style="--被り幅: 20px;">
-                <img src="cha/dt_ok-migi.webp">
+                <img src="cha/dt_ok-migi.webp"        alt="🥸">
                 <img src="cha/dt_ok-migi_hikari.webp" alt="⚡" class="差分 発射→拍動">
                 <img src="cha/dt_ok-migi_ude.webp"    alt="👌" class="差分 発射→拍微動" style="--起点: 80% 100%; --倍率: 1.05;">
             </div>
-            <div class="💬">
+            <div class  = "💬"
+                data-se = "se/pon.mp3">
                 いや失敬失敬ww<br>
                 シカーリお仕事させていただきますぞいwwwおkおk
             </div>
@@ -429,11 +449,13 @@
 
         <div class="🐰">
             <div class="キャラ画像 身体_縦伸" style="--被り幅: -5px;">
-                <img src="cha/ut_tameiki.webp">
+                <img src="cha/ut_tameiki.webp"         alt="🐰">
                 <img src="cha/ut_tameiki_kuchi.webp"   alt="👄" class="差分 パク"       style="--起点: 50% 79%;">
                 <img src="cha/ut_tameiki_tameiki.webp" alt="💨" class="差分 発射→拍動" style="--時間1: 2s; --時間2: 2s; --倍率: 1.05;">
             </div>
-            <div class="💬 中速" style="--左尻尾: 5px;">
+            <div class  = "💬 中速"
+                data-se = "se/tameiki.mp3"
+                style   = "--左尻尾: 5px;">
                 草ばかり生やちくさって、あったりまえでしゅ！<br>
                 このインターネット老人会め。<br>
                 んじゃ、今日はこちらのご相談コメントにこたえていくでしゅよ。
@@ -441,16 +463,18 @@
         </div>
 
     </div>
-    </div> <!-- 1 ～ 11 ここまで -->
+    </div> <!-- セリフ1 ～ 11 ここまで -->
 
-    <div class="描画省略" style="--省略幅: 50vh;"> <!-- 12 -->
+    <div class="描画省略" style="--省略幅: 50vh;"> <!-- セリフ12 -->
     <div class="対話全体枠">
 
         <div class="👤">
             <div class="キャラ画像 身体_縦伸">
-                <img src="cha/guest.webp">
+                <img src="cha/guest.webp" alt="👤">
             </div>
-            <div class="💬">
+            <div class    = "💬"
+                data-se   = "se/spotlight.mp3"
+                data-wait = "30">
                 私はスピリチュアリティを学んで10年以上、自分は神とひとつのワンネスであるということを理解しています。<br>
                 私には仲のよい昔からの親友がいるのですが、困ったことに先日、彼女はとある教祖の偶像を救いの神のように崇めるようになってしまいました。<br>
                 「偶像崇拝」がなぜ問題か、いつも丁寧に説明するのですが理解されず、最後は険悪な雰囲気になって別れます。<br>
@@ -459,17 +483,19 @@
         </div>
 
     </div>
-    </div> <!-- 12 ここまで -->
+    </div> <!-- セリフ12 ここまで -->
 
-    <div class="描画省略" style="--省略幅: 1300vh;"> <!-- 13 ～ 39 -->
+    <div class="描画省略" style="--省略幅: 1300vh;"> <!-- セリフ13 ～ 39 -->
     <div class="対話全体枠">
 
         <div class="🥸">
             <div class="キャラ画像 身体_縦伸" style="--時間: 0.4s; --被り幅: 5px;">
-                <img src="cha/da_sibuki.webp">
+                <img src="cha/da_sibuki.webp"        alt="🥸">
                 <img src="cha/da_sibuki_sibuki.webp" alt="💦" class="差分 発射" style="--起点: 60% 80%;">
             </div>
-            <div class="💬 中速" data-wait="20" style="--右尻尾: 10px;">
+            <div class  = "💬 中速"
+                data-se = "se/cymbals.mp3"
+                style   = "--右尻尾: 10px;">
                 <b>ドプフォwwww</b><br>
                 このコメを拾ったのが、小生への当てつけ以外の何ものでもない件についてwww
             </div>
@@ -477,9 +503,11 @@
 
         <div class="🐰">
             <div class="キャラ画像 身体_縦伸" style="--時間: 0.5s;">
-                <img src="cha/uf_tumetaime.webp">
+                <img src="cha/uf_tumetaime.webp" alt="🐰">
             </div>
-            <div class="💬" data-se="se/kaze.mp3" data-volume="0.5">
+            <div class      = "💬"
+                data-se     = "se/kaze.mp3"
+                data-volume = "0.5">
                 なにをゆってるでしゅ。<br>
                 ユニちゃんはドクがどわ〜い好きでしゅよ。ﾌﾌﾝ
             </div>
@@ -487,11 +515,12 @@
 
         <div class="🥸">
             <div class="キャラ画像 身体_縦伸" style="--時間: 0.3s; --被り幅: 20px;">
-                <img src="cha/df_dogeza.webp">
+                <img src="cha/df_dogeza.webp"       alt="🥸">
                 <img src="cha/df_dogeza_gaba.webp"  alt="🙇‍♂️" class="差分 発射">
                 <img src="cha/df_dogeza_kuchi.webp" alt="👄" class="差分 パク" style="--起点: 50% 72%;">
             </div>
-            <div class="💬 中速" data-se="se/tento.mp3">
+            <div class  = "💬 中速"
+                data-se = "se/gaba.mp3">
                 その冷たい目線、<br>
                 待って無理ご褒美すぎ本当にありがとうございましたww
             </div>
@@ -499,10 +528,12 @@
 
         <div class="🐰">
             <div class="キャラ画像 身体_縦伸">
-                <img src="cha/ut_teikan.webp">
+                <img src="cha/ut_teikan.webp"       alt="🐰">
                 <img src="cha/ut_teikan_kuchi.webp" alt="👄" class="差分 パク" style="--起点: 50% 81%;">
             </div>
-            <div class="💬 中速" style="--左尻尾: 5px;">
+            <div class  = "💬 中速"
+                data-se = "se/kinuke.mp3"
+                style   = "--左尻尾: 5px;">
                 いーから<br>
                 さくさくグッドな回答をちやがれでしゅ！
             </div>
@@ -510,11 +541,14 @@
 
         <div class="🥸">
             <div class="キャラ画像 身体_縦伸" style="--被り幅: 20px;">
-                <img src="cha/dt_hitosasi.webp">
+                <img src="cha/dt_hitosasi.webp"        alt="🥸">
                 <img src="cha/dt_hitosasi_hikari.webp" alt="⚡" class="差分 発射→拍動">
                 <img src="cha/dt_hitosasi_ude.webp"    alt="☝️" class="差分 発射→拍微動" style="--起点: 50% 100%; --時間2: 2s; --倍率: 1.03;">
             </div>
-            <div class="💬" data-wait="20" data-se="se/pikon.mp3" style="--右尻尾: 20px;">
+            <div class    = "💬"
+                data-se   = "se/pikon.mp3"
+                data-wait = "20"
+                style     = "--右尻尾: 20px;">
                 いや失敬失敬ww<br>
                 「<em>偶像崇拝</em>」について、でございますな。キタコレww<br>
                 いわゆる有名どころの一神教で「偶像崇拝ほんと無理〜w」って禁止されてることが多いのは、言わずもがな人間の想像で神の概念の矮小化を防ぐ目的と、推しと運営とオタクの序列を維持するためですぢゃ。
@@ -523,10 +557,12 @@
 
         <div class="🐰">
             <div class="キャラ画像 身体_縦伸">
-                <img src="cha/ut_tantan.webp">
+                <img src="cha/ut_tantan.webp"       alt="🐰">
                 <img src="cha/ut_tantan_kuchi.webp" alt="👄" class="差分 パク" style="--起点: 50% 84%;">
             </div>
-            <div class="💬" style="--左余白: 4%;">
+            <div class  = "💬"
+                data-se = "se/tameiki.mp3"
+                style   = "--左余白: 4%;">
                 …<b>神</b>と<b>宗教</b>と<b>人間</b><br>
                 のことでしゅね。
             </div>
@@ -534,11 +570,13 @@
 
         <div class="🥸" style="--間隔: -20px;">
             <div class="キャラ画像 身体_縦伸">
-                <img src="cha/da_megane.webp">
+                <img src="cha/da_megane.webp"        alt="🥸">
                 <img src="cha/da_megane_hikari.webp" alt="✨" class="差分 発射→拍動" style="--起点: 40% 53%; --倍率: 1.3;">
                 <img src="cha/da_megane_kuchi.webp"  alt="👄" class="差分 ピク">
             </div>
-            <div class="💬" style="--右尻尾: 20px;">
+            <div class  = "💬"
+                data-se = "se/syakin.mp3"
+                style   = "--右尻尾: 20px;">
                 しかしここでコメ主殿がおっさってるのはその意味ではなく、スピリチュアリティな意味での文脈だと把握しますた。(メガネ、クイッ)<br>
                 推しは自分から分離した外側にいるのではなく、わが内側にこそいるのだと。<br>
                 だから外側の推しの偶像を崇めることは、自分自身の内側の神性や目覚めを否定することになるゆえ、「解釈違いほんと無理しぬww」とゆーわけでございまするwwwコポォ
@@ -547,7 +585,7 @@
 
         <div class="🐰">
             <div class="キャラ画像 身体_縦伸">
-                <img src="cha/uf_unun.webp">
+                <img src="cha/uf_unun.webp"      alt="🐰">
                 <img src="cha/uf_unun_sen.webp"  alt="💨" class="差分 発射" style="--起点: 90% 40%; --倍率: 1;">
                 <img src="cha/uf_unun_unun.webp" alt="💨" class="差分 発射" style="--起点: 70% 80%; --時間: 2s; --待機: 1s;">
             </div>
@@ -560,7 +598,7 @@
 
         <div class="🥸" style="--間隔: -10px; --配置: center;">
             <div class="キャラ画像 身体_縦伸" style="--サイズ: 8%; --被り幅: -25px; --時間: 0.3s;">
-                <img src="cha/da_pyo-n.webp">
+                <img src="cha/da_pyo-n.webp"         alt="🥸">
                 <img src="cha/da_pyo-n_pyo-n.webp"   alt="💨" class="差分 発射" style="--起点: 99% 45%; --時間: 1.5s; --倍率: 1.3; z-index: -1;">
                 <img src="cha/da_pyo-n_odoroki.webp" alt="⚡" class="差分 発射" style="--起点: 64% 12%;">
                 <img src="cha/da_pyo-n_kuchi.webp"   alt="👄" class="差分 パク" style="--起点: 50% 60%;">
@@ -573,7 +611,7 @@
 
         <div class="🐰" style="--間隔: 20px;">
             <div class="キャラ画像 身体_拍動" style="--サイズ: 4%; --被り幅: 10px;">
-                <img src="cha/ud_hammer.webp">
+                <img src="cha/ud_hammer.webp"            alt="🐰">
                 <img src="cha/ud_hammer_kuchi.webp"      alt="👄" class="差分 パク" style="--起点: 50% 70%; --時間: 0.1s;">
                 <div class="差分 発射" style="--起点: 0% 100%; --時間: 0.5s;">
                     <img src="cha/ud_hammer_hammer.webp" alt="🔨" class="一転"      style="--起点: 60% 79%;">
@@ -587,7 +625,7 @@
 
         <div class="🥸">
             <div class="キャラ画像 身体_振動" style="--サイズ: 4%; --被り幅: 13px;">
-                <img src="cha/df_tankobu.webp">
+                <img src="cha/df_tankobu.webp"          alt="🥸">
                 <img src="cha/df_tankobu_tori.webp"     alt="🦉" class="差分 微動"       style="--時間:  9s; z-index: -1;">
                 <img src="cha/df_tankobu_hukidasi.webp" alt="💨" class="差分 発射→拍動" style="--時間1: 2s; --起点: 70% 20%; --倍率: 1.02; --待機1: 2s;">
                 <img src="cha/df_tankobu_zukizuki.webp" alt="⚡" class="差分 発射→拍動" style="--時間1: 2s; --起点: 50% 50%; --倍率: 1.15; --待機1: 1s;">
@@ -605,7 +643,7 @@
 
         <div class="🐰">
             <div class="キャラ画像 身体_縦伸">
-                <img src="cha/ut_tomadoi.webp">
+                <img src="cha/ut_tomadoi.webp"       alt="🐰">
                 <img src="cha/ut_tomadoi_kuchi.webp" alt="👄" class="差分 パク" style="--起点: 50% 76%;">
             </div>
             <div class="💬" style="--左尻尾: 5px;">
@@ -617,7 +655,7 @@
 
         <div class="🥸">
             <div class="キャラ画像 身体_縦伸" style="--被り幅: 15px;">
-                <img src="cha/dt_ok-hidari.webp">
+                <img src="cha/dt_ok-hidari.webp"        alt="🥸">
                 <img src="cha/dt_ok-hidari_hikari.webp" alt="⚡" class="差分 発射→拍動">
                 <img src="cha/dt_ok-hidari_ude.webp"    alt="👌" class="差分 発射→拍微動" style="--起点: 50% 100%; --時間2: 2s; --倍率: 1.03;">
             </div>
@@ -629,7 +667,7 @@
 
         <div class="🐰">
             <div class="キャラ画像 身体_縦伸">
-                <img src="cha/ut_nani.webp">
+                <img src="cha/ut_nani.webp"       alt="🐰">
                 <img src="cha/ut_nani_me.webp"    alt="👀" class="差分 目瞬">
                 <img src="cha/ut_nani_kuchi.webp" alt="👄" class="差分 パク" style="--起点: 50% 78%;">
                 <img src="cha/ut_nani_ude.webp"   alt="💪" class="差分 微動">
@@ -641,7 +679,7 @@
 
         <div class="🥸" style="--間隔: -5px;">
             <div class="キャラ画像 身体_横揺" style="--角度: 2deg;">
-                <img src="cha/da_heart.webp">
+                <img src="cha/da_heart.webp"        alt="🥸">
                 <img src="cha/da_heart_hikari.webp" alt="✨" class="差分 発射→拍動" style="--起点: 16.5% 33%; --時間1: 2s; --時間2: 2s; --倍率: 1.3;">
                 <img src="cha/da_heart_heart.webp"  alt="♥️" class="差分 発射→拍動" style="--起点:  50% 100%; --時間1: 9s; --時間2: 3s; --倍率: 1.1;">
                 <img src="cha/da_heart_kuchi.webp"  alt="👄" class="差分 ピク">
@@ -655,7 +693,7 @@
 
         <div class="🐰">
             <div class="キャラ画像 身体_拍動" style="--サイズ: 4%;">
-                <img src="cha/ut_odoroki.webp">
+                <img src="cha/ut_odoroki.webp"         alt="🐰">
                 <img src="cha/ut_odoroki_odoroki.webp" alt="⚡" class="差分 発射">
                 <img src="cha/ut_odoroki_me.webp"      alt="👀" class="差分 拍動→目瞬" style="--起点: 40% 73%;">
                 <img src="cha/ut_odoroki_kuchi.webp"   alt="👄" class="差分 パク"       style="--起点: 50% 81%; --時間: 0.15s;">
@@ -670,7 +708,7 @@
 
         <div class="🥸">
             <div class="キャラ画像 身体_縦伸" style="--時間: 0.4s; --被り幅: 5px;">
-                <img src="cha/da_sibuki.webp">
+                <img src="cha/da_sibuki.webp"        alt="🥸">
                 <img src="cha/da_sibuki_sibuki.webp" alt="💦" class="差分 発射" style="--起点: 60% 80%;">
             </div>
             <div class="💬 中速" data-wait="20" style="--右尻尾: 10px;">
@@ -682,7 +720,7 @@
 
         <div class="🐰">
             <div class="キャラ画像 身体_横揺" style="--時間: 1s; --被り幅: 5px;">
-                <img src="cha/ut_hatena.webp">
+                <img src="cha/ut_hatena.webp"        alt="🐰">
                 <img src="cha/ut_hatena_hatena.webp" alt="❔" class="差分 発射→拍動">
                 <img src="cha/ut_hatena_kuchi.webp"  alt="👄" class="差分 パク"         style="--起点: 50% 79%;">
                 <img src="cha/ut_hatena_ude.webp"    alt="💪" class="差分 発射→拍微動" style="--起点: 35% 95%; --時間2: 9s; --時間3: 9s; --倍率: 1.03;">
@@ -696,7 +734,7 @@
 
         <div class="🥸">
             <div class="キャラ画像 身体_縦伸" style="--被り幅: 20px;">
-                <img src="cha/dt_hitosasi.webp">
+                <img src="cha/dt_hitosasi.webp"     alt="🥸">
                 <img src="cha/dt_hitosasi_ude.webp" alt="☝️" class="差分 発射→拍微動" style="--起点: 50% 100%; --時間2: 2s; --倍率: 1.03;">
             </div>
             <div class="💬" data-wait="20" style="--右尻尾: 15px;">
@@ -707,7 +745,7 @@
 
         <div class="🐰">
             <div class="キャラ画像 身体_縦伸">
-                <img src="cha/ut_hitotu.webp">
+                <img src="cha/ut_hitotu.webp"       alt="🐰">
                 <img src="cha/ut_hitotu_kuchi.webp" alt="👄" class="差分 パク" style="--起点: 50% 79%;">
                 <img src="cha/ut_hitotu_ude.webp"   alt="☝️" class="差分 発射" style="--起点: 50% 95%; --倍率: 1.03;">
             </div>
@@ -718,7 +756,7 @@
 
         <div class="🥸" style="--間隔: -5px;">
             <div class="キャラ画像 身体_縦伸" style="--サイズ: 4%;">
-                <img src="cha/dt_good.webp">
+                <img src="cha/dt_good.webp"          alt="🥸">
                 <div class="差分 発射→拍動" style="--起点: 25% 60%; --時間1: 2s; --時間2: 2s;">
                     <img src="cha/dt_good_hosi.webp" alt="⭐" class="回転"      style="--起点: 18% 41%;">
                 </div>
@@ -733,7 +771,7 @@
 
         <div class="🐰" style="--間隔: 10px;">
             <div class="キャラ画像 身体_横揺" style="--時間: 1.5s; --被り幅: 10px;">
-                <img src="cha/ua_hatena.webp">
+                <img src="cha/ua_hatena.webp"        alt="🐰">
                 <img src="cha/ua_hatena_hatena.webp" alt="❔" class="差分 発射→拍動" style="--時間2: 1.5s; --倍率: 1.05;">
                 <img src="cha/ua_hatena_kuchi.webp"  alt="👄" class="差分">
                 <img src="cha/ua_hatena_ude.webp"    alt="👆" class="差分">
@@ -745,7 +783,7 @@
 
         <div class="🥸" style="--間隔: -20px;">
             <div class="キャラ画像 身体_縦伸">
-                <img src="cha/da_megane.webp">
+                <img src="cha/da_megane.webp"        alt="🥸">
                 <img src="cha/da_megane_hikari.webp" alt="✨" class="差分 発射→拍動" style="--起点: 40% 53%; --倍率: 1.3;">
                 <img src="cha/da_megane_kuchi.webp"  alt="👄" class="差分 ピク">
             </div>
@@ -758,7 +796,7 @@
 
         <div class="🐰">
             <div class="キャラ画像 身体_振動" style="--サイズ: 4%;">
-                <img src="cha/ut_odoroki.webp">
+                <img src="cha/ut_odoroki.webp"       alt="🐰">
                 <img src="cha/ut_odoroki_me.webp"    alt="👀" class="差分 目瞬" style="--起点: 40% 73%;">
                 <img src="cha/ut_odoroki_kuchi.webp" alt="👄" class="差分">
             </div>
@@ -769,7 +807,7 @@
 
         <div class="🥸" style="--間隔: -20px;">
             <div class="キャラ画像 身体_縦伸" style="--時間: 0.4s; --被り幅: 5px;">
-                <img src="cha/da_sibuki.webp">
+                <img src="cha/da_sibuki.webp"        alt="🥸">
                 <img src="cha/da_sibuki_sibuki.webp" alt="💦" class="差分 発射" style="--起点: 60% 80%;">
             </div>
             <div class="💬" style="--右尻尾: 10px;">
@@ -780,7 +818,7 @@
 
         <div class="🐰">
             <div class="キャラ画像 身体_拍動">
-                <img src="cha/ut_kyogaku.webp">
+                <img src="cha/ut_kyogaku.webp"             alt="🐰">
                 <img src="cha/ut_sabun_denkyu-hikari.webp" alt="⚡" class="差分 発射→拍動" style="--倍率: 1.15;">
                 <img src="cha/ut_sabun_denkyu.webp"        alt="💡" class="差分 発射→拍動" style="--倍率: 1.1;">
                 <img src="cha/ut_kyogaku_me.webp"          alt="👀" class="差分 拍動→目瞬">
@@ -796,7 +834,7 @@
 
         <div class="🥸" style="--間隔: -20px;">
             <div class="キャラ画像 身体_縦伸">
-                <img src="cha/dt_hitosasi.webp">
+                <img src="cha/dt_hitosasi.webp"     alt="🥸">
                 <img src="cha/dt_hitosasi_ude.webp" alt="☝️" class="差分 発射→拍微動" style="--起点: 50% 100%; --時間2: 2s; --倍率: 1.03;">
             </div>
             <div class="💬" data-wait="20" style="--右尻尾: 20px;">
@@ -806,14 +844,14 @@
         </div>
 
     </div>
-    </div> <!-- 13 ～ 39 ここまで -->
+    </div> <!-- セリフ13 ～ 39 ここまで -->
 
-    <div class="描画省略" style="--省略幅: 1000vh;"> <!-- 40 ～ 60 -->
+    <div class="描画省略" style="--省略幅: 1000vh;"> <!-- セリフ40 ～ 60 -->
     <div class="対話全体枠">
 
         <div class="🐰">
             <div class="キャラ画像 身体_縦伸">
-                <img src="cha/ut_hitotu.webp">
+                <img src="cha/ut_hitotu.webp"       alt="🐰">
                 <img src="cha/ut_hitotu_kuchi.webp" alt="👄" class="差分 パク" style="--起点: 50% 79%;">
                 <img src="cha/ut_hitotu_ude.webp"   alt="☝️" class="差分 発射" style="--起点: 50% 95%; --待機: 2s; --倍率: 1.03;">
             </div>
@@ -825,7 +863,7 @@
 
         <div class="🥸">
             <div class="キャラ画像 身体_縦伸" style="--被り幅: 20px;">
-                <img src="cha/dt_ok-migi.webp">
+                <img src="cha/dt_ok-migi.webp"     alt="🥸">
                 <img src="cha/da_okane_heart.webp" alt="♥️" class="差分 発射→拍動"   style="--時間1: 3s; --時間2: 3s;">
                 <img src="cha/dt_ok-migi_ude.webp" alt="👌" class="差分 発射→拍微動" style="--起点: 80% 100%; --倍率: 1.05;">
             </div>
@@ -839,7 +877,7 @@
 
         <div class="🐰">
             <div class="キャラ画像 身体_縦伸">
-                <img src="cha/ut_hojihoji.webp">
+                <img src="cha/ut_hojihoji.webp"          alt="🐰">
                 <img src="cha/ut_hojihoji_hojihoji.webp" alt="💨" class="差分 発射">
             </div>
             <div class="💬">
@@ -850,7 +888,7 @@
 
         <div class="🥸">
             <div class="キャラ画像 身体_縦伸" style="--時間: 0.4s; --被り幅: 20px;">
-                <img src="cha/da_pya.webp">
+                <img src="cha/da_pya.webp"        alt="🥸">
                 <img src="cha/da_pya_ude.webp"    alt="💪" class="差分 発射" style="--起点: 0% 100%; --時間: 2s; --倍率: 1.05;">
                 <img src="cha/da_pya_sibuki.webp" alt="💦" class="差分 発射" style="--起点: 60% 80%;">
             </div>
@@ -863,7 +901,7 @@
 
         <div class="🐰">
             <div class="キャラ画像 身体_横揺">
-                <img src="cha/ut_tateme.webp">
+                <img src="cha/ut_tateme.webp"       alt="🐰">
                 <img src="cha/ut_tateme_me.webp"    alt="👀" class="差分 目瞬" style="--起点: 50% 74%;">
                 <img src="cha/ut_tateme_kuchi.webp" alt="👄" class="差分 パク" style="--起点: 50% 82%;">
             </div>
@@ -875,7 +913,7 @@
 
         <div class="🥸" style="--間隔: -5px;">
             <div class="キャラ画像 身体_縦伸" style="--被り幅: 40px;">
-                <img src="cha/da_okane.webp">
+                <img src="cha/da_okane.webp"       alt="🥸">
                 <img src="cha/da_okane_kuchi.webp" alt="👄" class="差分 ピク">
                 <img src="cha/da_okane_heart.webp" alt="♥️" class="差分 発射→拍動" style="--起点: 50% 90%; --時間1: 3s; --時間2: 3s;">
             </div>
@@ -886,7 +924,7 @@
 
         <div class="🐰">
             <div class="キャラ画像 身体_縦伸">
-                <img src="cha/ut_iya.webp">
+                <img src="cha/ut_iya.webp"     alt="🐰">
                 <img src="cha/ut_iya_ude.webp" alt="💪" class="差分">
             </div>
             <div class="💬" data-speed="2">
@@ -896,7 +934,7 @@
 
         <div class="🥸" style="--間隔: -5px;">
             <div class="キャラ画像 身体_縦伸" style="--被り幅: 20px;">
-                <img src="cha/dt_hitosasi.webp">
+                <img src="cha/dt_hitosasi.webp"         alt="🥸">
                 <div class="差分 発射">
                     <img src="cha/dt_precure_hosi.webp" alt="⭐" class="回転" style="--起点: 26% 22%;">
                 </div>
@@ -910,7 +948,7 @@
 
         <div class="🐰">
             <div class="キャラ画像 身体_縦伸">
-                <img src="cha/ut_tateme.webp">
+                <img src="cha/ut_tateme.webp"       alt="🐰">
                 <img src="cha/ut_tateme_me.webp"    alt="👀" class="差分 目瞬" style="--起点: 50% 74%;">
                 <img src="cha/ut_tateme_kuchi.webp" alt="👄" class="差分 パク" style="--起点: 50% 82%;">
             </div>
@@ -922,7 +960,7 @@
 
         <div class="🥸">
             <div class="キャラ画像 身体_横揺" style="--角度: 2deg;">
-                <img src="cha/da_heart.webp">
+                <img src="cha/da_heart.webp"        alt="🥸">
                 <img src="cha/da_heart_hikari.webp" alt="✨" class="差分 発射→拍動" style="--起点: 16.5% 33%; --時間1: 2s; --時間2: 2s; --倍率: 1.4;">
                 <img src="cha/da_heart_kuchi.webp"  alt="👄" class="差分 ピク">
                 <img src="cha/da_heart_ude.webp"    alt="🙏" class="差分">
@@ -935,7 +973,7 @@
 
         <div class="🐰">
             <div class="キャラ画像 身体_縦伸" style="--サイズ: 4%;">
-                <img src="cha/ut_odoroki.webp">
+                <img src="cha/ut_odoroki.webp"       alt="🐰">
                 <img src="cha/ut_odoroki_me.webp"    alt="👀" class="差分 目瞬" style="--起点: 40% 73%;">
                 <img src="cha/ut_odoroki_kuchi.webp" alt="👄" class="差分 パク" style="--起点: 50% 81%;">
             </div>
@@ -946,7 +984,7 @@
 
         <div class="🥸" style="--間隔: -10px;">
             <div class="キャラ画像 身体_縦伸" style="--サイズ: 16%; --被り幅: -5px;">
-                <img src="cha/da_udehiroge.webp">
+                <img src="cha/da_udehiroge.webp"        alt="🥸">
                 <img src="cha/da_udehiroge_hikari.webp" alt="⚡" class="差分 発射→拍動" style="--起点: 40% 40%; --時間1: 2s; --時間2: 2s; --倍率: 1.15;">
                 <img src="cha/da_udehiroge_denkyu.webp" alt="💡" class="差分 発射→拍動" style="--起点: 40% 40%; --時間1: 2s; --時間2: 2s; --倍率: 1.1;">
                 <img src="cha/da_udehiroge_kuchi.webp"  alt="👄" class="差分 パク" style="--起点: 50% 58%;">
@@ -958,7 +996,7 @@
 
         <div class="🐰">
             <div class="キャラ画像 身体_拍動">
-                <img src="cha/ut_odoroki-s.webp">
+                <img src="cha/ut_odoroki-s.webp"       alt="🐰">
                 <img src="cha/ut_odoroki-s_me.webp"    alt="👀" class="差分 拍動→目瞬">
                 <img src="cha/ut_odoroki-s_kuchi.webp" alt="👄" class="差分 パク">
                 <img src="cha/ut_odoroki-s_ude.webp"   alt="🙏" class="差分 発射" style="--起点: 50% 90%; --倍率: 1;">
@@ -970,7 +1008,7 @@
 
         <div class="🥸" style="--間隔: -20px;">
             <div class="キャラ画像 身体_縦伸" style="--サイズ: -4%;">
-                <img src="cha/df_x.webp">
+                <img src="cha/df_x.webp" alt="🥸">
             </div>
             <div class="💬" data-wait="20">
                 しかし、エゴとしてのあなたがこだわる「イヤな気分」は、それとは別ですぢゃ。<br>
@@ -981,7 +1019,7 @@
 
         <div class="🐰">
             <div class="キャラ画像 身体_横揺" style="--時間: 1s;">
-                <img src="cha/uf_unun.webp">
+                <img src="cha/uf_unun.webp" alt="🐰">
             </div>
             <div class="💬 無声" data-speed="10" style="--左余白: 6%; --左尻尾: -20px;">
                 （…考え中…）
@@ -990,7 +1028,7 @@
 
         <div class="🥸" style="--間隔: -20px;">
             <div class="キャラ画像 身体_縦伸" style="--サイズ: 16%; --被り幅: -5px;">
-                <img src="cha/da_udehiroge.webp">
+                <img src="cha/da_udehiroge.webp"          alt="🥸">
                 <div class="差分 発射">
                     <img src="cha/da_udehiroge_hosi.webp" alt="⭐" class="回転" style="--起点: 15% 29%;">
                 </div>
@@ -1005,7 +1043,7 @@
 
         <div class="🐰">
             <div class="キャラ画像 身体_縦伸" style="--被り幅: 5px;">
-                <img src="cha/ua_nattoku.webp">
+                <img src="cha/ua_nattoku.webp"       alt="🐰">
                 <img src="cha/ua_nattoku_me.webp"    alt="👀" class="差分 目瞬" style="--起点: 50% 55%;">
                 <img src="cha/ua_nattoku_kuchi.webp" alt="👄" class="差分 ピク">
                 <img src="cha/ua_nattoku_ude.webp"   alt="☝️" class="差分 発射" style="--起点: 50% 90%; --待機: 1s; --倍率: 1.1;">
@@ -1020,7 +1058,7 @@
 
         <div class="🥸">
             <div class="キャラ画像 身体_縦伸">
-                <img src="cha/dt_hitosasi.webp">
+                <img src="cha/dt_hitosasi.webp"     alt="🥸">
                 <img src="cha/dt_hitosasi_ude.webp" alt="☝️" class="差分 発射→拍微動" style="--起点: 50% 100%; --時間2: 2s; --倍率: 1.03;">
             </div>
             <div class="💬" data-wait="10" style="--右尻尾: 20px;">
@@ -1031,7 +1069,7 @@
 
         <div class="🐰">
             <div class="キャラ画像 身体_縦伸" style="--被り幅: 10px;">
-                <img src="cha/uf_bimyo.webp">
+                <img src="cha/uf_bimyo.webp"     alt="🐰">
                 <img src="cha/uf_bimyo_ude.webp" alt="💪" class="差分 発射" style="--起点: 25% 90%; --倍率: 1;">
             </div>
             <div class="💬" style="--左尻尾: 10px;">
@@ -1042,7 +1080,7 @@
 
         <div class="🥸">
             <div class="キャラ画像 身体_縦伸" style="--サイズ: 8%; --被り幅: 10px;">
-                <img src="cha/dt_go.webp">
+                <img src="cha/dt_go.webp"            alt="🥸">
                 <div class="差分 発射">
                     <img src="cha/dt_go_hosi.webp"   alt="⭐" class="回転" style="--起点: 21% 30%;">
                 </div>
@@ -1070,7 +1108,7 @@
         <div class="📻">
             <div class="キャラ画像">
                 <a href="cm_001.html">
-                    <img src="img/radio.webp">
+                    <img src="img/radio.webp"      alt="📻">
                     <img src="img/radio_onpu.webp" alt="🎵" class="差分 発射→拍微動" style="--起点: 50% 50%; --時間2: 2s;">
                 </a>
             </div>
@@ -1083,7 +1121,7 @@
         </div>
 
     </div>
-    </div> <!-- 40 ～ 60 ここまで -->
+    </div> <!-- セリフ40 ～ 60 ここまで -->
 
     <div style="height: 10vh;"></div>
 
