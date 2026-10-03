@@ -42,6 +42,7 @@ setTimeout(() => { // 3秒経過で強制
 
 // 🎛️設定 (初期値)
 
+let スライダーボイス音量 = 4;
 let スライダー効果音量   = 4;
 let スライダー文字サイズ = 4;
 let スライダー画像サイズ = 4;
@@ -56,16 +57,16 @@ let スイッチ表情アニメ   = true;
 
 let 設定文字サイズ = 100;
 let 設定速度ms     = 90 - スライダー文字速度 * 10; // 0 〜 90ms (デフォ 50ms)
-let ボイス音量     = スライダー効果音量 * 0.05;    // 0 〜 0.45 (デフォ 0.2)
-let 効果音音量     = ボイス音量 * 0.5;             // 0 〜 0.22 (デフォ 0.1)
+let ボイス音量     = スライダーボイス音量 * 0.1;   // 0 〜 0.9  (デフォ 0.4)
+let 効果音量       = スライダー効果音量   * 0.1;   // 0 〜 0.9  (デフォ 0.4)
 
 // ▫️設定更新関数
 
 function 設定更新() {
     設定文字サイズ = 100 + (スライダー文字サイズ - 4) * 5;
     設定速度ms     = 90 - スライダー文字速度 * 10;
-    ボイス音量     = スライダー効果音量 * 0.05;
-    効果音音量     = ボイス音量 * 0.5;
+    ボイス音量     = スライダーボイス音量 * 0.1;
+    効果音量       = スライダー効果音量   * 0.1;
     document.documentElement.style.fontSize = `${設定文字サイズ}%`;
     document.documentElement.style.setProperty('--画像サイズ', スライダー画像サイズ);
     const アニメ速度 = Math.max(0.1, 1 + (スライダーアニメ速度 - 4) * 0.2); // 0.2 〜 2 (デフォ 1)
@@ -98,6 +99,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const ラジオ          = document.getElementById('ラジオ');
     const 入力_文字サイズ = document.getElementById('文字サイズ');
     const 入力_文字速度   = document.getElementById('文字速度');
+    const 入力_ボイス音量 = document.getElementById('ボイス音量');
     const 入力_効果音量   = document.getElementById('効果音量');
     const 入力_画像サイズ = document.getElementById('画像サイズ');
     const 入力_アニメ速度 = document.getElementById('アニメ速度');
@@ -108,6 +110,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const 初期値_文字サイズ = 4;
     const 初期値_文字速度   = 4;
+    const 初期値_ボイス音量 = 4;
     const 初期値_効果音量   = 4;
     const 初期値_画像サイズ = 4;
     const 初期値_アニメ速度 = 4;
@@ -119,6 +122,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const KEY_文字サイズ = 'site_text_size';
     const KEY_文字速度   = 'site_text_speed';
+    const KEY_ボイス音量 = 'site_voice_volume';
     const KEY_効果音量   = 'site_se_volume';
     const KEY_画像サイズ = 'site_img_size';
     const KEY_アニメ速度 = 'site_anime_speed';
@@ -130,6 +134,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const 保存_文字サイズ = localStorage.getItem(KEY_文字サイズ);
     const 保存_文字速度   = localStorage.getItem(KEY_文字速度);
+    const 保存_ボイス音量 = localStorage.getItem(KEY_ボイス音量);
     const 保存_効果音量   = localStorage.getItem(KEY_効果音量);
     const 保存_画像サイズ = localStorage.getItem(KEY_画像サイズ);
     const 保存_アニメ速度 = localStorage.getItem(KEY_アニメ速度);
@@ -139,6 +144,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     スライダー文字サイズ = 保存_文字サイズ !== null ? parseInt(保存_文字サイズ, 10) : 初期値_文字サイズ;
     スライダー文字速度   = 保存_文字速度   !== null ? parseInt(保存_文字速度, 10)   : 初期値_文字速度;
+    スライダーボイス音量 = 保存_ボイス音量 !== null ? parseInt(保存_ボイス音量, 10) : 初期値_ボイス音量;
     スライダー効果音量   = 保存_効果音量   !== null ? parseInt(保存_効果音量, 10)   : 初期値_効果音量;
     スライダー画像サイズ = 保存_画像サイズ !== null ? parseInt(保存_画像サイズ, 10) : 初期値_画像サイズ;
     スライダーアニメ速度 = 保存_アニメ速度 !== null ? parseInt(保存_アニメ速度, 10) : 初期値_アニメ速度;
@@ -176,6 +182,23 @@ document.addEventListener('DOMContentLoaded', () => {
             if (表示) 表示.textContent = e.target.value;
             
             localStorage.setItem(KEY_文字速度, スライダー文字速度);
+            設定更新();
+        });
+    }
+
+    // ▫️ボイス音量
+
+    if (入力_ボイス音量) {
+        入力_ボイス音量.value = スライダーボイス音量;
+        const 表示 = 入力_ボイス音量.nextElementSibling;
+        if (表示) 表示.textContent = スライダーボイス音量;
+
+        入力_ボイス音量.addEventListener('input', (e) => {
+            スライダーボイス音量 = parseInt(e.target.value, 10);
+            const 表示 = e.target.nextElementSibling;
+            if (表示) 表示.textContent = e.target.value;
+
+            localStorage.setItem(KEY_ボイス音量, スライダーボイス音量);
             設定更新();
         });
     }
@@ -289,6 +312,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             localStorage.removeItem(KEY_文字サイズ); // 保存データの消去
             localStorage.removeItem(KEY_文字速度);
+            localStorage.removeItem(KEY_ボイス音量);
             localStorage.removeItem(KEY_効果音量);
             localStorage.removeItem(KEY_画像サイズ);
             localStorage.removeItem(KEY_アニメ速度);
@@ -308,6 +332,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 スライダー文字速度  = 初期値_文字速度;
                 const 表示 = 入力_文字速度.nextElementSibling;
                 if (表示) 表示.textContent = 初期値_文字速度;
+            }
+
+            if (入力_ボイス音量) {
+                入力_ボイス音量.value = 初期値_ボイス音量;
+                スライダーボイス音量  = 初期値_ボイス音量;
+                const 表示 = 入力_ボイス音量.nextElementSibling;
+                if (表示) 表示.textContent = 初期値_ボイス音量;
             }
 
             if (入力_効果音量) {
@@ -948,7 +979,7 @@ function セリフ表示(エリア, 完了コールバック) {
             const 文字span = 文字一覧[現在位置];
             文字span.classList.add('表示済');
 
-            if (!モノローグ && 文字span.textContent !== ' ') 音声再生(キャラ);
+            if (!モノローグ && 文字span.textContent !== ' ') ボイス再生(キャラ);
 
             if (現在位置 === 文字一覧.length - 1) { // 最後の1文字を表示し終えた瞬間
                 if (!モノローグ) 口元アニメ終了(エリア);
@@ -967,20 +998,20 @@ function セリフ表示(エリア, 完了コールバック) {
 
 // 🎛️オーディオ
 
-const 音声一覧 = {
+const ボイス一覧 = {
     ドク: new Audio('se/doc.mp3'),
     ユニ: new Audio('se/uni.mp3'),
     第三: new Audio('se/oth.mp3')
 };
-Object.values(音声一覧).forEach((音声) => { 音声.preload = 'auto'; });
+Object.values(ボイス一覧).forEach((ボイス) => { ボイス.preload = 'auto'; });
 
-// ▫️音声再生（ボイス用）
+// ▫️ボイス再生
 
-function 音声再生(キャラ) {
+function ボイス再生(キャラ) {
     if (ボイス音量 <= 0) return; // 音量0なら再生スキップ
-    const 音声 = 音声一覧[キャラ].cloneNode();
-    音声.volume = Math.min(Math.max(ボイス音量, 0), 1); // 0.0 ~ 1.0 にクランプ
-    音声.play().catch(() => {});
+    const ボイス = ボイス一覧[キャラ].cloneNode();
+    ボイス.volume = Math.min(Math.max(ボイス音量, 0), 1); // 0.0 ~ 1.0 の範囲に収める
+    ボイス.play().catch(() => {});
 }
 
 // ▫️効果音のプリロード
@@ -999,9 +1030,9 @@ document.querySelectorAll('.💬[data-se]').forEach((el) => {
 // ▫️効果音再生
 
 function 効果音再生(パス, 音量倍率 = 1) {
-    if (!パス || !効果音キャッシュ[パス] || 効果音音量 <= 0) return;
+    if (!パス || !効果音キャッシュ[パス] || 効果音量 <= 0) return;
     const 効果音   = 効果音キャッシュ[パス].cloneNode();
-    const 最終音量 = 効果音音量 * 音量倍率;
+    const 最終音量 = 効果音量 * 音量倍率;
     
     効果音.volume = Math.min(Math.max(最終音量, 0), 1); // 0.0 ~ 1.0 の範囲に収める
     効果音.play().catch(() => {});

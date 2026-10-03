@@ -75,6 +75,14 @@
         <div class="設定💬">
 
             <div class="設定項目">
+                ボイス音量
+                <label class="スライダー">
+                    小<input type="range" id="ボイス音量" max="9" min="0" value="4">大
+                    <span class="スライダー数値">4</span>
+                </label>
+            </div>
+
+            <div class="設定項目">
                 効果音量
                 <label class="スライダー">
                     小<input type="range" id="効果音量" max="9" min="0" value="4">大
@@ -285,8 +293,8 @@
 
         ◾カスタムデータ
         data-se     効果音 URL
+        data-volume 効果音量の倍率 (効果音量はデフォ0.4なので、2倍までを推奨)
         data-speed  文字速度の倍率 (20倍で通常の1行相当の時間)
-        data-volume 音量の倍率 (SE音量はデフォ0.1、最大0.22なので、5倍までを推奨)
         data-wait   セリフ終了後のタメ文字数
         -->
 
@@ -392,7 +400,7 @@
             </div>
             <div class      = "💬 高速"
                 data-se     = "se/gogogo.mp3"
-                data-volume = "5"
+                data-volume = "2"
                 style       = "--左尻尾: 10px;">
                 <b>それを買うおカネはどこから出たああ〜〜！<br>
                 モーロクぢぢい〜〜！</b>
@@ -410,7 +418,7 @@
                 </div>
             </div>
             <div class  = "💬"
-                data-se = "se/jarajara.mp3">
+                data-se = "se/charin.mp3">
                 またまたそんなイケナイ言葉wをどこで覚えたのやら…ﾌﾟﾌｫww<br>
                 そんなにプリプリしてると、やって来たるものも来たれなくなっちゃいますぞい♥️
             </div>
@@ -453,9 +461,10 @@
                 <img src="cha/ut_tameiki_kuchi.webp"   alt="👄" class="差分 パク"       style="--起点: 50% 79%;">
                 <img src="cha/ut_tameiki_tameiki.webp" alt="💨" class="差分 発射→拍動" style="--時間1: 2s; --時間2: 2s; --倍率: 1.05;">
             </div>
-            <div class  = "💬 中速"
-                data-se = "se/tameiki.mp3"
-                style   = "--左尻尾: 5px;">
+            <div class    = "💬 中速"
+                data-se   = "se/kinuke.mp3"
+                data-wait = "30"
+                style     = "--左尻尾: 5px;">
                 草ばかり生やちくさって、あったりまえでしゅ！<br>
                 このインターネット老人会め。<br>
                 んじゃ、今日はこちらのご相談コメントにこたえていくでしゅよ。
@@ -532,7 +541,7 @@
                 <img src="cha/ut_teikan_kuchi.webp" alt="👄" class="差分 パク" style="--起点: 50% 81%;">
             </div>
             <div class  = "💬 中速"
-                data-se = "se/kinuke.mp3"
+                data-se = "se/tameiki.mp3"
                 style   = "--左尻尾: 5px;">
                 いーから<br>
                 さくさくグッドな回答をちやがれでしゅ！
@@ -561,7 +570,7 @@
                 <img src="cha/ut_tantan_kuchi.webp" alt="👄" class="差分 パク" style="--起点: 50% 84%;">
             </div>
             <div class  = "💬"
-                data-se = "se/tameiki.mp3"
+                data-se = "se/pyoko.mp3"
                 style   = "--左余白: 4%;">
                 …<b>神</b>と<b>宗教</b>と<b>人間</b><br>
                 のことでしゅね。
