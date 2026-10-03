@@ -996,67 +996,25 @@ function セリフ表示(エリア, 完了コールバック) {
 }
 
 
-// 🎛️ボイス (Web Audio API 方式)
-
-const 音声コンテキスト = new (window.AudioContext || window.webkitAudioContext)();
-
-function 音声コンテキスト起動() { // タップで起動
-    if (音声コンテキスト.state === 'suspended') 音声コンテキスト.resume();
-}
-document.addEventListener('touchstart', 音声コンテキスト起動, { once: true });
-document.addEventListener('click',      音声コンテキスト起動, { once: true });
-document.addEventListener('keydown',    音声コンテキスト起動, { once: true });
-
-// ▫️事前デコードとキャッシュ化
+// 🎛️オーディオ
 
 const ボイス一覧 = {
-    ドク: 'se/doc.mp3',
-    ユニ: 'se/uni.mp3',
-    第三: 'se/oth.mp3'
+    ドク: new Audio('se/doc.mp3'),
+    ユニ: new Audio('se/uni.mp3'),
+    第三: new Audio('se/oth.mp3')
 };
-
-const ボイスキャッシュ = {};
-
-async function ボイス読み込み(キャラ, パス) {
-    try {
-        const 応答     = await fetch(パス);
-        const 生データ = await 応答.arrayBuffer();
-        ボイスキャッシュ[キャラ] = await 音声コンテキスト.decodeAudioData(生データ);
-    } catch (エラー) {
-        console.warn(`ボイス読み込み失敗: ${キャラ}`, エラー);
-    }
-}
-
-Object.entries(ボイス一覧).forEach(([キャラ, パス]) => {
-    ボイス読み込み(キャラ, パス);
-});
+Object.values(ボイス一覧).forEach((ボイス) => { ボイス.preload = 'auto'; });
 
 // ▫️ボイス再生
 
 function ボイス再生(キャラ) {
     if (ボイス音量 <= 0) return; // 音量0なら再生スキップ
-
-    const バッファ = ボイスキャッシュ[キャラ];
-    if (!バッファ) return; // デコード未完了ならスキップ
-
-    if (音声コンテキスト.state === 'suspended') 音声コンテキスト.resume(); // 音声コンテキストが停止中なら再開
-
-    const 再生ノード = 音声コンテキスト.createBufferSource();
-    const 音量ノード = 音声コンテキスト.createGain();
-
-    再生ノード.buffer = バッファ;
-
-    const 適用音量 = Math.min(Math.max(ボイス音量, 0), 1);
-    音量ノード.gain.setValueAtTime(適用音量, 音声コンテキスト.currentTime); // 0.0 ~ 1.0 の範囲に収める
-
-    再生ノード.connect(音量ノード).connect(音声コンテキスト.destination);
-    再生ノード.start(0);
+    const ボイス = ボイス一覧[キャラ].cloneNode();
+    ボイス.volume = Math.min(Math.max(ボイス音量, 0), 1); // 0.0 ~ 1.0 の範囲に収める
+    ボイス.play().catch(() => {});
 }
 
-
-// 🎛️効果音 <audio>方式
-
-// ▫️キャッシュ化
+// ▫️効果音のプリロード
 
 const 効果音キャッシュ = {};
 
