@@ -197,14 +197,14 @@ b, em {
 /* #️⃣フィルター */
 
 .黒枠 {
-    filter: url(#黒枠);
+    filter: url(#outline-black);
     text-shadow: none;
 }
 
 /* 🔹発光フィルター */
 
 .白枠 { 
-    filter: url(#白枠)
+    filter: url(#outline-white)
             drop-shadow(0 0 10px var(--中光, #888)); 
 }
 

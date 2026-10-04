@@ -1139,10 +1139,10 @@
 
 <!-- ↔️SVGフィルター -->
 
-<svg style="position: absolute; width: 0; height: 0; overflow: hidden;">
+<svg>
     <defs>
 
-        <filter id="白枠">
+        <filter id="outline-white">
             <feMorphology in="SourceAlpha" operator="dilate" radius="2" result="expanded" />
             <feFlood flood-color="seashell" flood-opacity="1" result="color" />
             <feComposite in="color" in2="expanded" operator="in" result="outline" />
@@ -1153,7 +1153,7 @@
             </feMerge>
         </filter>
 
-        <filter id="黒枠">
+        <filter id="outline-black">
             <feMorphology in="SourceAlpha" operator="dilate" radius="1" result="expanded" />
             <feFlood flood-color="black" flood-opacity="1" result="color" />
             <feComposite in="color" in2="expanded" operator="in" result="outline" />
