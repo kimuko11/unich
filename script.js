@@ -94,30 +94,6 @@ function 設定更新() {
 
 // 🎛️設定スライダーとリセット
 
-function isOldIOS() {
-    const ua = navigator.userAgent;
-    
-    // iOS / iPadOS (iPhone, iPad, iPod) の文字列判定
-    const isIOS = /iPhone|iPad|iPod/.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
-    
-    if (!isIOS) return false;
-
-    // OSのバージョン番号を抽出 (例: "OS 15_7_1 like Mac OS X" -> 15)
-    const match = ua.match(/OS (\d+)_/);
-    if (match && match[1]) {
-        const version = parseInt(match[1], 10);
-        return version <= 15; // 15以下であれば true
-    }
-
-    // iPadOS 13以降でMac表記になっている場合のフォールバック判定
-    // iOS15以下でサポートされている特定のJS機能/APIの有無で簡易判定
-    if (!window.structuredClone) { // structuredClone は iOS15.4 以降で導入
-        return true;
-    }
-
-    return false;
-}
-
 document.addEventListener('DOMContentLoaded', () => {
     const 設定            = document.getElementById('設定');
     const ラジオ          = document.getElementById('ラジオ');
@@ -132,10 +108,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const 選択_表情アニメ = document.getElementById('表情アニメ');
     const リセット        = document.getElementById('リセット');
 
-    const isLegacyIOS = isOldIOS();
-    
+    const 旧iOS = 旧iOS判定();
+
     const 初期値_文字サイズ = 4;
-    const 初期値_文字速度 = isLegacyIOS ? 9 : 4; // iOS15以下ならデフォルト最速(9)
+    const 初期値_文字速度   = 旧iOS ? 9 : 4; // iOS15以下なら最速
     const 初期値_ボイス音量 = 4;
     const 初期値_効果音量   = 4;
     const 初期値_画像サイズ = 4;
@@ -409,6 +385,27 @@ document.addEventListener('DOMContentLoaded', () => {
 
     設定更新(); // 初回反映
 });
+
+// ▫️古いiOSの判定
+
+function 旧iOS判定() {
+    const 識別文字 = navigator.userAgent;
+    const アップル = /iPhone|iPad|iPod/.test(識別文字) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+    
+    if (!アップル) return false;
+
+    const match = 識別文字.match(/OS (\d+)_/); // バージョン抽出
+    if (match && match[1]) {
+        const version = parseInt(match[1], 10);
+        return version <= 15; // 15以下なら true
+    }
+
+    if (!window.structuredClone) { // structuredClone は iOS15.4 以降で導入
+        return true;
+    }
+
+    return false;
+}
 
 
 // 🎛️ 表示範囲の絞り込み（検証用）

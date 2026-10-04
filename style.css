@@ -224,4 +224,4 @@ body.消光 .💬::before {
     box-shadow:      none;
 }
 
-body.消光 .白枠 { filter: url(#白枠); } /* 白枠は消さない */
+body.消光 .白枠 { filter: url(#outline-white); } /* 白枠は消さない */
