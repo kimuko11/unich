@@ -14,7 +14,14 @@
     <link rel="stylesheet" href="anime_001.css">
     <link rel="stylesheet" href="anime.css">
 
+    <style>
+        .白枠 { filter: url(#白枠); -webkit-filter: url(#白枠); }
+        .黒枠 { filter: url(#黒枠); -webkit-filter: url(#黒枠); }
+        body.消光 .白枠 { filter: url(#白枠); -webkit-filter: url(#白枠); }
+    </style>
+
     <script src="script.js" defer></script>
+
 </head>
 <body>
 
@@ -179,6 +186,11 @@
     <div class="画像" style="margin: calc(54vh - var(--画像サイズ, 4) * 1vh) 0;">
         <img src="img/ryusei.webp" class="流星大" style="--待機: 3s;">
     </div>
+
+    <p class="白枠 改行">
+        <span class="黒枠 極大 出現 ▼">🎙️</span>
+        <span class="差分 黒枠 大字 太字 橙 横滑 ▼" style="top: 0.4em;">番組パーソナリティ</span>
+    </p>
 
     <!-- 🔹対話 -->
 
