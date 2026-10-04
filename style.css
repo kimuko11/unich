@@ -197,14 +197,15 @@ b, em {
 /* #️⃣フィルター */
 
 .黒枠 {
-    filter: url(#outline-black);
+    display: inline-block;
     text-shadow: none;
+    filter: url(#kuro-waku);
 }
 
 /* 🔹発光フィルター */
 
-.白枠 { 
-    filter: url(#outline-white)
+.白枠 {
+    filter: url(#siro-waku)
             drop-shadow(0 0 10px var(--中光, #888)); 
 }
 
@@ -224,4 +225,4 @@ body.消光 .💬::before {
     box-shadow:      none;
 }
 
-body.消光 .白枠 { filter: url(#outline-white); } /* 白枠は消さない */
+body.消光 .白枠 { filter: url(#siro-waku); } /* 白枠は消さない */
