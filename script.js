@@ -996,11 +996,13 @@ function セリフ表示(エリア, 完了コールバック) {
 }
 
 
-// 🎛️ボイス (Web Audio API 方式)
+// 🎛️ボイス
+
+// ▫️Web Audio API 初期化とユーザー操作による起動 (効果音と共通)
 
 const 音声コンテキスト = new (window.AudioContext || window.webkitAudioContext)();
 
-function 音声コンテキスト起動() { // タップで起動
+function 音声コンテキスト起動() {
     if (音声コンテキスト.state === 'suspended') 音声コンテキスト.resume();
 }
 document.addEventListener('touchstart', 音声コンテキスト起動, { once: true });
@@ -1054,30 +1056,51 @@ function ボイス再生(キャラ) {
 }
 
 
-// 🎛️効果音 <audio>方式
+// 🎛️効果音
 
-// ▫️キャッシュ化
+// ▫️事前デコードとキャッシュ化
 
 const 効果音キャッシュ = {};
 
-document.querySelectorAll('.💬[data-se]').forEach((el) => {
+async function 効果音読み込み(パス) {
+    try {
+        const 応答     = await fetch(パス);
+        const 生データ = await 応答.arrayBuffer();
+        効果音キャッシュ[パス] = await 音声コンテキスト.decodeAudioData(生データ);
+    } catch (エラー) {
+        console.warn(`効果音読み込み失敗: ${パス}`, エラー);
+    }
+}
+
+document.querySelectorAll('.💬[data-se]').forEach((el) => { // DOM から data-se を読み込み
     const パス = el.dataset.se;
     if (パス && !効果音キャッシュ[パス]) {
-        const audio = new Audio(パス);
-        audio.preload = 'auto';
-        効果音キャッシュ[パス] = audio;
+        効果音キャッシュ[パス] = true; // 重複防止用
+        効果音読み込み(パス);
     }
 });
 
 // ▫️効果音再生
 
 function 効果音再生(パス, 音量倍率 = 1) {
-    if (!パス || !効果音キャッシュ[パス] || 効果音量 <= 0) return;
-    const 効果音   = 効果音キャッシュ[パス].cloneNode();
+    if (!パス || 効果音量 <= 0) return;
+
+    const バッファ = 効果音キャッシュ[パス];
+    if (!バッファ || !(バッファ instanceof AudioBuffer)) return; // 未読み込みならスキップ
+
+    if (音声コンテキスト.state === 'suspended') 音声コンテキスト.resume();
+
+    const 再生ノード = 音声コンテキスト.createBufferSource();
+    const 音量ノード = 音声コンテキスト.createGain();
+
+    再生ノード.buffer = バッファ;
+
     const 最終音量 = 効果音量 * 音量倍率;
-    
-    効果音.volume = Math.min(Math.max(最終音量, 0), 1); // 0.0 ~ 1.0 の範囲に収める
-    効果音.play().catch(() => {});
+    const 適用音量 = Math.min(Math.max(最終音量, 0), 1);
+    音量ノード.gain.setValueAtTime(適用音量, 音声コンテキスト.currentTime);
+
+    再生ノード.connect(音量ノード).connect(音声コンテキスト.destination);
+    再生ノード.start(0);
 }
 
 
