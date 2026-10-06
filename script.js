@@ -108,13 +108,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const 選択_表情アニメ = document.getElementById('表情アニメ');
     const リセット        = document.getElementById('リセット');
 
-    const 旧iOS = 旧iOS判定();
+    const 低スペ端末 = 低スペ端末判定();
 
     const 初期値_ボイス音量 = 4;
     const 初期値_効果音量   = 4;
     const 初期値_文字サイズ = 4;
     const 初期値_画像サイズ = 4;
-    const 初期値_文字速度   = 旧iOS ? 9 : 4; // iOS15以下なら最速
+    const 初期値_文字速度   = 低スペ端末 ? 9 : 4; // 低スペック端末なら最速に
     const 初期値_アニメ速度 = 4;
     const 初期値_光の効果   = true;
     const 初期値_登場アニメ = true;
@@ -386,22 +386,23 @@ document.addEventListener('DOMContentLoaded', () => {
     設定更新(); // 初回反映
 });
 
-// ▫️古いiOSの判定
+// ▫️低スペック端末の判定
 
-function 旧iOS判定() {
+function 低スペ端末判定() {
     const 識別文字 = navigator.userAgent;
-    const アップル = /iPhone|iPad|iPod/.test(識別文字) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
-    
-    if (!アップル) return false;
 
-    const match = 識別文字.match(/OS (\d+)_/); // バージョン抽出
-    if (match && match[1]) {
-        const version = parseInt(match[1], 10);
-        return version <= 15; // 15以下なら true
+    const アップル = /iPhone|iPad|iPod/.test(識別文字) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+    if (アップル) {
+        const match = 識別文字.match(/OS (\d+)_/);
+        if (match && match[1]) return parseInt(match[1], 10) <= 15; // iOS 15 以下なら
+        if (!window.structuredClone) return true;                   // structuredClone は iOS 15.4 以降で導入
     }
 
-    if (!window.structuredClone) { // structuredClone は iOS15.4 以降で導入
-        return true;
+    const アンドロイド = /Android/i.test(識別文字);
+    if (アンドロイド) {
+        const ram   = navigator.deviceMemory; 
+        const cores = navigator.hardwareConcurrency; 
+        if ((ram && ram < 4) || (cores && cores <= 4)) return true; // RAM 4GB 未満、または CPU 4コア以下なら
     }
 
     return false;
@@ -1087,11 +1088,11 @@ function ボイス再生(キャラ, 変動率 = 0.03) {
 
     再生ノード.buffer = バッファ;
 
-    const ピッチ揺らぎ = (1 - 変動率) + Math.random() * (変動率 * 2);   // 感情に応じたピッチ揺らぎ
+    const ピッチ揺らぎ = (1 - 変動率) + Math.random() * (変動率 * 2);         // 感情に応じたピッチ揺らぎ
     再生ノード.playbackRate.value = ピッチ揺らぎ;
 
-    const 音量揺らぎ = (変動率 * 10) + Math.random() * (変動率 * 3);    // 感情に応じた音量増と揺らぎ
-    const 適用音量 = Math.min(Math.max(ボイス音量 * 音量揺らぎ, 0), 1); // 0.0～1.0 の範囲に収める
+    const 音量揺らぎ   = (0.5 + (変動率 * 5)) + Math.random() * (変動率 * 3); // 感情に応じた音量増と揺らぎ
+    const 適用音量     = Math.min(Math.max(ボイス音量 * 音量揺らぎ, 0), 1);   // 0.0～1.0 の範囲に収める
     音量ノード.gain.setValueAtTime(適用音量, 音声コンテキスト.currentTime);
 
     再生ノード.connect(音量ノード).connect(音声コンテキスト.destination);
