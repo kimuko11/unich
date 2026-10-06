@@ -398,12 +398,9 @@ function 低スペ端末判定() {
         if (!window.structuredClone) return true;                   // structuredClone は iOS 15.4 以降で導入
     }
 
-    const アンドロイド = /Android/i.test(識別文字);
-    if (アンドロイド) {
-        const ram   = navigator.deviceMemory; 
-        const cores = navigator.hardwareConcurrency; 
-        if ((ram && ram < 4) || (cores && cores <= 4)) return true; // RAM 4GB 未満、または CPU 4コア以下なら
-    }
+    const ram   = navigator.deviceMemory; 
+    const cores = navigator.hardwareConcurrency; 
+    if ((ram && ram < 4) || (cores && cores <= 4)) return true; // RAM 4GB 未満、または CPU 4コア以下なら
 
     return false;
 }
@@ -1088,11 +1085,11 @@ function ボイス再生(キャラ, 変動率 = 0.03) {
 
     再生ノード.buffer = バッファ;
 
-    const ピッチ揺らぎ = (1 - 変動率) + Math.random() * (変動率 * 2);         // 感情に応じたピッチ揺らぎ
+    const ピッチ揺らぎ = (1 - 変動率) + Math.random() * (変動率 * 2);        // 感情に応じたピッチ揺らぎ
     再生ノード.playbackRate.value = ピッチ揺らぎ;
 
-    const 音量揺らぎ   = (0.5 + (変動率 * 5)) + Math.random() * (変動率 * 3); // 感情に応じた音量増と揺らぎ
-    const 適用音量     = Math.min(Math.max(ボイス音量 * 音量揺らぎ, 0), 1);   // 0.0～1.0 の範囲に収める
+    const 音量揺らぎ   = (0.9 + 変動率) + Math.random() * (変動率 * 2);      // 感情に応じた音量微増と揺らぎ
+    const 適用音量     = Math.min(Math.max(ボイス音量 * 音量揺らぎ, 0), 1);  // 0.0～1.0 の範囲に収める
     音量ノード.gain.setValueAtTime(適用音量, 音声コンテキスト.currentTime);
 
     再生ノード.connect(音量ノード).connect(音声コンテキスト.destination);
