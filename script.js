@@ -48,27 +48,26 @@ let スライダー文字サイズ = 4;
 let スライダー画像サイズ = 4;
 let スライダー文字速度   = 4;
 let スライダーアニメ速度 = 4;
-
 let スイッチ光の効果     = true;
 let スイッチ登場アニメ   = true;
 let スイッチ表情アニメ   = true;
 
 // ▫️計算用の派生変数
 
+let ボイス音量     = スライダーボイス音量 * 0.08;   // 0 〜 0.72  (デフォ 0.32)
+let 効果音量       = スライダー効果音量   * 0.08;   // 0 〜 0.72  (デフォ 0.32)
 let 設定文字サイズ = 100;
 let 設定速度ms     = 90 - スライダー文字速度 * 10; // 0 〜 90ms (デフォ 50ms)
-let ボイス音量     = スライダーボイス音量 * 0.1;   // 0 〜 0.9  (デフォ 0.4)
-let 効果音量       = スライダー効果音量   * 0.1;   // 0 〜 0.9  (デフォ 0.4)
 
 // ▫️設定更新関数
 
 function 設定更新() {
+    ボイス音量     = スライダーボイス音量 * 0.08;
+    効果音量       = スライダー効果音量   * 0.08;
     設定文字サイズ = 100 + (スライダー文字サイズ - 4) * 5;
-    設定速度ms     = 90 - スライダー文字速度 * 10;
-    ボイス音量     = スライダーボイス音量 * 0.1;
-    効果音量       = スライダー効果音量   * 0.1;
     document.documentElement.style.fontSize = `${設定文字サイズ}%`;
     document.documentElement.style.setProperty('--画像サイズ', スライダー画像サイズ);
+    設定速度ms     = 90 - スライダー文字速度 * 10;
     const アニメ速度 = Math.max(0.1, 1 + (スライダーアニメ速度 - 4) * 0.2); // 0.2 〜 2 (デフォ 1)
     document.documentElement.style.setProperty('--アニメ速度', アニメ速度);
 
@@ -95,13 +94,14 @@ function 設定更新() {
 // 🎛️設定スライダーとリセット
 
 document.addEventListener('DOMContentLoaded', () => {
-    const 設定            = document.getElementById('設定');
-    const ラジオ          = document.getElementById('ラジオ');
-    const 入力_文字サイズ = document.getElementById('文字サイズ');
-    const 入力_文字速度   = document.getElementById('文字速度');
+    const 設定   = document.getElementById('設定');
+    const ラジオ = document.getElementById('ラジオ');
+
     const 入力_ボイス音量 = document.getElementById('ボイス音量');
     const 入力_効果音量   = document.getElementById('効果音量');
+    const 入力_文字サイズ = document.getElementById('文字サイズ');
     const 入力_画像サイズ = document.getElementById('画像サイズ');
+    const 入力_文字速度   = document.getElementById('文字速度');
     const 入力_アニメ速度 = document.getElementById('アニメ速度');
     const 選択_光の効果   = document.getElementById('光の効果');
     const 選択_登場アニメ = document.getElementById('登場アニメ');
@@ -110,11 +110,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const 旧iOS = 旧iOS判定();
 
-    const 初期値_文字サイズ = 4;
-    const 初期値_文字速度   = 旧iOS ? 9 : 4; // iOS15以下なら最速
     const 初期値_ボイス音量 = 4;
     const 初期値_効果音量   = 4;
+    const 初期値_文字サイズ = 4;
     const 初期値_画像サイズ = 4;
+    const 初期値_文字速度   = 旧iOS ? 9 : 4; // iOS15以下なら最速
     const 初期値_アニメ速度 = 4;
     const 初期値_光の効果   = true;
     const 初期値_登場アニメ = true;
@@ -818,7 +818,7 @@ function 次キャラ処理() {
     キャラ画像.addEventListener('transitionend', 画像登場完了);
     ふきだし.addEventListener('transitionend', ふきだし登場完了);
 
-    // ▫️すでに拡大完了している場合や発火しない場合の保険処理（安全装置）
+    // ▫️すでに拡大完了している場合や発火しない場合の保険
 
     const アニメ速度 = アニメ速度取得();
     const 保険待機時間 = 1000 / アニメ速度; // アニメ速度に合わせた待機ミリ秒
@@ -951,7 +951,7 @@ function 文字分解(要素) {
 }
 
 
-// 🎛️セリフ表示（文字速度や設定の即時変更・タメ時間にも対応）
+// 🎛️セリフ表示（速度変更やタメ時間、設定の即時変更にも対応）
 
 function セリフ表示(エリア, 完了コールバック) {
     const ふきだし   = エリア.querySelector('.💬');
@@ -959,8 +959,17 @@ function セリフ表示(エリア, 完了コールバック) {
     const キャラ     = キャラ取得(エリア);
     const 文字一覧   = 文字分解(ふきだし);
 
-    const タメ文字数 = parseInt(ふきだし.dataset.wait || '0', 10); // data-wait  追加の文字数   (未設定時 0)
     const 速度倍率   = parseFloat(ふきだし.dataset.speed || '1');  // data-speed 文字速度の増減 (未設定時 1)
+    const タメ文字数 = parseInt(ふきだし.dataset.wait || '0', 10); // data-wait  追加の文字数   (未設定時 0)
+
+    // ▫️ふきだしクラス(なし/感情/激情)からボイス変動を指定
+    
+    let ボイス変動率 = 0.03; // デフォ平静
+    if (ふきだし.classList.contains('感情')) {
+        ボイス変動率 = 0.05;
+    } else if (ふきだし.classList.contains('激情')) {
+        ボイス変動率 = 0.08;
+    }
 
     // ▫️ト書き下の表示関数
 
@@ -975,13 +984,14 @@ function セリフ表示(エリア, 完了コールバック) {
 
     if (!モノローグ) 口元アニメ開始(エリア);
 
-    let 現在位置   = 0;
-    let タイマーID = null;
+    let 現在位置     = 0;
+    let タイマーID   = null;
+    let 前回発音時刻 = 0; // ボイス速度上限を制御するため
 
-    // ▫️1文字進めるステップ関数
+    // ▫️️1文字進めるステップ関数
 
     function 次文字表示() {
-        if (設定速度ms <= 0 || !スイッチ登場アニメ) { // 文字速度 0ms以下(最速)と、登場アニメOFFの場合、待ち時間なしで全表示＆即完了
+        if (設定速度ms <= 0 || !スイッチ登場アニメ) { // 速度 0ms以下(9)と、登場アニメOFFの場合、待ち時間なしで全表示＆即完了
             for (let i = 現在位置; i < 文字一覧.length; i++) {
                 文字一覧[i].classList.add('表示済');
             }
@@ -991,7 +1001,7 @@ function セリフ表示(エリア, 完了コールバック) {
             return;
         }
 
-        if (現在位置 >= 文字一覧.length + タメ文字数) { // 表示文字 ＋ タメ文字数 がすべて終了
+        if (現在位置 >= 文字一覧.length + タメ文字数) { // 表示文字 + タメ文字数 全終了
             完了コールバック();
             return;
         }
@@ -1002,7 +1012,13 @@ function セリフ表示(エリア, 完了コールバック) {
             const 文字span = 文字一覧[現在位置];
             文字span.classList.add('表示済');
 
-            if (!モノローグ && 文字span.textContent !== ' ') ボイス再生(キャラ);
+            if (!モノローグ && 文字span.textContent !== ' ') {
+                const 現在時刻 = performance.now();
+                if (現在時刻 - 前回発音時刻 >= 30) { // 前回の発音から30ms以上経過なら再生
+                    ボイス再生(キャラ, ボイス変動率);
+                    前回発音時刻 = 現在時刻;
+                }
+            }
 
             if (現在位置 === 文字一覧.length - 1) { // 最後の1文字を表示し終えた瞬間
                 if (!モノローグ) 口元アニメ終了(エリア);
@@ -1021,7 +1037,7 @@ function セリフ表示(エリア, 完了コールバック) {
 
 // 🎛️ボイス
 
-// ▫️Web Audio API 初期化とユーザー操作による起動 (効果音と共通)
+// ▫️Web Audio API 初期化 と ユーザー操作による起動 (効果音共通)
 
 const 音声コンテキスト = new (window.AudioContext || window.webkitAudioContext)();
 
@@ -1058,7 +1074,7 @@ Object.entries(ボイス一覧).forEach(([キャラ, パス]) => {
 
 // ▫️ボイス再生
 
-function ボイス再生(キャラ) {
+function ボイス再生(キャラ, 変動率 = 0.03) {
     if (ボイス音量 <= 0) return; // 音量0なら再生スキップ
 
     const バッファ = ボイスキャッシュ[キャラ];
@@ -1071,8 +1087,12 @@ function ボイス再生(キャラ) {
 
     再生ノード.buffer = バッファ;
 
-    const 適用音量 = Math.min(Math.max(ボイス音量, 0), 1);
-    音量ノード.gain.setValueAtTime(適用音量, 音声コンテキスト.currentTime); // 0.0 ~ 1.0 の範囲に収める
+    const ピッチ揺らぎ = (1 - 変動率) + Math.random() * (変動率 * 2);   // 感情に応じたピッチ揺らぎ
+    再生ノード.playbackRate.value = ピッチ揺らぎ;
+
+    const 音量揺らぎ = (変動率 * 10) + Math.random() * (変動率 * 3);    // 感情に応じた音量増と揺らぎ
+    const 適用音量 = Math.min(Math.max(ボイス音量 * 音量揺らぎ, 0), 1); // 0.0～1.0 の範囲に収める
+    音量ノード.gain.setValueAtTime(適用音量, 音声コンテキスト.currentTime);
 
     再生ノード.connect(音量ノード).connect(音声コンテキスト.destination);
     再生ノード.start(0);
