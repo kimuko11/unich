@@ -572,13 +572,21 @@ function 数値変更(targetId, diff) {
 // 🎛️スクロールによる画面内出現の監視 (▼クラス)
 
 const ページ開始時刻          = performance.now();
-const スクロール出現基準時間   = 8000;      // ⚠️ページ開始から自動アニメ経過時間 + 1000ms
+const スクロール出現基準時間   = 9000;      // ⚠️ページ開始から自動アニメ経過時間 + 1000ms
 const スクロール出現閾値既定値 = 1;         // data-threshold 既定値
 const スクロール出現マップ     = new Map(); // 監視対象要素 → .再生 を付与する要素の配列
 const スクロール出現監視一覧   = new Map(); // threshold値 → IntersectionObserver（同じ閾値は1つに共有）
- 
+
 function スクロール出現実行(要素) {
     要素.classList.add('再生');
+
+    const 対象要素 = 要素.matches('[data-se]') ? 要素 : 要素.querySelector('[data-se]'); // 効果音が指定されているなら再生
+    if (対象要素 && 対象要素.dataset.se) {
+        const パス     = 対象要素.dataset.se;
+        const 音量倍率 = parseFloat(対象要素.dataset.volume || '1');
+        
+        if (typeof 効果音再生 === 'function') 効果音再生(パス, 音量倍率);
+    }
 }
 
 function アニメ速度取得() {
@@ -1056,6 +1064,10 @@ const ボイス一覧 = {
 
 const ボイスキャッシュ = {};
 
+Object.entries(ボイス一覧).forEach(([キャラ, パス]) => {
+    ボイス読み込み(キャラ, パス);
+});
+
 async function ボイス読み込み(キャラ, パス) {
     try {
         const 応答     = await fetch(パス);
@@ -1065,10 +1077,6 @@ async function ボイス読み込み(キャラ, パス) {
         console.warn(`ボイス読み込み失敗: ${キャラ}`, エラー);
     }
 }
-
-Object.entries(ボイス一覧).forEach(([キャラ, パス]) => {
-    ボイス読み込み(キャラ, パス);
-});
 
 // ▫️ボイス再生
 
@@ -1103,6 +1111,23 @@ function ボイス再生(キャラ, 変動率 = 0.03) {
 
 const 効果音キャッシュ = {};
 
+document.addEventListener('DOMContentLoaded', () => {
+    const 全効果音 = document.querySelectorAll('[data-se]'); // DOM上の data-se を全て読み込む
+
+    const 効果音一覧 = new Set(); // 重複読み込みを防ぐため
+    全効果音.forEach(要素 => {
+        if (要素.dataset.se) {
+            効果音一覧.add(要素.dataset.se);
+        }
+    });
+
+    効果音一覧.forEach(パス => {
+        if (typeof 効果音読み込み === 'function') {
+            効果音読み込み(パス);
+        }
+    });
+});
+
 async function 効果音読み込み(パス) {
     try {
         const 応答     = await fetch(パス);
@@ -1112,14 +1137,6 @@ async function 効果音読み込み(パス) {
         console.warn(`効果音読み込み失敗: ${パス}`, エラー);
     }
 }
-
-document.querySelectorAll('.💬[data-se]').forEach((el) => { // DOM から data-se を読み込み
-    const パス = el.dataset.se;
-    if (パス && !効果音キャッシュ[パス]) {
-        効果音キャッシュ[パス] = true; // 重複防止用
-        効果音読み込み(パス);
-    }
-});
 
 // ▫️効果音再生
 
