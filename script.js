@@ -406,7 +406,7 @@ function 低スペ端末判定() {
 }
 
 
-// 🎛️ 表示範囲の絞り込み（検証用）
+// 🎛️表示範囲の絞り込み（検証用）
 
 // ▫️表示範囲の更新と保存
 
@@ -571,13 +571,17 @@ function 数値変更(targetId, diff) {
 
 // 🎛️スクロールによる画面内出現の監視 (▼クラス)
 
-const ページ開始時刻          = performance.now();
-const スクロール出現基準時間   = 9000;      // ⚠️ページ開始から自動アニメ経過時間 + 1000ms
-const スクロール出現閾値既定値 = 1;         // data-threshold 既定値
-const スクロール出現マップ     = new Map(); // 監視対象要素 → .再生 を付与する要素の配列
-const スクロール出現監視一覧   = new Map(); // threshold値 → IntersectionObserver（同じ閾値は1つに共有）
+const ページ開始時刻 = performance.now(); // キャラの画面内登場の監視と共用
+const body要素       = document.body;
 
-function スクロール出現実行(要素) {
+const 出現指定時間   = body要素 ? parseInt(body要素.dataset.appBaseTime, 10) : NaN;
+const 出現基準時間   = !isNaN(出現指定時間) ? 出現指定時間 : 0; // 指定時間がない場合は即出現
+
+const 出現閾値既定値 = 1;         // data-threshold 既定値
+const 出現マップ     = new Map(); // 監視対象要素 → .再生 を付与する要素の配列
+const 出現監視一覧   = new Map(); // threshold値 → IntersectionObserver（同じ閾値は1つに共有）
+
+function 出現実行(要素) {
     要素.classList.add('再生');
 
     const 対象要素 = 要素.matches('[data-se]') ? 要素 : 要素.querySelector('[data-se]'); // 効果音が指定されているなら再生
@@ -594,18 +598,17 @@ function アニメ速度取得() {
     return (isNaN(計算値) || 計算値 <= 0) ? 1 : 計算値;
 }
  
-function スクロール出現交差時(項目一覧, 監視) {
+function 出現交差時(項目一覧, 監視) {
     項目一覧.forEach((項目) => {
         if (!項目.isIntersecting) return;
         監視.unobserve(項目.target); // 一度再生したら監視終了
-        const 対象一覧 = スクロール出現マップ.get(項目.target) || [項目.target];
+
+        const 対象一覧 = 出現マップ.get(項目.target) || [項目.target];
         const 経過時刻 = performance.now() - ページ開始時刻;
-
         const 現在倍率 = アニメ速度取得();
-        const 実効最短時刻 = スクロール出現基準時間 / 現在倍率;
-
-        const 残り時刻 = 実効最短時刻 - 経過時刻;
-        const 再生実行 = () => 対象一覧.forEach(スクロール出現実行);
+        const 再生時刻 = 出現基準時間 / 現在倍率;
+        const 残り時刻 = 再生時刻 - 経過時刻;
+        const 再生実行 = () => 対象一覧.forEach(出現実行);
 
         if (残り時刻 > 0) {
             setTimeout(再生実行, 残り時刻);
@@ -615,15 +618,15 @@ function スクロール出現交差時(項目一覧, 監視) {
     });
 }
 
-function スクロール出現監視取得(閾値) {
-    if (!スクロール出現監視一覧.has(閾値)) {
+function 出現監視取得(閾値) {
+    if (!出現監視一覧.has(閾値)) {
         const 監視 = new IntersectionObserver(
-            (項目一覧) => スクロール出現交差時(項目一覧, 監視),
+            (項目一覧) => 出現交差時(項目一覧, 監視),
             { threshold: 閾値 }
         );
-        スクロール出現監視一覧.set(閾値, 監視);
+        出現監視一覧.set(閾値, 監視);
     }
-    return スクロール出現監視一覧.get(閾値);
+    return 出現監視一覧.get(閾値);
 }
 
 document.querySelectorAll('.▼').forEach((要素) => {
@@ -631,14 +634,14 @@ document.querySelectorAll('.▼').forEach((要素) => {
                      || 要素.classList.contains('半倒'); // 初期配置が本配置と異なり、threshold 計算不能な要素
     const 監視対象    = 親要素監視系 ? 要素.parentElement : 要素;
     const 指定閾値    = parseFloat(要素.dataset.threshold);
-    const 閾値        = Number.isNaN(指定閾値) ? スクロール出現閾値既定値 : 指定閾値;
-    const 監視        = スクロール出現監視取得(閾値);
+    const 閾値        = Number.isNaN(指定閾値) ? 出現閾値既定値 : 指定閾値;
+    const 監視        = 出現監視取得(閾値);
 
-    if (!スクロール出現マップ.has(監視対象)) {
-        スクロール出現マップ.set(監視対象, []);
+    if (!出現マップ.has(監視対象)) {
+        出現マップ.set(監視対象, []);
         監視.observe(監視対象);
     }
-    スクロール出現マップ.get(監視対象).push(要素);
+    出現マップ.get(監視対象).push(要素);
 });
 
 
@@ -682,7 +685,7 @@ function 種別取得(エリア) {
 }
 
 
-// 🎛️キャラの画面内出現の監視
+// 🎛️キャラの画面内登場の監視
 
 // ▫️threshold (デフォ 1) をふきだし100文字超過から20文字ごとに 0.05 減算
 
@@ -721,15 +724,33 @@ const 画面外停止監視 = new IntersectionObserver((項目一覧) => {
 
 // ▫️初回登場トリガー用 ＆ 常時監視の登録
 
+const 検証中フラグ = localStorage.getItem('preview_from') !== null || localStorage.getItem('preview_to') !== null;
+const 登場指定時間 = body要素 ? parseInt(body要素.dataset.entryBaseTime, 10) : NaN;
+const 指定基準時間 = !isNaN(登場指定時間) ? 登場指定時間 : 0; // 指定時間がない場合は即登場
+const 登場基準時間 = 検証中フラグ ? 0 : 指定基準時間;         // 検証中も即登場
+
 キャラ一覧.forEach((エリア) => {
     const 計算済threshold = 閾値計算(エリア);
 
     const 個別監視 = new IntersectionObserver((項目一覧) => {
         項目一覧.forEach((項目) => {
             if (項目.isIntersecting) {
-                待機リスト.push(項目.target);
-                個別監視.unobserve(項目.target); // 一度検知したら初回登場監視は解除
-                次キャラ処理();
+                const 経過時刻 = performance.now() - ページ開始時刻;
+                const 現在倍率 = アニメ速度取得();
+                const 登場時刻 = 登場基準時間 / 現在倍率;
+                const 残り時刻 = 登場時刻 - 経過時刻;
+
+                const 登場実行 = () => {
+                    待機リスト.push(項目.target);
+                    個別監視.unobserve(項目.target); // 一度検知したら初回登場監視は解除
+                    次キャラ処理();
+                };
+
+                if (残り時刻 > 0) {
+                    setTimeout(登場実行, 残り時刻);
+                } else {
+                    登場実行();
+                }
             }
         });
     }, { threshold: 計算済threshold });

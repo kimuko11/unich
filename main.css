@@ -7,7 +7,7 @@
 
     max-width:  380px;
     width:      95%;
-    min-height: 200px;
+    min-height: 220px;
 
     border:        1px solid #666;
     border-top:    1px solid #222;
@@ -94,7 +94,7 @@
 
     /* 🔹登場前の位置 */
 
-    transform: translateX(calc(var(--方向, -1) * 99%)); /* JSの登場完了検知専用として、身体アニメと干渉しない transform を使用 */
+    transform: translateX(calc(var(--方向, -1) * var(--反転, 1) * 99%)); /* JSの登場完了検知専用として、身体アニメと干渉しない transform を使用 */
     opacity:   0;
     scale:     var(--反転, 1) 1;
 
@@ -250,7 +250,7 @@
     opacity:   0;
 }
 .ト書き上 {
-    margin:    -45px -20px  25px;
+    margin:    -45px 0 25px;
     animation: 出現 0.5s 1s linear forwards;
 }
 .ト書き下 {

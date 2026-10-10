@@ -16,7 +16,9 @@
 
     <script src="script.js" defer></script>
 </head>
-<body>
+
+<body data-app-base-time="14000" data-entry-base-time="9000"> <!-- ⚠️出現基準時間 & 登場基準時間 -->
+
 
 <!-- ↔️ローディング・マスク -->
 
@@ -198,11 +200,31 @@
         これは、問題の克服を目指すのではなく、「最初から問題はなかった」と、<em>前提</em>を替える番組である✨
     </p>
 
-    <p class="上下 中央 改行2">
+    <!-- 🔹ガイド -->
+
+    <p class="上下 中央">
         <span class="連動消滅">
            <span class="出現" style="--待機: 8s;">🔻<span class="小字 銀">ゆっくりと下へ画面スクロールしてください</span>🔻</span>
         </span>
     </p>
+
+    <div class="対話全体枠" style="margin-bottom: 5rem;">
+        <div class="👤 右側 連動消滅">
+            <div class="キャラ画像 身体_縦伸" style="--サイズ: -19%;">
+                <img src="cha/st_kihon.webp"          alt="👤">
+                <img src="cha/st_kihon_me.webp"       alt="👀" class="差分 目瞬" style="--起点: 50% 62%;">
+                <img src="cha/st_kihon_kuchi.webp"    alt="👄" class="差分 パク" style="--起点: 50% 70%;">
+                <img src="cha/st_kihon_hitosasi.webp" alt="☝️" class="差分 発射" style="--起点: 50% 100%; --倍率: 1.03;">
+            </div>
+            <div class  = "💬 小字"
+                data-se = "se/hyoi.mp3"
+                style   = "--余白左: 3%; --右尻尾: -45px;">
+                <div class="ト書き上 右寄 銀">（番組スタッフ）</div>
+                画面をタップすると、効果音付きのリッチコンテンツになります。<br>
+                変更・調整したい時は、画面右上のラジオをタップして、お好みの設定にできます。
+            </div>
+        </div>
+    </div>
 
     <!-- 🔹キャラ紹介 -->
 
@@ -262,9 +284,6 @@
             <p class="カチンコ 中央">
                 <em class="ブロック 改行2" style="margin-top: 2rem;">ON AIR #001</em>
                 <em class="ブロック 改行2 大字">いけない♥️アイドル</em>
-                <span class="ブロック 左寄 小字 銀">
-                👇画面をタップすると、効果音付きのリッチコンテンツをお楽しみいただけます。
-                変更・調整したい時は、画面右上のラジオをタップして、お好みの設定にできます。</span>
             </p>
         </div>
     </div>
