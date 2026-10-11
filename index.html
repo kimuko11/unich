@@ -208,20 +208,21 @@
         </span>
     </p>
 
-    <div class="対話全体枠" style="margin-bottom: 5rem;">
+    <div class="対話全体枠" style="margin-bottom: 10rem;">
         <div class="👤 右側 連動消滅">
-            <div class="キャラ画像 身体_縦伸" style="--サイズ: -19%;">
+            <div class="キャラ画像 身体_縦伸" style="--サイズ: -16%; --被り幅: -5px;">
                 <img src="cha/st_kihon.webp"          alt="👤">
                 <img src="cha/st_kihon_me.webp"       alt="👀" class="差分 目瞬" style="--起点: 50% 62%;">
                 <img src="cha/st_kihon_kuchi.webp"    alt="👄" class="差分 パク" style="--起点: 50% 70%;">
                 <img src="cha/st_kihon_hitosasi.webp" alt="☝️" class="差分 発射" style="--起点: 50% 100%; --倍率: 1.03;">
             </div>
-            <div class  = "💬 小字"
-                data-se = "se/hyoi.mp3"
-                style   = "--余白左: 3%; --右尻尾: -45px;">
+            <div class     = "💬 小字"
+                data-se    = "se/pochi.mp3"
+                data-speed = "2"
+                style      = "--余白左: 3%; --右尻尾: -45px;">
                 <div class="ト書き上 右寄 銀">（番組スタッフ）</div>
-                画面をタップすると、効果音付きのリッチコンテンツになります。<br>
-                変更・調整したい時は、画面右上のラジオをタップして、お好みの設定にできます。
+                画面を<em>タップ👇</em>すると、<em>効果音</em>付きのリッチコンテンツをお楽しみいただけます。<br>
+                変更・調整したい時は、画面右上の<em>ラジオ</em>をタップして、お好みの設定にできます。
             </div>
         </div>
     </div>
@@ -230,13 +231,13 @@
 
     <p class="星群 ▼"></p> <!-- ▼ は JS でスクロール出現を監視 (data-threshold で出現割合を指定) -->
 
-    <p class="白枠 改行">
+    <p class="白枠 改行2">
         <span class="黒枠 極大 出現 ▼">🎙️</span>
-        <span class="差分 黒枠 大字 太字 橙 横滑 ▼" style="top: 0.4em;">番組パーソナリティ</span>
+        <span class="差分 黒枠 大字 太字 橙 横滑 ▼" data-se="se/kirara.mp3" style="top: 0.4em;">番組パーソナリティ</span>
     </p>
 
     <div class="画像 発光">
-        <div class="拡大 ▼" data-threshold="0.9" data-se="se/hyoi.mp3">
+        <div class="拡大 ▼" data-threshold="0.95" data-se="se/cyupi-3.mp3">
             <img src="pic/prof_doc_001.webp" alt="🥸アイドルライブを楽しむドク">
         </div>
     </div>
@@ -250,12 +251,12 @@
         らしいが、それ以上に日本のオタク文化に沼りすぎて生活もままならない<em>社会不適合者</em>。
     </p>
 
-    <p class="出現 改行4 ▼">
+    <p class="出現 改行5 ▼">
         だが、その不適合ぶりを全力で<em>自愛</em>する姿は、人生を深刻にとらえて悩めるリスナーたちに安らぎをもたらしているとかいないとか。
     </p>
 
     <div class="画像 発光">
-        <div class="拡大 ▼" data-threshold="0.9">
+        <div class="拡大 ▼" data-threshold="0.95" data-se="se/cyupi-3.mp3">
             <img src="pic/prof_uni_001.webp" alt="🐰買い物中のユニちゃん">
         </div>
     </div>
@@ -279,7 +280,7 @@
     <!-- 🔹タイトル -->
 
     <div class="画像 発光" style="z-index: 1;">
-        <div class="半倒 改行12 ▼">
+        <div class="半倒 改行12 ▼" data-se="jin/jazz.mp3">
             <img src="img/kachinko.webp">
             <p class="カチンコ 中央">
                 <em class="ブロック 改行2" style="margin-top: 2rem;">ON AIR #001</em>
@@ -288,12 +289,12 @@
         </div>
     </div>
 
-    <p class="カチンコ星群 ▼" style="margin-top: -20rem; margin-bottom: 40vh; --待機: 2s;"></p>
+    <p class="カチンコ星群 ▼" data-se="se/ka-n.mp3" style="margin-top: -20rem; margin-bottom: 40vh; --待機: 2s;"></p>
 
     <!-- 🔹1画面弱の空白と流星 ⚠️ * 〇vh は セリフ数 / 10 -->
 変動
     <div class="画像" style="margin-bottom: calc(60vh - var(--画像サイズ, 4) * 6vh);">
-        <img src="img/ryusei.webp" class="流星大 ▼">
+        <img src="img/ryusei.webp" class="流星大 ▼" data-se="se/ryusei.mp3">
     </div>
 
     <!-- 🔹対話 -->

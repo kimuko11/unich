@@ -31,18 +31,18 @@
 .中景 {
     background: url('img/ucyu_cyukei.webp');
 
-    animation:          中景・動き auto linear forwards,
-                        中景・瞬き 1.7s ease-in-out infinite alternate;
-    animation-timeline: scroll(root),
-                        auto;
+    animation:          中景・瞬き 1.7s ease-in-out infinite alternate,
+                        中景・動き auto linear forwards;
+    animation-timeline: auto,
+                        scroll(root);
 }
 .近景 {
     background: url('img/ucyu_kinkei.webp');
 
-    animation:          近景・動き auto linear forwards,
-                        近景・瞬き 1.3s ease-in-out infinite alternate;
-    animation-timeline: scroll(root),
-                        auto;
+    animation:          近景・瞬き 1.3s ease-in-out infinite alternate,
+                        近景・動き auto linear forwards;
+    animation-timeline: auto,
+                        scroll(root);
 }
 
 @keyframes 遠景・動き {

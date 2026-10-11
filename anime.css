@@ -110,13 +110,17 @@ body.即時 .拡大,
 body.即時 .半倒,
 body.即時 .横滑,
 body.即時 .落下, 
-body.即時 .キャラ画像,
 body.即時 .💬 {
     opacity:   1;
     scale:     1;
     rotate:    0deg;
     translate: 0 0;
-    transform: translateX(0);
+    animation: none;
+}
+
+body.即時 .キャラ画像 {
+    opacity:   1;
+transform: translateX(0);
     animation: none;
 }
 

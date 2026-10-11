@@ -114,7 +114,7 @@ p {
 .明朝 { font-family: "Noto Serif JP", serif; }
 
 b, em {
-    font-size:   1.1rem;
+    font-size:   1.1em;
     font-style:  normal;
     font-weight: 900;
     line-height: 1;
