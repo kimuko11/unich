@@ -1171,7 +1171,7 @@ async function 効果音読み込み(パス) {
 // ▫️効果音再生
 
 function 効果音再生(パス, 音量倍率 = 1) {
-    if (!パス || 効果音量 <= 0) return;
+    if (!初回タップ済み || !パス || 効果音量 <= 0) return;
 
     const バッファ = 効果音キャッシュ[パス];
     if (!バッファ || !(バッファ instanceof AudioBuffer)) return; // 未読み込みならスキップ

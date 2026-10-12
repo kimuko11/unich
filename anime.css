@@ -31,9 +31,9 @@
     animation: 拡大 calc(var(--時間, 1s) / var(--アニメ速度, 1)) calc(var(--待機, 0s) / var(--アニメ速度, 1)) cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
 }
 
-.縮小 { /* 原型から縮小 */
+.半縮 { /* 原型から半縮 */
     transform-origin: var(--起点, 0% 0%);
-    animation: 縮小 calc(var(--時間, 1s) / var(--アニメ速度, 1)) calc(var(--待機, 0s) / var(--アニメ速度, 1)) linear forwards;
+    animation: 半縮 calc(var(--時間, 1s) / var(--アニメ速度, 1)) calc(var(--待機, 0s) / var(--アニメ速度, 1)) linear forwards;
 }
 
 /* 🔹Rotate */
