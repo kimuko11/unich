@@ -584,6 +584,8 @@ const 出現監視一覧   = new Map(); // threshold値 → IntersectionObserver
 function 出現実行(要素) {
     要素.classList.add('再生');
 
+    if (!初回タップ済み) return; // 未タップなら効果音はスキップ
+
     const 対象要素 = 要素.matches('[data-se]') ? 要素 : 要素.querySelector('[data-se]'); // 効果音が指定されているなら再生
     if (対象要素 && 対象要素.dataset.se) {
         const パス     = 対象要素.dataset.se;
@@ -799,10 +801,12 @@ function 次キャラ処理() {
         ふきだし.style.setProperty('--横幅', `${ふきだし.offsetWidth}px`); // ふきだしを均等にフワフワさせるため取得
         ふきだし.style.setProperty('--縦幅', `${ふきだし.offsetHeight}px`);
 
-        const 効果音パス = ふきだし.dataset.se;
-        if (効果音パス) {
-            const 音量倍率 = parseFloat(ふきだし.dataset.volume || '1'); // data-volume 未設定時は 1
-            効果音再生(効果音パス, 音量倍率);
+        if (初回タップ済み) { // 未タップなら効果音はスキップ
+            const 効果音パス = ふきだし.dataset.se;
+            if (効果音パス) {
+                const 音量倍率 = parseFloat(ふきだし.dataset.volume || '1'); // data-volume 未設定時は 1
+                効果音再生(効果音パス, 音量倍率);
+            }
         }
 
         セリフ表示(エリア, () => {
@@ -1018,7 +1022,7 @@ function セリフ表示(エリア, 完了コールバック) {
     // ▫️️1文字進めるステップ関数
 
     function 次文字表示() {
-        if (設定速度ms <= 0 || !スイッチ登場アニメ) { // 速度 0ms以下(9)と、登場アニメOFFの場合、待ち時間なしで全表示＆即完了
+        if (設定速度ms <= 0 || 速度倍率 <=0 || !スイッチ登場アニメ) { // 速度 0ms以下か、登場アニメOFFの場合、待ち時間なしで全表示＆即完了
             for (let i = 現在位置; i < 文字一覧.length; i++) {
                 文字一覧[i].classList.add('表示済');
             }
@@ -1062,18 +1066,23 @@ function セリフ表示(エリア, 完了コールバック) {
 }
 
 
-// 🎛️ボイス
-
-// ▫️Web Audio API 初期化 と ユーザー操作による起動 (効果音共通)
+// 🎛️ Web Audio API 初期化 と ユーザー操作による起動
 
 const 音声コンテキスト = new (window.AudioContext || window.webkitAudioContext)();
 
-function 音声コンテキスト起動() {
+document.addEventListener('touchstart', ユーザー操作検知, { once: true });
+document.addEventListener('click',      ユーザー操作検知, { once: true });
+document.addEventListener('keydown',    ユーザー操作検知, { once: true });
+
+let 初回タップ済み = false;
+
+function ユーザー操作検知() {
+    初回タップ済み = true;
     if (音声コンテキスト.state === 'suspended') 音声コンテキスト.resume();
 }
-document.addEventListener('touchstart', 音声コンテキスト起動, { once: true });
-document.addEventListener('click',      音声コンテキスト起動, { once: true });
-document.addEventListener('keydown',    音声コンテキスト起動, { once: true });
+
+
+// 🎛️ボイス
 
 // ▫️事前デコードとキャッシュ化
 
