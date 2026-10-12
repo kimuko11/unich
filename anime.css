@@ -88,7 +88,7 @@
 
 @keyframes 半縮 { /* 原型から半縮 */
       0% { scale: 1.0; }
-    100% { scale: 0.6; }
+    100% { scale: 0.7; }
 }
 
 /* 🔹Rotate */
@@ -129,7 +129,7 @@ body.即時 .💬 {
     
 }
 body.即時 .半縮 {
-    scale:     0.6;
+    scale:     0.7;
     animation: none;
 }
 body.即時 .キャラ画像 {

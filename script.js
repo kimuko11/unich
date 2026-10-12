@@ -1075,7 +1075,7 @@ let 初回タップ済み = false;
 function 音声解除() {
     音声コンテキスト.resume().then(() => {
         if (音声コンテキスト.state === 'running') {
-            初回タップ済み = true; // running を確認してからフラグを立てる
+            初回タップ済み = true;
             document.removeEventListener('click',   音声解除);
             document.removeEventListener('keydown', 音声解除);
         }
@@ -1085,8 +1085,7 @@ function 音声解除() {
 document.addEventListener('click',   音声解除);
 document.addEventListener('keydown', 音声解除);
 
-// ▫️ 再生してよい状態かの一括判定
-function 音声再生可能() {
+function 音声再生可能() { // 再生してよい状態かの一括判定
     return 初回タップ済み && 音声コンテキスト.state === 'running';
 }
 
@@ -1120,7 +1119,7 @@ async function ボイス読み込み(キャラ, パス) {
 // ▫️ボイス再生
 
 function ボイス再生(キャラ, 変動率 = 0.03) {
-    if (!初回タップ済み || ボイス音量 <= 0) return; // 未タップ、もしくは音量0なら再生スキップ
+    if (!音声再生可能() || ボイス音量 <= 0) return; // 音声再生不可、もしくは音量0なら再生スキップ
 
     const バッファ = ボイスキャッシュ[キャラ];
     if (!バッファ) return; // デコード未完了ならスキップ
@@ -1178,7 +1177,7 @@ async function 効果音読み込み(パス) {
 // ▫️効果音再生
 
 function 効果音再生(パス, 音量倍率 = 1) {
-    if (!初回タップ済み || !パス || 効果音量 <= 0) return;
+    if (!音声再生可能() || !パス || 効果音量 <= 0) return;
 
     const バッファ = 効果音キャッシュ[パス];
     if (!バッファ || !(バッファ instanceof AudioBuffer)) return; // 未読み込みならスキップ
