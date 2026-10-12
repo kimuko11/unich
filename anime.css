@@ -31,6 +31,11 @@
     animation: 拡大 calc(var(--時間, 1s) / var(--アニメ速度, 1)) calc(var(--待機, 0s) / var(--アニメ速度, 1)) cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
 }
 
+.縮小 { /* 原型から縮小 */
+    transform-origin: var(--起点, 0% 0%);
+    animation: 縮小 calc(var(--時間, 1s) / var(--アニメ速度, 1)) calc(var(--待機, 0s) / var(--アニメ速度, 1)) linear forwards;
+}
+
 /* 🔹Rotate */
 
 .半倒 { /* 左90度から0度へ1/4転 */
@@ -120,8 +125,7 @@ body.即時 .💬 {
 
 body.即時 .キャラ画像 {
     opacity:   1;
-transform: translateX(0);
-    animation: none;
+    transform: translateX(0);
 }
 
 /* 🔹OFF時に非表示 */
