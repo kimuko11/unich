@@ -601,6 +601,9 @@ function アニメ速度取得() {
 }
  
 function 出現交差時(項目一覧, 監視) {
+
+    if (!初回タップ済み) return; // タップなら処理をスキップ
+
     項目一覧.forEach((項目) => {
         if (!項目.isIntersecting) return;
         監視.unobserve(項目.target); // 一度再生したら監視終了
@@ -736,6 +739,9 @@ const 登場基準時間 = 検証中フラグ ? 0 : 指定基準時間;         
 
     const 個別監視 = new IntersectionObserver((項目一覧) => {
         項目一覧.forEach((項目) => {
+
+if (!初回タップ済み) return; // ← 未タップなら無視
+
             if (項目.isIntersecting) {
                 const 経過時刻 = performance.now() - ページ開始時刻;
                 const 現在倍率 = アニメ速度取得();
@@ -1075,9 +1081,11 @@ document.addEventListener('click',      ユーザー操作検知, { once: true }
 document.addEventListener('keydown',    ユーザー操作検知, { once: true });
 
 let 初回タップ済み = false;
+let 初回タップ時刻 = 0;
 
 function ユーザー操作検知() {
     初回タップ済み = true;
+    初回タップ時刻 = performance.now();
     if (音声コンテキスト.state === 'suspended') 音声コンテキスト.resume();
 }
 

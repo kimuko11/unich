@@ -33,7 +33,7 @@
 
 .半縮 { /* 原型から半縮 */
     transform-origin: var(--起点, 0% 0%);
-    animation: 半縮 calc(var(--時間, 1s) / var(--アニメ速度, 1)) calc(var(--待機, 0s) / var(--アニメ速度, 1)) linear forwards;
+    animation: 半縮 calc(var(--時間, 1s) / var(--アニメ速度, 1)) calc(var(--待機, 10s) / var(--アニメ速度, 1)) linear forwards;
 }
 
 /* 🔹Rotate */
@@ -86,6 +86,11 @@
     100% { scale: 1; }
 }
 
+@keyframes 半縮 { /* 原型から半縮 */
+      0% { scale: 1.0; }
+    100% { scale: 0.6; }
+}
+
 /* 🔹Rotate */
 
 @keyframes 半倒 { /* 左90度から0度へ1/4転 */
@@ -121,8 +126,12 @@ body.即時 .💬 {
     rotate:    0deg;
     translate: 0 0;
     animation: none;
+    
 }
-
+body.即時 .半縮 {
+    scale:     0.6;
+    animation: none;
+}
 body.即時 .キャラ画像 {
     opacity:   1;
     transform: translateX(0);
