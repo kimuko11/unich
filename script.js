@@ -601,9 +601,6 @@ function アニメ速度取得() {
 }
  
 function 出現交差時(項目一覧, 監視) {
-
-    if (!初回タップ済み) return; // タップなら処理をスキップ
-
     項目一覧.forEach((項目) => {
         if (!項目.isIntersecting) return;
         監視.unobserve(項目.target); // 一度再生したら監視終了
@@ -738,9 +735,6 @@ const 登場基準時間 = 検証中フラグ ? 0 : 指定基準時間;         
     const 計算済threshold = 閾値計算(エリア);
 
     const 個別監視 = new IntersectionObserver((項目一覧) => {
-
-        if (!初回タップ済み) return; // ← 未タップなら無視
-
         項目一覧.forEach((項目) => {
             if (項目.isIntersecting) {
                 const 経過時刻 = performance.now() - ページ開始時刻;
@@ -1083,7 +1077,7 @@ document.addEventListener('keydown',    ユーザー操作検知, { once: true }
 let 初回タップ済み = false;
 
 function ユーザー操作検知() {
-    if (!初回タップ済み) 初回タップ済み = true;
+    初回タップ済み = true;
     if (音声コンテキスト.state === 'suspended') 音声コンテキスト.resume();
 }
 
@@ -1117,7 +1111,7 @@ async function ボイス読み込み(キャラ, パス) {
 // ▫️ボイス再生
 
 function ボイス再生(キャラ, 変動率 = 0.03) {
-    if (ボイス音量 <= 0) return; // 音量0なら再生スキップ
+    if (!初回タップ済み || ボイス音量 <= 0) return; // 未タップ、もしくは音量0なら再生スキップ
 
     const バッファ = ボイスキャッシュ[キャラ];
     if (!バッファ) return; // デコード未完了ならスキップ
