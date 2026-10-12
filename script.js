@@ -586,10 +586,6 @@ function 出現実行(要素) {
 
     if (!初回タップ済み) return; // 未タップなら効果音はスキップ
 
-    // 💡【追加】すでに画面の上方に過ぎ去っている要素（topが0未満）なら効果音を鳴らさない
-    const 矩形 = 要素.getBoundingClientRect();
-    if (矩形.top < 0) return;
-
     const 対象要素 = 要素.matches('[data-se]') ? 要素 : 要素.querySelector('[data-se]'); // 効果音が指定されているなら再生
     if (対象要素 && 対象要素.dataset.se) {
         const パス     = 対象要素.dataset.se;
@@ -806,14 +802,12 @@ function 次キャラ処理() {
         ふきだし.style.setProperty('--縦幅', `${ふきだし.offsetHeight}px`);
 
         if (初回タップ済み) { // 未タップなら効果音はスキップ
-            const エリア矩形 = エリア.getBoundingClientRect();
-            if (エリア矩形.top >= 0) {
             const 効果音パス = ふきだし.dataset.se;
             if (効果音パス) {
                 const 音量倍率 = parseFloat(ふきだし.dataset.volume || '1'); // data-volume 未設定時は 1
                 効果音再生(効果音パス, 音量倍率);
             }
-        }}
+        }
 
         セリフ表示(エリア, () => {
             表示処理中 = false;
@@ -1076,15 +1070,24 @@ function セリフ表示(エリア, 完了コールバック) {
 
 const 音声コンテキスト = new (window.AudioContext || window.webkitAudioContext)();
 
-document.addEventListener('touchstart', ユーザー操作検知, { once: true });
-document.addEventListener('click',      ユーザー操作検知, { once: true });
-document.addEventListener('keydown',    ユーザー操作検知, { once: true });
-
 let 初回タップ済み = false;
 
-function ユーザー操作検知() {
-    初回タップ済み = true;
-    if (音声コンテキスト.state === 'suspended') 音声コンテキスト.resume();
+function 音声解除() {
+    音声コンテキスト.resume().then(() => {
+        if (音声コンテキスト.state === 'running') {
+            初回タップ済み = true; // running を確認してからフラグを立てる
+            document.removeEventListener('click',   音声解除);
+            document.removeEventListener('keydown', 音声解除);
+        }
+    }).catch(() => {}); // 失敗したら次の操作で再挑戦
+}
+
+document.addEventListener('click',   音声解除);
+document.addEventListener('keydown', 音声解除);
+
+// ▫️ 再生してよい状態かの一括判定
+function 音声再生可能() {
+    return 初回タップ済み && 音声コンテキスト.state === 'running';
 }
 
 
@@ -1121,8 +1124,6 @@ function ボイス再生(キャラ, 変動率 = 0.03) {
 
     const バッファ = ボイスキャッシュ[キャラ];
     if (!バッファ) return; // デコード未完了ならスキップ
-
-    if (音声コンテキスト.state === 'suspended') 音声コンテキスト.resume(); // 音声コンテキストが停止中なら再開
 
     const 再生ノード = 音声コンテキスト.createBufferSource();
     const 音量ノード = 音声コンテキスト.createGain();
@@ -1181,8 +1182,6 @@ function 効果音再生(パス, 音量倍率 = 1) {
 
     const バッファ = 効果音キャッシュ[パス];
     if (!バッファ || !(バッファ instanceof AudioBuffer)) return; // 未読み込みならスキップ
-
-    if (音声コンテキスト.state === 'suspended') 音声コンテキスト.resume();
 
     const 再生ノード = 音声コンテキスト.createBufferSource();
     const 音量ノード = 音声コンテキスト.createGain();
