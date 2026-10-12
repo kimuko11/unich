@@ -586,6 +586,10 @@ function 出現実行(要素) {
 
     if (!初回タップ済み) return; // 未タップなら効果音はスキップ
 
+    // 💡【追加】すでに画面の上方に過ぎ去っている要素（topが0未満）なら効果音を鳴らさない
+    const 矩形 = 要素.getBoundingClientRect();
+    if (矩形.top < 0) return;
+
     const 対象要素 = 要素.matches('[data-se]') ? 要素 : 要素.querySelector('[data-se]'); // 効果音が指定されているなら再生
     if (対象要素 && 対象要素.dataset.se) {
         const パス     = 対象要素.dataset.se;
@@ -802,12 +806,14 @@ function 次キャラ処理() {
         ふきだし.style.setProperty('--縦幅', `${ふきだし.offsetHeight}px`);
 
         if (初回タップ済み) { // 未タップなら効果音はスキップ
+            const エリア矩形 = エリア.getBoundingClientRect();
+            if (エリア矩形.top >= 0) {
             const 効果音パス = ふきだし.dataset.se;
             if (効果音パス) {
                 const 音量倍率 = parseFloat(ふきだし.dataset.volume || '1'); // data-volume 未設定時は 1
                 効果音再生(効果音パス, 音量倍率);
             }
-        }
+        }}
 
         セリフ表示(エリア, () => {
             表示処理中 = false;
