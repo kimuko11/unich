@@ -123,11 +123,11 @@ document.addEventListener('DOMContentLoaded', () => {
     // ▫️ストレージ保存用のKEY名
 
     const KEY_文字サイズ = 'site_text_size';
-    const KEY_文字速度   = 'site_text_speed';
-    const KEY_ボイス音量 = 'site_voice_volume';
-    const KEY_効果音量   = 'site_se_volume';
+    const KEY_文字速度   = 'site_text_sp';
+    const KEY_ボイス音量 = 'site_voice_vol';
+    const KEY_効果音量   = 'site_se_vol';
     const KEY_画像サイズ = 'site_img_size';
-    const KEY_アニメ速度 = 'site_anime_speed';
+    const KEY_アニメ速度 = 'site_anime_sp';
     const KEY_光の効果   = 'site_glow_effect';
     const KEY_登場アニメ = 'site_app_anime';
     const KEY_表情アニメ = 'site_face_anime';
@@ -466,7 +466,7 @@ function 表示制御実行(値上, 値下) {
         if (番号 >= 開始位置 && 番号 <= 終了位置) {
             el.style.display = '';
 
-            if (絞り込み有効 && 番号 === 開始位置) {// 絞り込み表示中、かつ「表示範囲の先頭」の場合のみ margin-top を補正
+            if (絞り込み有効 && 番号 === 開始位置) { // 絞り込み表示中、かつ「表示範囲の先頭」の場合のみ margin-top を補正
                 el.style.marginTop = '0px';
             } else {
                 el.style.marginTop = ''; // 通常時のCSSに戻す
@@ -589,7 +589,7 @@ function 出現実行(要素) {
     const 対象要素 = 要素.matches('[data-se]') ? 要素 : 要素.querySelector('[data-se]'); // 効果音が指定されているなら再生
     if (対象要素 && 対象要素.dataset.se) {
         const パス     = 対象要素.dataset.se;
-        const 音量倍率 = parseFloat(対象要素.dataset.volume || '1');
+        const 音量倍率 = parseFloat(対象要素.dataset.sv || '1');
         
         if (typeof 効果音再生 === 'function') 効果音再生(パス, 音量倍率);
     }
@@ -804,7 +804,7 @@ function 次キャラ処理() {
         if (初回タップ済み) { // 未タップなら効果音はスキップ
             const 効果音パス = ふきだし.dataset.se;
             if (効果音パス) {
-                const 音量倍率 = parseFloat(ふきだし.dataset.volume || '1'); // data-volume 未設定時は 1
+                const 音量倍率 = parseFloat(ふきだし.dataset.sv || '1'); // data-sv 未設定時は 1
                 効果音再生(効果音パス, 音量倍率);
             }
         }
@@ -990,8 +990,8 @@ function セリフ表示(エリア, 完了コールバック) {
     const キャラ     = キャラ取得(エリア);
     const 文字一覧   = 文字分解(ふきだし);
 
-    const 速度倍率   = parseFloat(ふきだし.dataset.speed || '1');  // data-speed 文字速度の増減 (未設定時 1)
-    const タメ文字数 = parseInt(ふきだし.dataset.wait || '0', 10); // data-wait  追加の文字数   (未設定時 0)
+    const 速度倍率   = parseFloat(ふきだし.dataset.sp || '1');   // data-sp 文字速度の増減 (未設定時 1)
+    const タメ文字数 = parseInt(ふきだし.dataset.wt || '0', 10); // data-wt 追加の文字数   (未設定時 0)
 
     // ▫️ふきだしクラス(なし/感情/激情)からボイス変動を指定
     
@@ -1043,10 +1043,11 @@ function セリフ表示(エリア, 完了コールバック) {
             const 文字span = 文字一覧[現在位置];
             文字span.classList.add('表示済');
 
-            if (!モノローグ && 文字span.textContent !== ' ') {
+            if (文字span.textContent !== ' ') {
                 const 現在時刻 = performance.now();
                 if (現在時刻 - 前回発音時刻 >= 30) { // 前回の発音から30ms以上経過なら再生
-                    ボイス再生(キャラ, ボイス変動率);
+                    const 音量倍率 = parseFloat(ふきだし.dataset.vv || '1'); // data-vv が未設定時は 1
+                    ボイス再生(キャラ, ボイス変動率, 音量倍率);
                     前回発音時刻 = 現在時刻;
                 }
             }
@@ -1118,7 +1119,7 @@ async function ボイス読み込み(キャラ, パス) {
 
 // ▫️ボイス再生
 
-function ボイス再生(キャラ, 変動率 = 0.03) {
+function ボイス再生(キャラ, 変動率 = 0.03, 音量倍率 = 1) {
     if (!音声再生可能() || ボイス音量 <= 0) return; // 音声再生不可、もしくは音量0なら再生スキップ
 
     const バッファ = ボイスキャッシュ[キャラ];
@@ -1129,11 +1130,12 @@ function ボイス再生(キャラ, 変動率 = 0.03) {
 
     再生ノード.buffer = バッファ;
 
-    const ピッチ揺らぎ = (1 - 変動率) + Math.random() * (変動率 * 2);        // 感情に応じたピッチ揺らぎ
+    const ピッチ揺らぎ = (1 - 変動率) + Math.random() * (変動率 * 2);   // 感情に応じたピッチ揺らぎ
     再生ノード.playbackRate.value = ピッチ揺らぎ;
 
-    const 音量揺らぎ   = (0.9 + 変動率) + Math.random() * (変動率 * 2);      // 感情に応じた音量微増と揺らぎ
-    const 適用音量     = Math.min(Math.max(ボイス音量 * 音量揺らぎ, 0), 1);  // 0.0～1.0 の範囲に収める
+    const 音量揺らぎ   = (0.9 + 変動率) + Math.random() * (変動率 * 2); // 感情に応じた音量微増と揺らぎ
+    const 最終音量 = ボイス音量 * 音量揺らぎ * 音量倍率;
+    const 適用音量 = Math.min(Math.max(最終音量, 0), 1);  // 0.0～1.0 の範囲に収める
     音量ノード.gain.setValueAtTime(適用音量, 音声コンテキスト.currentTime);
 
     再生ノード.connect(音量ノード).connect(音声コンテキスト.destination);

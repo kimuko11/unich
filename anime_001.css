@@ -70,7 +70,7 @@ body.停止 .発射,
 body.停止 .発射→拍動,
 body.停止 .発射→拍微動 {
     opacity: 1;
-    scale:   var(--反転, 1) 1;
+    scale:   1;
 }
 
 
