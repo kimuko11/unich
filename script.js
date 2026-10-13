@@ -393,17 +393,39 @@ function 低スペ端末判定() {
 
     const アップル = /iPhone|iPad|iPod/.test(識別文字) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
     if (アップル) {
-        const match = 識別文字.match(/OS (\d+)_/);
-        if (match && match[1]) return parseInt(match[1], 10) <= 15; // iOS 15 以下なら
-        if (!window.structuredClone) return true;                   // structuredClone は iOS 15.4 以降で導入
+        const 一致 = 識別文字.match(/OS (\d+)_/);
+        if (一致 && 一致[1]) return parseInt(一致[1], 10) <= 15; // iOS 15 以下なら
+        if (!window.structuredClone) return true;                // structuredClone は iOS 15.4 以降で導入
     }
 
-    const ram   = navigator.deviceMemory; 
-    const cores = navigator.hardwareConcurrency; 
-    if ((ram && ram < 4) || (cores && cores <= 4)) return true; // RAM 4GB 未満、または CPU 4コア以下なら
+    const メモリ = navigator.deviceMemory; 
+    const コア数 = navigator.hardwareConcurrency; 
+    if ((メモリ && メモリ < 4) || (コア数 && コア数 <= 4)) return true; // メモリ 4GB 未満、または CPU 4コア以下なら
 
     return false;
 }
+
+
+// 🎛️操作環境の判定
+
+document.addEventListener('DOMContentLoaded', () => {
+    const 操作環境 = window.matchMedia('(pointer: fine)').matches; // ポインティングデバイスを使っているなら
+
+    if (操作環境) {
+        const 行動一覧 = document.querySelectorAll('.行動');
+        行動一覧.forEach(要素 => {
+            要素.textContent = 'クリック';
+        });
+        const 機器一覧 = document.querySelectorAll('.機器');
+        機器一覧.forEach(要素 => {
+            要素.textContent = '🖱';
+        });
+        const 行動一覧2 = document.querySelectorAll('.行動2');
+        行動一覧2.forEach(要素 => {
+            要素.textContent = '(もしくはキータッチ⌨)';
+        });
+    }
+});
 
 
 // 🎛️表示範囲の絞り込み（検証用）
