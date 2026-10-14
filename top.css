@@ -67,3 +67,8 @@
     0% { filter: drop-shadow(0 0 2px #FF0055) hue-rotate(  0deg); }
   100% { filter: drop-shadow(0 0 2px #FF0055) hue-rotate(360deg); }
 }
+
+
+/* #️⃣ガイド */
+
+.タップ済 { display: none; }

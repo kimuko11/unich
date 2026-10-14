@@ -175,7 +175,7 @@
     <div class="宇宙レイヤー 近景"></div>
     <div class="星群"></div>
 
-    <div style="height: 12vw;"></div> <!-- トップ画像をサイズ可変のロゴに被せないために vw で縦余白を決定 -->
+    <div style="height: 11vw;"></div> <!-- トップ画像をサイズ可変のロゴに被せないために vw で縦余白を決定 -->
 
     <!-- 🔹トップ画像 -->
 
@@ -214,9 +214,11 @@
         <div class="👤 右側">
             <div class="キャラ画像" style="--サイズ: -16%; --被り幅: -5px;">
                 <img src="cha/st_kihon.webp"          alt="👤">
-                <img src="cha/st_kihon_me.webp"       alt="👀" class="差分 目瞬" style="--起点: 50% 62%;">
-                <img src="cha/st_kihon_kuchi.webp"    alt="👄" class="差分 パク" style="--起点: 50% 70%;">
-                <img src="cha/st_kihon_hitosasi.webp" alt="☝️" class="差分 発射" style="--起点: 50% 100%; --倍率: 1.03;">
+                <img src="cha/st_kihon_onpu.webp"     alt="🎵" class="差分 タップ済 発射" style="--起点: 50% 50%;">
+                <img src="cha/st_kihon_me.webp"       alt="👀" class="差分 未タップ 目瞬" style="--起点: 50% 62%;">
+                <img src="cha/st_kihon_me2.webp"      alt="👀" class="差分 タップ済">
+                <img src="cha/st_kihon_kuchi.webp"    alt="👄" class="差分 パク"          style="--起点: 50% 70%;">
+                <img src="cha/st_kihon_hitosasi.webp" alt="☝️" class="差分 発射"          style="--起点: 50% 100%; --倍率: 1.03;">
             </div>
             <div class     = "💬 小字"
                 data-se = "se/puyon.mp3"
@@ -224,8 +226,14 @@
                 data-sp = "0"
                 style   = "--余白左: 3%; --右尻尾: -45px;">
                 <div class="ト書き上 右寄 銀">（番組スタッフ）</div>
-                画面を<em class="行動">タップ</em><em class="機器">👇</em><span class="行動2"></span>すると、<em>効果音</em>付きのリッチコンテンツをお楽しみいただけます。<br>
-                変更・調整したい時は、画面右上の<em>ラジオ</em>を<span class="行動">タップ</span>して、お好みの設定にできます。
+                <div class="未タップ">
+                    画面を<em class="操作">タップ</em><em class="機器">👇</em><span class="操作2"></span>すると、<em>効果音</em>付きのリッチコンテンツをお楽しみいただけます。
+                </div>
+                 <div class="タップ済">
+                    ご視聴ありがとうございます。<br>
+                    この番組は、効果音付きでお楽しみいただけます。
+                </div>
+                変更・調整したい時は、画面右上の<em>ラジオ</em>を<span class="操作">タップ</span>して、お好みの設定にできます。
             </div>
         </div>
     </div>
@@ -1059,7 +1067,7 @@
             <div class="💬" data-wt="20">
                 しかし、エゴとしてのあなたがこだわる「イヤな気分」は、それとは別ですぢゃ。<br>
                 イヤな気分の前には必ず、「それは間違ってる」という判断…見方の採用がありますぢゃ。<br>
-                大抵は、かつての権威から学んだ「これが正しい、こーあるべきべき！」という<em>限定的な信念</em>を、無意識のうちに受け入れた見方が。
+                大抵は、かつての権威から学んだ「<em>これが正しい、これが正義、誰もがこーあるべきべき！</em>」という制限的な信念を、無意識のうちに受け入れた見方が。
             </div>
         </div>
 
@@ -1161,7 +1169,7 @@
             <div class="💬" style="--右尻尾: 10px;">
                 <a href="cm_001.html">
                     アンサーが出たら、<br>
-                    <span class="行動">タップ</span>してくださいね♪
+                    <span class="操作">タップ</span>してくださいね♪
                 </a>
             </div>
         </div>

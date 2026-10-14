@@ -190,16 +190,16 @@ b, em {
     width: 100%;
 
     content-visibility:     auto;
-    contain-intrinsic-size: auto var(--省略幅, 100vh);
+    contain-intrinsic-size: auto var(--省略幅, 500vh);
 }
 
 
 /* #️⃣フィルター */
 
 .黒枠 {
-    display: inline-block;
+    filter:      url(#kuro-waku);
+    display:     inline-block;
     text-shadow: none;
-    filter: url(#kuro-waku);
 }
 
 /* 🔹発光フィルター */

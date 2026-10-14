@@ -412,16 +412,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const 操作環境 = window.matchMedia('(pointer: fine)').matches; // ポインティングデバイスを使っているなら
 
     if (操作環境) {
-        const 行動一覧 = document.querySelectorAll('.行動');
-        行動一覧.forEach(要素 => {
+        const 操作一覧 = document.querySelectorAll('.操作');
+        操作一覧.forEach(要素 => {
             要素.textContent = 'クリック';
         });
         const 機器一覧 = document.querySelectorAll('.機器');
         機器一覧.forEach(要素 => {
             要素.textContent = '🖱';
         });
-        const 行動一覧2 = document.querySelectorAll('.行動2');
-        行動一覧2.forEach(要素 => {
+        const 操作一覧2 = document.querySelectorAll('.操作2');
+        操作一覧2.forEach(要素 => {
             要素.textContent = '(もしくはキータッチ⌨)';
         });
     }
@@ -1095,18 +1095,28 @@ const 音声コンテキスト = new (window.AudioContext || window.webkitAudioC
 
 let 初回タップ済み = false;
 
+function 音声状態チェック() {
+    if (音声コンテキスト.state === 'running') {
+        初回タップ済み = true;
+        
+        document.querySelectorAll('.未タップ').forEach(要素 => 要素.style.display = 'none');
+        document.querySelectorAll('.タップ済').forEach(要素 => 要素.style.display = 'block'); // 表示切替
+        
+        document.removeEventListener('click',   音声解除);
+        document.removeEventListener('keydown', 音声解除);
+    }
+}
+
 function 音声解除() {
     音声コンテキスト.resume().then(() => {
-        if (音声コンテキスト.state === 'running') {
-            初回タップ済み = true;
-            document.removeEventListener('click',   音声解除);
-            document.removeEventListener('keydown', 音声解除);
-        }
+        音声状態チェック();
     }).catch(() => {}); // 失敗したら次の操作で再挑戦
 }
 
 document.addEventListener('click',   音声解除);
 document.addEventListener('keydown', 音声解除);
+
+document.addEventListener('DOMContentLoaded', () => { 音声状態チェック(); }); // ページ読み込み時にもチェック
 
 function 音声再生可能() { // 再生してよい状態かの一括判定
     return 初回タップ済み && 音声コンテキスト.state === 'running';
