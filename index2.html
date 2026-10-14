@@ -75,8 +75,17 @@
 
         <div class="設定💬">
 
+            <div class="右寄" style="margin-top: -10px;">
+                <div class="未タップ">
+                    <span class="中字">🔇</span>音声出力: OFF
+                </div>
+                <div class="タップ済">
+                    <span class="中字">🔊</span> 音声出力: ON
+                </div>
+            </div>
+
             <div class="設定項目">
-                ボイス音量
+                <div style="display: inline;">ボイス音量<span class="灰">（最小: 無音）</span></div>
                 <label class="スライダー">
                     小<input type="range" id="ボイス音量" max="9" min="0" value="4">大
                     <span class="スライダー数値">4</span>
@@ -84,7 +93,7 @@
             </div>
 
             <div class="設定項目">
-                効果音量
+                <div style="display: inline;">効果音量<span class="灰">（最小: 無音）</span></div>
                 <label class="スライダー">
                     小<input type="range" id="効果音量" max="9" min="0" value="4">大
                     <span class="スライダー数値">4</span>
@@ -108,7 +117,7 @@
             </div>
 
             <div class="設定項目">
-                文字速度
+                <div style="display: inline;">文字速度<span class="灰">（最速: 文字送りなし）</span></div>
                 <label class="スライダー">
                     遅<input type="range" id="文字速度" max="9" min="0" value="4">速
                     <span class="スライダー数値">4</span>

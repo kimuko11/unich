@@ -78,8 +78,17 @@
 
         <div class="設定💬">
 
+            <div class="右寄" style="margin-top: -10px;">
+                <div class="未タップ">
+                    <span class="中字">🔇</span>音声出力: OFF
+                </div>
+                <div class="タップ済">
+                    <span class="中字">🔊</span> 音声出力: ON
+                </div>
+            </div>
+
             <div class="設定項目">
-                ボイス音量
+                <div style="display: inline;">ボイス音量<span class="灰">（最小: 無音）</span></div>
                 <label class="スライダー">
                     小<input type="range" id="ボイス音量" max="9" min="0" value="4">大
                     <span class="スライダー数値">4</span>
@@ -87,7 +96,7 @@
             </div>
 
             <div class="設定項目">
-                効果音量
+                <div style="display: inline;">効果音量<span class="灰">（最小: 無音）</span></div>
                 <label class="スライダー">
                     小<input type="range" id="効果音量" max="9" min="0" value="4">大
                     <span class="スライダー数値">4</span>
@@ -111,7 +120,7 @@
             </div>
 
             <div class="設定項目">
-                文字速度
+                <div style="display: inline;">文字速度<span class="灰">（最速: 文字送りなし）</span></div>
                 <label class="スライダー">
                     遅<input type="range" id="文字速度" max="9" min="0" value="4">速
                     <span class="スライダー数値">4</span>
@@ -230,7 +239,7 @@
                     画面を<em class="操作">タップ</em><em class="機器">👇</em><span class="操作2"></span>すると、<em>効果音</em>付きのリッチコンテンツをお楽しみいただけます。<br>
                     現在の状態は、無音です。
                 </div>
-                 <div class="タップ済">
+                <div class="タップ済">
                     現在、効果音付きでお楽しみいただけます。<br>
                     変更・調整したい時は、画面右上の<em>ラジオ</em>を<span class="操作">タップ</span>して、お好みの設定にできます。
                 </div>
