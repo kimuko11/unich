@@ -1,8 +1,8 @@
 @charset "UTF-8";
 
-/* #️⃣ロゴと設定 */
+/* #️⃣ヘッダ */
 
-.ヘッダー {
+.ヘッダ {
     position: fixed;
     top:      0;
     left:     0;
@@ -18,13 +18,27 @@
     pointer-events: auto;
 }
 
+/* 🔹ロゴ */
+
 .ロゴ {
     max-width:   calc(44% + var(--画像サイズ, 4) * 1%);
     flex-shrink: 0;
+
+    cursor: pointer;
+
+    transition: scale  calc(var(--時間, 0.2s) / var(--アニメ速度, 1)),
+                filter 1.0s; /* 消光用 */
 }
+.ロゴ.オープン {
+    transform-origin: 0% 0%;
+    scale:            1.05;
+}
+
+/* 🔹検証用 表示範囲 */
 
 .表示範囲 {
     min-width:   0;
+    flex-shrink: 0;
 
     opacity:    0.5;
     transition: opacity 0.2s;
@@ -57,6 +71,8 @@ input[type="number"]::-webkit-inner-spin-button { -webkit-appearance: none; }
     line-height: 1;
 }
 
+/* 🔹設定 */
+
 .設定 { 
     display:        flex;
     flex-direction: column;
@@ -74,21 +90,16 @@ input[type="number"]::-webkit-inner-spin-button { -webkit-appearance: none; }
     transition: scale  calc(var(--時間, 0.2s) / var(--アニメ速度, 1)),
                 filter 1.0s; /* 消光用 */
 }
-
 .設定.オープン .ラジオ { scale: 1.2; }
 
 
-/* #️⃣設定ふきだし */
+/* #️⃣ふきだし外観 */
 
-.設定💬 {
+.ヘッダ💬 {
     position: absolute;
-    top:      55%; /* 位置 */
-    right:    0;
-
-    width: 250px;
 
     border: 1px solid var(--強光, seashell);
-    border-radius:    25px;
+    border-radius:    30px;
 
     background-color: rgba(60, 60, 60, 0.75);
 
@@ -97,34 +108,57 @@ input[type="number"]::-webkit-inner-spin-button { -webkit-appearance: none; }
                 inset 0  2px 10px var(--弱光, #888),  /* 光沢 */
                 inset 0 -2px 15px rgba(0, 0, 0, 0.5); /* 影 */
 
-    transform-origin: top right;
     scale:      0;
     opacity:    0;
     visibility: hidden;
 
     transition:
-        scale      calc(var(--時間, 0.3s) / var(--アニメ速度, 1)) cubic-bezier(0.175, 0.885, 0.32, 1.275),
-        opacity    calc(var(--時間, 0.3s) / var(--アニメ速度, 1)),
-        visibility calc(var(--時間, 0.3s) / var(--アニメ速度, 1));
+        scale      calc(var(--時間, 0.8s) / var(--アニメ速度, 1)) cubic-bezier(0.175, 0.885, 0.32, 1.275),
+        opacity    calc(var(--時間, 0.4s) / var(--アニメ速度, 1)),
+        visibility calc(var(--時間, 0.8s) / var(--アニメ速度, 1));
 }
+.ロゴ .ヘッダ💬 {
+    top:   65%;
+    left:  0;
 
-.設定.オープン .設定💬 {
+    width: 162px;
+
+    transform-origin: 50% 0%;
+}
+.設定 .ヘッダ💬 {
+    top:   55%;
+    right: 0;
+
+    width: 250px;
+
+    transform-origin: 80% 0%;
+}
+.ロゴ.オープン .ヘッダ💬,
+.設定.オープン .ヘッダ💬 {
     scale:      1;
     opacity:    1;
     visibility: visible;
 }
 
-.設定💬::before { /* ふきだしの尻尾 */
+.ヘッダ💬::before { /* ふきだしの尻尾 */
     content: '';
 
     position: absolute;
     top:      -6px;
-    right:    50px;
 
-    border-width: 0 1px 6px 3px;
     border-style: solid;
     border-color: transparent transparent var(--強光, seashell) transparent;
 }
+.ロゴ .ヘッダ💬::before {
+    left:         80px;
+    border-width: 0 2px 6px 2px;
+}
+.設定 .ヘッダ💬::before {
+    right:        55px;
+    border-width: 0 1px 6px 3px;
+}
+
+/* #️⃣ふきだし内部 */
 
 /* 🔹スライダー群 */
 
@@ -169,7 +203,7 @@ input[type="number"]::-webkit-inner-spin-button { -webkit-appearance: none; }
 
     pointer-events: none;
     
-    /* 🔹フェード設定 */
+    /* フェード設定 */
 
     opacity:    0;
     visibility: hidden;
@@ -294,8 +328,7 @@ input:checked + .スイッチ背景:after { /* ONの文字 */
 }
 .リセット:hover { color: var(--強光, seashell); }
 
-
-/* #️⃣画面横幅 501px 以上の時、画像サイズ項目を隠す */
+/* 🔹画面横幅 501px 以上の時、画像サイズ項目を隠す */
 
 @media (min-width: 501px) {
     .設定項目:has(#画像サイズ) {

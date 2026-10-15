@@ -62,7 +62,7 @@ a {
 
 /* #️⃣文字枠, ふきだし */
 
-p, .💬, .ヘッダー {    
+p, .💬, .ヘッダ {    
     text-shadow:
         0  1px #000,      /* 下 */
        -1px  0 #111,      /* 左 */
@@ -80,7 +80,7 @@ p {
     max-width: 600px; /* 最大横幅 600px */
 }
 
-.💬, .設定💬 { padding: 20px; }
+.💬, .ヘッダ💬 { padding: 20px; }
 
 
 /* #️⃣画像枠 */
@@ -138,7 +138,7 @@ b, em {
 .桃 { color: deeppink; }
 .水 { color: aqua; }
 .銀 { color: silver; }
-.灰 { color: gray; }
+.灰 { color: #888; }
 
 :root {
     --弱光:   rgba(255, 245, 238, 0.25); /* #888 */

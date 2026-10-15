@@ -94,6 +94,7 @@ function 設定更新() {
 // 🎛️設定スライダーとリセット
 
 document.addEventListener('DOMContentLoaded', () => {
+    const ロゴ   = document.getElementById('ロゴ');
     const 設定   = document.getElementById('設定');
     const ラジオ = document.getElementById('ラジオ');
 
@@ -292,18 +293,27 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // ▫️開閉切り替え
+    // ▫️ふきだしの開閉切り替え
 
     ラジオ.addEventListener('click', (e) => {
         e.stopPropagation();
         設定.classList.toggle('オープン');
     });
 
-    // ▫️設定外をタップしたら閉じる
+    document.addEventListener('click', (e) => {
+        if (!設定.contains(e.target)) { // 設定の外をタップしたら閉じる
+            設定.classList.remove('オープン');
+        }
+    });
+
+    ロゴ.addEventListener('click', (e) => {
+        e.stopPropagation();
+        ロゴ.classList.toggle('オープン');
+    });
 
     document.addEventListener('click', (e) => {
-        if (!設定.contains(e.target)) {
-            設定.classList.remove('オープン');
+        if (!ロゴ.contains(e.target)) { // ロゴの外をタップしたら閉じる
+            ロゴ.classList.remove('オープン');
         }
     });
 
