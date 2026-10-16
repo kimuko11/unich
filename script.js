@@ -94,10 +94,6 @@ function 設定更新() {
 // 🎛️設定スライダーとリセット
 
 document.addEventListener('DOMContentLoaded', () => {
-    const ロゴ   = document.getElementById('ロゴ');
-    const 設定   = document.getElementById('設定');
-    const ラジオ = document.getElementById('ラジオ');
-
     const 入力_ボイス音量 = document.getElementById('ボイス音量');
     const 入力_効果音量   = document.getElementById('効果音量');
     const 入力_文字サイズ = document.getElementById('文字サイズ');

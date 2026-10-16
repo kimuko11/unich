@@ -88,7 +88,7 @@
 
 @keyframes 縮小 { /* 原型から縮小 */
       0% { scale: 1; }
-    100% { scale: var(--倍率, 0.7); }
+    100% { scale: var(--倍率, 0.5); }
 }
 
 /* 🔹Rotate */
