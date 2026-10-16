@@ -21,7 +21,7 @@
 /* 🔹ロゴ */
 
 .ロゴ {
-    max-width:   calc(80% + var(--画像サイズ, 4) * 0.5%);
+    max-width:   calc(85% + var(--画像サイズ, 4) * 0.5%);
     flex-shrink: 0;
 
     transform-origin: 0% 0%;
@@ -40,11 +40,9 @@
     min-width:   0;
     flex-shrink: 0;
 
-    opacity:    0.5;
+    opacity: 0;
     transition: opacity 0.2s;
 }
-
-.表示範囲:hover { opacity: 1; }
 
 #非表示上, #非表示下 {
     width: 35px;
@@ -70,6 +68,13 @@ input[type="number"]::-webkit-inner-spin-button { -webkit-appearance: none; }
     font-size:   16px;
     line-height: 1;
 }
+
+.表示範囲スイッチ {
+    opacity:    0;
+    transition: opacity 0.2s;
+}
+.表示範囲スイッチ:hover,
+body.表示 .表示範囲 { opacity: 1; }
 
 /* 🔹設定 */
 
@@ -154,7 +159,7 @@ input[type="number"]::-webkit-inner-spin-button { -webkit-appearance: none; }
     border-width: 0 2px 6px 2px;
 }
 .設定 .ヘッダ💬::before {
-    right:        50px;
+    right:        35px;
     border-width: 0 1px 6px 3px;
 }
 
@@ -316,7 +321,7 @@ input:checked + .スイッチ背景:after { /* ONの文字 */
 .リセット {
     display: block;
 
-    margin:  0 auto;
+    margin:  auto;
     padding: 4px 8px;
 
     border:        1px solid var(--中光, #888);

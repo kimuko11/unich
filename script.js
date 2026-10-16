@@ -51,6 +51,7 @@ let スライダーアニメ速度 = 4;
 let スイッチ光の効果     = true;
 let スイッチ登場アニメ   = true;
 let スイッチ表情アニメ   = true;
+let スイッチ表示範囲     = false;
 
 // ▫️計算用の派生変数
 
@@ -88,6 +89,12 @@ function 設定更新() {
     } else {
         document.body.classList.add('停止');
     }
+
+    if (スイッチ表示範囲) {
+        document.body.classList.remove('表示');
+    } else {
+        document.body.classList.add('表示');
+    }
 }
 
 
@@ -103,6 +110,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const 選択_光の効果   = document.getElementById('光の効果');
     const 選択_登場アニメ = document.getElementById('登場アニメ');
     const 選択_表情アニメ = document.getElementById('表情アニメ');
+    const 選択_表示範囲   = document.getElementById('表示範囲');
     const リセット        = document.getElementById('リセット');
 
     const 低スペ端末 = 低スペ端末判定();
@@ -116,6 +124,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const 初期値_光の効果   = true;
     const 初期値_登場アニメ = true;
     const 初期値_表情アニメ = true;
+    const 初期値_表示範囲   = false;
 
     // ▫️ストレージ保存用のKEY名
 
@@ -128,6 +137,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const KEY_光の効果   = 'site_glow_effect';
     const KEY_登場アニメ = 'site_app_anime';
     const KEY_表情アニメ = 'site_face_anime';
+    const KEY_表示範囲   = 'site_view_span';
 
     // ▫️保存データの読み込み（無ければデフォルト値）
 
@@ -140,16 +150,18 @@ document.addEventListener('DOMContentLoaded', () => {
     const 保存_光の効果   = localStorage.getItem(KEY_光の効果);
     const 保存_登場アニメ = localStorage.getItem(KEY_登場アニメ);
     const 保存_表情アニメ = localStorage.getItem(KEY_表情アニメ);
+    const 保存_表示範囲   = localStorage.getItem(KEY_表示範囲);
 
     スライダー文字サイズ = 保存_文字サイズ !== null ? parseInt(保存_文字サイズ, 10) : 初期値_文字サイズ;
-    スライダー文字速度   = 保存_文字速度   !== null ? parseInt(保存_文字速度, 10)   : 初期値_文字速度;
+    スライダー文字速度   = 保存_文字速度   !== null ? parseInt(保存_文字速度,   10) : 初期値_文字速度;
     スライダーボイス音量 = 保存_ボイス音量 !== null ? parseInt(保存_ボイス音量, 10) : 初期値_ボイス音量;
-    スライダー効果音量   = 保存_効果音量   !== null ? parseInt(保存_効果音量, 10)   : 初期値_効果音量;
+    スライダー効果音量   = 保存_効果音量   !== null ? parseInt(保存_効果音量,   10) : 初期値_効果音量;
     スライダー画像サイズ = 保存_画像サイズ !== null ? parseInt(保存_画像サイズ, 10) : 初期値_画像サイズ;
     スライダーアニメ速度 = 保存_アニメ速度 !== null ? parseInt(保存_アニメ速度, 10) : 初期値_アニメ速度;
-    スイッチ光の効果     = 保存_光の効果   !== null ? 保存_光の効果 === 'true'      : 初期値_光の効果;
+    スイッチ光の効果     = 保存_光の効果   !== null ? 保存_光の効果   === 'true'    : 初期値_光の効果;
     スイッチ登場アニメ   = 保存_登場アニメ !== null ? 保存_登場アニメ === 'true'    : 初期値_登場アニメ;
     スイッチ表情アニメ   = 保存_表情アニメ !== null ? 保存_表情アニメ === 'true'    : 初期値_表情アニメ;
+    スイッチ表示範囲     = 保存_表示範囲   !== null ? 保存_表示範囲   === 'false'   : 初期値_表示範囲;
 
     // ▫️文字サイズ (画面のスライダー要素と数値表示に初期値を反映)
 
@@ -285,6 +297,18 @@ document.addEventListener('DOMContentLoaded', () => {
         選択_表情アニメ.addEventListener('change', (e) => {
             スイッチ表情アニメ = e.target.checked;
             localStorage.setItem(KEY_表情アニメ, スイッチ表情アニメ);
+            設定更新();
+        });
+    }
+
+    // ▫️表示範囲
+
+    if (選択_表示範囲) {
+        選択_表示範囲.checked = スイッチ表示範囲;
+
+        選択_表示範囲.addEventListener('change', (e) => {
+            スイッチ表示範囲 = e.target.checked;
+            localStorage.setItem(KEY_表示範囲, スイッチ表示範囲);
             設定更新();
         });
     }

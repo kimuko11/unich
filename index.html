@@ -50,7 +50,7 @@
 
     <!-- 🔹検証用 表示範囲 -->
 
-    <div class="表示範囲">
+    <div id="表示範囲" class="表示範囲">
         表示範囲
         <button type="button" onclick="範囲リセット()">🗑️</button>
         
@@ -164,7 +164,20 @@
 
             </div> <!-- 設定グループ ここまで -->
 
+            <div class="設定グループ">
+
+            <div class="設定項目 表示範囲スイッチ" style="margin: 0;">
+                表示範囲
+                <label class="スイッチ">
+                    <input type="checkbox" id="表示範囲">
+                    <span class="スイッチ背景"></span>
+                </label>
+            </div>
+
             <button type="button" id="リセット" class="リセット">初期値に戻す</button>
+
+
+            </div>
 
         </div> <!-- ヘッダ💬 ここまで -->
 
@@ -185,7 +198,7 @@
     <div class="宇宙レイヤー 近景"></div>
     <div class="星群"></div>
 
-    <div style="height: 110px;"></div>
+    <div style="height: 100px;"></div>
 
     <!-- 🔹トップ画像 -->
 
