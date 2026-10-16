@@ -91,9 +91,9 @@ function 設定更新() {
     }
 
     if (スイッチ表示範囲) {
-        document.body.classList.remove('表示');
-    } else {
         document.body.classList.add('表示');
+    } else {
+        document.body.classList.remove('表示');
     }
 }
 
@@ -161,7 +161,7 @@ document.addEventListener('DOMContentLoaded', () => {
     スイッチ光の効果     = 保存_光の効果   !== null ? 保存_光の効果   === 'true'    : 初期値_光の効果;
     スイッチ登場アニメ   = 保存_登場アニメ !== null ? 保存_登場アニメ === 'true'    : 初期値_登場アニメ;
     スイッチ表情アニメ   = 保存_表情アニメ !== null ? 保存_表情アニメ === 'true'    : 初期値_表情アニメ;
-    スイッチ表示範囲     = 保存_表示範囲   !== null ? 保存_表示範囲   === 'false'   : 初期値_表示範囲;
+    スイッチ表示範囲     = 保存_表示範囲   !== null ? 保存_表示範囲   === 'true'    : 初期値_表示範囲;
 
     // ▫️文字サイズ (画面のスライダー要素と数値表示に初期値を反映)
 
@@ -530,7 +530,7 @@ function 表示制御実行(値上, 値下) {
     });
 
     // 入力が1つでもあればメインコンテンツより上は隠す
-    const トップコンテンツ = document.querySelectorAll('.宇宙全体 > :not(.対話全体枠):not(.描画省略):not(.宇宙レイヤー):not(.カチンコ星群)');
+    const トップコンテンツ = document.querySelectorAll('.宇宙全体 > :not(.対話全体枠):not(.描画省略):not(.宇宙レイヤー):not(.空白)');
 
     トップコンテンツ.forEach(el => {
         if (絞り込み有効) {

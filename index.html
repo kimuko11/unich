@@ -50,11 +50,11 @@
 
     <!-- 🔹検証用 表示範囲 -->
 
-    <div id="表示範囲" class="表示範囲">
-        表示範囲
+    <div class="表示範囲">
+        表示範囲 (検証用)
         <button type="button" onclick="範囲リセット()">🗑️</button>
         
-        <div style="display: flex; gap: 2px;">
+        <div style="display: flex; gap: 3px;">
 
             <div style="display: flex;">
                 <input type="number" id="非表示上" min="1">
@@ -162,20 +162,19 @@
                     </label>
                 </div>
 
-            </div> <!-- 設定グループ ここまで -->
+            </div>
 
             <div class="設定グループ">
 
-            <div class="設定項目 表示範囲スイッチ" style="margin: 0;">
-                表示範囲
-                <label class="スイッチ">
-                    <input type="checkbox" id="表示範囲">
-                    <span class="スイッチ背景"></span>
-                </label>
-            </div>
+                <div class="設定項目 表示範囲スイッチ" style="margin-bottom: -5px;">
+                    表示範囲
+                    <label class="スイッチ">
+                        <input type="checkbox" id="表示範囲">
+                        <span class="スイッチ背景" style="cursor: default;"></span>
+                    </label>
+                </div>
 
-            <button type="button" id="リセット" class="リセット">初期値に戻す</button>
-
+                <button type="button" id="リセット" class="リセット">初期値に戻す</button>
 
             </div>
 
@@ -198,7 +197,7 @@
     <div class="宇宙レイヤー 近景"></div>
     <div class="星群"></div>
 
-    <div style="height: 100px;"></div>
+    <div class="空白" style="height: 100px;"></div>
 
     <!-- 🔹トップ画像 -->
 
@@ -323,7 +322,7 @@
         </div>
     </div>
 
-    <p class="カチンコ星群 ▼" data-se="se/ka-n.mp3" style="margin-top: -16rem; margin-bottom: 40vh; --待機: 2s;"></p>
+    <p class="星群 ▼" data-se="se/ka-n.mp3" style="margin-top: -16rem; margin-bottom: 40vh; --待機: 2s;"></p>
 
     <!-- 🔹1画面弱の空白と流星 ⚠️ * 〇vh は セリフ数 / 10 -->
 変動
@@ -1090,7 +1089,7 @@
             <div class="💬" data-wt="20">
                 しかし、エゴとしてのあなたがこだわる「イヤな気分」は、それとは別ですぢゃ。<br>
                 イヤな気分の前には必ず、「それは間違ってる」という判断…見方の採用がありますぢゃ。<br>
-                大抵は、かつての権威から学んだ「<em>これが正しい、これが正義、誰もがこーあるべきべき！</em>」という制限的な信念を、無意識のうちに受け入れた見方が。
+                大抵は、かつての権威から学んだ「<em>これが正しい、これが正義、こーあるべきべき！</em>」という制限的な信念を、無意識のうちに受け入れた見方が。
             </div>
         </div>
 

@@ -35,14 +35,14 @@
 .表示範囲 {
     position: absolute;
     top:      0;
-    right:    12%;
+    right:    11%;
 
     min-width:   0;
     flex-shrink: 0;
 
-    opacity: 0;
-    transition: opacity 0.2s;
+    visibility: hidden;
 }
+body.表示 .表示範囲 { visibility: visible; }
 
 #非表示上, #非表示下 {
     width: 35px;
@@ -70,11 +70,13 @@ input[type="number"]::-webkit-inner-spin-button { -webkit-appearance: none; }
 }
 
 .表示範囲スイッチ {
+    cursor: default;
+
     opacity:    0;
-    transition: opacity 0.2s;
+    transition: opacity 0.2s 1s;
 }
 .表示範囲スイッチ:hover,
-body.表示 .表示範囲 { opacity: 1; }
+body.表示 .表示範囲スイッチ { opacity: 1; }
 
 /* 🔹設定 */
 
@@ -321,7 +323,7 @@ input:checked + .スイッチ背景:after { /* ONの文字 */
 .リセット {
     display: block;
 
-    margin:  auto;
+    margin:  auto 0;
     padding: 4px 8px;
 
     border:        1px solid var(--中光, #888);
