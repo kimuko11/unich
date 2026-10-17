@@ -993,7 +993,7 @@ function ニュートラル復帰(要素, プロパティ, 目標値, 秒数 = 0
 // 🎛️文字分解（ふきだし内のHTML構造を保ったまま、文字を1つずつ<span class="文字">に分解。ト書きは除外）
 
 function 文字分解(要素) {
-    const 文字要素一覧 = [];
+    const 文字一覧 = [];
 
     function 走査(元ノード, 複製先) {
         元ノード.childNodes.forEach((子ノード) => {
@@ -1004,7 +1004,7 @@ function 文字分解(要素) {
                     文字span.className   = '文字';
                     文字span.textContent = 文字;
                     複製先.appendChild(文字span);
-                    文字要素一覧.push(文字span);
+                    文字一覧.push(文字span);
                 });
             } else if (子ノード.nodeType === Node.ELEMENT_NODE) {
                 if (子ノード.classList.contains('ト書き上') || 子ノード.classList.contains('ト書き下')) {
@@ -1014,7 +1014,9 @@ function 文字分解(要素) {
                 }
 
                 if (子ノード.tagName === 'BR') {
-                    複製先.appendChild(document.createElement('br'));
+                    const brElem = document.createElement('br');
+                    複製先.appendChild(brElem);
+                    文字一覧.push(brElem); // 改行タグは配列の順番に組み込む
                 } else {
                     const 複製要素 = document.createElement(子ノード.tagName);
                     [...子ノード.attributes].forEach((属性) => {
@@ -1030,7 +1032,7 @@ function 文字分解(要素) {
     const 元の内容 = 要素.cloneNode(true);
     要素.innerHTML = '';
     走査(元の内容, 要素);
-    return 文字要素一覧;
+    return 文字一覧;
 }
 
 
@@ -1076,7 +1078,9 @@ function セリフ表示(エリア, 完了コールバック) {
     function 次文字表示() {
         if (設定速度ms <= 0 || 速度倍率 <=0 || !スイッチ登場アニメ) { // 速度 0ms以下か、登場アニメOFFの場合、待ち時間なしで全表示＆即完了
             for (let i = 現在位置; i < 文字一覧.length; i++) {
-                文字一覧[i].classList.add('表示済');
+                if (文字一覧[i].nodeType === Node.ELEMENT_NODE && 文字一覧[i].tagName === 'SPAN') {
+                    文字一覧[i].classList.add('表示済');
+                }
             }
             if (!モノローグ) 口元アニメ終了(エリア);
             ト書き下表示();
@@ -1089,18 +1093,24 @@ function セリフ表示(エリア, 完了コールバック) {
             return;
         }
 
-        // ▫️実際の文字の表示処理（実際の文字数を超えた分は「タメ時間」として待機のみ行う）
+        let 次の遅延 = 設定速度ms * 速度倍率;
 
         if (現在位置 < 文字一覧.length) {
-            const 文字span = 文字一覧[現在位置];
-            文字span.classList.add('表示済');
+            const 対象 = 文字一覧[現在位置];
 
-            if (文字span.textContent !== ' ') {
-                const 現在時刻 = performance.now();
-                if (現在時刻 - 前回発音時刻 >= 30) { // 前回の発音から30ms以上経過なら再生
-                    const 音量倍率 = parseFloat(ふきだし.dataset.vv || '1'); // data-vv が未設定時は 1
-                    ボイス再生(キャラ, ボイス変動率, 音量倍率);
-                    前回発音時刻 = 現在時刻;
+            if (対象.tagName === 'BR') {
+                const 改行タメ倍率 = 5; // 改行は〇文字相当のタメ時間
+                次の遅延 = (設定速度ms * 速度倍率) * 改行タメ倍率;
+            } else {
+                対象.classList.add('表示済'); // 通常の文字要素の場合
+
+                if (対象.textContent !== ' ') {
+                    const 現在時刻 = performance.now();
+                    if (現在時刻 - 前回発音時刻 >= 30) { // 前回の発音から30ms以上経過なら再生
+                        const 音量倍率 = parseFloat(ふきだし.dataset.vv || '1'); // data-vv が未設定時は 1
+                        ボイス再生(キャラ, ボイス変動率, 音量倍率);
+                        前回発音時刻 = 現在時刻;
+                    }
                 }
             }
 
@@ -1112,10 +1122,10 @@ function セリフ表示(エリア, 完了コールバック) {
 
         現在位置++;
 
-        タイマーID = setTimeout(次文字表示, 設定速度ms * 速度倍率); // 毎回その時点の「設定速度ms」を取得して次のタイマーを設定
+        タイマーID = setTimeout(次文字表示, 次の遅延); // 毎回その時点の「設定速度ms」を取得して次のタイマーを設定
     }
 
-    次文字表示(); // 処理開始
+    次文字表示();
 }
 
 

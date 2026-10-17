@@ -31,32 +31,28 @@
 
     <!-- 🔹設定 -->
 
-    <div class="設定" id="設定">
-        <img src="img/radio-s.webp" alt="ラジオ" id="ラジオ" class="ラジオ 発光 出現">
+    <div id="設定" class="設定">
+
+        <div id="ラジオ" class="ラジオ 発光 出現" style="--待機: 1s;">
+            <img src="img/radio_off.webp" alt="📻ラジオ" class="未タップ">
+            <img src="img/radio_on.webp"  alt="📻ラジオ" class="タップ済">
+        </div>
+        <div class="出現→消滅" style="--待機: 1s; margin-top: -8px;">設定</div>
 
         <div class="ヘッダ💬">
 
-            <div class="右寄" style="margin-top: -10px;">
-                <div class="未タップ">
-                    <span class="中字">🔇</span>音声出力: OFF
-                </div>
-                <div class="タップ済">
-                    <span class="中字">🔊</span> 音声出力: ON
-                </div>
-            </div>
-
             <div class="設定項目">
-                <div style="display: inline;">ボイス音量<span class="灰">（最小: 無音）</span></div>
+                ボイス音量
                 <label class="スライダー">
-                    小<input type="range" id="ボイス音量" max="9" min="0" value="4">大
+                    無<input type="range" id="ボイス音量" max="9" min="0" value="4">大
                     <span class="スライダー数値">4</span>
                 </label>
             </div>
 
             <div class="設定項目">
-                <div style="display: inline;">効果音量<span class="灰">（最小: 無音）</span></div>
+                効果音量
                 <label class="スライダー">
-                    小<input type="range" id="効果音量" max="9" min="0" value="4">大
+                    無<input type="range" id="効果音量" max="9" min="0" value="4">大
                     <span class="スライダー数値">4</span>
                 </label>
             </div>
@@ -78,9 +74,9 @@
             </div>
 
             <div class="設定項目">
-                <div style="display: inline;">文字速度<span class="灰">（最速: 文字送りなし）</span></div>
+                文字速度
                 <label class="スライダー">
-                    遅<input type="range" id="文字速度" max="9" min="0" value="4">速
+                    遅<input type="range" id="文字速度" max="9" min="0" value="4">無
                     <span class="スライダー数値">4</span>
                 </label>
             </div>
@@ -119,9 +115,21 @@
                     </label>
                 </div>
 
-            </div> <!-- 設定グループ ここまで -->
+            </div>
 
-            <button type="button" id="リセット" class="リセット">初期値に戻す</button>
+            <div class="設定グループ">
+
+                <div class="設定項目 表示範囲スイッチ" style="margin-bottom: -5px;">
+                    表示範囲
+                    <label class="スイッチ">
+                        <input type="checkbox" id="表示範囲">
+                        <span class="スイッチ背景" style="cursor: default;"></span>
+                    </label>
+                </div>
+
+                <button type="button" id="リセット" class="リセット">初期値に戻す</button>
+
+            </div>
 
         </div> <!-- ヘッダ💬 ここまで -->
 

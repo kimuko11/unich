@@ -33,7 +33,7 @@
 
 .縮小 { /* 原型から縮小 */
     transform-origin: var(--起点, 0% 0%);
-    animation: 縮小 calc(var(--時間, 1s) / var(--アニメ速度, 1)) calc(var(--待機, 10s) / var(--アニメ速度, 1)) linear forwards;
+    animation: 縮小 calc(var(--時間, 1s) / var(--アニメ速度, 1)) calc(var(--待機, 0s) / var(--アニメ速度, 1)) linear forwards;
 }
 
 /* 🔹Rotate */
