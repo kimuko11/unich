@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>📻宇宙よろず相談室 🎬#001 - 1</title>
+    <title>📻宇宙よろず相談室 🎬#001</title>
 
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="ucyu.css">
@@ -48,13 +48,14 @@
 
     </div>
 
-    <!-- 🔹検証用 表示範囲 -->
+    <!-- 🔹表示範囲 (開発用) -->
 
     <div class="表示範囲">
-        表示範囲 (検証用)
+        表示範囲
         <button type="button" onclick="範囲リセット()">🗑️</button>
+        (<a href="#" class="金 下線" onclick="const cb = document.getElementById('表示範囲'); if(cb){cb.checked = false; cb.dispatchEvent(new Event('change'));} return false;">非表示</a>)
         
-        <div style="display: flex; gap: 3px;">
+        <div style="display: flex; gap: 5px;">
 
             <div style="display: flex;">
                 <input type="number" id="非表示上" min="1">
@@ -197,7 +198,7 @@
     <div class="宇宙レイヤー 近景"></div>
     <div class="星群"></div>
 
-    <div class="空白" style="height: 100px;"></div>
+    <div class="改行6"></div>
 
     <!-- 🔹トップ画像 -->
 
@@ -232,7 +233,7 @@
         </span>
     </p>
 
-    <div class="対話全体枠" style="margin-bottom: 10rem;">
+    <div class="対話全体枠">
         <div class="👤 右側">
             <div class="キャラ画像" style="--サイズ: -16%; --被り幅: -5px;">
                 <img src="cha/st_kihon.webp"          alt="👤">
@@ -259,6 +260,8 @@
             </div>
         </div>
     </div>
+
+    <div class="改行10"></div>
 
     <!-- 🔹キャラ紹介 -->
 
@@ -325,7 +328,7 @@
     <p class="星群 ▼" data-se="se/ka-n.mp3" style="margin-top: -16rem; margin-bottom: 40vh; --待機: 2s;"></p>
 
     <!-- 🔹1画面弱の空白と流星 ⚠️ * 〇vh は セリフ数 / 10 -->
-変動
+
     <div class="画像" style="margin-bottom: calc(60vh - var(--画像サイズ, 4) * 6vh);">
         <img src="img/ryusei.webp" class="流星大 ▼" data-se="se/ryusei.mp3" data-sv="0.1">
     </div>

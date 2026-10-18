@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>📻宇宙よろず相談室 🎬#001 - 2</title>
+    <title>📻宇宙よろず相談室 🎬#001 - 回答</title>
 
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="ucyu.css">
@@ -46,13 +46,14 @@
 
     </div>
 
-    <!-- 🔹検証用 表示範囲 -->
+        <!-- 🔹表示範囲 (開発用) -->
 
     <div class="表示範囲">
-        表示範囲 (検証用)
+        表示範囲
         <button type="button" onclick="範囲リセット()">🗑️</button>
+        (<a href="#" class="金 下線" onclick="const cb = document.getElementById('表示範囲'); if(cb){cb.checked = false; cb.dispatchEvent(new Event('change'));} return false;">非表示</a>)
         
-        <div style="display: flex; gap: 3px;">
+        <div style="display: flex; gap: 5px;">
 
             <div style="display: flex;">
                 <input type="number" id="非表示上" min="1">
@@ -200,7 +201,7 @@
 
     <!-- 🔹1画面弱の空白と流星 ⚠️ * 〇vh は セリフ数 / 10 -->
 
-    <div class="画像" style="margin: calc(40vh - var(--画像サイズ, 4) * 1vh) 0;">
+    <div class="画像" style="margin: calc(45vh - var(--画像サイズ, 4) * 1vh) 0;">
         <img src="img/ryusei.webp" class="流星大" style="--待機: 3s;">
     </div>
 

@@ -50,6 +50,7 @@ a {
     text-decoration: none;
     color: inherit;
 }
+a:hover { color: var(--強光, seashell); }
 
 
 /* #️⃣グローバル変数 */
@@ -128,6 +129,8 @@ b, em {
 
 .細字 { font-weight: normal; }
 .太字 { font-weight: 900; }
+
+.下線 { text-decoration: underline; }
 
 /* 🔹カラー */
 

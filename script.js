@@ -310,6 +310,10 @@ document.addEventListener('DOMContentLoaded', () => {
             スイッチ表示範囲 = e.target.checked;
             localStorage.setItem(KEY_表示範囲, スイッチ表示範囲);
             設定更新();
+
+            const 入力上 = document.getElementById('非表示上');
+            const 入力下 = document.getElementById('非表示下');
+            if (入力上.value || 入力下.value ) 範囲リセット();
         });
     }
 
@@ -327,6 +331,9 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     ロゴ.addEventListener('click', (e) => {
+        if (e.target.closest('.ヘッダ💬')) {
+            return;
+        }
         e.stopPropagation();
         ロゴ.classList.toggle('オープン');
     });
@@ -530,7 +537,7 @@ function 表示制御実行(値上, 値下) {
     });
 
     // 入力が1つでもあればメインコンテンツより上は隠す
-    const トップコンテンツ = document.querySelectorAll('.宇宙全体 > :not(.対話全体枠):not(.描画省略):not(.宇宙レイヤー):not(.空白)');
+    const トップコンテンツ = document.querySelectorAll('.宇宙全体 > :not(.対話全体枠):not(.描画省略):not(.宇宙レイヤー), #ロゴ');
 
     トップコンテンツ.forEach(el => {
         if (絞り込み有効) {
