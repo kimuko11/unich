@@ -433,12 +433,12 @@ function 低スペ端末判定() {
         const 一致 = 識別文字.match(/OS (\d+)_/);
         if (一致 && 一致[1]) return parseInt(一致[1], 10) <= 15; // iOS 15 以下なら
         if (!window.structuredClone) return true;                // structuredClone は iOS 15.4 以降で導入
+        return false;
     }
 
     const メモリ = navigator.deviceMemory; 
     const コア数 = navigator.hardwareConcurrency; 
     if ((メモリ && メモリ < 4) || (コア数 && コア数 <= 4)) return true; // メモリ 4GB 未満、または CPU 4コア以下なら
-
     return false;
 }
 

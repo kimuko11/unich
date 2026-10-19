@@ -129,7 +129,7 @@ body.即時 .💬 {
     
 }
 body.即時 .縮小 {
-    scale:     0.7;
+    scale:     var(--倍率, 0.5);
     animation: none;
 }
 body.即時 .キャラ画像 {
