@@ -864,7 +864,17 @@ function 次キャラ処理() {
             const 効果音パス = ふきだし.dataset.se;
             if (効果音パス) {
                 const 音量倍率 = parseFloat(ふきだし.dataset.sv || '1'); // data-sv 未設定時は 1
-                効果音再生(効果音パス, 音量倍率);
+                const 待機秒   = parseFloat(ふきだし.dataset.sw || '0'); // data-sw 未設定時は 0
+                
+                if (待機秒 > 0) {
+                    const アニメ速度倍率 = アニメ速度取得();
+                    const 遅延ms = (待機秒 * 1000) / アニメ速度倍率; // アニメ速度に追従して変動
+                    setTimeout(() => {
+                        効果音再生(効果音パス, 音量倍率);
+                    }, 遅延ms);
+                } else {
+                    効果音再生(効果音パス, 音量倍率); // 即時再生
+                }
             }
         }
 
