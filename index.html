@@ -51,7 +51,7 @@
     <!-- 🔹表示範囲 (開発用) -->
 
     <div class="表示範囲">
-        表示範囲
+        開発用
         <button type="button" onclick="範囲リセット()">🗑️</button>
         (<a href="#" class="金 下線" onclick="const cb = document.getElementById('表示範囲'); if(cb){cb.checked = false; cb.dispatchEvent(new Event('change'));} return false;">非表示</a>)
         
@@ -168,7 +168,7 @@
             <div class="設定グループ">
 
                 <div class="設定項目 表示範囲スイッチ" style="margin-bottom: -5px;">
-                    表示範囲
+                    開発用
                     <label class="スイッチ">
                         <input type="checkbox" id="表示範囲">
                         <span class="スイッチ背景" style="cursor: default;"></span>
@@ -244,7 +244,7 @@
                 <img src="cha/st_kihon_hitosasi.webp" alt="☝️" class="差分 発射"          style="--起点: 50% 100%; --倍率: 1.03;">
             </div>
             <div class     = "💬 小字"
-                data-se = "se/puyon.mp3"
+                data-se = "se/danryoku_s.mp3"
                 data-sv = "0.3"
                 data-sp = "0"
                 style   = "--余白左: 3%; --右尻尾: -45px;">
@@ -269,11 +269,11 @@
 
     <p class="白枠 改行2">
         <span class="黒枠 極大 出現 ▼">🎙️</span>
-        <span class="差分 黒枠 大字 太字 橙 横滑 ▼" data-se="se/kirara.mp3" data-sv="0.1" style="top: 0.4em;">番組パーソナリティ</span>
+        <span class="差分 黒枠 大字 太字 橙 横滑 ▼" data-se="se/ryusei_s.mp3" data-sv="0.1" style="top: 0.4em;">番組パーソナリティ</span>
     </p>
 
     <div class="画像 発光">
-        <div class="拡大 ▼" data-threshold="0.95" data-se="se/cyupi-3.mp3">
+        <div class="拡大 ▼" data-threshold="0.95" data-se="se/tojo_cute.mp3">
             <img src="pic/prof_doc_001.webp" alt="🥸アイドルライブを楽しむドク">
         </div>
     </div>
@@ -292,7 +292,7 @@
     </p>
 
     <div class="画像 発光">
-        <div class="拡大 ▼" data-threshold="0.95" data-se="se/cyupi-3.mp3">
+        <div class="拡大 ▼" data-threshold="0.95" data-se="se/tojo_cute.mp3">
             <img src="pic/prof_uni_001.webp" alt="🐰買い物中のユニちゃん">
         </div>
     </div>
@@ -325,12 +325,12 @@
         </div>
     </div>
 
-    <p class="星群 ▼" data-se="se/ka-n.mp3" style="margin-top: -16rem; margin-bottom: 40vh; --待機: 2s;"></p>
+    <p class="星群 ▼" data-se="se/hyosigi_m.mp3" style="margin-top: -16rem; margin-bottom: 40vh; --待機: 2s;"></p>
 
     <!-- 🔹1画面弱の空白と流星 ⚠️ * 〇vh は セリフ数 / 10 -->
 
     <div class="画像" style="margin-bottom: calc(60vh - var(--画像サイズ, 4) * 6vh);">
-        <img src="img/ryusei.webp" class="流星大 ▼" data-se="se/ryusei.mp3" data-sv="0.1">
+        <img src="img/ryusei.webp" class="流星大 ▼" data-se="se/hikari_mid.mp3" data-sv="0.1">
     </div>
 
     <!-- 🔹対話 -->
@@ -364,8 +364,9 @@
                     <img src="cha/ut_genkina-aisatu_ude.webp" alt="💪" class="横揺"            style="--起点: 25% 95%; --角度: 10deg;">
                 </div>
             </div>
+            <!-- 番組初手の盛り上がりや元気さ重視 -->
             <div class  = "💬 感情"
-                data-se = "se/kansei.mp3"
+                data-se = "se/kansei_hakusyu_l.mp3"
                 data-sv = "0.3">
                 人類の起源から魂の行き先まで、リスナーのあらゆゆ疑問や謎にこたえゆ「<em>宇宙よろず相談室</em>」！<br>
                 みんなのアイドル、<em>ユニちゃん</em>でしゅ！
@@ -378,8 +379,9 @@
                 <img src="cha/dt_figure_heart.webp"  alt="♥️" class="差分 発射→拍動"   style="--時間1: 3s; --時間2: 3s;">
                 <img src="cha/dt_figure_figure.webp" alt="💪" class="差分 発射→拍微動" style="--起点: 50% 100%; --倍率: 1.03;">
             </div>
+            <!-- 盛り上がりや元気さに加えて、ドクのオタク感も出す -->
             <div class  = "💬"
-                data-se = "se/yahho.mp3"
+                data-se = "se/oyorokobi.mp3"
                 data-sv = "0.3"
                 style   = "--右尻尾: 15px;">
                 デュフフww<br>
@@ -413,7 +415,7 @@
                 </div>
             </div>
             <div class  = "💬"
-                data-se = "se/kyupin.mp3"
+                data-se = "se/hikari_high.mp3"
                 data-sv = "0.5"
                 style   = "--右尻尾: 20px;">
                 オウフwww<br>
@@ -430,7 +432,7 @@
                 <img src="cha/uf_sizukana-ikari_kekkan.webp" alt="💢" class="差分 拍動" style="--起点: 33% 55%; --時間: 0.5s;">
             </div>
             <div class  = "💬 激情"
-                data-se = "se/go-4.mp3"
+                data-se = "se/jinari.mp3"
                 data-sv = "3"
                 data-sp = "10"
                 data-vv = "0.1"
@@ -445,7 +447,7 @@
                 <img src="cha/df_chiikawa_chiikawa.webp" alt="🤲" class="差分 発射→拍微動" style="--起点: 50% 100%; --時間1: 2s; --時間2: 2s; --倍率: 1.02;">
             </div>
             <div class  = "💬"
-                data-se = "se/waaa.mp3"
+                data-se = "se/kansei_mix.mp3"
                 data-sv = "0.3"
                 data-wt = "20"
                 style   = "--右尻尾: -10px;">
@@ -463,7 +465,7 @@
                 <img src="cha/ut_ikari_kuchi.webp"    alt="👄" class="差分 パク" style="--起点: 50% 79%; --時間: 0.15s;">
             </div>
             <div class  = "💬 激情"
-                data-se = "se/bachi-2.mp3"
+                data-se = "se/denki.mp3"
                 data-sv = "2"
                 data-vv = "2"
                 style   = "--左尻尾: 10px;">
@@ -515,7 +517,7 @@
                 <img src="cha/dt_ok-migi_ude.webp"    alt="👌" class="差分 発射→拍微動" style="--起点: 80% 100%; --倍率: 1.05;">
             </div>
             <div class  = "💬"
-                data-se = "se/pon.mp3"
+                data-se = "se/kodutumi.mp3"
                 data-sv = "0.5">
                 いや失敬失敬ww<br>
                 シカーリお仕事させていただきますぞいwwwおkおk
@@ -529,7 +531,7 @@
                 <img src="cha/ut_tameiki_tameiki.webp" alt="💨" class="差分 発射→拍動" style="--時間1: 2s; --時間2: 2s; --倍率: 1.05;">
             </div>
             <div class  = "💬 感情"
-                data-se = "se/powawa.mp3"
+                data-se = "se/vib_mid.mp3"
                 data-wt = "10"
                 style   = "--左尻尾: 5px;">
                 草ばかり生やちくさって、あったりまえでしゅ！<br>
@@ -549,7 +551,7 @@
                 <img src="cha/guest.webp" alt="👤">
             </div>
             <div class  = "💬"
-                data-se = "se/kaiso.mp3"
+                data-se = "se/kaiso_2.mp3"
                 data-sv = "0.05"
                 data-vv = "0.5"
                 data-wt = "10">
@@ -572,7 +574,7 @@
                 <img src="cha/da_sibuki_sibuki.webp" alt="💦" class="差分 発射" style="--起点: 60% 80%;">
             </div>
             <div class  = "💬 感情"
-                data-se = "se/zukkoke.mp3"
+                data-se = "se/cymbals.mp3"
                 style   = "--右尻尾: 10px;">
                 <b>ドプフォwwww</b><br>
                 このコメを拾ったのが、小生への当てつけ以外の何ものでもない件についてwww
@@ -598,7 +600,7 @@
                 <img src="cha/df_dogeza_kuchi.webp" alt="👄" class="差分 パク" style="--起点: 50% 72%;">
             </div>
             <div class  = "💬 感情"
-                data-se = "se/guki.mp3">
+                data-se = "se/daboku.mp3">
                 その冷たい目線、<br>
                 待って無理ご褒美すぎ本当にありがとうございましたww
             </div>
@@ -610,7 +612,7 @@
                 <img src="cha/ut_teikan_kuchi.webp" alt="👄" class="差分 パク" style="--起点: 50% 81%;">
             </div>
             <div class  = "💬 感情"
-                data-se = "se/pou.mp3"
+                data-se = "se/app_low.mp3"
                 style   = "--左尻尾: 5px;">
                 いーから<br>
                 さくさくグッドな回答をちやがれでしゅ！
@@ -624,7 +626,7 @@
                 <img src="cha/dt_hitosasi_ude.webp"    alt="☝️" class="差分 発射→拍微動" style="--起点: 50% 100%; --時間2: 2s; --倍率: 1.03;">
             </div>
             <div class  = "💬"
-                data-se = "se/pikon.mp3"
+                data-se = "se/hirameki.mp3"
                 data-wt = "10"
                 style   = "--右尻尾: 20px;">
                 いや失敬失敬ww<br>
@@ -639,7 +641,7 @@
                 <img src="cha/ut_tantan_kuchi.webp" alt="👄" class="差分 パク" style="--起点: 50% 84%;">
             </div>
             <div class  = "💬"
-                data-se = "se/pyoko.mp3"
+                data-se = "se/app_cute_low.mp3"
                 style   = "--左余白: 4%;">
                 …<b>神</b>と<b>宗教</b>と<b>人間</b><br>
                 のことでしゅね。
@@ -653,7 +655,7 @@
                 <img src="cha/da_megane_kuchi.webp"  alt="👄" class="差分 ピク">
             </div>
             <div class  = "💬"
-                data-se = "se/syakin.mp3"
+                data-se = "se/hero_1.mp3"
                 style   = "--右尻尾: 20px;">
                 しかしここでコメ主殿がおっさってるのはその意味ではなく、スピリチュアリティな意味での文脈だと把握しますた。(メガネ、クイッ)<br>
                 推しは自分から分離した外側にいるのではなく、わが内側にこそいるのだと。<br>
@@ -668,7 +670,7 @@
                 <img src="cha/uf_unun_unun.webp" alt="💨" class="差分 発射" style="--起点: 70% 80%; --時間: 2s; --待機: 1s;">
             </div>
             <div class="💬"
-                data-se = "se/pachi-2.mp3"
+                data-se = "se/mabataki.mp3"
                 style   = "--左尻尾: 15px;">
                 ドクのアタオカ解説はともかく、このリスナーさまはよく理解されてゆでしゅね。<br>
                 だから精神的に成熟ちた人なら、外がわの偶像を崇拝なんてすゆわけないでしゅ。<br>
@@ -684,7 +686,7 @@
                 <img src="cha/da_pyo-n_kuchi.webp"   alt="👄" class="差分 パク" style="--起点: 50% 60%;">
             </div>
             <div class  = "💬 激情"
-                data-se = "se/pyo-n.mp3"
+                data-se = "se/fc_jump.mp3"
                 data-wt = "20"
                 style   = "--起点: top center; --余白右: 0%;">
                 バブみ盛り盛り、<br>チパ〜イ♥️
@@ -734,7 +736,7 @@
                 <img src="cha/ut_tomadoi_kuchi.webp" alt="👄" class="差分 パク" style="--起点: 50% 76%;">
             </div>
             <div class  = "💬"
-                data-se = "se/boyon.mp3"
+                data-se = "se/danryoku_m.mp3"
                 style   = "--左尻尾: 5px;">
                 あれ？<br>
                 軽いでしゅねえ。<br>
@@ -749,7 +751,7 @@
                 <img src="cha/dt_ok-hidari_ude.webp"    alt="👌" class="差分 発射→拍微動" style="--起点: 50% 100%; --時間2: 2s; --倍率: 1.03;">
             </div>
             <div class  = "💬"
-                data-se = "se/kyupin.mp3"
+                data-se = "se/hikari_high.mp3"
                 style   = "--右尻尾: 20px;">
                 キタコレww<br>
                 だって小生、そーゆー目で見てないでござるww
@@ -764,7 +766,7 @@
                 <img src="cha/ut_nani_ude.webp"   alt="💪" class="差分 微動">
             </div>
             <div class  = "💬"
-                data-se = "se/po.mp3"
+                data-se = "se/app_mid.mp3"
                 style   = "--左余白: 2%;">
                 そーゆー目…って…なにが？
             </div>
@@ -779,7 +781,7 @@
                 <img src="cha/da_heart_ude.webp"    alt="🙏" class="差分">
             </div>
             <div class  = "💬"
-                data-se = "se/moso.mp3"
+                data-se = "se/sozo.mp3"
                 data-sv = "3"
                 style   = "--右尻尾: 10px;">
                 偶像崇拝を「正しい」とか「間違ってる」とか、そーゆー目で見てないって意味ですぢゃw<br>
@@ -810,7 +812,7 @@
                 <img src="cha/da_sibuki_sibuki.webp" alt="💦" class="差分 発射" style="--起点: 60% 80%;">
             </div>
             <div class  = "💬 感情"
-                data-se = "se/do-n.mp3"
+                data-se = "se/kanadarai.mp3"
                 data-wt = "10"
                 style   = "--右尻尾: 10px;">
                 ドプフォwww<br>
@@ -827,7 +829,7 @@
                 <img src="cha/ut_hatena_ude.webp"    alt="💪" class="差分 発射→拍微動" style="--起点: 35% 95%; --時間2: 9s; --時間3: 9s; --倍率: 1.03;">
             </div>
             <div class="💬"
-                data-se = "se/poyo.mp3"
+                data-se = "se/app_cute_high.mp3"
                 style="--左尻尾: 5px;">
                 <b>？？？</b><br>
                 なにゆってゆでしゅか…？<br>
@@ -841,7 +843,7 @@
                 <img src="cha/dt_hitosasi_ude.webp" alt="☝️" class="差分 発射→拍微動" style="--起点: 50% 100%; --時間2: 2s; --倍率: 1.03;">
             </div>
             <div class  = "💬"
-                data-se = "se/kira.mp3"
+                data-se = "se/hikari_low.mp3"
                 data-wt = "10"
                 style   = "--右尻尾: 15px;">
                 再確認ヨロシ？<br>
@@ -856,7 +858,7 @@
                 <img src="cha/ut_hitotu_ude.webp"   alt="☝️" class="差分 発射" style="--起点: 50% 95%; --倍率: 1.03;">
             </div>
             <div class  = "💬"
-                data-se = "se/peta.mp3"
+                data-se = "se/stamp.mp3"
                 style   = "--左余白: 2%; --左尻尾: 5px;">
                 …神とひとつ、でしゅね。
             </div>
@@ -872,7 +874,7 @@
                 <img src="cha/dt_good_ude.webp"      alt="👍" class="差分 発射" style="--起点: 30% 99%; --倍率: 1.1;">
             </div>
             <div class  = "💬"
-                data-se = "se/kyupin.mp3"
+                data-se = "se/hikari_high.mp3"
                 style   = "--右尻尾: 30px;">
                 ワンネス同意、いただきますたw<br>
                 それなら神が世界をクリエイトしてるのだから、「あなたが」世界をクリエイトしてるてーことになるのですがそれは。
@@ -886,7 +888,10 @@
                 <img src="cha/ua_hatena_kuchi.webp"  alt="👄" class="差分">
                 <img src="cha/ua_hatena_ude.webp"    alt="👆" class="差分">
             </div>
-            <div class="💬" data-sp="5" style="--左余白: 6%; --左尻尾: -20px;">
+            <div class  = "💬"
+                data-se = "se/app_cute_high.mp3"
+                data-sp = "5"
+                style   = "--左余白: 6%; --左尻尾: -20px;">
                 ・・・・？
             </div>
         </div>
@@ -897,7 +902,9 @@
                 <img src="cha/da_megane_hikari.webp" alt="✨" class="差分 発射→拍動" style="--起点: 40% 53%; --倍率: 1.3;">
                 <img src="cha/da_megane_kuchi.webp"  alt="👄" class="差分 ピク">
             </div>
-            <div class="💬" style="--右尻尾: 20px;">
+            <div class  = "💬"
+                data-se = "se/hikari_strong.mp3"
+                style   = "--右尻尾: 20px;">
                 いや失敬失敬ww<br>
                 あなたが「これが正解だ」と採用するなら、<em>あなた固有の世界</em>ではそれが「正解」になるし、あなたが「これが間違いだ」と採用するなら、<em>あなた固有の世界</em>ではそれが「間違い」になる…ただそれだけのことでは。<br>
                 <em>それが神では。</em>（ｷﾘｯ
@@ -910,7 +917,10 @@
                 <img src="cha/ut_odoroki_me.webp"    alt="👀" class="差分 目瞬" style="--起点: 40% 73%;">
                 <img src="cha/ut_odoroki_kuchi.webp" alt="👄" class="差分">
             </div>
-            <div class="💬 感情" data-sp="5" data-se="se/katakata.mp3" style="--左余白: 5%; --左尻尾: -20px;">
+            <div class  = "💬 感情"
+                data-se = "se/newtype.mp3"
+                data-sp = "5"
+                style   = "--左余白: 5%; --左尻尾: -20px;">
                 <b>・・・・！</b>
             </div>
         </div>
@@ -920,7 +930,9 @@
                 <img src="cha/da_sibuki.webp"        alt="🥸">
                 <img src="cha/da_sibuki_sibuki.webp" alt="💦" class="差分 発射" style="--起点: 60% 80%;">
             </div>
-            <div class="💬" style="--右尻尾: 10px;">
+            <div class  = "💬"
+                data-se = "se/cymbals.mp3"
+                style   = "--右尻尾: 10px;">
                 もしこの宇宙のどこかに、自分とは関係なしに最初から意味の決まったものなんてあるなら、自分は神とひとつではない…<br>
                 「<em>神なのに、その外側に制御できない何かがあるww</em>」という、あり得ないパラドクースが成立しちゃいますぢゃよねwwwフォカヌポウ
             </div>
@@ -935,7 +947,10 @@
                 <img src="cha/ut_kyogaku_kuchi.webp"       alt="👄" class="差分 パク">
                 <img src="cha/ut_kyogaku_ude.webp"         alt="🙏" class="差分 発射" style="--起点: 50% 90%; --倍率: 1;">
             </div>
-            <div class="💬 感情" data-sp="2" data-se="se/pikon.mp3" style="--左余白: 3%;">
+            <div class  = "💬 感情"
+                data-se = "se/hikari_high.mp3"
+                data-sp = "2"
+                style   = "--左余白: 3%;">
                 なにそれ…!!<br>
                 あああ…そっか…<br>
                 そーでしゅよね…。
@@ -947,7 +962,10 @@
                 <img src="cha/dt_hitosasi.webp"     alt="🥸">
                 <img src="cha/dt_hitosasi_ude.webp" alt="☝️" class="差分 発射→拍微動" style="--起点: 50% 100%; --時間2: 2s; --倍率: 1.03;">
             </div>
-            <div class="💬" data-wt="20" style="--右尻尾: 20px;">
+            <div class  = "💬"
+                data-se = "se/bane.mp3"
+                data-wt = "10"
+                style   = "--右尻尾: 20px;">
                 何かを間違ってるとケテーイしたら、イヤな気分はゼターイ不可避。<br>
                 だってそれは、あなたという神による「自己拒絶のクリエイト」以外の何ものでもないからww
             </div>
@@ -965,7 +983,9 @@
                 <img src="cha/ut_hitotu_kuchi.webp" alt="👄" class="差分 パク" style="--起点: 50% 79%;">
                 <img src="cha/ut_hitotu_ude.webp"   alt="☝️" class="差分 発射" style="--起点: 50% 95%; --待機: 2s; --倍率: 1.03;">
             </div>
-            <div class="💬" style="--左尻尾: 5px;">
+            <div class  = "💬"
+                data-se = "se/app_mid.mp3"
+                style   = "--左尻尾: 5px;">
                 ・・・・・。<br>
                 参考までに、ドクにとっての「よい気分」の見方を教えてほちいでしゅ。
             </div>
@@ -977,7 +997,8 @@
                 <img src="cha/da_okane_heart.webp" alt="♥️" class="差分 発射→拍動"   style="--時間1: 3s; --時間2: 3s;">
                 <img src="cha/dt_ok-migi_ude.webp" alt="👌" class="差分 発射→拍微動" style="--起点: 80% 100%; --倍率: 1.05;">
             </div>
-            <div class="💬">
+            <div class  = "💬"
+                data-se = "se/hikari_low.mp3">
                 オゥフww<br>
                 控えめに言って、その素直さ最高♥️<br>
                 でもただの参考に留めて、思い込みではなく自分の心が安らぎと力強さを感じるかどうかで選ぶのですぢゃよ？<br>
@@ -990,7 +1011,8 @@
                 <img src="cha/ut_hojihoji.webp"          alt="🐰">
                 <img src="cha/ut_hojihoji_hojihoji.webp" alt="💨" class="差分 発射">
             </div>
-            <div class="💬">
+            <div class  = "💬"
+                data-se = "se/danryoku_s.mp3">
                 心配すゆな、<br>
                 ドクは権威者じゃないでしゅ。
             </div>
@@ -1002,7 +1024,10 @@
                 <img src="cha/da_pya_ude.webp"    alt="💪" class="差分 発射" style="--起点: 0% 100%; --時間: 2s; --倍率: 1.05;">
                 <img src="cha/da_pya_sibuki.webp" alt="💦" class="差分 発射" style="--起点: 60% 80%;">
             </div>
-            <div class="💬 感情" data-wt="20" style="--右尻尾: 20px;">
+            <div class  = "💬 感情"
+                data-se = "se/ichimokusan.mp3"
+                data-wt = "10"
+                style   = "--右尻尾: 20px;">
                 ピャーーwww<br>
                 これは失敬失敬ww<br>
                 小生が採用した目から見ると、どんな人も、どんな物質も、どんな経験も、どんな出来事も、ひとつ残らず「<em>神の一部</em>」で、「<em>神自身</em>」ですぢゃ♥️
@@ -1015,7 +1040,9 @@
                 <img src="cha/ut_tateme_me.webp"    alt="👀" class="差分 目瞬" style="--起点: 50% 74%;">
                 <img src="cha/ut_tateme_kuchi.webp" alt="👄" class="差分 パク" style="--起点: 50% 82%;">
             </div>
-            <div class="💬" style="--左尻尾: 5px;">
+            <div class  = "💬"
+                data-se = "se/app_mid.mp3"
+                style   = "--左尻尾: 5px;">
                 悪人も、貧こんも、戦争も、<br>
                 ちきう破壊も？
             </div>
@@ -1027,7 +1054,10 @@
                 <img src="cha/da_okane_kuchi.webp" alt="👄" class="差分 ピク">
                 <img src="cha/da_okane_heart.webp" alt="♥️" class="差分 発射→拍動" style="--起点: 50% 90%; --時間1: 3s; --時間2: 3s;">
             </div>
-            <div class="💬" data-wt="20" style="--右余白: 2%; --右尻尾: -5px;">
+            <div class  = "💬"
+                data-se = "se/hikari_low.mp3"
+                data-wt = "10"
+                style   = "--右余白: 2%; --右尻尾: -5px;">
                 もちろん神自身ですぢゃ♥️
             </div>
         </div>
@@ -1037,7 +1067,9 @@
                 <img src="cha/ut_iya.webp"     alt="🐰">
                 <img src="cha/ut_iya_ude.webp" alt="💪" class="差分">
             </div>
-            <div class="💬" data-sp="2">
+            <div class  = "💬"
+                data-se = "se/vib_comical.mp3"
+                data-sp = "2">
                 そんな神、イヤでしゅ…。
             </div>
         </div>
@@ -1050,7 +1082,7 @@
                 </div>
                 <img src="cha/dt_hitosasi_ude.webp"     alt="☝️" class="差分 発射→拍微動" style="--起点: 50% 100%; --時間2: 2s; --倍率: 1.03;">
             </div>
-            <div class="💬" data-wt="20" data-se="se/pikon.mp3" style="--右尻尾: 20px;">
+            <div class="💬" data-wt="20" data-se="se/hirameki.mp3" style="--右尻尾: 20px;">
                 肝要なのはここで、<br>
                 自分のキボンヌと気分は、ハキーリわけて考えることがポイントなのですぢゃw
             </div>
