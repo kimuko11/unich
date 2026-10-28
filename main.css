@@ -216,7 +216,7 @@
 
 /* #️⃣モノローグのふきだし */
 
-.無声 { color: silver; }
+.無声 { color: darkgray; }
 
 .💬.無声::before {
     background-color: rgb(from var(--色, var(--標準色, #777)) r g b / calc(alpha / 1.5));
@@ -230,7 +230,7 @@
     border:        none;   /* 尻尾消去 */
     border-radius: 50%;
 
-    background-color: var(--中光, #888);
+    background-color: var(--弱光, #888);
 }
 
 
