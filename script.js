@@ -465,7 +465,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
-// 🎛️表示範囲の絞り込み（検証用）
+// 🎛️表示範囲の絞り込み（開発用）
 
 // ▫️表示範囲の更新と保存
 
@@ -633,8 +633,10 @@ function 数値変更(targetId, diff) {
 const ページ開始時刻 = performance.now(); // キャラの画面内登場の監視と共用
 const body要素       = document.body;
 
+const 開発用フラグ   = localStorage.getItem('preview_from') !== null || localStorage.getItem('preview_to') !== null;
 const 出現指定時間   = body要素 ? parseInt(body要素.dataset.appBaseTime, 10) : NaN;
-const 出現基準時間   = !isNaN(出現指定時間) ? 出現指定時間 : 0; // 指定時間がない場合は即出現
+const 指定出現時間   = !isNaN(出現指定時間) ? 出現指定時間 : 0; // 指定時間がない場合は即出現
+const 出現基準時間   = 開発用フラグ ? 0 : 指定出現時間;         // 開発モード中も即出現
 
 const 出現閾値既定値 = 1;         // data-threshold 既定値
 const 出現マップ     = new Map(); // 監視対象要素 → .再生 を付与する要素の配列
@@ -785,10 +787,9 @@ const 画面外停止監視 = new IntersectionObserver((項目一覧) => {
 
 // ▫️初回登場トリガー用 ＆ 常時監視の登録
 
-const 検証中フラグ = localStorage.getItem('preview_from') !== null || localStorage.getItem('preview_to') !== null;
 const 登場指定時間 = body要素 ? parseInt(body要素.dataset.entryBaseTime, 10) : NaN;
 const 指定基準時間 = !isNaN(登場指定時間) ? 登場指定時間 : 0; // 指定時間がない場合は即登場
-const 登場基準時間 = 検証中フラグ ? 0 : 指定基準時間;         // 検証中も即登場
+const 登場基準時間 = 開発用フラグ ? 0 : 指定基準時間;         // 開発モード中も即登場
 
 キャラ一覧.forEach((エリア) => {
     const 計算済threshold = 閾値計算(エリア);
@@ -1271,7 +1272,10 @@ function 効果音再生(パス, 音量倍率 = 1) {
     if (!音声再生可能() || !パス || 効果音量 <= 0) return;
 
     const バッファ = 効果音キャッシュ[パス];
-    if (!バッファ || !(バッファ instanceof AudioBuffer)) return; // 未読み込みならスキップ
+    if (!バッファ || !(バッファ instanceof AudioBuffer)) {
+        setTimeout(() => 効果音再生(パス, 音量倍率), 100); // 読み込み待ちのリトライ
+        return;
+    }
 
     const 再生ノード = 音声コンテキスト.createBufferSource();
     const 音量ノード = 音声コンテキスト.createGain();
