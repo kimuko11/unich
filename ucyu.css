@@ -133,11 +133,11 @@
     }
 }
 
-.流星大 {
+.🌠 {
     opacity:   0;
-    animation: 流星大 calc(1.3s / var(--アニメ速度, 1)) calc(var(--待機, 0.5s) / var(--アニメ速度, 1)) linear forwards;
+    animation: 🌠 calc(1.3s / var(--アニメ速度, 1)) calc(var(--待機, 1s) / var(--アニメ速度, 1)) linear forwards;
 }
-@keyframes 流星大 {
+@keyframes 🌠 {
       0% { opacity:    0;
            translate:  200px -200px;
     }

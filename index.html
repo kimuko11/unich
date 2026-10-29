@@ -225,8 +225,7 @@
         これは、問題の克服を目指すのではなく、「最初から問題はなかった」と、<em>前提</em>を替える番組である✨
     </p>
 
-    <!-- 🔹ガイド -->
-
+    <!-- 1. ガイド -->
     <p class="上下 中央">
         <span class="連動消滅">
            <span class="出現" style="--待機: 8s;">🔻<span class="小字 銀">ゆっくりと下へ画面スクロールしてください</span>🔻</span>
@@ -330,13 +329,12 @@
     <!-- 🔹1画面弱の空白と流星 ⚠️ * 〇vh は 合計セリフ数 / 10 (空白と画像サイズを反比例させる) -->
 
     <div class="画像" style="margin-bottom: calc(60vh - var(--画像サイズ, 4) * 6vh);">
-        <img src="img/ryusei.webp" class="流星大 ▼" data-se="se/hikari_mid.mp3" data-sv="0.1">
+        <img src="img/ryusei.webp" class="🌠 ▼" data-se="se/hikari_mid.mp3" data-sv="0.1" data-sw="1">
     </div>
 
-    <!-- 🔹対話 -->
+    <!-- 🔹変数メモ
 
-    <!--
-    ◾ 利用できる CSS 変数
+    ◾ CSS 変数
     🥸,🐰,👤: --間隔 px (上との間隔の増減)
     キャラ画像: --サイズ % (画像サイズの増減), --被り幅 px (ふきだしへの被り幅の増減)
     💬:        --左/右尻尾 px (尻尾距離の増減) --左/右余白 % (ふきだし占有率の増減)
@@ -353,7 +351,9 @@
     data-wt: セリフ終了後のタメ文字数
     -->
 
-    <div class="描画省略" style="--省略幅: 550vh;"> <!-- セリフ 2 ～ 12 -->
+    <!-- 🔹セリフ 2 ～ 13 -->
+
+    <div class="描画省略" style="--省略幅: 550vh;">
     <div class="対話全体枠">
 
         <!-- 2. 番組初手の盛り上がりや元気さ重視 -->
@@ -550,12 +550,7 @@
             </div>
         </div>
 
-    </div>
-    </div> <!-- セリフ2 ～ 12 ここまで -->
-
-    <div class="描画省略" style="--省略幅: 50vh;"> <!-- セリフ13 -->
-    <div class="対話全体枠">
-
+        <!-- 13. 真面目な質問でも深刻にならないように -->
         <div class="👤">
             <div class="キャラ画像 身体_縦伸">
                 <img src="cha/guest.webp" alt="👤">
@@ -572,9 +567,11 @@
         </div>
 
     </div>
-    </div> <!-- セリフ13 ここまで -->
+    </div> <!-- セリフ 2 ～ 13 ここまで -->
 
-    <div class="描画省略" style="--省略幅: 1300vh;"> <!-- セリフ14 ～ 40 -->
+    <!-- 🔹セリフ 14 ～ 40 -->
+
+    <div class="描画省略" style="--省略幅: 1300vh;">
     <div class="対話全体枠">
 
         <!-- 14. ウケるwww -->
@@ -695,7 +692,7 @@
             </div>
         </div>
 
-        <!-- 22. マゾ気とバブみがW刺激されて興奮ジャンプ (半分やりかえし、半分ネタとしてからかい) -->
+        <!-- 22. マゾ気とバブみが刺激されて興奮ジャンプ (半分やりかえし、半分ネタとしてからかい) -->
         <div class="🥸" style="--間隔: -10px; --配置: center;">
             <div class="キャラ画像 身体_縦伸" style="--サイズ: 8%; --被り幅: -25px; --時間: 0.3s;">
                 <img src="cha/da_pyo-n.webp"         alt="🥸">
@@ -795,7 +792,7 @@
             </div>
         </div>
 
-        <!-- 28. 「外側(古い同意)ではなく、内側(変わり続ける毎瞬)にたずねる」核心 (モワモワ音は小さいので vol 3倍) -->
+        <!-- 28. 外側(古い同意)ではなく、内側(変わり続ける今)にたずねる核心 (モワモワ音は小さいので vol 3倍) -->
         <div class="🥸" style="--間隔: -5px;">
             <div class="キャラ画像 身体_横揺" style="--角度: 2deg;">
                 <img src="cha/da_heart.webp"        alt="🥸">
@@ -1012,7 +1009,9 @@
     </div>
     </div> <!-- セリフ14 ～ 40 ここまで -->
 
-    <div class="描画省略" style="--省略幅: 1000vh;"> <!-- セリフ41 ～ 61 -->
+    <!-- 🔹セリフ 41 ～ 62 -->
+
+    <div class="描画省略" style="--省略幅: 1000vh;">
     <div class="対話全体枠">
 
         <!-- 41. 新たな視野を受け入れる準備が整う -->
@@ -1332,48 +1331,48 @@
             </div>
         </div>
 
-        <p class="改行12"></p>
+        <!-- 🔹以降、次ページリンク付き -->
 
-        <!-- 🔹流星 -->
+        <a href="cm_001.html">
+            <p class="改行10"></p>
+        </a>
 
-        <div class="画像 改行3">
-            <img src="img/ryusei.webp" class="流星大 ▼" data-se="se/syutudai_2.mp3">
+        <!-- 61. 流星と出題SE -->
+        <div class="画像 👆" style="width: 100%;" onclick="location.href='cm_001.html'">
+            <img src="img/ryusei.webp" class="🌠 ▼" data-se="se/syutudai_2.mp3">
         </div>
 
-        <!-- 🔹次ページへ -->
-
-        <div class="👤" style="--配置: center;">
+        <!-- 62. ガイド -->
+        <div class="👤 👆" style="--配置: center;" onclick="location.href='cm_001.html'">
             <div class="キャラ画像" style="--サイズ: -16%; --被り幅: -5px;">
-                <a href="cm_001.html">
                 <img src="cha/st_kihon.webp"          alt="👤">
                 <img src="cha/st_kihon_me2.webp"      alt="👀" class="差分">
                 <img src="cha/st_kihon_kuchi.webp"    alt="👄" class="差分 パク" style="--起点: 50% 70%;">
                 <img src="cha/st_kihon_hitosasi.webp" alt="☝️" class="差分 発射" style="--起点: 50% 100%; --倍率: 1.03;">
-                </a>
             </div>
             <div class="💬 小字"
                 data-sp = "0"
                 data-se = "se/danryoku_high.mp3"
                 data-sv = "0.3"
                 style   = "--左余白: 20%; --左尻尾: -20px;">
-                <a href="cm_001.html">
-                    アンサーが出たら、<br>
-                    <span class="操作">タップ</span>してくださいね♪
-                </a>
+                アンサーが出たら、<br>
+                画面を<span class="操作">タップ</span>してくださいね♪
             </div>
         </div>
 
-    </div>
-    </div> <!-- セリフ41 ～ 61 ここまで -->
+        <a href="cm_001.html">
+            <p class="改行10"></p>
+        </a>
 
-    <div style="height: 10vh;"></div>
+    </div>
+    </div> <!-- セリフ41 ～ 62 ここまで -->
 
 </main> <!-- 宇宙全体 ここまで -->
 
 
 <!-- ↔️SVGフィルター -->
 
-<svg>
+<svg style="position: absolute; width: 0; height: 0; overflow: hidden;">
 <defs>
 
     <filter id="siro-waku">
@@ -1400,3 +1399,6 @@
 
 </defs>
 </svg>
+
+</body>
+</html>

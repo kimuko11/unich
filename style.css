@@ -33,7 +33,7 @@ img {
     height:    auto;  /* 縦横比の維持 */
 }
 
-button {
+button, .👆 {
     border:     none;
     outline:    none;
     background: none;

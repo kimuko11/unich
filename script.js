@@ -650,9 +650,18 @@ function 出現実行(要素) {
     const 対象要素 = 要素.matches('[data-se]') ? 要素 : 要素.querySelector('[data-se]'); // 効果音が指定されているなら再生
     if (対象要素 && 対象要素.dataset.se) {
         const パス     = 対象要素.dataset.se;
-        const 音量倍率 = parseFloat(対象要素.dataset.sv || '1');
-        
-        if (typeof 効果音再生 === 'function') 効果音再生(パス, 音量倍率);
+        const 音量倍率 = parseFloat(対象要素.dataset.sv || '1'); // data-sv 未設定時は 1
+        const 待機秒   = parseFloat(対象要素.dataset.sw || '0'); // data-sw 未設定時は 0
+
+        if (待機秒 > 0) {
+            const アニメ速度倍率 = アニメ速度取得();
+            const 遅延ms = (待機秒 * 1000) / アニメ速度倍率; // アニメ速度に追従して変動
+            setTimeout(() => {
+                if (typeof 効果音再生 === 'function') 効果音再生(パス, 音量倍率);
+            }, 遅延ms);
+        } else {
+            if (typeof 効果音再生 === 'function') 効果音再生(パス, 音量倍率);
+        }
     }
 }
 
