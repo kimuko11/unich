@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>📻宇宙よろず相談室 🎬CM</title>
+    <title>🌌宇宙よろず相談室 📻CM</title>
 
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="ucyu.css">
@@ -14,10 +14,16 @@
     <link rel="stylesheet" href="anime_001.css">
     <link rel="stylesheet" href="anime.css">
 
+    <script>
+        window.追加読み込みリスト = [
+            'pimg/enso_chello.webp',
+            'pic/cm_001.webp'
+        ];
+    </script>
     <script src="script.js" defer></script>
 </head>
 
-<body data-app-base-time="4000"> <!-- ⚠️出現基準時間 -->
+<body>
 
 
 <!-- ↔️ローディング・マスク -->
@@ -154,52 +160,76 @@
 
     <p class="白枠 改行">
         <span class="黒枠 極大 出現" style="--待機: 1s;">🎞️</span>
-        <span class="差分 黒枠 大字 太字 水 横滑" style="top: 0.4em; margin-left: 0.5rem; --待機: 1s;">こまーしゃる</span>
+        <span class="差分 黒枠 大字 太字 水 横滑 ▼" style="--待機: 1s; top: 0.4em; margin-left: 0.5rem;"
+            data-sw = "1"
+            data-se = "se/ryusei_s.mp3"
+            data-sv = "0.2">
+            こまーしゃる
+        </span>
     </p>
 
-    <!-- 🔹広告 -->
+    <!-- 🔹広告画像 -->
 
-    <div class="画像 改行2">
-        <img src="pic/cm_001.webp" class="発光 拡大 ▼" data-se="se/hyoi.mp3" style="--時間: 2s;">
+    <div class="画像">
+        <img src="pic/cm_001.webp" class="発光 拡大 ▼" style="--待機: 4s; --時間: 2s;"
+            data-sw = "3"
+            data-se = "jin/mus2_jgl_14.mp3"
+            data-sv = "0.2">
     </div>
 
     <!-- 🔹演奏隊 -->
 
-    <p style="display: flex; justify-content: space-between; align-items: center;">
-        <img src="img/pixy_chello.gif" class="白枠 横滑" style="--待機: 3s; --方向: -1;">
-        <img src="img/pixy_acco.gif"   class="白枠 落下" style="--待機: 2s;">
-        <img src="img/pixy_drum.gif"   class="白枠 落下" style="--待機: 2s;">
-        <img src="img/pixy_rappa.gif"  class="白枠 横滑" style="--待機: 3s; --方向: 1;">
+    <p style="display: flex; justify-content: space-between; align-items: center; margin-top: -20px;">
+        <img src="img/enso_chello.webp" class="横滑 ▼" style="--待機: 3s; --方向: -1;">
+        <img src="img/enso_chello.webp" class="落下 ▼" style="--待機: 2s;">
+        <img src="img/enso_chello.webp" class="落下 ▼" style="--待機: 2s;">
+        <img src="img/enso_chello.webp" class="横滑 ▼" style="--待機: 3s; --方向: 1;"
+            data-sw = "3"
+            data-se = "jin/mus2_jgl_10a.mp3"
+            data-sv = "0.5">
     </p>
+
+    <!-- 🔹以降、次ページリンク付き -->
+
+    <a href="index2.html">
+        <p class="空白"></p>
+    </a>
 
     <!-- 🔹流星 -->
 
-    <div class="画像" style="margin: 25vh 0;">
-        <img src="img/hosi.webp" class="🌠 ▼">
+    <div class="画像 👆" style="width: 100%;" onclick="location.href='index2.html'">
+        <img src="img/ryusei.webp" class="🌠 ▼"
+            data-sw = "1"
+            data-se = "se/hikari_mid.mp3"
+            data-sv = "0.1">
     </div>
 
-    <!-- 🔹次ページへ -->
-
-    <div class="対話全体枠">
-        <div class="📻">
-            <div class="キャラ画像">
-                <a href="index2.html">
-                    <img src="img/radio.webp">
-                    <img src="img/radio_onpu.webp" alt="🎵" class="差分 発射→拍微動" style="--起点: 50% 50%; --時間2: 2s;">
-                </a>
+    <!-- 🔹ガイド -->
+    <div class="対話全体枠 👆" onclick="location.href='index2.html'">
+        <div class="👩">
+            <div class="キャラ画像" style="--サイズ: -16%; --被り幅: -5px;">
+                <img src="cha/st_migi.webp"          alt="👩">
+                <img src="cha/st_migi_me2.webp"      alt="👀" class="差分">
+                <img src="cha/st_migi_kuchi.webp"    alt="👄" class="差分 パク" style="--起点: 50% 70%;">
+                <img src="cha/st_migi_hitosasi.webp" alt="☝️" class="差分 発射" style="--起点: 50% 100%; --倍率: 1.03;">
             </div>
-            <div class="💬" style="--右尻尾: 10px;">
-                <a href="index2.html">
-                    タップして、<br>
-                    「宇宙よろず相談室」<br>
-                    再開します♪
-                </a>
+            <div class="💬 小字"
+                data-sp = "0"
+                data-se = "jin/mus2_jgl_10b.mp3"
+                data-sv = "0.5"
+                style   = "--右尻尾: -45px;">
+                画面を<span class="操作">タップ</span>して、<br>
+                「宇宙よろず相談室」<br>
+                続きます♪  
             </div>
         </div>
     </div>
 
-    <div style="height: 10vh;"></div>
-
+    <a href="index2.html">
+        <p class="空白"></p>
+        <p class="右寄 小字 銀">※こまーしゃるはフィクションです。念のため。</p>
+    </a>
+        
 </main> <!-- 宇宙全体 ここまで -->
 
 
@@ -232,3 +262,6 @@
 
 </defs>
 </svg>
+
+</body>
+</html>
