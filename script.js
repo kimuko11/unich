@@ -1,19 +1,17 @@
 // 🎛️ローディング・マスク
 
-const 読み込みリスト = [
+const 既定読み込みリスト = [
     'img/ucyu_enkei.webp',
     'img/ucyu_cyukei.webp',
     'img/ucyu_kinkei.webp',
     'img/seigun.webp',
+    'img/ryusei.webp',
     'img/logo.webp',
-    'img/logo_subtitle.webp',
-    'img/logo_fukidasi.webp',
-    'img/radio.webp',
-    'pic/hosocyu_yuka.webp',
-    'pic/hosocyu_unich.webp',
-    'pic/hosocyu.webp',
-    'pic/hosocyu_hosoto.webp'
+    'img/radio_off.webp',
+    'img/radio_on.webp'
 ];
+
+const 読み込みリスト = [...既定読み込みリスト, ...(window.追加読み込みリスト || [])];
 
 function ページオープン() {
     const 暗幕 = document.getElementById('暗幕');
