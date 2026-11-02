@@ -11,19 +11,23 @@
     <link rel="stylesheet" href="header.css">
     <link rel="stylesheet" href="top.css">
     <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="cm.css">
     <link rel="stylesheet" href="anime_001.css">
     <link rel="stylesheet" href="anime.css">
 
     <script>
         window.追加読み込みリスト = [
+            'img/enso_acco.webp',
             'img/enso_chello.webp',
+            'img/enso_rappa.webp',
+            'img/enso_drum.webp',
             'pic/cm_001.webp'
         ];
     </script>
     <script src="script.js" defer></script>
 </head>
 
-<body data-app-base-time="3000" data-entry-base-time="7000"> <!-- ⚠️出現基準時間 & 登場基準時間 -->
+<body data-app-base-time="4000" data-entry-base-time="13000"> <!-- ⚠️出現基準時間 & 登場基準時間 -->
 
 
 <!-- ↔️ローディング・マスク -->
@@ -165,32 +169,35 @@
 
     <!-- 🔹広告画像 -->
 
+    <a href="index2.html"> <!-- 以降、次ページリンクで覆う -->
+
     <div class="画像">
         <img src="pic/cm_001.webp" class="発光 拡大 ▼" style="--時間: 2s;"
-            data-se = "jin/mus2_jgl_14.mp3"
-            data-sv = "0.2">
+            data-se = "se/kaiso_2.mp3"
+            data-sv = "0.5">
     </div>
 
     <!-- 🔹演奏隊 -->
 
-    <p class="発光" style="display: flex; justify-content: space-between; align-items: center; margin-top: -20px;">
-        <img src="img/enso_acco.webp"   class="横滑" style="--待機: 3s; --方向: -1;">
-        <img src="img/enso_rappa.webp"  class="落下" style="--待機: 2s;">
-        <img src="img/enso_drum.webp"   class="落下" style="--待機: 2s;">
-        <img src="img/enso_chello.webp" class="横滑" style="--待機: 3s; --方向: 1;">
+    <p class="発光 ▼" style="--待機2: 2s; display: flex; justify-content: space-between; align-items: center; margin-top: -20px;"
+            data-sw = "2"
+            data-se = "jin/mus2_jgl_19.mp3"
+            data-sv = "0.5">
+        <img src="img/enso_acco.webp"   class="横滑→縦伸" style="--待機1: 3s; --方向: -1;">
+        <img src="img/enso_chello.webp" class="落下→縦伸" style="--待機1: 2s;">
+        <img src="img/enso_rappa.webp"  class="落下→縦伸" style="--待機1: 2s;">
+        <img src="img/enso_drum.webp"   class="横滑→縦伸" style="--待機1: 3s; --方向: 1;">
     </p>
 
-    <!-- 🔹以降、次ページリンクで覆う -->
 
-    <a href="index2.html">
 
     <p class="空白10"></p>
 
     <!-- 🔹流星 -->
 
     <div class="画像" style="width: 100%;">
-        <img src="img/ryusei.webp" class="🌠 ▼" style="--待機: 3s;"
-            data-sw = "3"
+        <img src="img/ryusei.webp" class="🌠 ▼" style="--待機: 7s;"
+            data-sw = "7"
             data-se = "se/hikari_mid.mp3"
             data-sv = "0.1">
     </div>

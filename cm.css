@@ -1,0 +1,17 @@
+@charset "UTF-8";
+
+/* #️⃣演奏隊アニメ */
+
+.横滑→縦伸 {
+    opacity: 0;
+    transform-origin: var(--起点, 50% 100%);
+    animation: 横滑 calc(var(--時間1, 1s)   / var(--アニメ速度, 1)) calc( var(--待機1, 0s) / var(--アニメ速度, 1)) cubic-bezier(0.175, 0.885, 0.32, 1.07) forwards,
+               縦伸 calc(var(--時間2, 0.25s) / var(--アニメ速度, 1)) calc((var(--待機1, 0s) + var(--時間1, 1s) + var(--待機2, 0s)) / var(--アニメ速度, 1)) var(--回数, 24) ease-in-out alternate;
+}
+
+.落下→縦伸 {
+    opacity: 0;
+    transform-origin: var(--起点, 50% 100%);
+    animation: 落下 calc(var(--時間1, 2s) / var(--アニメ速度, 1)) calc(var(--待機1, 0s) / var(--アニメ速度, 1)) ease-out forwards,
+               縦伸 calc(var(--時間2, 0.25s) / var(--アニメ速度, 1)) calc((var(--待機1, 0s) + var(--時間1, 2s) + var(--待機2, 0s)) / var(--アニメ速度, 1)) var(--回数, 24) ease-in-out alternate;
+}
