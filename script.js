@@ -328,19 +328,22 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    ロゴ.addEventListener('click', (e) => {
-        if (e.target.closest('.ヘッダ💬')) {
-            return;
-        }
-        e.stopPropagation();
-        ロゴ.classList.toggle('オープン');
-    });
+    const ロゴ = document.getElementById('ロゴ');
+    if (ロゴ) {
+        ロゴ.addEventListener('click', (e) => {
+            if (e.target.closest('.ヘッダ💬')) {
+                return;
+            }
+            e.stopPropagation();
+            ロゴ.classList.toggle('オープン');
+        });
 
-    document.addEventListener('click', (e) => {
-        if (!ロゴ.contains(e.target)) { // ロゴの外をタップしたら閉じる
-            ロゴ.classList.remove('オープン');
-        }
-    });
+        document.addEventListener('click', (e) => {
+            if (!ロゴ.contains(e.target)) { // ロゴの外をタップしたら閉じる
+                ロゴ.classList.remove('オープン');
+            }
+        });
+    }
 
     // ▫️リセットボタンのクリック処理（保存値も削除してデフォルトへ）
 
