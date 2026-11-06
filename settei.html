@@ -1,0 +1,105 @@
+<!-- ↔️設定 -->
+
+<div id="設定" class="設定">
+
+        <div id="ラジオ" class="ラジオ 発光 出現" style="--待機: 1s;">
+            <img src="img/radio_off.webp" alt="📻" class="未タップ">
+            <img src="img/radio_on.webp"  alt="📻" class="タップ済">
+        </div>
+        <div class="出現→消滅" style="--待機: 1s; margin-top: -8px;">設定</div>
+
+        <div class="ヘッダ💬">
+
+            <div class="設定項目">
+                ボイス音量
+                <label class="スライダー">
+                    無<input type="range" id="ボイス音量" max="9" min="0" value="4">大
+                    <span class="スライダー値">4</span>
+                </label>
+            </div>
+
+            <div class="設定項目">
+                効果音量
+                <label class="スライダー">
+                    無<input type="range" id="効果音量" max="9" min="0" value="4">大
+                    <span class="スライダー値">4</span>
+                </label>
+            </div>
+
+            <div class="設定項目">
+                文字サイズ
+                <label class="スライダー">
+                    小<input type="range" id="文字サイズ" max="9" min="0" value="4">大
+                    <span class="スライダー値">4</span>
+                </label>
+            </div>
+
+            <div class="設定項目">
+                画像サイズ
+                <label class="スライダー">
+                    小<input type="range" id="画像サイズ" max="9" min="0" value="4">大
+                    <span class="スライダー値">4</span>
+                </label>
+            </div>
+
+            <div class="設定項目">
+                文字速度
+                <label class="スライダー">
+                    遅<input type="range" id="文字速度" max="9" min="0" value="4">無
+                    <span class="スライダー値">4</span>
+                </label>
+            </div>
+
+            <div class="設定項目">
+                アニメ速度
+                <label class="スライダー">
+                    遅<input type="range" id="アニメ速度" max="9" min="0" value="4">速
+                    <span class="スライダー値">4</span>
+                </label>
+            </div>
+            
+            <div class="設定グループ">
+
+                <div class="設定項目">
+                    光の効果
+                    <label class="スイッチ">
+                        <input type="checkbox" id="光の効果" checked>
+                        <span class="スイッチ背景"></span>
+                    </label>
+                </div>
+
+                <div class="設定項目">
+                    登場アニメ
+                    <label class="スイッチ">
+                        <input type="checkbox" id="登場アニメ" checked>
+                        <span class="スイッチ背景"></span>
+                    </label>
+                </div>
+
+                <div class="設定項目">
+                    表情アニメ
+                    <label class="スイッチ">
+                        <input type="checkbox" id="表情アニメ" checked>
+                        <span class="スイッチ背景"></span>
+                    </label>
+                </div>
+
+            </div>
+
+            <div class="設定グループ">
+
+                <div class="設定項目 表示範囲スイッチ" style="margin-bottom: -5px;">
+                    開発用
+                    <label class="スイッチ">
+                        <input type="checkbox" id="表示範囲">
+                        <span class="スイッチ背景" style="cursor: default;"></span>
+                    </label>
+                </div>
+
+                <button type="button" id="リセット" class="リセット">初期値に戻す</button>
+
+            </div>
+
+    </div> <!-- ヘッダ💬 ここまで -->
+
+</div> <!-- 設定 ここまで -->

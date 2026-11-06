@@ -38,6 +38,38 @@ setTimeout(() => { // 3秒経過で強制
 }, 3000);
 
 
+// 🎛️ヘッダとSVG
+
+async function ヘッダ読み込み() {
+    try {
+        const [設定, 開発, SVG] = await Promise.all([
+            fetch('settei.html'),
+            fetch('kaihatu.html'),
+            fetch('svg.html')
+        ]);
+
+        if (!設定.ok || !開発.ok || !SVG.ok) {
+            throw new Error('設定の一部が読み込み失敗');
+        }
+
+        const 設定html = await 設定.text();
+        const 開発html = await 開発.text();
+        const SVG_html = await SVG.text();
+
+        const 設定コンテナ = document.getElementById('設定コンテナ');
+        const 開発コンテナ = document.getElementById('開発コンテナ');
+        const SVGフィルタ  = document.getElementById('SVGフィルタ');
+
+        if (設定コンテナ) 設定コンテナ.outerHTML = 設定html;
+        if (開発コンテナ) 開発コンテナ.outerHTML = 開発html;
+        if (SVGフィルタ)  SVGフィルタ.outerHTML  = SVG_html;
+
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+
 // 🎛️設定 (初期値)
 
 let スライダーボイス音量 = 4;
@@ -98,7 +130,9 @@ function 設定更新() {
 
 // 🎛️設定スライダーとリセット
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => { // ヘッダ読み込みを必ず先に完了させる
+    await ヘッダ読み込み();
+
     const 入力_ボイス音量 = document.getElementById('ボイス音量');
     const 入力_効果音量   = document.getElementById('効果音量');
     const 入力_文字サイズ = document.getElementById('文字サイズ');
@@ -553,7 +587,9 @@ function 表示制御実行(値上, 値下) {
 
 let 表示遅延タイマー = null;
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => { // ヘッダ読み込みを必ず先に完了させる
+    await ヘッダ読み込み();
+
     const 入力上 = document.getElementById('非表示上');
     const 入力下 = document.getElementById('非表示下');
 
@@ -639,7 +675,7 @@ const 出現指定時間   = body要素 ? parseInt(body要素.dataset.appBaseTim
 const 指定出現時間   = !isNaN(出現指定時間) ? 出現指定時間 : 0; // 指定時間がない場合は即出現
 const 出現基準時間   = 開発用フラグ ? 0 : 指定出現時間;         // 開発モード中も即出現
 
-const 出現閾値既定値 = 1;         // data-threshold 既定値
+const 出現閾値既定値 = 1;         // data-th(threshold) 既定値
 const 出現マップ     = new Map(); // 監視対象要素 → .再生 を付与する要素の配列
 const 出現監視一覧   = new Map(); // threshold値 → IntersectionObserver（同じ閾値は1つに共有）
 
@@ -706,7 +742,7 @@ document.querySelectorAll('.▼').forEach((要素) => {
     const 親要素監視系 = 要素.classList.contains('横滑') || 要素.classList.contains('拡大')
                      || 要素.classList.contains('半倒'); // 初期配置が本配置と異なり、threshold 計算不能な要素
     const 監視対象    = 親要素監視系 ? 要素.parentElement : 要素;
-    const 指定閾値    = parseFloat(要素.dataset.threshold);
+    const 指定閾値    = parseFloat(要素.dataset.th);
     const 閾値        = Number.isNaN(指定閾値) ? 出現閾値既定値 : 指定閾値;
     const 監視        = 出現監視取得(閾値);
 
@@ -738,7 +774,7 @@ document.querySelectorAll('.連動消滅').forEach((要素) => {
 
 // 🎛️キャラ一覧
 
-const キャラ一覧 = document.querySelectorAll('.🥸, .🐰, .👩, .👤, .📻');
+const キャラ一覧 = document.querySelectorAll('.🥸, .🐰, .👩, .👤');
 
 // ▫️エリアのクラスからキャラ判定
 
@@ -751,7 +787,7 @@ function キャラ取得(エリア) {
 // ▫️エリアのクラスから「身体アニメ管理用の種別」を判定
 
 function 種別取得(エリア) {
-    for (const 種別 of ['🥸', '🐰', '👩', '👤', '📻']) {
+    for (const 種別 of ['🥸', '🐰', '👩', '👤']) {
         if (エリア.classList.contains(種別)) return 種別;
     }
     return '__既定__';

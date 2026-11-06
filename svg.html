@@ -1,0 +1,29 @@
+<!-- ↔️SVGフィルタ -->
+
+<svg style="position: absolute; width: 0; height: 0; overflow: hidden;">
+<defs>
+
+    <filter id="siro-waku">
+        <feMorphology in="SourceAlpha" operator="dilate" radius="2" result="expanded" />
+        <feFlood flood-color="seashell" flood-opacity="1" result="color" />
+        <feComposite in="color" in2="expanded" operator="in" result="outline" />
+
+        <feMerge> <!-- 元の画像をその上に重ねる -->
+            <feMergeNode in="outline" />
+            <feMergeNode in="SourceGraphic" />
+        </feMerge>
+    </filter>
+
+    <filter id="kuro-waku">
+        <feMorphology in="SourceAlpha" operator="dilate" radius="1" result="expanded" />
+        <feFlood flood-color="black" flood-opacity="1" result="color" />
+        <feComposite in="color" in2="expanded" operator="in" result="outline" />
+
+        <feMerge>
+            <feMergeNode in="outline" />
+            <feMergeNode in="SourceGraphic" />
+        </feMerge>
+    </filter>
+
+</defs>
+</svg>

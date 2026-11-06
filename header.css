@@ -190,7 +190,7 @@ body.表示 .表示範囲スイッチ { opacity: 1; }
     cursor:       pointer;
 }
 
-.スライダー数値 {
+.スライダー値 {
     position:  absolute;
     top:       -15px; /* 位置 */
     left:      50%;
@@ -219,7 +219,7 @@ body.表示 .表示範囲スイッチ { opacity: 1; }
                 visibility 0.2s;
 }
 
-.スライダー:hover .スライダー数値, .スライダー input[type="range"]:focus + .スライダー数値 { /* フォーカス時 */
+.スライダー:hover .スライダー値, .スライダー input[type="range"]:focus + .スライダー値 { /* フォーカス時 */
     opacity:    1;
     visibility: visible;
 }

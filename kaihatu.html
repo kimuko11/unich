@@ -1,0 +1,29 @@
+<!-- ↔️開発用 表示範囲 -->
+
+<div class="表示範囲">
+    開発用
+    <button type="button" onclick="範囲リセット()">🗑️</button>
+    (<a href="#" class="金 下線"
+        onclick="const cb = document.getElementById('表示範囲'); if(cb){cb.checked = false; cb.dispatchEvent(new Event('change'));} return false;">非表示</a>)
+        
+    <div style="display: flex; gap: 5px;">
+
+        <div style="display: flex;">
+            <input type="number" id="非表示上" min="1">
+            <div class="縦列">
+                <button type="button" class="スピンボタン" onclick="数値変更('非表示上', -1)">🔼</button>
+                <button type="button" class="スピンボタン" onclick="数値変更('非表示上',  1)">🔽</button>
+            </div>
+        </div>
+
+        <div style="display: flex;">
+            <input type="number" id="非表示下" min="1">
+            <div class="縦列">
+                <button type="button" class="スピンボタン" onclick="数値変更('非表示下', -1)">🔼</button>
+                <button type="button" class="スピンボタン" onclick="数値変更('非表示下',  1)">🔽</button>
+            </div>
+        </div>
+
+    </div>
+
+</div>

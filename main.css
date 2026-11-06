@@ -2,7 +2,7 @@
 
 /* #️⃣タイトル */
 
-.カチンコ {
+.🎬 {
     padding: 1rem;
 
     max-width:  380px;
@@ -71,7 +71,7 @@
 
 /* #️⃣キャラの指定と登場 */
 
-.🥸, .🐰, .👩, .👤, .📻 {
+.🥸, .🐰, .👩, .👤 {
     display:        flex;
     flex-direction: column;
     align-items:    var(--配置, flex-start); /* 左右の配置決め */

@@ -42,6 +42,7 @@
     <!-- 🔹ロゴ -->
 
     <div id="ロゴ" class="ロゴ">
+
         <div class="発光 横滑" style="--待機: 1s;">
             <div class="縮小"  style="--待機: 10s;">
                 <img src="img/logo.webp" alt="🦉宇宙よろず相談室🐰">
@@ -58,140 +59,10 @@
 
     </div>
 
-    <!-- 🔹表示範囲 (開発用) -->
+    <!-- 🔹開発と設定 -->
 
-    <div class="表示範囲">
-        開発用
-        <button type="button" onclick="範囲リセット()">🗑️</button>
-        (<a href="#" class="金 下線" onclick="const cb = document.getElementById('表示範囲'); if(cb){cb.checked = false; cb.dispatchEvent(new Event('change'));} return false;">非表示</a>)
-        
-        <div style="display: flex; gap: 5px;">
-
-            <div style="display: flex;">
-                <input type="number" id="非表示上" min="1">
-                <div class="縦列">
-                    <button type="button" class="スピンボタン" onclick="数値変更('非表示上', -1)">🔼</button>
-                    <button type="button" class="スピンボタン" onclick="数値変更('非表示上',  1)">🔽</button>
-                </div>
-            </div>
-
-            <div style="display: flex;">
-                <input type="number" id="非表示下" min="1">
-                <div class="縦列">
-                    <button type="button" class="スピンボタン" onclick="数値変更('非表示下', -1)">🔼</button>
-                    <button type="button" class="スピンボタン" onclick="数値変更('非表示下',  1)">🔽</button>
-                </div>
-            </div>
-
-        </div>
-
-    </div>
-
-    <!-- 🔹設定 -->
-
-    <div id="設定" class="設定">
-
-        <div id="ラジオ" class="ラジオ 発光 出現" style="--待機: 1s;">
-            <img src="img/radio_off.webp" alt="📻" class="未タップ">
-            <img src="img/radio_on.webp"  alt="📻" class="タップ済">
-        </div>
-        <div class="出現→消滅" style="--待機: 1s; margin-top: -8px;">設定</div>
-
-        <div class="ヘッダ💬">
-
-            <div class="設定項目">
-                ボイス音量
-                <label class="スライダー">
-                    無<input type="range" id="ボイス音量" max="9" min="0" value="4">大
-                    <span class="スライダー数値">4</span>
-                </label>
-            </div>
-
-            <div class="設定項目">
-                効果音量
-                <label class="スライダー">
-                    無<input type="range" id="効果音量" max="9" min="0" value="4">大
-                    <span class="スライダー数値">4</span>
-                </label>
-            </div>
-
-            <div class="設定項目">
-                文字サイズ
-                <label class="スライダー">
-                    小<input type="range" id="文字サイズ" max="9" min="0" value="4">大
-                    <span class="スライダー数値">4</span>
-                </label>
-            </div>
-
-            <div class="設定項目">
-                画像サイズ
-                <label class="スライダー">
-                    小<input type="range" id="画像サイズ" max="9" min="0" value="4">大
-                    <span class="スライダー数値">4</span>
-                </label>
-            </div>
-
-            <div class="設定項目">
-                文字速度
-                <label class="スライダー">
-                    遅<input type="range" id="文字速度" max="9" min="0" value="4">無
-                    <span class="スライダー数値">4</span>
-                </label>
-            </div>
-
-            <div class="設定項目">
-                アニメ速度
-                <label class="スライダー">
-                    遅<input type="range" id="アニメ速度" max="9" min="0" value="4">速
-                    <span class="スライダー数値">4</span>
-                </label>
-            </div>
-            
-            <div class="設定グループ">
-
-                <div class="設定項目">
-                    光の効果
-                    <label class="スイッチ">
-                        <input type="checkbox" id="光の効果" checked>
-                        <span class="スイッチ背景"></span>
-                    </label>
-                </div>
-
-                <div class="設定項目">
-                    登場アニメ
-                    <label class="スイッチ">
-                        <input type="checkbox" id="登場アニメ" checked>
-                        <span class="スイッチ背景"></span>
-                    </label>
-                </div>
-
-                <div class="設定項目">
-                    表情アニメ
-                    <label class="スイッチ">
-                        <input type="checkbox" id="表情アニメ" checked>
-                        <span class="スイッチ背景"></span>
-                    </label>
-                </div>
-
-            </div>
-
-            <div class="設定グループ">
-
-                <div class="設定項目 表示範囲スイッチ" style="margin-bottom: -5px;">
-                    開発用
-                    <label class="スイッチ">
-                        <input type="checkbox" id="表示範囲">
-                        <span class="スイッチ背景" style="cursor: default;"></span>
-                    </label>
-                </div>
-
-                <button type="button" id="リセット" class="リセット">初期値に戻す</button>
-
-            </div>
-
-        </div> <!-- ヘッダ💬 ここまで -->
-
-    </div> <!-- 設定 ここまで -->
+    <div id="開発コンテナ"></div>
+    <div id="設定コンテナ"></div>
 
 </header>
 
@@ -208,11 +79,11 @@
     <div class="宇宙レイヤー 近景"></div>
     <div class="星群"></div>
 
-    <div class="改行6"></div>
+    <div class="改幅15"></div>
 
     <!-- 🔹トップ画像 -->
 
-    <div class="画像 改行">
+    <div class="画像 改幅">
         <img src="pic/hosocyu_yuka.webp">
         <img src="pic/hosocyu_unich.webp"  class="差分 ネオン">
         <img src="pic/hosocyu_hosoto.webp" class="差分 出現"      style="--待機: 4s;">
@@ -231,7 +102,7 @@
         なぜなら、誰もが<em>完璧</em>な配役で、何も良くする必要はないから。
     </p>
 
-    <p class="出現 改行2" style="--待機: 7s;">
+    <p class="出現 改幅" style="--待機: 7s;">
         これは、問題の克服を目指すのではなく、「最初から問題はなかった」と、<em>前提</em>を替える番組である✨
     </p>
 
@@ -245,6 +116,7 @@
 
      <!-- 1. 音声と設定の案内 -->
     <div class="対話全体枠">
+
         <div class="👩">
             <div class="キャラ画像" style="--サイズ: -16%; --被り幅: -5px;">
                 <img src="cha/st_migi.webp"          alt="👩">
@@ -254,11 +126,10 @@
                 <img src="cha/st_migi_kuchi.webp"    alt="👄" class="差分 パク"          style="--起点: 50% 70%;">
                 <img src="cha/st_migi_hitosasi.webp" alt="☝️" class="差分 発射"          style="--起点: 50% 100%; --倍率: 1.03;">
             </div>
-            <div class  = "💬 小字"
+            <div class= "💬 小字" style="--余白左: 3%; --右尻尾: -45px;"
                 data-sp = "0"
                 data-se = "se/danryoku_high.mp3"
-                data-sv = "0.3"
-                style   = "--余白左: 3%; --右尻尾: -45px;">
+                data-sv = "0.3">
                 <div class="ト書き上 右寄 銀">（番組スタッフ）</div>
                 <div class="未タップ">
                     画面を<em class="操作">タップ</em><em class="機器">👇</em><span class="操作2"></span>すると、<em>効果音</em>付きのリッチコンテンツをお楽しみいただけます。<br>
@@ -270,21 +141,28 @@
                 </div>
             </div>
         </div>
+        
     </div>
 
-    <div class="改行10"></div>
+    <div class="改幅20"></div>
 
     <!-- 🔹キャラ紹介 -->
 
-    <p class="星群 ▼"></p> <!-- ▼ は JS でスクロール出現を監視 (data-threshold で出現割合を指定) -->
+    <p class="星群 ▼"></p> <!-- ▼ は JS でスクロール出現を監視 (data-th で出現割合を指定) -->
 
-    <p class="白枠 改行2">
+    <p class="白枠 改幅">
         <span class="黒枠 極大 出現 ▼">🎙️</span>
-        <span class="差分 黒枠 大字 太字 橙 横滑 ▼" data-se="se/ryusei_s.mp3" data-sv="0.2" style="top: 0.4em;">番組パーソナリティ</span>
+        <span class="差分 黒枠 大字 太字 橙 横滑 ▼" style="top: 0.4em;"
+            data-se = "se/ryusei_s.mp3"
+            data-sv = "0.2">
+            番組パーソナリティ
+        </span>
     </p>
 
     <div class="画像 発光">
-        <div class="拡大 ▼" data-threshold="0.95" data-se="se/tojo_cute.mp3">
+        <div class="拡大 ▼"
+            data-th = "0.95"
+            data-se = "se/tojo_cute.mp3">
             <img src="pic/prof_doc_001.webp" alt="🥸アイドルライブを楽しむドク">
         </div>
     </div>
@@ -298,12 +176,14 @@
         らしいが、それ以上に日本のオタク文化に沼りすぎて生活もままならない<em>社会不適合者</em>。
     </p>
 
-    <p class="出現 改行5 ▼">
+    <p class="出現 改幅10 ▼">
         だが、その不適合ぶりを全力で<em>自愛</em>する姿は、人生を深刻にとらえて悩めるリスナーたちに安らぎをもたらしているとかいないとか。
     </p>
 
     <div class="画像 発光">
-        <div class="拡大 ▼" data-threshold="0.95" data-se="se/tojo_cute.mp3">
+        <div class="拡大 ▼"
+            data-th = "0.95"
+            data-se = "se/tojo_cute.mp3">
             <img src="pic/prof_uni_001.webp" alt="🐰買い物中のユニちゃん">
         </div>
     </div>
@@ -317,9 +197,11 @@
         生活能力のないドクターを拾って彼女の番組にぶっこんだ結果、運よく人気番組となった。
     </p>
 
-    <p class="出現 改行15 ▼">
+    <p class="出現 ▼">
         <em>尊大なしゃべり</em>と<em>舌足らず</em>のミスマッチは、大きなお友達の支持を集めているとかいないとか。
     </p>
+
+    <div class="改幅50"></div>
 
 
     <!-- ↔️メインコンテンツ -->
@@ -327,21 +209,28 @@
     <!-- 🔹タイトル -->
 
     <div class="画像 発光" style="z-index: 1;">
-        <div class="半倒 改行8 ▼" data-se="jin/jazz.mp3" data-sv="0.5">
+        <div class  = "半倒 改行8 ▼"
+            data-se = "jin/jazz.mp3"
+            data-sv = "0.5">
             <img src="img/kachinko.webp">
-            <p class="カチンコ 中央">
+            <p class="🎬 中央">
                 <em class="ブロック 改行2" style="margin-top: 2rem;">ON AIR #001</em>
                 <em class="ブロック 改行2 大字">いけない♥️アイドル</em>
             </p>
         </div>
     </div>
 
-    <p class="星群 ▼" data-se="se/hyosigi_m.mp3" style="margin-top: -16rem; margin-bottom: 40vh; --待機: 2s;"></p>
+    <p class="星群 ▼" style="--待機: 2s; margin-top: -16rem; margin-bottom: 40vh;"
+        data-se = "se/hyosigi_m.mp3">
+    </p>
 
     <!-- 🔹1画面弱の空白と流星 ⚠️ * 〇vh は 合計セリフ数 / 10 (空白と画像サイズを反比例させる) -->
 
     <div class="画像" style="margin-bottom: calc(60vh - var(--画像サイズ, 4) * 6vh);">
-        <img src="img/ryusei.webp" class="🌠 ▼" data-se="se/hikari_mid.mp3" data-sv="0.1" data-sw="1">
+        <img src="img/ryusei.webp" class="🌠 ▼"
+            data-sw = "1"
+            data-se = "se/hikari_mid.mp3"
+            data-sv = "0.1">
     </div>
 
     <!-- 🔹変数メモ
@@ -373,7 +262,7 @@
             <div class="キャラ画像 身体_横揺">
                 <img src="cha/ut_genkina-aisatu.webp"         alt="🐰">
                 <img src="cha/ut_genkina-aisatu_heart.webp"   alt="♥️" class="差分 発射→拍動" style="--時間1: 2s; --時間2: 2s;">
-                <img src="cha/ut_genkina-aisatu_kuchi.webp"   alt="👄" class="差分 パク">
+                <img src="cha/ut_genkina-aisatu_kuchi.webp"   alt="👄" class="差分 パク"       style="--起点: 50% 75%;">
                 <div class="差分 発射" style="--起点: 40% 100%; --倍率: 1.05;">
                     <img src="cha/ut_genkina-aisatu_ude.webp" alt="💪" class="横揺"            style="--起点: 25% 95%; --角度: 10deg;">
                 </div>
@@ -393,10 +282,9 @@
                 <img src="cha/dt_figure_heart.webp"  alt="♥️" class="差分 発射→拍動"   style="--時間1: 3s; --時間2: 3s;">
                 <img src="cha/dt_figure_figure.webp" alt="💪" class="差分 発射→拍微動" style="--起点: 50% 100%; --倍率: 1.03;">
             </div>
-            <div class  = "💬"
+            <div class  = "💬" style="--右尻尾: 15px;"
                 data-se = "se/oyorokobi.mp3"
-                data-sv = "0.3"
-                style   = "--右尻尾: 15px;">
+                data-sv = "0.3">
                 デュフフww<br>
                 本日は行きつけの中古ショップでプレミア価格10倍の絶版フィギュアを保護できて大満足の <em>Dr. YOU</em> (ドクター・ユー) ですぢゃ♥️
             </div>
@@ -407,8 +295,8 @@
             <div class="キャラ画像 身体_拍動">
                 <img src="cha/ut_kyogaku.webp"         alt="🐰">
                 <img src="cha/ut_kyogaku_odoroki.webp" alt="⚡" class="差分 発射">
-                <img src="cha/ut_kyogaku_me.webp"      alt="👀" class="差分 拍動→目瞬" style="--倍率: 1.2;">
-                <img src="cha/ut_kyogaku_kuchi.webp"   alt="👄" class="差分 パク">
+                <img src="cha/ut_kyogaku_me.webp"      alt="👀" class="差分 拍動→目瞬" style="--起点: 50% 67%; --倍率: 1.2;">
+                <img src="cha/ut_kyogaku_kuchi.webp"   alt="👄" class="差分 パク"       style="--起点: 50% 75%;">
                 <img src="cha/ut_kyogaku_ude.webp"     alt="💪" class="差分 発射"       style="--起点: 50% 90%; --倍率: 1.03;">
             </div>
             <div class  = "💬 激情"
@@ -429,10 +317,9 @@
                     <img src="cha/dt_precure_hosi.webp" alt="⭐" class="回転" style="--起点: 26% 22%;">
                 </div>
             </div>
-            <div class  = "💬"
+            <div class  = "💬" style="--右尻尾: 20px;"
                 data-se = "se/hikari_high.mp3"
-                data-sv = "0.5"
-                style   = "--右尻尾: 20px;">
+                data-sv = "0.5">
                 オウフwww<br>
                 そんな難しい言葉、よくぞご存知でwww<br>
                 そーゆーユニちゃそ社長には、年相応なプリ〇ュアの人形をあげませう。<br>
@@ -447,12 +334,11 @@
                 <img src="cha/uf_sizukana-ikari.webp"        alt="🐰">
                 <img src="cha/uf_sizukana-ikari_kekkan.webp" alt="💢" class="差分 拍動" style="--起点: 33% 55%; --時間: 0.5s;">
             </div>
-            <div class  = "💬 激情"
+            <div class  = "💬 激情" style="--左余白: 5%; --左尻尾: -20px;"
                 data-sp = "10"
                 data-vv = "0.1"
                 data-se = "se/jinari.mp3"
-                data-sv = "3"
-                style   = "--左余白: 5%; --左尻尾: -20px;">
+                data-sv = "3">
                 <b>・・・・💢</b>
             </div>
         </div>
@@ -463,11 +349,10 @@
                 <img src="cha/df_chiikawa.webp"          alt="🥸">
                 <img src="cha/df_chiikawa_chiikawa.webp" alt="🤲" class="差分 発射→拍微動" style="--起点: 50% 100%; --時間1: 2s; --時間2: 2s; --倍率: 1.02;">
             </div>
-            <div class  = "💬"
+            <div class  = "💬" style="--右尻尾: -10px;"
                 data-se = "se/deru_m.mp3"
                 data-sv = "0.3"
-                data-wt = "20"
-                style   = "--右尻尾: -10px;">
+                data-wt = "20">
                 おや、お気に召されない？<br>
                 ちい〇わの方がよかったですかのう…
                 <div class="ト書き下">（次々フィギュアを出してくる）</div>
@@ -482,11 +367,10 @@
                 <img src="cha/ut_ikari_kekkan.webp"   alt="💢" class="差分 拍動" style="--起点: 32% 51%; --時間: 0.5s;">
                 <img src="cha/ut_ikari_kuchi.webp"    alt="👄" class="差分 パク" style="--起点: 50% 79%; --時間: 0.15s;">
             </div>
-            <div class  = "💬 激情"
+            <div class  = "💬 激情" style="--左尻尾: 10px;"
                 data-vv = "2"
                 data-se = "se/denki.mp3"
-                data-sv = "2"
-                style   = "--左尻尾: 10px;">
+                data-sv = "2">
                 <b>それを買うおカネはどこから出たああ〜〜！<br>
                 モーロクぢぢい〜〜！</b>
             </div>
@@ -522,10 +406,9 @@
                     <img src="cha/ud_gekido_ude.webp"  alt="🙌" class="縦伸"            style="--起点: 50% 81%; --時間: 0.05s; --倍率: 1.8;">
                 </div>
             </div>
-            <div class  = "💬 激情"
+            <div class  = "💬 激情" style="--左尻尾: 10px;"
                 data-vv = "3"
-                data-se = "se/fire.mp3"
-                style   = "--左尻尾: 10px;">
+                data-se = "se/fire.mp3">
                 <b>ハートマークつけとゆばやいか、反省ちろ〜〜〜！！💢</b>
             </div>
         </div>
@@ -552,10 +435,9 @@
                 <img src="cha/ut_tameiki_kuchi.webp"   alt="👄" class="差分 パク"       style="--起点: 50% 79%;">
                 <img src="cha/ut_tameiki_tameiki.webp" alt="💨" class="差分 発射→拍動" style="--時間1: 2s; --時間2: 2s; --倍率: 1.05;">
             </div>
-            <div class  = "💬 感情"
+            <div class  = "💬 感情" style="--左尻尾: 5px;"
                 data-se = "se/tameiki_m.mp3"
-                data-wt = "10"
-                style   = "--左尻尾: 5px;">
+                data-wt = "10">
                 草ばかり生やちくさって、あったりまえでしゅ！<br>
                 このインターネット老人会め。<br>
                 んじゃ、今日はこちらのご相談コメントにこたえていくでしゅよ。
@@ -592,9 +474,8 @@
                 <img src="cha/da_sibuki.webp"        alt="🥸">
                 <img src="cha/da_sibuki_sibuki.webp" alt="💦" class="差分 発射" style="--起点: 60% 80%;">
             </div>
-            <div class  = "💬 感情"
-                data-se = "se/cymbals.mp3"
-                style   = "--右尻尾: 10px;">
+            <div class  = "💬 感情" style="--右尻尾: 10px;"
+                data-se = "se/cymbals.mp3">
                 <b>ドプフォwwww</b><br>
                 このコメを拾ったのが、小生への当てつけ以外の何ものでもない件についてwww
             </div>
@@ -632,9 +513,8 @@
                 <img src="cha/ut_teikan.webp"       alt="🐰">
                 <img src="cha/ut_teikan_kuchi.webp" alt="👄" class="差分 パク" style="--起点: 50% 81%;">
             </div>
-            <div class  = "💬 感情"
-                data-se = "se/kinuke.mp3"
-                style   = "--左尻尾: 5px;">
+            <div class  = "💬 感情" style="--左尻尾: 5px;"
+                data-se = "se/kinuke.mp3">
                 いーから<br>
                 さくさくグッドな回答をちやがれでしゅ！
             </div>
@@ -647,10 +527,9 @@
                 <img src="cha/dt_hitosasi_hikari.webp" alt="⚡" class="差分 発射→拍動">
                 <img src="cha/dt_hitosasi_ude.webp"    alt="☝️" class="差分 発射→拍微動" style="--起点: 50% 100%; --時間2: 2s; --倍率: 1.03;">
             </div>
-            <div class  = "💬"
+            <div class  = "💬" style="--右尻尾: 20px;"
                 data-se = "se/hirameki.mp3"
-                data-wt = "10"
-                style   = "--右尻尾: 20px;">
+                data-wt = "10">
                 いや失敬失敬ww<br>
                 「<em>偶像崇拝</em>」について、でございますな。キタコレww<br>
                 いわゆる有名どころの一神教で「偶像崇拝ほんと無理〜w」って禁止されてることが多いのは、言わずもがな人間の想像で神の概念の矮小化を防ぐ目的と、推しと運営とオタクの序列を維持するためですぢゃ。
@@ -663,9 +542,8 @@
                 <img src="cha/ut_tantan.webp"       alt="🐰">
                 <img src="cha/ut_tantan_kuchi.webp" alt="👄" class="差分 パク" style="--起点: 50% 84%;">
             </div>
-            <div class  = "💬"
-                data-se = "se/tameiki_s.mp3"
-                style   = "--左余白: 4%;">
+            <div class  = "💬" style="--左余白: 4%;"
+                data-se = "se/tameiki_s.mp3">
                 …<b>神</b>と<b>宗教</b>と<b>人間</b><br>
                 のことでしゅね。
             </div>
@@ -678,9 +556,8 @@
                 <img src="cha/da_megane_hikari.webp" alt="✨" class="差分 発射→拍動" style="--起点: 40% 53%; --倍率: 1.3;">
                 <img src="cha/da_megane_kuchi.webp"  alt="👄" class="差分 ピク">
             </div>
-            <div class  = "💬"
-                data-se = "se/hero_1.mp3"
-                style   = "--右尻尾: 20px;">
+            <div class  = "💬" style="--右尻尾: 20px;"
+                data-se = "se/hero_1.mp3">
                 しかしここでコメ主殿がおっさってるのはその意味ではなく、スピリチュアリティな意味での文脈だと把握しますた。(メガネ、クイッ)<br>
                 推しは自分から分離した外側にいるのではなく、わが内側にこそいるのだと。<br>
                 だから外側の推しの偶像を崇めることは、自分自身の内側の神性や目覚めを否定することになるゆえ、「解釈違いほんと無理しぬww」とゆーわけでございまするwwwコポォ
@@ -1346,12 +1223,13 @@
         <!-- 🔹以降、次ページリンク付き -->
 
         <a href="cm_001.html">
-            <p class="空白10"></p>
+            <p class="改幅10"></p>
         </a>
 
         <!-- 61. 流星と出題SE -->
-        <div class="画像 👆" style="width: 100%;" onclick="location.href='cm_001.html'">
-            <img src="img/ryusei.webp" class="🌠 ▼" data-se="se/syutudai_2.mp3">
+        <div class="画像 改幅10 👆" style="width: 100%;" onclick="location.href='cm_001.html'">
+            <img class  = "🌠 ▼" src="img/ryusei.webp"
+                data-se = "se/syutudai_2.mp3">
         </div>
 
         <!-- 62. ガイド -->
@@ -1362,7 +1240,7 @@
                 <img src="cha/st_migi_kuchi.webp"    alt="👄" class="差分 パク" style="--起点: 50% 70%;">
                 <img src="cha/st_migi_hitosasi.webp" alt="☝️" class="差分 発射" style="--起点: 50% 100%; --倍率: 1.03;">
             </div>
-            <div class="💬 小字"
+            <div class  = "💬 小字"
                 data-sp = "0"
                 data-se = "se/danryoku_high.mp3"
                 data-sv = "0.3"
@@ -1373,7 +1251,7 @@
         </div>
 
         <a href="cm_001.html">
-            <p class="空白10"></p>
+            <p class="改幅10"></p>
         </a>
 
     </div>
@@ -1382,35 +1260,9 @@
 </main> <!-- 宇宙全体 ここまで -->
 
 
-<!-- ↔️SVGフィルター -->
+<!-- ↔️SVGフィルタ -->
 
-<svg style="position: absolute; width: 0; height: 0; overflow: hidden;">
-<defs>
-
-    <filter id="siro-waku">
-        <feMorphology in="SourceAlpha" operator="dilate" radius="2" result="expanded" />
-        <feFlood flood-color="seashell" flood-opacity="1" result="color" />
-        <feComposite in="color" in2="expanded" operator="in" result="outline" />
-
-        <feMerge> <!-- 元の画像をその上に重ねる -->
-            <feMergeNode in="outline" />
-            <feMergeNode in="SourceGraphic" />
-        </feMerge>
-    </filter>
-
-    <filter id="kuro-waku">
-        <feMorphology in="SourceAlpha" operator="dilate" radius="1" result="expanded" />
-        <feFlood flood-color="black" flood-opacity="1" result="color" />
-        <feComposite in="color" in2="expanded" operator="in" result="outline" />
-
-        <feMerge>
-            <feMergeNode in="outline" />
-            <feMergeNode in="SourceGraphic" />
-        </feMerge>
-    </filter>
-
-</defs>
-</svg>
+<div id="SVGフィルタ"></div>
 
 </body>
 </html>
