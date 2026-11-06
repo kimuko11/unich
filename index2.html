@@ -55,7 +55,7 @@
 </header>
 
 
-<!-- ↔️サイト概要 -->
+<!-- ↔️メインコンテンツ -->
 
 <!-- 🔹宇宙視差背景 ⚠️--ずれ幅と--視差速度はページ長さによって調整する -->
 
@@ -67,23 +67,22 @@
     <div class="宇宙レイヤー 近景"></div>
     <div class="星群"></div>
 
-
-    <!-- ↔️メインコンテンツ -->
-
     <!-- 🔹1画面の空白 (ガイドと流星) ⚠️ * 〇vh は セリフ数 / 10 -->
 
-    <p class="上下 中央" style="margin: calc(50vh - var(--画像サイズ, 4) * 1vh) 0;">
-        <span class="連動消滅">
-           <span class="出現" style="--待機: 2s;">🔻<span class="小字">ゆっくりと下へ画面スクロールしてください</span>🔻</span>
-        </span>
-    </p>
+    <div style="margin: calc(50vh - var(--画像サイズ, 4) * 1vh) 0;">
+        <p class="上下 中央">
+            <span class="連動消滅">
+                <span class="出現" style="--待機: 1s;">🔻<span class="小字">ゆっくりと下へ画面スクロールしてください</span>🔻</span>
+            </span>
+        </p>
+    </div>
 
-    <p class="画像" style="margin: calc(50vh - var(--画像サイズ, 4) * 1vh) 0;">
+    <div class="画像" style="margin: calc(50vh - var(--画像サイズ, 4) * 1vh) 0;">
         <img src="img/ryusei.webp" class="🌠 ▼" style="--待機: 1s;"
             data-sw = "1"
             data-se = "se/hikari_mid.mp3"
             data-sv = "0.1">
-    </p>
+    </div>
 
     <!-- 🔹変数メモ
 
