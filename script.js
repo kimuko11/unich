@@ -1229,8 +1229,7 @@ function 音声状態の判定(初回タップ = false) {
 
         if (初回タップ) {
             if (typeof 効果音再生 === 'function') {
-                効果音読み込み('se/button_m.mp3');
-                効果音再生('se/button_m.mp3');
+                効果音再生('se/uni.mp3');
             }
 
             const 音声状態 = document.querySelector('#音声状態'); // 🔊ON 表示
@@ -1254,7 +1253,7 @@ function 音声状態の判定(初回タップ = false) {
 
 function 音声解除() {
     音声コンテキスト.resume().then(() => {
-        音声状態の判定();
+        音声状態の判定(true);
     }).catch(() => {}); // 失敗したら次の操作で再挑戦
 }
 
