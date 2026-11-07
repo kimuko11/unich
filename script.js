@@ -1212,14 +1212,32 @@ const 音声コンテキスト = new (window.AudioContext || window.webkitAudioC
 let 初回タップ済み = false;
 
 function 音声状態の判定() {
+    const 入力_ボイス音量 = document.getElementById('ボイス音量');
+    const 入力_効果音量   = document.getElementById('効果音量');
+    const 音量項目一覧    = [入力_ボイス音量, 入力_効果音量].filter(Boolean);
+
     if (音声コンテキスト.state === 'running') {
         初回タップ済み = true;
         
         document.querySelectorAll('.未タップ').forEach(要素 => 要素.style.display = 'none');
         document.querySelectorAll('.タップ済').forEach(要素 => 要素.style.display = 'block'); // 表示切替
         
+        // 🔊 音声有効化：グレーアウト解除＆スライダー操作許可
+        音量項目一覧.forEach(入力 => {
+            入力.disabled = false;
+            const 親項目 = 入力.closest('.設定項目');
+            if (親項目) 親項目.classList.remove('無効');
+        });
+
         document.removeEventListener('click',   音声解除);
         document.removeEventListener('keydown', 音声解除);
+        } else {
+        // 🔇 未タップ（音声停止）：グレーアウト＆スライダー操作不可
+        音量項目一覧.forEach(入力 => {
+            入力.disabled = true;
+            const 親項目 = 入力.closest('.設定項目');
+            if (親項目) 親項目.classList.add('無効');
+        });
     }
 }
 

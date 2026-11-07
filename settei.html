@@ -2,29 +2,33 @@
 
 <div id="設定" class="設定">
 
-        <div id="ラジオ" class="ラジオ 発光 出現" style="--待機: 1s;">
-            <img src="img/radio_off.webp" alt="📻" class="未タップ">
-            <img src="img/radio_on.webp"  alt="📻" class="タップ済">
+    <div id="ラジオ" class="ラジオ 発光 出現" style="--待機: 1s;">
+        <img src="img/radio_off.webp" alt="📻" class="未タップ">
+        <img src="img/radio_on.webp"  alt="📻" class="タップ済">
+    </div>
+
+    <div class="出現→消滅" style="--待機: 1s; margin-top: -8px;">
+        <span class="未タップ">🔇OFF</span>
+        <span class="タップ済">🔊 ON</span>
+    </div>
+
+    <div class="ヘッダ💬">
+
+        <div class="設定項目">
+            ボイス音量
+            <label class="スライダー">
+                無<input type="range" id="ボイス音量" max="9" min="0" value="4">大
+                <span class="スライダー値">4</span>
+            </label>
         </div>
-        <div class="出現→消滅" style="--待機: 1s; margin-top: -8px;">設定</div>
 
-        <div class="ヘッダ💬">
-
-            <div class="設定項目">
-                ボイス音量
-                <label class="スライダー">
-                    無<input type="range" id="ボイス音量" max="9" min="0" value="4">大
-                    <span class="スライダー値">4</span>
-                </label>
-            </div>
-
-            <div class="設定項目">
-                効果音量
-                <label class="スライダー">
-                    無<input type="range" id="効果音量" max="9" min="0" value="4">大
-                    <span class="スライダー値">4</span>
-                </label>
-            </div>
+        <div class="設定項目">
+            効果音量
+            <label class="スライダー">
+                無<input type="range" id="効果音量" max="9" min="0" value="4">大
+                <span class="スライダー値">4</span>
+            </label>
+        </div>
 
             <div class="設定項目">
                 文字サイズ

@@ -175,6 +175,14 @@ body.表示 .表示範囲スイッチ { opacity: 1; }
 
     margin-bottom: 18px;
 }
+.設定項目.無効 {
+    opacity: 0.1;
+    pointer-events: none;
+    user-select: none;
+}
+.設定項目.無効 input[type="range"] {
+    cursor: not-allowed;
+}
 
 .スライダー {
     display:     flex;
@@ -182,6 +190,12 @@ body.表示 .表示範囲スイッチ { opacity: 1; }
     gap:         6px;
 
     color: gold;
+}
+.スライダー input[type="range"] {
+    flex: 1;
+
+    accent-color: gold; /* ツマミ色 */
+    cursor:       pointer;
 }
 .スライダー input[type="range"] {
     flex: 1;
