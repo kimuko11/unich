@@ -1211,7 +1211,7 @@ const 音声コンテキスト = new (window.AudioContext || window.webkitAudioC
 
 let 初回タップ済み = false;
 
-function 音声状態の判定() {
+function 音声状態の判定(初回タップ = false) {
     const 入力_ボイス音量 = document.getElementById('ボイス音量');
     const 入力_効果音量   = document.getElementById('効果音量');
     const 音量項目一覧    = [入力_ボイス音量, 入力_効果音量].filter(Boolean);
@@ -1227,13 +1227,21 @@ function 音声状態の判定() {
             if (親項目) 親項目.classList.remove('無効');
         });
 
-        const 音声状態 = document.querySelector('#音声状態'); // 音声状態の再表示
-        if (音声状態) {
-            音声状態.classList.remove('出現→消滅');
-            void 音声状態.offsetWidth; 
-            音声状態.classList.add('出現→消滅');
+        if (初回タップ) {
+            if (typeof 効果音再生 === 'function') {
+                効果音読み込み('se/button_m.mp3');
+                効果音再生('se/button_m.mp3');
+            }
+
+            const 音声状態 = document.querySelector('#音声状態'); // 🔊ON 表示
+            if (音声状態) {
+                音声状態.classList.remove('出現→消滅');
+                void 音声状態.offsetWidth; 
+                音声状態.style.setProperty('--待機', '0s');
+                音声状態.classList.add('出現→消滅');
+            }
         }
-        
+
         document.removeEventListener('click',   音声解除);
         document.removeEventListener('keydown', 音声解除);
     } else {
