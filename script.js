@@ -38,9 +38,9 @@ setTimeout(() => { // 3秒経過で強制
 }, 3000);
 
 
-// 🎛️ヘッダとSVG
+// 🎛️外部HTMLのヘッダ部品とSVGフィルタの読み込み (最初にDOMを完成させる)
 
-async function ヘッダ読み込み() {
+async function 外部HTML読み込み() {
     try {
         const [設定, 開発, SVG] = await Promise.all([
             fetch('settei.html'),
@@ -70,6 +70,19 @@ async function ヘッダ読み込み() {
 }
 
 
+// 🎛️DOM完成後の初期化や判定
+
+document.addEventListener('DOMContentLoaded', async () => {
+    await 外部HTML読み込み();
+
+    設定関連の初期化();
+    操作環境の判定();
+    表示範囲の初期化();
+    音声状態の判定();
+    効果音キャッシュ化();
+});
+
+
 // 🎛️設定 (初期値)
 
 let スライダーボイス音量 = 4;
@@ -85,8 +98,8 @@ let スイッチ表示範囲     = false;
 
 // ▫️計算用の派生変数
 
-let ボイス音量     = スライダーボイス音量 * 0.08;   // 0 〜 0.72  (デフォ 0.32)
-let 効果音量       = スライダー効果音量   * 0.08;   // 0 〜 0.72  (デフォ 0.32)
+let ボイス音量     = スライダーボイス音量 * 0.08;  // 0 〜 0.72 (デフォ 0.32)
+let 効果音量       = スライダー効果音量   * 0.08;  // 0 〜 0.72 (デフォ 0.32)
 let 設定文字サイズ = 100;
 let 設定速度ms     = 90 - スライダー文字速度 * 10; // 0 〜 90ms (デフォ 50ms)
 
@@ -130,9 +143,7 @@ function 設定更新() {
 
 // 🎛️設定スライダーとリセット
 
-document.addEventListener('DOMContentLoaded', async () => { // ヘッダ読み込みを必ず先に完了させる
-    await ヘッダ読み込み();
-
+function 設定関連の初期化() {
     const 入力_ボイス音量 = document.getElementById('ボイス音量');
     const 入力_効果音量   = document.getElementById('効果音量');
     const 入力_文字サイズ = document.getElementById('文字サイズ');
@@ -456,11 +467,12 @@ document.addEventListener('DOMContentLoaded', async () => { // ヘッダ読み�
     }
 
     設定更新(); // 初回反映
-});
+};
 
 // ▫️低スペック端末の判定
 
 function 低スペ端末判定() {
+
     const 識別文字 = navigator.userAgent;
 
     const アップル = /iPhone|iPad|iPod/.test(識別文字) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
@@ -480,7 +492,8 @@ function 低スペ端末判定() {
 
 // 🎛️操作環境の判定
 
-document.addEventListener('DOMContentLoaded', () => {
+function 操作環境の判定() {
+
     const 操作環境 = window.matchMedia('(pointer: fine)').matches; // ポインティングデバイスを使っているなら
 
     if (操作環境) {
@@ -497,7 +510,7 @@ document.addEventListener('DOMContentLoaded', () => {
             要素.textContent = '(もしくはキータッチ⌨)';
         });
     }
-});
+};
 
 
 // 🎛️表示範囲の絞り込み（開発用）
@@ -587,8 +600,7 @@ function 表示制御実行(値上, 値下) {
 
 let 表示遅延タイマー = null;
 
-document.addEventListener('DOMContentLoaded', async () => { // ヘッダ読み込みを必ず先に完了させる
-    await ヘッダ読み込み();
+function 表示範囲の初期化() {
 
     const 入力上 = document.getElementById('非表示上');
     const 入力下 = document.getElementById('非表示下');
@@ -618,7 +630,7 @@ document.addEventListener('DOMContentLoaded', async () => { // ヘッダ読み�
         入力上.addEventListener('input', 遅延付きページ更新);
         入力下.addEventListener('input', 遅延付きページ更新);
     }
-});
+};
 
 // ▫️範囲のリセット
 
@@ -1199,7 +1211,7 @@ const 音声コンテキスト = new (window.AudioContext || window.webkitAudioC
 
 let 初回タップ済み = false;
 
-function 音声状態チェック() {
+function 音声状態の判定() {
     if (音声コンテキスト.state === 'running') {
         初回タップ済み = true;
         
@@ -1213,14 +1225,12 @@ function 音声状態チェック() {
 
 function 音声解除() {
     音声コンテキスト.resume().then(() => {
-        音声状態チェック();
+        音声状態の判定();
     }).catch(() => {}); // 失敗したら次の操作で再挑戦
 }
 
 document.addEventListener('click',   音声解除);
 document.addEventListener('keydown', 音声解除);
-
-document.addEventListener('DOMContentLoaded', () => { 音声状態チェック(); }); // ページ読み込み時にもチェック
 
 function 音声再生可能() { // 再生してよい状態かの一括判定
     return 初回タップ済み && 音声コンテキスト.state === 'running';
@@ -1285,7 +1295,7 @@ function ボイス再生(キャラ, 変動率 = 0.02, 音量倍率 = 1) {
 
 const 効果音キャッシュ = {};
 
-document.addEventListener('DOMContentLoaded', () => {
+function 効果音キャッシュ化() {
     const 全効果音 = document.querySelectorAll('[data-se]'); // DOM上の data-se を全て読み込む
 
     const 効果音一覧 = new Set(); // 重複読み込みを防ぐため
@@ -1300,7 +1310,7 @@ document.addEventListener('DOMContentLoaded', () => {
             効果音読み込み(パス);
         }
     });
-});
+};
 
 async function 効果音読み込み(パス) {
     try {
