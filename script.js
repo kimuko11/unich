@@ -1222,19 +1222,22 @@ function 音声状態の判定() {
         document.querySelectorAll('.未タップ').forEach(要素 => 要素.style.display = 'none');
         document.querySelectorAll('.タップ済').forEach(要素 => 要素.style.display = 'block'); // 表示切替
         
-        // 🔊 音声有効化：グレーアウト解除＆スライダー操作許可
         音量項目一覧.forEach(入力 => {
-            入力.disabled = false;
             const 親項目 = 入力.closest('.設定項目');
             if (親項目) 親項目.classList.remove('無効');
         });
 
+        const 音声状態 = document.querySelector('#音声状態'); // 音声状態の再表示
+        if (音声状態) {
+            音声状態.classList.remove('出現→消滅');
+            void 音声状態.offsetWidth; 
+            音声状態.classList.add('出現→消滅');
+        }
+        
         document.removeEventListener('click',   音声解除);
         document.removeEventListener('keydown', 音声解除);
-        } else {
-        // 🔇 未タップ（音声停止）：グレーアウト＆スライダー操作不可
-        音量項目一覧.forEach(入力 => {
-            入力.disabled = true;
+    } else {
+        音量項目一覧.forEach(入力 => { // 未タップ
             const 親項目 = 入力.closest('.設定項目');
             if (親項目) 親項目.classList.add('無効');
         });

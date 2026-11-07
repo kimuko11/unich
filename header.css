@@ -176,12 +176,13 @@ body.表示 .表示範囲スイッチ { opacity: 1; }
     margin-bottom: 18px;
 }
 .設定項目.無効 {
-    opacity: 0.1;
+    opacity: 0.5;
+
     pointer-events: none;
-    user-select: none;
+    user-select:    none;
 }
 .設定項目.無効 input[type="range"] {
-    cursor: not-allowed;
+accent-color: darkgray; /* ツマミ色 */
 }
 
 .スライダー {
