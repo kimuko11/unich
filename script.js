@@ -446,7 +446,7 @@ function 設定の初期化() {
 function 低スペ端末判定() {
     const 識別文字 = navigator.userAgent;
     const アップル = /iPhone|iPad|iPod/.test(識別文字) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
-    
+
     if (アップル) {
         const 一致 = 識別文字.match(/OS (\d+)_/);
         if (一致 && 一致[1]) return parseInt(一致[1], 10) <= 15; // iOS 15 以下なら
@@ -503,12 +503,12 @@ function 表示範囲更新() {
         localStorage.removeItem('preview_to');
     }
 
-    表示制御実行(値上, 値下);
+    表示制御(値上, 値下);
 }
 
 // ▫️表示・非表示の切り替え
 
-function 表示制御実行(値上, 値下) {
+function 表示制御(値上, 値下) {
     const 上数値 = parseInt(値上, 10);
     const 下数値 = parseInt(値下, 10);
 
@@ -567,7 +567,6 @@ function 表示制御実行(値上, 値下) {
 let 表示遅延タイマー = null;
 
 function 表示範囲の初期化() {
-
     const 入力上 = document.getElementById('非表示上');
     const 入力下 = document.getElementById('非表示下');
 
@@ -578,7 +577,7 @@ function 表示範囲の初期化() {
         入力上.value = 保存上;
         入力下.value = 保存下;
 
-        表示制御実行(保存上, 保存下); // 復元された値で初回表示を切り替え
+        表示制御(保存上, 保存下); // 復元された値で初回表示を切り替え
 
         const 遅延付きページ更新 = () => {
             clearTimeout(表示遅延タイマー);
@@ -614,25 +613,25 @@ function 範囲リセット() {
 
 // ▫️独自スピンボタンによる数値変更
 
-function 数値変更(targetId, diff) {
-    const input = document.getElementById(targetId);
-    if (!input) return;
+function 数値変更(入力欄, 増減値) {
+    const 入力値 = document.getElementById(入力欄);
+    if (!入力値) return;
 
     const セリフ一覧 = document.querySelectorAll('.対話全体枠 > div');
     const 総数 = セリフ一覧.length;
 
-    let 現在値 = parseInt(input.value, 10);
+    let 現在値 = parseInt(入力値.value, 10);
 
     if (isNaN(現在値)) { // 空欄時に▲▼を押したら最大値からスタート
         現在値 = 総数;
     } else {
-        現在値 += diff;
+        現在値 += 増減値;
     }
 
     if (現在値 < 1) 現在値 = 1; // 1未満にはならず、最大セリフ数を超えない
     if (総数 > 0 && 現在値 > 総数) 現在値 = 総数;
 
-    input.value = 現在値;
+    入力値.value = 現在値;
 
     const 入力上 = document.getElementById('非表示上');
     const 入力下 = document.getElementById('非表示下');
