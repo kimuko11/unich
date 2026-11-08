@@ -10,16 +10,7 @@ const 既定読み込みリスト = [
     'img/radio_off.webp',
     'img/radio_on.webp'
 ];
-
 const 読み込みリスト = [...既定読み込みリスト, ...(window.追加読み込みリスト || [])];
-
-function ページオープン() {
-    const 暗幕 = document.getElementById('暗幕');
-  
-    if (暗幕 && !暗幕.classList.contains('読み込み完了')) {
-        暗幕.classList.add('読み込み完了');
-    }
-}
 
 function プリロード(対象URL) {
     return new Promise((成功) => {
@@ -30,12 +21,13 @@ function プリロード(対象URL) {
     });
 }
 
-Promise.all(読み込みリスト.map(プリロード)).then(() => {
-    ページオープン();
-});
-setTimeout(() => { // 3秒経過で強制
-    ページオープン();
-}, 3000);
+function ページオープン() {
+    const 暗幕 = document.getElementById('暗幕');
+    if (暗幕 && !暗幕.classList.contains('読み込み完了')) { 暗幕.classList.add('読み込み完了'); }
+}
+
+Promise.all(読み込みリスト.map(プリロード)).then(() => { ページオープン(); });
+setTimeout(() => { ページオープン(); }, 3000); // 3秒経過で強制
 
 
 // 🎛️外部HTMLのヘッダ部品とSVGフィルタの読み込み (最初にDOMを完成させる)
@@ -48,9 +40,7 @@ async function 外部HTML読み込み() {
             fetch('svg.html')
         ]);
 
-        if (!設定.ok || !開発.ok || !SVG.ok) {
-            throw new Error('設定の一部が読み込み失敗');
-        }
+        if (!設定.ok || !開発.ok || !SVG.ok) { throw new Error('設定の一部が読み込み失敗'); }
 
         const 設定html = await 設定.text();
         const 開発html = await 開発.text();
@@ -75,7 +65,7 @@ async function 外部HTML読み込み() {
 document.addEventListener('DOMContentLoaded', async () => {
     await 外部HTML読み込み();
 
-    設定関連の初期化();
+    設定の初期化();
     操作環境の判定();
     表示範囲の初期化();
     音声状態の判定();
@@ -83,7 +73,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 });
 
 
-// 🎛️設定 (初期値)
+// 🎛️設定の初期値
 
 let スライダーボイス音量 = 4;
 let スライダー効果音量   = 4;
@@ -103,7 +93,8 @@ let 効果音量       = スライダー効果音量   * 0.08;  // 0 〜 0.72 (�
 let 設定文字サイズ = 100;
 let 設定速度ms     = 90 - スライダー文字速度 * 10; // 0 〜 90ms (デフォ 50ms)
 
-// ▫️設定更新関数
+
+// 🎛️設定の更新
 
 function 設定更新() {
     ボイス音量     = スライダーボイス音量 * 0.08;
@@ -114,6 +105,8 @@ function 設定更新() {
     設定速度ms     = 90 - スライダー文字速度 * 10;
     const アニメ速度 = Math.max(0.1, 1 + (スライダーアニメ速度 - 4) * 0.2); // 0.2 〜 2 (デフォ 1)
     document.documentElement.style.setProperty('--アニメ速度', アニメ速度);
+
+    // ▫️bodyにクラス付与と削除
 
     if (スイッチ光の効果) {
         document.body.classList.remove('消光');
@@ -141,9 +134,10 @@ function 設定更新() {
 }
 
 
-// 🎛️設定スライダーとリセット
+// 🎛️設定の初期化 (設定スライダーとリセットボタン)
 
-function 設定関連の初期化() {
+function 設定の初期化() {
+
     const 入力_ボイス音量 = document.getElementById('ボイス音量');
     const 入力_効果音量   = document.getElementById('効果音量');
     const 入力_文字サイズ = document.getElementById('文字サイズ');
@@ -171,11 +165,11 @@ function 設定関連の初期化() {
 
     // ▫️ストレージ保存用のKEY名
 
-    const KEY_文字サイズ = 'site_text_size';
-    const KEY_文字速度   = 'site_text_sp';
     const KEY_ボイス音量 = 'site_voice_vol';
     const KEY_効果音量   = 'site_se_vol';
+    const KEY_文字サイズ = 'site_text_size';
     const KEY_画像サイズ = 'site_img_size';
+    const KEY_文字速度   = 'site_text_sp';
     const KEY_アニメ速度 = 'site_anime_sp';
     const KEY_光の効果   = 'site_glow_effect';
     const KEY_登場アニメ = 'site_app_anime';
@@ -184,63 +178,29 @@ function 設定関連の初期化() {
 
     // ▫️保存データの読み込み（無ければデフォルト値）
 
-    const 保存_文字サイズ = localStorage.getItem(KEY_文字サイズ);
-    const 保存_文字速度   = localStorage.getItem(KEY_文字速度);
     const 保存_ボイス音量 = localStorage.getItem(KEY_ボイス音量);
     const 保存_効果音量   = localStorage.getItem(KEY_効果音量);
+    const 保存_文字サイズ = localStorage.getItem(KEY_文字サイズ);
     const 保存_画像サイズ = localStorage.getItem(KEY_画像サイズ);
+    const 保存_文字速度   = localStorage.getItem(KEY_文字速度);
     const 保存_アニメ速度 = localStorage.getItem(KEY_アニメ速度);
     const 保存_光の効果   = localStorage.getItem(KEY_光の効果);
     const 保存_登場アニメ = localStorage.getItem(KEY_登場アニメ);
     const 保存_表情アニメ = localStorage.getItem(KEY_表情アニメ);
     const 保存_表示範囲   = localStorage.getItem(KEY_表示範囲);
 
-    スライダー文字サイズ = 保存_文字サイズ !== null ? parseInt(保存_文字サイズ, 10) : 初期値_文字サイズ;
-    スライダー文字速度   = 保存_文字速度   !== null ? parseInt(保存_文字速度,   10) : 初期値_文字速度;
     スライダーボイス音量 = 保存_ボイス音量 !== null ? parseInt(保存_ボイス音量, 10) : 初期値_ボイス音量;
     スライダー効果音量   = 保存_効果音量   !== null ? parseInt(保存_効果音量,   10) : 初期値_効果音量;
+    スライダー文字サイズ = 保存_文字サイズ !== null ? parseInt(保存_文字サイズ, 10) : 初期値_文字サイズ;
     スライダー画像サイズ = 保存_画像サイズ !== null ? parseInt(保存_画像サイズ, 10) : 初期値_画像サイズ;
+    スライダー文字速度   = 保存_文字速度   !== null ? parseInt(保存_文字速度,   10) : 初期値_文字速度;
     スライダーアニメ速度 = 保存_アニメ速度 !== null ? parseInt(保存_アニメ速度, 10) : 初期値_アニメ速度;
     スイッチ光の効果     = 保存_光の効果   !== null ? 保存_光の効果   === 'true'    : 初期値_光の効果;
     スイッチ登場アニメ   = 保存_登場アニメ !== null ? 保存_登場アニメ === 'true'    : 初期値_登場アニメ;
     スイッチ表情アニメ   = 保存_表情アニメ !== null ? 保存_表情アニメ === 'true'    : 初期値_表情アニメ;
     スイッチ表示範囲     = 保存_表示範囲   !== null ? 保存_表示範囲   === 'true'    : 初期値_表示範囲;
 
-    // ▫️文字サイズ (画面のスライダー要素と数値表示に初期値を反映)
-
-    if (入力_文字サイズ) {
-        入力_文字サイズ.value = スライダー文字サイズ;
-        const 表示 = 入力_文字サイズ.nextElementSibling;
-        if (表示) 表示.textContent = スライダー文字サイズ;
-
-        入力_文字サイズ.addEventListener('input', (e) => {
-            スライダー文字サイズ = parseInt(e.target.value, 10);
-            const 表示 = e.target.nextElementSibling;
-            if (表示) 表示.textContent = e.target.value;
-            
-            localStorage.setItem(KEY_文字サイズ, スライダー文字サイズ); // 変更時にブラウザへ即時保存
-            設定更新();
-        });
-    }
-
-    // ▫️文字速度
-
-    if (入力_文字速度) {
-        入力_文字速度.value = スライダー文字速度;
-        const 表示 = 入力_文字速度.nextElementSibling;
-        if (表示) 表示.textContent = スライダー文字速度;
-
-        入力_文字速度.addEventListener('input', (e) => {
-            スライダー文字速度 = parseInt(e.target.value, 10);
-            const 表示 = e.target.nextElementSibling;
-            if (表示) 表示.textContent = e.target.value;
-            
-            localStorage.setItem(KEY_文字速度, スライダー文字速度);
-            設定更新();
-        });
-    }
-
-    // ▫️ボイス音量
+    // ▫️スライダーと数値に初期値を反映
 
     if (入力_ボイス音量) {
         入力_ボイス音量.value = スライダーボイス音量;
@@ -251,13 +211,10 @@ function 設定関連の初期化() {
             スライダーボイス音量 = parseInt(e.target.value, 10);
             const 表示 = e.target.nextElementSibling;
             if (表示) 表示.textContent = e.target.value;
-
-            localStorage.setItem(KEY_ボイス音量, スライダーボイス音量);
+            localStorage.setItem(KEY_ボイス音量, スライダーボイス音量); // 変更時にブラウザ保存
             設定更新();
         });
     }
-
-    // ▫️効果音量
 
     if (入力_効果音量) {
         入力_効果音量.value = スライダー効果音量;
@@ -268,13 +225,24 @@ function 設定関連の初期化() {
             スライダー効果音量 = parseInt(e.target.value, 10);
             const 表示 = e.target.nextElementSibling;
             if (表示) 表示.textContent = e.target.value;
-
             localStorage.setItem(KEY_効果音量, スライダー効果音量);
             設定更新();
         });
     }
 
-    // ▫️画像サイズ
+    if (入力_文字サイズ) {
+        入力_文字サイズ.value = スライダー文字サイズ;
+        const 表示 = 入力_文字サイズ.nextElementSibling;
+        if (表示) 表示.textContent = スライダー文字サイズ;
+
+        入力_文字サイズ.addEventListener('input', (e) => {
+            スライダー文字サイズ = parseInt(e.target.value, 10);
+            const 表示 = e.target.nextElementSibling;
+            if (表示) 表示.textContent = e.target.value;
+            localStorage.setItem(KEY_文字サイズ, スライダー文字サイズ);
+            設定更新();
+        });
+    }
 
     if (入力_画像サイズ) {
         入力_画像サイズ.value = スライダー画像サイズ;
@@ -285,13 +253,24 @@ function 設定関連の初期化() {
             スライダー画像サイズ = parseInt(e.target.value, 10);
             const 表示 = e.target.nextElementSibling;
             if (表示) 表示.textContent = e.target.value;
-            
             localStorage.setItem(KEY_画像サイズ, スライダー画像サイズ);
             設定更新();
         });
     }
 
-    // ▫️アニメ速度
+    if (入力_文字速度) {
+        入力_文字速度.value = スライダー文字速度;
+        const 表示 = 入力_文字速度.nextElementSibling;
+        if (表示) 表示.textContent = スライダー文字速度;
+
+        入力_文字速度.addEventListener('input', (e) => {
+            スライダー文字速度 = parseInt(e.target.value, 10);
+            const 表示 = e.target.nextElementSibling;
+            if (表示) 表示.textContent = e.target.value;
+            localStorage.setItem(KEY_文字速度, スライダー文字速度);
+            設定更新();
+        });
+    }
 
     if (入力_アニメ速度) {
         入力_アニメ速度.value = スライダーアニメ速度;
@@ -302,13 +281,10 @@ function 設定関連の初期化() {
             スライダーアニメ速度 = parseInt(e.target.value, 10);
             const 表示 = e.target.nextElementSibling;
             if (表示) 表示.textContent = e.target.value;
-            
             localStorage.setItem(KEY_アニメ速度, スライダーアニメ速度);
             設定更新();
         });
     }
-
-    // ▫️光の効果
 
     if (選択_光の効果) {
         選択_光の効果.checked = スイッチ光の効果;
@@ -320,8 +296,6 @@ function 設定関連の初期化() {
         });
     }
 
-    // ▫️登場アニメ
-
     if (選択_登場アニメ) {
         選択_登場アニメ.checked = スイッチ登場アニメ;
 
@@ -332,8 +306,6 @@ function 設定関連の初期化() {
         });
     }
 
-    // ▫️表情アニメ
-
     if (選択_表情アニメ) {
         選択_表情アニメ.checked = スイッチ表情アニメ;
 
@@ -343,8 +315,6 @@ function 設定関連の初期化() {
             設定更新();
         });
     }
-
-    // ▫️表示範囲
 
     if (選択_表示範囲) {
         選択_表示範囲.checked = スイッチ表示範囲;
@@ -360,64 +330,51 @@ function 設定関連の初期化() {
         });
     }
 
-    // ▫️ふきだしの開閉切り替え
+    // ▫️設定とロゴのふきだし開閉
 
-    ラジオ.addEventListener('click', (e) => {
-        e.stopPropagation();
-        設定.classList.toggle('オープン');
-    });
+    const ラジオ = document.getElementById('ラジオ');
+    if (ラジオ) {
+        ラジオ.addEventListener('click', (e) => {
+            e.stopPropagation();
+            設定.classList.toggle('オープン');
+        });
 
-    document.addEventListener('click', (e) => {
-        if (!設定.contains(e.target)) { // 設定の外をタップしたら閉じる
-            設定.classList.remove('オープン');
-        }
-    });
+        document.addEventListener('click', (e) => {
+            if (!設定.contains(e.target)) { 設定.classList.remove('オープン'); } // 設定の外をタップしたら閉じる
+        });
+    }
 
     const ロゴ = document.getElementById('ロゴ');
     if (ロゴ) {
         ロゴ.addEventListener('click', (e) => {
-            if (e.target.closest('.ヘッダ💬')) {
-                return;
-            }
+            if (e.target.closest('.ヘッダ💬')) return;
             e.stopPropagation();
             ロゴ.classList.toggle('オープン');
         });
 
         document.addEventListener('click', (e) => {
-            if (!ロゴ.contains(e.target)) { // ロゴの外をタップしたら閉じる
-                ロゴ.classList.remove('オープン');
-            }
+            if (!ロゴ.contains(e.target)) { ロゴ.classList.remove('オープン'); } // ロゴの外をタップしたら閉じる
         });
     }
 
-    // ▫️リセットボタンのクリック処理（保存値も削除してデフォルトへ）
+    // ▫️リセットボタン（保存値を削除して初期化）
 
     if (リセット) {
-        リセット.addEventListener('click', () => {
 
-            localStorage.removeItem(KEY_文字サイズ); // 保存データの消去
-            localStorage.removeItem(KEY_文字速度);
+        // 保存値の削除
+
+        リセット.addEventListener('click', () => {
             localStorage.removeItem(KEY_ボイス音量);
             localStorage.removeItem(KEY_効果音量);
+            localStorage.removeItem(KEY_文字サイズ);
             localStorage.removeItem(KEY_画像サイズ);
+            localStorage.removeItem(KEY_文字速度);
             localStorage.removeItem(KEY_アニメ速度);
             localStorage.removeItem(KEY_光の効果);
             localStorage.removeItem(KEY_登場アニメ);
             localStorage.removeItem(KEY_表情アニメ);
 
-            if (入力_文字サイズ) {
-                入力_文字サイズ.value = 初期値_文字サイズ; // リセット
-                スライダー文字サイズ  = 初期値_文字サイズ;
-                const 表示 = 入力_文字サイズ.nextElementSibling;
-                if (表示) 表示.textContent = 初期値_文字サイズ;
-            }
-
-            if (入力_文字速度) {
-                入力_文字速度.value = 初期値_文字速度;
-                スライダー文字速度  = 初期値_文字速度;
-                const 表示 = 入力_文字速度.nextElementSibling;
-                if (表示) 表示.textContent = 初期値_文字速度;
-            }
+            // 初期化
 
             if (入力_ボイス音量) {
                 入力_ボイス音量.value = 初期値_ボイス音量;
@@ -433,11 +390,25 @@ function 設定関連の初期化() {
                 if (表示) 表示.textContent = 初期値_効果音量;
             }
 
+            if (入力_文字サイズ) {
+                入力_文字サイズ.value = 初期値_文字サイズ;
+                スライダー文字サイズ  = 初期値_文字サイズ;
+                const 表示 = 入力_文字サイズ.nextElementSibling;
+                if (表示) 表示.textContent = 初期値_文字サイズ;
+            }
+
             if (入力_画像サイズ) {
                 入力_画像サイズ.value = 初期値_画像サイズ;
                 スライダー画像サイズ  = 初期値_画像サイズ;
                 const 表示 = 入力_画像サイズ.nextElementSibling;
                 if (表示) 表示.textContent = 初期値_画像サイズ;
+            }
+
+            if (入力_文字速度) {
+                入力_文字速度.value = 初期値_文字速度;
+                スライダー文字速度  = 初期値_文字速度;
+                const 表示 = 入力_文字速度.nextElementSibling;
+                if (表示) 表示.textContent = 初期値_文字速度;
             }
 
             if (入力_アニメ速度) {
@@ -462,20 +433,20 @@ function 設定関連の初期化() {
                 スイッチ表情アニメ      = 初期値_表情アニメ;
             }
 
-            設定更新(); // 再計算
+            設定更新();
         });
-    }
+    } // リセット ここまで
 
-    設定更新(); // 初回反映
+    設定更新(); // 初回の反映
 };
 
-// ▫️低スペック端末の判定
+
+// 🎛️低スペック端末の判定
 
 function 低スペ端末判定() {
-
     const 識別文字 = navigator.userAgent;
-
     const アップル = /iPhone|iPad|iPod/.test(識別文字) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+    
     if (アップル) {
         const 一致 = 識別文字.match(/OS (\d+)_/);
         if (一致 && 一致[1]) return parseInt(一致[1], 10) <= 15; // iOS 15 以下なら
@@ -484,7 +455,7 @@ function 低スペ端末判定() {
     }
 
     const メモリ = navigator.deviceMemory; 
-    const コア数 = navigator.hardwareConcurrency; 
+    const コア数 = navigator.hardwareConcurrency;
     if ((メモリ && メモリ < 4) || (コア数 && コア数 <= 4)) return true; // メモリ 4GB 未満、または CPU 4コア以下なら
     return false;
 }
@@ -493,22 +464,17 @@ function 低スペ端末判定() {
 // 🎛️操作環境の判定
 
 function 操作環境の判定() {
-
     const 操作環境 = window.matchMedia('(pointer: fine)').matches; // ポインティングデバイスを使っているなら
 
     if (操作環境) {
         const 操作一覧 = document.querySelectorAll('.操作');
-        操作一覧.forEach(要素 => {
-            要素.textContent = 'クリック';
-        });
+        操作一覧.forEach(要素 => { 要素.textContent = 'クリック'; });
+
         const 機器一覧 = document.querySelectorAll('.機器');
-        機器一覧.forEach(要素 => {
-            要素.textContent = '🖱';
-        });
+        機器一覧.forEach(要素 => { 要素.textContent = '🖱'; });
+
         const 操作一覧2 = document.querySelectorAll('.操作2');
-        操作一覧2.forEach(要素 => {
-            要素.textContent = '(もしくはキータッチ⌨)';
-        });
+        操作一覧2.forEach(要素 => { 要素.textContent = '(もしくはキータッチ⌨)'; });
     }
 };
 
@@ -1228,10 +1194,7 @@ function 音声状態の判定(初回タップ = false) {
         });
 
         if (初回タップ) {
-            if (typeof 効果音再生 === 'function') {
-                効果音読み込み('se/button_m.mp3');
-                効果音再生('se/button_m.mp3');
-            }
+            if (typeof 効果音再生 === 'function') 効果音再生('se/button_m.mp3');
 
             const 音声状態 = document.querySelector('#音声状態'); // 🔊ON 表示
             if (音声状態) {
@@ -1334,6 +1297,7 @@ function 効果音キャッシュ化() {
         }
     });
 
+    効果音一覧.add('se/button_m.mp3'); // 音声ONのSE
     効果音一覧.forEach(パス => {
         if (typeof 効果音読み込み === 'function') {
             効果音読み込み(パス);
