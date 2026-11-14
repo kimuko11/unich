@@ -20,7 +20,7 @@
 }
 
 .遠景 {
-    background: url('img/ucyu_enkei.webp') center top no-repeat;
+    background: url('/img/ucyu_enkei.webp') center top no-repeat;
 
     animation:          遠景・動き auto linear forwards;
     animation-timeline: scroll(root);
@@ -29,7 +29,7 @@
     .遠景 { background-size: 100%; }
 }
 .中景 {
-    background: url('img/ucyu_cyukei.webp');
+    background: url('/img/ucyu_cyukei.webp');
 
     animation:          中景・瞬き 1.7s ease-in-out infinite alternate,
                         中景・動き auto linear forwards;
@@ -37,7 +37,7 @@
                         scroll(root);
 }
 .近景 {
-    background: url('img/ucyu_kinkei.webp');
+    background: url('/img/ucyu_kinkei.webp');
 
     animation:          近景・瞬き 1.3s ease-in-out infinite alternate,
                         近景・動き auto linear forwards;
@@ -153,7 +153,7 @@
 .星群 {
     margin-bottom:   -50px;
     height:           55px;
-    background-image: url('img/seigun.webp');
+    background-image: url('/img/seigun.webp');
     opacity:          0;
 
     animation: 出現 calc(1s / var(--アニメ速度, 1)) calc(var(--待機, 0s) / var(--アニメ速度, 1)) linear forwards,

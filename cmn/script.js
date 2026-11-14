@@ -1,14 +1,14 @@
 // 🎛️ローディング・マスク
 
 const 既定読み込みリスト = [
-    'img/ucyu_enkei.webp',
-    'img/ucyu_cyukei.webp',
-    'img/ucyu_kinkei.webp',
-    'img/seigun.webp',
-    'img/ryusei.webp',
-    'img/logo.webp',
-    'img/radio_off.webp',
-    'img/radio_on.webp'
+    '/img/ucyu_enkei.webp',
+    '/img/ucyu_cyukei.webp',
+    '/img/ucyu_kinkei.webp',
+    '/img/seigun.webp',
+    '/img/ryusei.webp',
+    '/img/logo.webp',
+    '/img/radio_off.webp',
+    '/img/radio_on.webp'
 ];
 const 読み込みリスト = [...既定読み込みリスト, ...(window.追加読み込みリスト || [])];
 
@@ -35,9 +35,9 @@ setTimeout(() => { ページオープン(); }, 3000); // 3秒経過で強制
 async function 外部HTML読み込み() {
     try {
         const [設定, 開発, SVG] = await Promise.all([
-            fetch('settei.html'),
-            fetch('kaihatu.html'),
-            fetch('svg.html')
+            fetch('/cmn/settei.html'),
+            fetch('/cmn/kaihatu.html'),
+            fetch('/cmn/svg.html')
         ]);
 
         if (!設定.ok || !開発.ok || !SVG.ok) { throw new Error('設定の一部が読み込み失敗'); }
@@ -1296,7 +1296,7 @@ function 効果音キャッシュ化() {
         }
     });
 
-    効果音一覧.add('se/button_m.mp3'); // 音声ONのSE
+    効果音一覧.add('/se/button_m.mp3'); // 音声ONのSE
     効果音一覧.forEach(パス => {
         if (typeof 効果音読み込み === 'function') {
             効果音読み込み(パス);
