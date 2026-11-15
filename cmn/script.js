@@ -1,14 +1,14 @@
 // 🎛️ローディング・マスク
 
 const 既定読み込みリスト = [
-    '/img/ucyu_enkei.webp',
-    '/img/ucyu_cyukei.webp',
-    '/img/ucyu_kinkei.webp',
-    '/img/seigun.webp',
-    '/img/ryusei.webp',
-    '/img/logo.webp',
-    '/img/radio_off.webp',
-    '/img/radio_on.webp'
+    'https://kimuko11.github.io/unich/img/ucyu_enkei.webp',
+    'https://kimuko11.github.io/unich/img/ucyu_cyukei.webp',
+    'https://kimuko11.github.io/unich/img/ucyu_kinkei.webp',
+    'https://kimuko11.github.io/unich/img/seigun.webp',
+    'https://kimuko11.github.io/unich/img/ryusei.webp',
+    'https://kimuko11.github.io/unich/img/logo.webp',
+    'https://kimuko11.github.io/unich/img/radio_off.webp',
+    'https://kimuko11.github.io/unich/img/radio_on.webp'
 ];
 const 読み込みリスト = [...既定読み込みリスト, ...(window.追加読み込みリスト || [])];
 
@@ -35,9 +35,9 @@ setTimeout(() => { ページオープン(); }, 3000); // 3秒経過で強制
 async function 外部HTML読み込み() {
     try {
         const [設定, 開発, SVG] = await Promise.all([
-            fetch('/cmn/settei.html'),
-            fetch('/cmn/kaihatu.html'),
-            fetch('/cmn/svg.html')
+            fetch('https://kimuko11.github.io/unich/cmn/settei.html'),
+            fetch('https://kimuko11.github.io/unich/cmn/kaihatu.html'),
+            fetch('https://kimuko11.github.io/unich/cmn/svg.html')
         ]);
 
         if (!設定.ok || !開発.ok || !SVG.ok) { throw new Error('設定の一部が読み込み失敗'); }
@@ -1233,9 +1233,9 @@ function 音声再生可能() { // 再生してよい状態かの一括判定
 // ▫️事前デコードとキャッシュ化
 
 const ボイス一覧 = {
-    ドク: 'se/doc.mp3',
-    ユニ: 'se/uni.mp3',
-    第三: 'se/oth.mp3'
+    ドク: 'https://kimuko11.github.io/unich/se/doc.mp3',
+    ユニ: 'https://kimuko11.github.io/unich/se/uni.mp3',
+    第三: 'https://kimuko11.github.io/unich/se/oth.mp3'
 };
 
 const ボイスキャッシュ = {};
@@ -1296,7 +1296,7 @@ function 効果音キャッシュ化() {
         }
     });
 
-    効果音一覧.add('/se/button_m.mp3'); // 音声ONのSE
+    効果音一覧.add('https://kimuko11.github.io/unich/se/button_m.mp3'); // 音声ONのSE
     効果音一覧.forEach(パス => {
         if (typeof 効果音読み込み === 'function') {
             効果音読み込み(パス);
