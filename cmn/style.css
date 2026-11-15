@@ -76,9 +76,11 @@ p {
     position: relative;
 
     margin:  0 auto;
-    padding: 0 1rem 1rem 1rem;
+    padding: 0 1rem 2rem;
 
     max-width: 600px; /* 最大横幅 600px */
+
+    line-height: 1.75;
 }
 
 .💬, .ヘッダ💬 { padding: 20px; }
@@ -156,10 +158,10 @@ b, em {
     float: left;
 
     margin-right: 0.15em;
-    padding:      0.05em;
+    padding:      0.06em 0.06em 0;
 
     background-color: #bf0000;
-    font-size:        2.5rem;
+    font-size:        3rem;
     font-weight:      bold;
     line-height:      1;
     color:            var(--強光, seashell);

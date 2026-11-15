@@ -87,7 +87,7 @@ body.表示 .表示範囲スイッチ { opacity: 1; }
 
     margin-left: auto;
 
-    max-width:   calc(11% + var(--画像サイズ, 4) * 0.2%);
+    max-width:   calc(11% + var(--画像サイズ, 4) * 0.1%);
     flex-shrink: 0;
 }
 
