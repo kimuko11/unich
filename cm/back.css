@@ -159,3 +159,11 @@
     animation: 出現 calc(1s / var(--アニメ速度, 1)) calc(var(--待機, 0s) / var(--アニメ速度, 1)) linear forwards,
                近景・瞬き 2s calc(var(--待機, 0s) + 1s / var(--アニメ速度, 1)) ease-in-out infinite alternate;
 }
+
+.夜景 {
+    height:           43px;
+    background: url('https://kimuko11.github.io/unich/im/yakei.webp') repeat-x;
+
+    animation: 出現 calc(1s / var(--アニメ速度, 1)) calc(var(--待機, 0s) / var(--アニメ速度, 1)) linear forwards,
+               点滅 calc(5s / var(--アニメ速度, 1)) calc(var(--待機, 0s) + 1s / var(--アニメ速度, 1)) ease-in-out infinite alternate;
+}

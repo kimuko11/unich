@@ -79,6 +79,11 @@
                 display: none; }
 }
 
+@keyframes 点滅 { /* 表示から透明度選択 */
+      0% { opacity: 1; }
+    100% { opacity: var(--点滅, 0.7); }
+}
+
 /* 🔹Scale */
 
 @keyframes 拡大 { /* ゼロ縮小から原型拡大 */
