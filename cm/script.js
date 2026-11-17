@@ -1,14 +1,14 @@
 // 🎛️ローディング・マスク
 
 const 既定読み込みリスト = [
-    'https://kimuko11.github.io/unich/img/ucyu_enkei.webp',
-    'https://kimuko11.github.io/unich/img/ucyu_cyukei.webp',
-    'https://kimuko11.github.io/unich/img/ucyu_kinkei.webp',
-    'https://kimuko11.github.io/unich/img/seigun.webp',
-    'https://kimuko11.github.io/unich/img/ryusei.webp',
-    'https://kimuko11.github.io/unich/img/logo.webp',
-    'https://kimuko11.github.io/unich/img/radio_off.webp',
-    'https://kimuko11.github.io/unich/img/radio_on.webp'
+    'https://kimuko11.github.io/unich/im/ucyu_enkei.webp',
+    'https://kimuko11.github.io/unich/im/ucyu_cyukei.webp',
+    'https://kimuko11.github.io/unich/im/ucyu_kinkei.webp',
+    'https://kimuko11.github.io/unich/im/seigun.webp',
+    'https://kimuko11.github.io/unich/im/ryusei.webp',
+    'https://kimuko11.github.io/unich/im/logo.webp',
+    'https://kimuko11.github.io/unich/im/radio_off.webp',
+    'https://kimuko11.github.io/unich/im/radio_on.webp'
 ];
 const 読み込みリスト = [...既定読み込みリスト, ...(window.追加読み込みリスト || [])];
 
@@ -35,9 +35,9 @@ setTimeout(() => { ページオープン(); }, 3000); // 3秒経過で強制
 async function 外部HTML読み込み() {
     try {
         const [設定, 開発, SVG] = await Promise.all([
-            fetch('https://kimuko11.github.io/unich/cmn/settei.html'),
-            fetch('https://kimuko11.github.io/unich/cmn/kaihatu.html'),
-            fetch('https://kimuko11.github.io/unich/cmn/svg.html')
+            fetch('https://kimuko11.github.io/unich/cm/set.html'),
+            fetch('https://kimuko11.github.io/unich/cm/dev.html'),
+            fetch('https://kimuko11.github.io/unich/cm/svg.html')
         ]);
 
         if (!設定.ok || !開発.ok || !SVG.ok) { throw new Error('設定の一部が読み込み失敗'); }
