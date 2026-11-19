@@ -858,6 +858,25 @@ function 並び替え(リスト) {
     });
 }
 
+function スライド効果音設定取得(ふきだし) {
+    if (ふきだし.classList.contains('激情')) {
+        return {
+            パス: 'https://kimuko11.github.io/unich/se/slide_h.mp3',
+            音量倍率: 0.3
+        };
+    }
+    if (ふきだし.classList.contains('感情')) {
+        return {
+            パス: 'https://kimuko11.github.io/unich/se/slide_m.mp3',
+            音量倍率: 0.2
+        };
+    }
+    return {
+        パス: 'https://kimuko11.github.io/unich/se/slide_l.mp3',
+        音量倍率: 0.1
+    };
+}
+
 function 次キャラ処理() {
     if (表示処理中 || 待機リスト.length === 0) return;
 
@@ -877,6 +896,13 @@ function 次キャラ処理() {
 
     キャラ画像.classList.add('登場');
     ふきだし  .classList.add('発話');
+
+    if (初回タップ済み && スイッチ登場アニメ && ふきだし) {
+        const { パス, 音量倍率 } = スライド効果音設定取得(ふきだし);
+        if (typeof 効果音再生 === 'function') {
+            効果音再生(パス, 音量倍率);
+        }
+    }
 
     // ▫️セリフ開始の共通処理
 

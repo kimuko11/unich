@@ -123,8 +123,8 @@ b, em {
     line-height: 1;
 }
 
-.極小 { font-size: 0.6rem; }
-.小字 { font-size: 0.8rem; }
+.極小 { font-size: 0.8rem; }
+.小字 { font-size: 0.9rem; }
 .中字 { font-size: 1.0rem; }
 .大字 { font-size: 1.5rem; line-height: 1; }
 .極大 { font-size: 2.5rem; line-height: 1; }
