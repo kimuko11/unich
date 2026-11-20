@@ -63,8 +63,8 @@
 /* 🔹Opasity */
 
 @keyframes 出現 { /* 非表示から表示 */
-      0% { opacity: 0; }
-    100% { opacity: 1; }
+      0% { opacity: auto; }
+    100% { opacity: var(--透明度, 1); }
 }
 
 @keyframes 消滅 { /* 表示から非表示 */

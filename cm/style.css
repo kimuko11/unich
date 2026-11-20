@@ -132,7 +132,7 @@ b, em {
 .細字 { font-weight: normal; }
 .太字 { font-weight: 900; }
 
-.下線 { text-decoration: underline; }
+.下線 { text-decoration: underline dotted; }
 
 /* 🔹カラー */
 

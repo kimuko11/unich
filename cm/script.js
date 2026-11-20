@@ -858,7 +858,7 @@ function 並び替え(リスト) {
     });
 }
 
-function スライド効果音設定取得(ふきだし) {
+function 登場効果音(ふきだし) {
     if (ふきだし.classList.contains('激情')) {
         return {
             パス: 'https://kimuko11.github.io/unich/se/slide_h.mp3',
@@ -868,12 +868,12 @@ function スライド効果音設定取得(ふきだし) {
     if (ふきだし.classList.contains('感情')) {
         return {
             パス: 'https://kimuko11.github.io/unich/se/slide_m.mp3',
-            音量倍率: 0.2
+            音量倍率: 0.25
         };
     }
     return {
         パス: 'https://kimuko11.github.io/unich/se/slide_l.mp3',
-        音量倍率: 0.1
+        音量倍率: 0.2
     };
 }
 
@@ -898,7 +898,7 @@ function 次キャラ処理() {
     ふきだし  .classList.add('発話');
 
     if (初回タップ済み && スイッチ登場アニメ && ふきだし) {
-        const { パス, 音量倍率 } = スライド効果音設定取得(ふきだし);
+        const { パス, 音量倍率 } = 登場効果音(ふきだし);
         if (typeof 効果音再生 === 'function') {
             効果音再生(パス, 音量倍率);
         }
@@ -1323,6 +1323,10 @@ function 効果音キャッシュ化() {
     });
 
     効果音一覧.add('https://kimuko11.github.io/unich/se/button_m.mp3'); // 音声ONのSE
+    効果音一覧.add('https://kimuko11.github.io/unich/se/slide_l.mp3');  // スライド登場のSE
+    効果音一覧.add('https://kimuko11.github.io/unich/se/slide_m.mp3');
+    効果音一覧.add('https://kimuko11.github.io/unich/se/slide_h.mp3');
+
     効果音一覧.forEach(パス => {
         if (typeof 効果音読み込み === 'function') {
             効果音読み込み(パス);
